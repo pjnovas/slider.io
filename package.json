@@ -1,0 +1,13 @@
+{
+    "name": "Slider.IO"
+  , "author": "Pablo Novas"
+  , "version": "0.1.0"
+  , "description": "Another Slider but with WebSockets"
+  , "node": "0.6.12"
+  , "dependencies": {
+      "express": ">=2.5.9"
+    , "socket.io": ">= 0.9.6"
+    , "stache": ">= 0.1.0"
+    , "mustache": ">= 0.4.0"
+  }
+}

@@ -1,0 +1,29 @@
+{
+	"sliders":{
+		"test": {
+			"initIndex": 4,
+			"title": "Un Slider",
+			"background": {
+				"color": "#333333",
+				"image": {
+					"high": "bg.png",
+					"low": "bg_mobile.png",
+					"seamless": false
+				}
+			},
+			"fontFamily": "sans-serif",
+			"slide": {
+				"all": {
+					"background": {
+						"color": "rgba(222,222,222, 0.9)"
+					}
+				},
+				"title": {
+					"background": {
+						"color": "rgba(140, 200, 75, 0.9)"
+					}
+				}
+			}
+		}
+	}
+}
