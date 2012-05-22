@@ -9,7 +9,7 @@ exports.renderSlider =function(response, _slider, _userType){
 	if (!sliderCfg)
 		response.send('what???', 404);
 	else {
-		response.render('slider', { 
+		response.render('slider/slider.mu', { 
 	  	layout: false, 
 	  	locals: { 
 	  		title: sliderCfg.title || "Untitled",
@@ -19,7 +19,7 @@ exports.renderSlider =function(response, _slider, _userType){
 	  	} 
 	  });
 	}
-}
+};
 
 exports.renderSliderCSS = function(sliderName, res){
 	var slider = configs.sliders[sliderName];
@@ -34,3 +34,9 @@ exports.renderSliderCSS = function(sliderName, res){
 		res.end(css);  
 	});
 };
+
+exports.sendSlides = function(sliderName, res){
+	var json = require(__dirname + '/slides.json');
+	res.json(json);
+};
+
