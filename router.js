@@ -1,6 +1,5 @@
 
-var sliderCtrl = require('./controllers/slider'),
-	editorCtrl = require('./controllers/user');
+var sliderCtrl = require('./controllers/slider')
 
 exports.configure = function(app) {
 
@@ -38,13 +37,6 @@ exports.configure = function(app) {
 	  res.send("HOME");
 	});
 	
-	
-	/* User Routes ****************************************
-	********************************************************/
-
-	
-	
-	
 	/* Slider Routes ****************************************
 	********************************************************/
 	app.get('/slider/:slider/speaker', function (req, res){
@@ -60,7 +52,7 @@ exports.configure = function(app) {
 	});
 	
 	app.get('/slider/:slider/slides.json', function (req, res){
-		sliderCtrl.sendSlides(req.params.slider, res);
+		sliderCtrl.getSlides(req.params.slider, res);
 	});
 
 	app.get('/slider/:slider', function (req, res){

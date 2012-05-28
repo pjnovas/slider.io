@@ -1,15 +1,12 @@
 
-var configs = require('../config.json'),
-	fs = require('fs'),
-	mustache = require("mustache");
+var mustache = require("mustache"),
+	slider = require('../models/slider');
 
-exports.renderSlider =function(response, _slider, _userType){
-	var sliderCfg = configs.sliders[_slider];
-	
-	if (!sliderCfg)
-		response.send('what???', 404);
-	else {
-		response.render('slider/slider.mu', { 
+exports.renderSlider =function(res, _slider, _userType){
+
+	slider.getConfig(_slider, function(sliderCfg){
+		
+		res.render('slider/slider.mu', { 
 	  	layout: false, 
 	  	locals: { 
 	  		title: sliderCfg.title || "Untitled",
@@ -17,26 +14,45 @@ exports.renderSlider =function(response, _slider, _userType){
 	  		speaker: (_userType && _userType === 'speaker')? true : false,
 	  		solo: (_userType && _userType === 'solo')? true : false
 	  	} 
-	  });
-	}
-};
-
-exports.renderSliderCSS = function(sliderName, res){
-	var slider = configs.sliders[sliderName];
-	fs.readFile(__dirname + '/sliderCSS.css', 'ascii', function (err, data) {
-	  if (err) {
-	    console.log(err);
-	    res.send(err.toString(), 500);
-	  }
-		
-		res.writeHead(200, {'content-type': 'text/css'});
-		var css = mustache.to_html(data, slider);
-		res.end(css);  
+	  });	
+	}, function(error){
+		if (error.code === 'notfound')
+			res.send("Config Slider '" + _slider + "' NOT FOUND", 404);
+		else res.send(error.toString(), 500);
 	});
 };
 
-exports.sendSlides = function(sliderName, res){
-	var json = require(__dirname + '/slides.json');
-	res.json(json);
+exports.renderSliderCSS = function(sliderName, res){
+	
+	slider.getConfig(sliderName, function(sliderCfg){
+		
+		slider.getSlidesCSSTemplate(sliderName, function(templateCSS){
+			
+			res.writeHead(200, {'content-type': 'text/css'});
+			var css = mustache.to_html(templateCSS, sliderCfg);
+			res.end(css);
+			
+		}, function(error){
+			if (error.code === 'notfound')
+				res.send("Styles Template NOT FOUND (sliderCSS.css)", 404);
+			else res.send(error.toString(), 500);
+		});
+		
+	}, function(error){
+		if (error.code === 'notfound')
+			res.send("Config Slider '" + sliderName + "' NOT FOUND", 404);
+		else res.send(error.toString(), 500);
+	});
+};
+
+exports.getSlides = function(sliderName, res){
+	
+	slider.getSlides(sliderName, function(slides){
+		res.json(slides);
+	}, function(error){
+		if (error.code === 'notfound')
+			res.send("Slides for Slider '" + sliderName + "' NOT FOUND", 404);
+		else res.send(error.toString(), 500);
+	});
 };
 

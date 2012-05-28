@@ -1,9 +1,9 @@
 
 var express = require('express'),
-	app = express.createServer(),
 	stache = require('stache'),
 	realtime = require('./utils/realtime'),
-	router = require('./router');
+	router = require('./router'),
+	app = express.createServer();
 
 app.set('view engine', 'mustache');
 app.register(".mu", stache);
