@@ -57,3 +57,19 @@ exports.getSlides = function(sliderName, res){
 	});
 };
 
+exports.renderSliderList = function(res){
+	
+	slider.getSliderList(function(_sliders){
+		res.render('slider/list.mu', { 
+	  	layout: false, 
+	  	locals: { 
+	  		title: "Presentaciones",
+	  		sliders: _sliders
+	  	} 
+	  });	
+	}, function(error){
+		res.send(error.toString(), 500);
+	});
+};
+
+

@@ -50,5 +50,33 @@ exports.getSlidesCSSTemplate = function(_name, done, error){
 	});
 };
 
+exports.getSliderList = function(done, error){
+	
+	fs.realpath('./sliders', function(err, path){
+		
+		if (err){
+			 callError(err);
+		}
+
+		fs.readdir(path, function (err, files) {
+		 	
+		 	for(var i=0; i< files.length; i++){
+		 		if (files[i].indexOf('.config.json') > -1){
+		 			files.splice(i, 1);
+		 			continue;
+		 		}
+		 	}
+		 	
+		 	for(var i=0; i< files.length; i++){
+		 		files[i] = files[i].replace('.json', '');
+		 	}
+		 	
+		 	done(files);
+		});
+		
+	});
+};
+
+
 
 

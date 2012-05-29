@@ -55,10 +55,12 @@ exports.configure = function(app) {
 		sliderCtrl.getSlides(req.params.slider, res);
 	});
 
-	app.get('/slider/:slider', function (req, res){
+	app.get('/slider/:slider/', function (req, res){
 	  sliderCtrl.renderSlider(res, req.params.slider);
 	});
 	
-	
+	app.get('/slider', function (req, res){
+	  sliderCtrl.renderSliderList(res);
+	});
 };
 
