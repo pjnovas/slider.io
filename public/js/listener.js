@@ -6,6 +6,10 @@ $.when(socketIOReady, jsonReady, templatesReady).done(initSlider);
 
 var socket = io.connect(); 
 
+socket.on('connect', function() {
+	socket.emit('joinSlider', sliderName);
+});
+
 function updateClients(current){
 	$('#clients-holder').text(current);
 }

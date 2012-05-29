@@ -44,6 +44,12 @@
 	<script src="/js/libs/jquery.swipe.js"></script>
 	<script src="/js/libs/jquery.slider.js"></script>
 	
+	{{#scripts}}
+	<script type="text/javascript">
+		{{{scripts}}}
+	</script>
+	{{/scripts}}
+	
 	{{#solo}}
 	<script src="/js/solo.js"></script>
 	<script src="/js/speaker.js"></script>

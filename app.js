@@ -13,7 +13,7 @@ router.configure(app);
 
 app.use(express.static(__dirname + '/public'));
 
-realtime.start(app, 3);
+realtime.start(app);
 app.listen(17283);
 
 console.log('Server Express started at port %d', app.address().port);

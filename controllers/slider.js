@@ -12,7 +12,8 @@ exports.renderSlider =function(res, _slider, _userType){
 	  		title: sliderCfg.title || "Untitled",
 	  		fontURL: sliderCfg.fontURL,
 	  		speaker: (_userType && _userType === 'speaker')? true : false,
-	  		solo: (_userType && _userType === 'solo')? true : false
+	  		solo: (_userType && _userType === 'solo')? true : false,
+	  		scripts: "var sliderName = '" + _slider + "';"
 	  	} 
 	  });	
 	}, function(error){

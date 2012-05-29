@@ -1,44 +1,75 @@
-var socketIO = require('socket.io');
+var socketIO = require('socket.io'),
+	slider = require('../models/slider');
 
-exports.start = function(app, initSlider){
+exports.start = function(app){
 	var io = socketIO.listen(app),
-		slider = {
-			currIndex: initSlider,
-			currItemIndex: 0,
-			visible: false
-		},
-		clients = 0;
+		rooms = [];
 	
 	io.sockets.on('connection', function (socket) {
-	  clients++;
-	  socket.broadcast.emit('clientOnline', { current: clients });
-	  
-	  socket.emit('initSlider', { 
-	  		visible: slider.visible, 
-	  		index: slider.currIndex, 
-	  		itemIndex: slider.currItemIndex, 
-	  		current: clients 
+		var roomName = "";
+		  
+	  socket.on('joinSlider', function (_roomName) {
+	  	
+	  	var joinSliderRoom = function(){
+	  		roomName = _roomName;
+		  	
+		  	console.log(roomName);
+		  	console.dir(rooms[roomName]);
+		  	
+		  	socket.join(roomName);
+		  	rooms[roomName].clients++;
+		  	socket.broadcast.to(roomName).emit('clientOnline', { current: rooms[roomName].clients });
+		  	
+			  socket.emit('initSlider', { 
+			  		visible: rooms[roomName].visible, 
+			  		index: rooms[roomName].currIndex, 
+			  		itemIndex: rooms[roomName].currItemIndex, 
+			  		current: rooms[roomName].clients 
+			  });	
+	  	}
+	  	
+	  	if (!rooms[_roomName]) {
+	  		console.log('room not found!');
+	  		slider.getConfig(_roomName, function(sliderCfg){
+	  			
+	  			rooms[_roomName] = {
+						currIndex: sliderCfg.initIndex,
+						currItemIndex: 0,
+						visible: false,
+						clients: 0
+					};
+					
+					joinSliderRoom();
+					
+	  		}, function(err){
+	  			console.log('error');
+	  			socket.disconnect();
+	  			return;
+	  		});
+	  	}
+	  	else joinSliderRoom();
 	  });
 	  
 	  socket.on('toggleSlider', function (_visible) {
-	  	slider.visible = _visible;
-	    socket.broadcast.emit('toggleSlider', { visible: _visible });
+	  	rooms[roomName].visible = _visible;
+	    socket.broadcast.to(roomName).emit('toggleSlider', { visible: _visible });
 	  });
 	  
 	  socket.on('moveSlider', function (_index) {
-	  	slider.currItemIndex = 0;
-	  	slider.currIndex = _index;
-	    socket.broadcast.emit('moveSlider', { index: _index });
+	  	rooms[roomName].currItemIndex = 0;
+	  	rooms[roomName].currIndex = _index;
+	    socket.broadcast.to(roomName).emit('moveSlider', { index: _index });
 	  });
 	  
 	  socket.on('updatedItemList', function (_currIndex) {
-	  	slider.currItemIndex = _currIndex;
-	    socket.broadcast.emit('updatedItemList', { itemIndex: _currIndex });
+	  	rooms[roomName].currItemIndex = _currIndex;
+	    socket.broadcast.to(roomName).emit('updatedItemList', { itemIndex: _currIndex });
 	  });
 	  
 		socket.on('disconnect', function() {
-			clients--;
-			socket.broadcast.emit('clientOffline', { current: clients });
+			rooms[roomName].clients--;
+			socket.broadcast.to(roomName).emit('clientOffline', { current: rooms[roomName].clients });
+			socket.leave(roomName);
 		});
 	  
 	});
