@@ -72,4 +72,14 @@ exports.renderSliderList = function(res){
 	});
 };
 
+exports.renderEditSlider = function(res){
+	
+	res.render('slider/editor.mu', { 
+  	layout: false, 
+  	locals: { 
+  		title: "Editando Slider"
+  	} 
+  });	
+
+};
 

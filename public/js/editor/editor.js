@@ -17,12 +17,12 @@ function injectTemplates(){
 		templatesReady.resolve();
 	});
 	
-	$.get('partialViews/_slide.html', function(templates) {
+	$.get('/partialViews/_slide.html', function(templates) {
 	  $('body').append(templates);
 	  dSlides.resolve();
 	});
 	
-	$.get('partialViews/_toolbox.html', function(templates) {
+	$.get('/partialViews/_toolbox.html', function(templates) {
 	  $('body').append(templates);
 	  dToolbox.resolve();
 	});
@@ -31,7 +31,7 @@ function injectTemplates(){
 
 function buildToolbox(){
 
-	$.getJSON('js/editor/json/toolbox.json', function(toolboxItems){
+	$.getJSON('/js/editor/json/toolbox.json', function(toolboxItems){
 		
 		var items = $.mustache(template('toolboxItem'), {items: toolboxItems});
 		$('#toolbox').append(items);
