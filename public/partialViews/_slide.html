@@ -1,0 +1,31 @@
+<script id="content-tmpl" type="text/template">
+	<h1>
+		{{#titleImage}}
+		<img src="images/{{titleImage}}" class="title" />
+		{{/titleImage}}
+		{{title}}
+	</h1>
+
+	<h2>{{subTitle}}</h2>
+
+	{{#topImage}}
+	<img src="images/{{url}}" class="{{size}}">
+	{{/topImage}}
+
+	<ul class="bulletList">	
+	{{#bulletList}}
+		<li>{{.}}</li>
+	{{/bulletList}}
+	</ul>
+
+	{{#code}}
+		<h2>{{cTitle}}</h2>
+		<div class="{{language}}"><pre><code class="{{language}}">{{code}}</code></pre></div>
+	{{/code}}
+
+	{{#bottomImage}}
+	<img src="images/{{url}}" class="{{size}}">
+	{{/bottomImage}}
+
+	<h2>{{foot}}</h2>
+</script>

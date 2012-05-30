@@ -1,0 +1,50 @@
+
+[{
+	"label": "Title",
+	"field": "title",
+	"type": "text"
+},
+{
+	"label": "Image Title",
+	"field": "titleImage",
+	"type": "image"
+},
+{
+	"label": "Sub Title",
+	"field": "subTitle",
+	"type": "text"
+},
+{
+	"label": "Image",
+	"field": "topImage",
+	"type": "image"
+},
+{
+	"label": "Bullet List",
+	"field": "array",
+	"type": "bulletList"
+},
+{
+	"label": "Code Block",
+	"field": "code",
+	"type": "code"
+},
+{
+	"label": "Bottom Image",
+	"field": "bottomImage",
+	"type": "image"
+},
+{
+	"label": "Footer text",
+	"field": "foot",
+	"type": "text"
+}]
+
+
+
+
+
+
+
+
+

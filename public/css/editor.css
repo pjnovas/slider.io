@@ -1,0 +1,35 @@
+
+
+#preview {
+	width: 600px;
+	height: 600px;
+	position:relative;
+}
+
+#toolbox {
+	position:absolute;
+	top:10px;
+	left: 10px;
+	width: 200px;	
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	border: solid 1px silver;
+	border-width: 1px 1px 0 1px;
+}
+
+#toolbox li {
+	width: 100%;
+	height: 30px;
+	float: left;
+	border-bottom: solid 1px silver;
+}
+
+#toolbox li a {
+	text-decoration: none;
+	margin: 10px;
+	line-height: 2;
+}
+
+
+
