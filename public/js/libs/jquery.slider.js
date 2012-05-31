@@ -5,6 +5,8 @@ var Slider = (function($) {
 	var totIncrement = 0,
 		increment,
 		initialMargin,
+		mainCtn,
+		ulId,
 		
 		currentIndex = 0,
 		slider,
@@ -57,8 +59,8 @@ var Slider = (function($) {
 	};
 	
 	var resize = function(){
-		var h = $(window).height(),
-			w = $(window).width(),
+		var h = $(mainCtn).height(),
+			w = $(mainCtn).width(),
 			mr = 0,
 			mt = (h * 0.05),
 			height,
@@ -133,14 +135,16 @@ var Slider = (function($) {
 	};
 	
 	return {
-		init: function(slideList, start){
+		init: function(slideList, start, options){
+			mainCtn = options && options.container || window;
+			ulId = options && options.ulId || 'slider-list';
 			slideData = slideList;
 			
 			for (var i=0; i< slideData.length; i++){
-				$('#slider-list').append('<li>');
+				$('#' + ulId).append('<li>');
 			}
 			
-			slider = $('#slider-list');
+			slider = $('#' + ulId);
 			slides = $('li', slider);
 			slidesLen = slides.length;
 			firstSlider = $('li:first', slider);
@@ -149,9 +153,9 @@ var Slider = (function($) {
 			
 			resize();
 			
-			$('#slider-list').show();
+			$('#' + ulId).show();
 			
-			$(window).bind('resize orientationchange', resize);
+			$(mainCtn).bind('resize orientationchange', resize);
 		},
 		moveLeft: function(finishMove){
 			var hiddenItems = $('ul li:hidden', currentSlide);

@@ -2,11 +2,28 @@
 
 #preview {
 	width: 600px;
-	height: 600px;
+	height: 500px;
 	position:relative;
+	border: solid 1px silver;
+	margin: 20px auto;
+}
+
+#prevSlide {
+	position: absolute;
+	top: 50%;
+	left: -20px;
+	text-decoration: none;
+}
+
+#nextSlide {
+	position: absolute;
+	top: 50%;
+	right: -20px;
+	text-decoration: none;
 }
 
 #toolbox {
+	display:none;
 	position:absolute;
 	top:10px;
 	left: 10px;

@@ -3,7 +3,7 @@ var jsonReady = $.Deferred();
 var templatesReady = $.Deferred();
 
 $.when(templatesReady).done(buildToolbox);
-//$.when(jsonReady, templatesReady).done(init);
+$.when(jsonReady).done(init);
 
 var template = function(name){
 	return $.trim($('#' + name + '-tmpl').html());
@@ -11,10 +11,16 @@ var template = function(name){
 
 function injectTemplates(){
 	var dSlides = $.Deferred(),
-		dToolbox = $.Deferred();
+		dToolbox = $.Deferred(),
+		dDefault = $.Deferred();
 	
-	$.when(dSlides, dToolbox).done(function(){
+	$.when(dSlides, dToolbox, dDefault).done(function(){
 		templatesReady.resolve();
+	});
+	
+	$.get('/partialViews/_templates.html', function(templates) {
+	  $('body').append(templates);
+	  dDefault.resolve();
 	});
 	
 	$.get('/partialViews/_slide.html', function(templates) {
@@ -55,6 +61,42 @@ function init(){
 			field = that.attr('data-field');
 		
 			buildForm(label, type, field);
+	});
+	
+	Slider.init([{
+		"title" : "2009",
+		"bulletList": [
+			"Item 1",
+			"Item 2",
+			"Item 3",
+			"Item 4"
+		]
+	},
+	{
+		"title" : "2010",
+		"bottomImage": {
+			"url": "left_arrow.png",
+			"size": "small"
+		}
+	},
+	{
+		"title" : "2011",
+		"bottomImage": {
+			"url": "left_arrow.png",
+			"size": "small"
+		}
+	}], 0, {
+		container: $('#preview')
+	});
+	
+	Slider.toggle(true);
+	Slider.updateList(10);
+	
+	$('#nextSlide').bind('click', function(){
+		Slider.moveRight();
+	});
+	$('#prevSlide').bind('click', function(){
+		Slider.moveLeft();
 	});
 }
 

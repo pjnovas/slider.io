@@ -19,7 +19,11 @@
 -->
 			<div id="preview">
 				<ul id="toolbox"></ul>
-				<div id="slide"></div>
+				<div id="slider-stage">
+			  	<ul id="slider-list"></ul>
+			  </div>
+			  <a href="#" id="prevSlide">prev</a>
+			  <a href="#" id="nextSlide">next</a>
 			</div>
 <!--
 			<fieldset>
@@ -56,6 +60,7 @@
 	<script type="text/javascript" src="/js/libs/jquery-1.7.1.min.js"></script>
 	<script type="text/javascript" src="/js/libs/mustache.js"></script>
 	<script type="text/javascript" src="/js/libs/highlight.min.js"></script>
+	<script type="text/javascript" src="/js/libs/jquery.slider.js"></script>
 	<script type="text/javascript" src="/js/editor/editor.js"></script>
 
 	</body>
