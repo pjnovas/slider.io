@@ -1,33 +1,135 @@
 
+a, span {
+		/* Firefox */
+	-moz-transition: all 1s ease;
+	/* WebKit */
+	-webkit-transition: all 1s ease;
+	/* Opera */
+	-o-transition: all 1s ease;
+	/* Standard */
+	transition: all 1s ease;
+}
 
 #preview {
-	width: 600px;
+	width: 650px;
 	height: 500px;
 	position:relative;
 	border: solid 1px silver;
 	margin: 20px auto;
 }
 
-#prevSlide {
+.moveButtons,
+.moveButtons:visited {
+	border: solid 5px #777;
+	box-shadow: 2px 3px 7px gray;
+	border-radius: 30px;
+	padding: 10px;
+	background-color: white;
+	font-size: 30px;
+	font-weight: bold;
+	font-family: Arial;
+	line-height: 0.6;
+	color: #555;
+
 	position: absolute;
-	top: 50%;
-	left: -20px;
+	top: 40%;
 	text-decoration: none;
 }
 
-#nextSlide {
-	position: absolute;
-	top: 50%;
+.moveButtons:hover {
+	border: solid 5px #7CB467;
+	background-color: #9EFF86;
+}
+
+#addField {
+	left: -20px;
+	top: -20px;
+	line-height: 0.5;
+}
+
+#addField span {
+	-webkit-transform: rotate(0deg);
+	-moz-transform: rotate(0deg);
+	display: inline-block;
+}
+
+#addField.close span {
+	-webkit-transform: rotate(-135deg);
+	-moz-transform: rotate(-135deg);
+	display: inline-block;
+}
+
+#addField.close:hover {
+	border: solid 5px #5A0404;
+	background-color: #C43838;
+}
+
+#configs {
 	right: -20px;
+	top: -20px;	
+}
+
+#prevSlide {
+	left: -30px;
+}
+
+#nextSlide {
+	right: -30px;
+}
+
+#nextSlide:hover,
+#prevSlide:hover {
+	border: solid 5px #163E7A;
+	background-color: #C1CFFA;
+}
+
+.insertSlide {
+	width: 60px;
+	height: 15px;
+	border: solid 2px #777;
+	box-shadow: -2px 2px 5px gray;
+	padding: 10px;
+	background-color: #FFF;
+	font-size: 20px;
+	font-weight: bold;
+	font-family: arial;
+	line-height: 0.5;
+	color: #555;
+	position: absolute;
 	text-decoration: none;
+	bottom: 0px;
+	-webkit-transform: rotate(-90deg);
+	-moz-transform: rotate(-90deg);
+}
+
+.insertSlide:before {
+	content: '';
+	position: absolute;
+	width: 0;
+	height: 0;
+	border-top: 21px solid transparent;
+	border-bottom: 19px solid transparent;
+	border-left: 20px solid #777;
+	top: -3px;
+	right: -21px;
+}
+
+#insertLeft {
+	left: 20px;
+}
+
+#insertRight {
+	right: 20px;
 }
 
 #toolbox {
 	display:none;
 	position:absolute;
 	top:10px;
-	left: 10px;
-	width: 200px;	
+	left: 20px;
+	width: 150px;
+	background-color: #FFF;	
+	box-shadow: 2px 3px 7px gray;
 	list-style: none;
 	margin: 0;
 	padding: 0;

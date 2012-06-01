@@ -22,8 +22,13 @@
 				<div id="slider-stage">
 			  	<ul id="slider-list"></ul>
 			  </div>
-			  <a href="#" id="prevSlide">prev</a>
-			  <a href="#" id="nextSlide">next</a>
+			  <a href="#" class="moveButtons" id="addField"><span>+</span></a>
+			  <a href="#" class="moveButtons" id="configs">8</a>
+			  <a href="#" class="moveButtons" id="prevSlide">&lt;</a>
+			  <a href="#" class="moveButtons" id="nextSlide">&gt;</a>
+			  
+			  <a href="#" class="insertSlide" id="insertLeft">nuevo</a>
+			  <a href="#" class="insertSlide" id="insertRight">nuevo</a>
 			</div>
 <!--
 			<fieldset>

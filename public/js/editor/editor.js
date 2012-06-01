@@ -98,6 +98,10 @@ function init(){
 	$('#prevSlide').bind('click', function(){
 		Slider.moveLeft();
 	});
+	$('#addField').bind('click', function(){
+		$('#toolbox').slideToggle(1000);
+		$('#addField').toggleClass('close');
+	});
 }
 
 function buildForm(label, type, field){
