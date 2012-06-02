@@ -45,7 +45,7 @@ socket.on('toggleSlider', function (data) {
 });
 
 function injectTemplates(){
-	$.get('_templates.html', function(templates) {
+	$.get('/partialViews/_slides.html', function(templates) {
 	  $('body').append(templates);
 	  templatesReady.resolve();
 	});

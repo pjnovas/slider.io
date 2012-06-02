@@ -55,8 +55,8 @@ exports.configure = function(app) {
 		sliderCtrl.getSlides(req.params.slider, res);
 	});
 	
-	app.get('/slider/editor', function (req, res){
-		sliderCtrl.renderEditSlider(res);
+	app.get('/slider/:slider/editor', function (req, res){
+		sliderCtrl.renderEditSlider(req.params.slider, res);
 	});
 
 	app.get('/slider/:slider/', function (req, res){

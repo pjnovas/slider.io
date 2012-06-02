@@ -4,7 +4,7 @@ var templatesReady = $.Deferred();
 $.when(jsonReady, templatesReady).done(initSlider);
 
 function injectTemplates(){
-	$.get('_templates.html', function(templates) {
+	$.get('/partialViews/_slides.html', function(templates) {
 	  $('body').append(templates);
 	  templatesReady.resolve();
 	});

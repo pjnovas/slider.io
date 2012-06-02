@@ -11,39 +11,51 @@ var template = function(name){
 
 function injectTemplates(){
 	var dSlides = $.Deferred(),
-		dToolbox = $.Deferred(),
 		dDefault = $.Deferred();
 	
-	$.when(dSlides, dToolbox, dDefault).done(function(){
+	$.when(dSlides, dDefault).done(function(){
 		templatesReady.resolve();
 	});
 	
-	$.get('/partialViews/_templates.html', function(templates) {
+	$.get('/partialViews/_slides.html', function(templates) {
 	  $('body').append(templates);
 	  dDefault.resolve();
 	});
 	
-	$.get('/partialViews/_slide.html', function(templates) {
+	$.get('/partialViews/_editor.html', function(templates) {
 	  $('body').append(templates);
 	  dSlides.resolve();
-	});
-	
-	$.get('/partialViews/_toolbox.html', function(templates) {
-	  $('body').append(templates);
-	  dToolbox.resolve();
 	});
 	
 }
 
 function buildToolbox(){
+	var djsonToolbox = $.Deferred(),
+		djsonSlides = $.Deferred();
+
+	$.when(djsonSlides, djsonToolbox).done(function(slides){
+		jsonReady.resolve(slides);
+	});
 
 	$.getJSON('/js/editor/json/toolbox.json', function(toolboxItems){
 		
 		var items = $.mustache(template('toolboxItem'), {items: toolboxItems});
 		$('#toolbox').append(items);
+
+		djsonToolbox.resolve();
+	
+	  }).error(function(data,status,xhr) { 
+	  	console.dir({
+	  		"data": data,
+	  		"status": status,
+	  		"xhr": xhr
+		}); 
+	});
+	
+	$.getJSON('slides.json', function(data){
 		
-		jsonReady.resolve();
-			
+		djsonSlides.resolve(data);
+	
 	  }).error(function(data,status,xhr) { 
 	  	console.dir({
 	  		"data": data,
@@ -53,7 +65,7 @@ function buildToolbox(){
 	});
 }
 
-function init(){
+function init(slides){
 	$('a', '#toolbox').live('click', function(){
 		var that = $(this),
 			label = that.text();
@@ -63,30 +75,9 @@ function init(){
 			buildForm(label, type, field);
 	});
 	
-	Slider.init([{
-		"title" : "2009",
-		"bulletList": [
-			"Item 1",
-			"Item 2",
-			"Item 3",
-			"Item 4"
-		]
-	},
-	{
-		"title" : "2010",
-		"bottomImage": {
-			"url": "left_arrow.png",
-			"size": "small"
-		}
-	},
-	{
-		"title" : "2011",
-		"bottomImage": {
-			"url": "left_arrow.png",
-			"size": "small"
-		}
-	}], 0, {
-		container: $('#preview')
+	Slider.init(slides, 0, {
+		container: $('#preview'),
+		editorTmpl: 'editor-'
 	});
 	
 	Slider.toggle(true);

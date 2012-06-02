@@ -72,12 +72,13 @@ exports.renderSliderList = function(res){
 	});
 };
 
-exports.renderEditSlider = function(res){
+exports.renderEditSlider = function(_slider, res){
 	
 	res.render('slider/editor.mu', { 
   	layout: false, 
   	locals: { 
-  		title: "Editando Slider"
+  		title: "Editando Slider",
+  		scripts: "var sliderName = '" + _slider + "';"
   	} 
   });	
 

@@ -7,6 +7,7 @@ var Slider = (function($) {
 		initialMargin,
 		mainCtn,
 		ulId,
+		editorTmpl = '',
 		
 		currentIndex = 0,
 		slider,
@@ -108,6 +109,8 @@ var Slider = (function($) {
 			type = data.type || 'content',
 			curr = slides.eq(idx);
 		
+		type = editorTmpl + type;
+		
 		if (!curr.prop('data-built')) {
 			sContent = $.mustache(template(type), data);
 			fContent = $.mustache(template('footer'), data);
@@ -137,6 +140,7 @@ var Slider = (function($) {
 	return {
 		init: function(slideList, start, options){
 			mainCtn = options && options.container || window;
+			editorTmpl = options && options.editorTmpl || '';
 			ulId = options && options.ulId || 'slider-list';
 			slideData = slideList;
 			

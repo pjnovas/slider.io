@@ -1,0 +1,58 @@
+
+<script id="toolboxItem-tmpl" type="text/template">
+	{{#items}}
+	<li>
+		<a data-type="{{type}}" data-field="{{field}}" href="#">{{label}}</a>
+	</li>
+	{{/items}}
+</script>
+
+<script id="editor-content-tmpl" type="text/template">
+	{{#fields}}
+		
+		{{#title}}
+			<h1>{{title.text}}</h1>
+		{{/title}}
+		
+		{{#subTitle}}
+			<h2>{{subTitle.text}}</h2>
+		{{/subTitle}}
+		
+		{{#image}}
+			<img src="images/{{image.url}}" class="{{image.size}}">
+		{{/image}}
+	
+		{{#list}}
+			<ul class="bulletList">	
+			{{#list.items}}
+				<li>{{.}}</li>
+			{{/list.items}}
+			</ul>
+		{{/list}}
+		
+		{{#code}}
+			<h2>{{cTitle}}</h2>
+			<div class="{{language}}"><pre><code class="{{language}}">{{code}}</code></pre></div>
+		{{/code}}
+		
+		{{#paragraph}}
+			<p class="paragraph">{{paragraph.text}}</p>
+		{{/paragraph}}
+	
+	{{/fields}}
+</script>
+
+<script id="editor-footer-tmpl" type="text/template">
+	<aside>
+		{{#cheatsheet}}
+			<p>{{.}}</p>
+		{{/cheatsheet}}
+	</aside>
+	<details open="open">
+		{{#details}}
+			<p>{{.}}</p>
+		{{/details}}
+	</details>
+</script>
+
+
