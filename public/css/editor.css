@@ -10,25 +10,30 @@ a, span {
 	transition: all 1s ease;
 }
 
+#slider-stage {
+border: 3px solid #0B93D5;
+background-color: #111010;
+border-radius: 10px;
+}
+
 #preview {
 	width: 650px;
 	height: 500px;
 	position:relative;
-	border: solid 1px silver;
-	margin: 20px auto;
+	margin: 40px auto;
 }
 
 .moveButtons,
 .moveButtons:visited {
-	border: solid 5px #777;
-	box-shadow: 2px 3px 7px gray;
+	border: 5px solid #0B93D5;
+	box-shadow: 2px 3px 7px #000;
 	border-radius: 30px;
 	padding: 10px;
 	background-color: white;
 	font-size: 30px;
 	font-weight: bold;
 	font-family: Arial;
-	line-height: 0.6;
+	line-height: 1.6;
 	color: #555;
 
 	position: absolute;
@@ -42,9 +47,25 @@ a, span {
 }
 
 #addField {
+	box-shadow: 2px 3px 7px #000;
+	border-radius: 30px;
+	padding: 10px;
+	font-size: 30px;
+	font-weight: bold;
+	font-family: Arial;
+	color: #555;
+	
+	border: solid 5px #7CB467;
+	background-color: white;
+	
 	left: -20px;
 	top: -20px;
 	line-height: 0.5;
+}
+
+#addField:hover {
+	border: solid 5px #457C30;
+	background-color: #9EFF86;
 }
 
 #addField span {
@@ -65,8 +86,27 @@ a, span {
 }
 
 #configs {
+	border: 5px solid #555;
+	box-shadow: 2px 3px 7px #000;
+	border-radius: 30px;
+	padding: 10px;
+	background-color: white;
+	font-size: 30px;
+	font-weight: bold;
+	font-family: Arial;
+	line-height: 1.6;
+	color: #555;
+
+	position: absolute;
+	text-decoration: none;
+	
 	right: -20px;
 	top: -20px;	
+}
+
+#configs:hover {
+	border: solid 5px #333;
+	background-color: silver;
 }
 
 #prevSlide {
@@ -83,35 +123,25 @@ a, span {
 	background-color: #C1CFFA;
 }
 
-.insertSlide {
-	width: 60px;
-	height: 15px;
-	border: solid 2px #777;
-	box-shadow: -2px 2px 5px gray;
-	padding: 10px;
-	background-color: #FFF;
-	font-size: 20px;
+.insertSlide,
+.insertSlide:visited {
+	width: 50px;
+	height: 10px;
+	box-shadow: 2px 2px 5px #000;
+	padding: 5px 10px;
+
+	border: solid 3px #457C30;
+	background-color: white;
+	border-radius: 10px 10px 0 0;
+	
+	line-height: 0.5;
+	font-size: 16px;
 	font-weight: bold;
 	font-family: arial;
-	line-height: 0.5;
 	color: #555;
 	position: absolute;
 	text-decoration: none;
-	bottom: 0px;
-	-webkit-transform: rotate(-90deg);
-	-moz-transform: rotate(-90deg);
-}
-
-.insertSlide:before {
-	content: '';
-	position: absolute;
-	width: 0;
-	height: 0;
-	border-top: 21px solid transparent;
-	border-bottom: 19px solid transparent;
-	border-left: 20px solid #777;
-	top: -3px;
-	right: -21px;
+	bottom: -10px;
 }
 
 #insertLeft {
@@ -120,6 +150,12 @@ a, span {
 
 #insertRight {
 	right: 20px;
+}
+
+#screen-mode {
+	position: absolute;
+	top: -30px;
+	left: 37%;
 }
 
 #toolbox {

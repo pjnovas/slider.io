@@ -4,12 +4,13 @@
 	<head>
 		<title>SliderIO Editor</title>
 
+		<link href="/css/dark-hive/jquery-ui-1.8.20.custom.css" rel="stylesheet">
 		<link href="/css/style.css" rel="stylesheet">
 		<link href="/css/editor.css" rel="stylesheet">
 		
 	</head>
 
-	<body>
+	<body class="ui-widget-content" style="border:none">
 		<div id="wrapper">
 <!--
 			<ul id="slides-selector">
@@ -22,13 +23,17 @@
 				<div id="slider-stage">
 			  	<ul id="slider-list"></ul>
 			  </div>
-			  <a href="#" class="moveButtons" id="addField"><span>+</span></a>
-			  <a href="#" class="moveButtons" id="configs">8</a>
+			  <div id="screen-mode">
+					<input type="radio" id="view-edit" name="mode" checked="checked"/><label for="view-edit">Edicion</label>
+					<input type="radio" id="view-free" name="mode" /><label for="view-free">Libre</label>
+				</div>
+			  <a href="#" class="moveButtons vEditor" id="addField"><span>+</span></a>
+			  <a href="#" class="moveButtons vEditor" id="configs">8</a>
 			  <a href="#" class="moveButtons" id="prevSlide">&lt;</a>
 			  <a href="#" class="moveButtons" id="nextSlide">&gt;</a>
 			  
-			  <a href="#" class="insertSlide" id="insertLeft">nuevo</a>
-			  <a href="#" class="insertSlide" id="insertRight">nuevo</a>
+			  <a href="#" class="insertSlide vEditor" id="insertLeft">nuevo</a>
+			  <a href="#" class="insertSlide vEditor" id="insertRight">nuevo</a>
 			</div>
 <!--
 			<fieldset>
@@ -63,6 +68,7 @@
 		</div>
 
 	<script type="text/javascript" src="/js/libs/jquery-1.7.1.min.js"></script>
+	<script type="text/javascript" src="/js/libs/jquery-ui-1.8.20.custom.min.js"></script>
 	<script type="text/javascript" src="/js/libs/mustache.js"></script>
 	<script type="text/javascript" src="/js/libs/highlight.min.js"></script>
 	<script type="text/javascript" src="/js/libs/jquery.slider.js"></script>

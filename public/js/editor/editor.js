@@ -102,6 +102,14 @@ function init(){
 		$('#toolbox').slideToggle(1000);
 		$('#addField').toggleClass('close');
 	});
+	
+	$('#screen-mode').buttonset();
+	$('#view-edit').click(function(){
+		$('.vEditor', '#preview').show();
+	});
+	$('#view-free').click(function(){
+		$('.vEditor', '#preview').hide();
+	});
 }
 
 function buildForm(label, type, field){
