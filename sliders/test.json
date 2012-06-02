@@ -1,46 +1,95 @@
 [
 	{
-		"title" : "2009",
-		"bulletList": [
-			"Item 1",
-			"Item 2",
-			"Item 3",
-			"Item 4"
-		],
+		"fields": [{
+			"title": {
+				"text": "2009"
+			}
+		},
+		{
+			"list": {
+				"items": [
+					"Item 1",
+					"Item 2",
+					"Item 3",
+					"Item 4"
+				]
+			}
+		}],
 		"next": 5
 	},
 	{
-		"title" : "2010",
-		"bottomImage": {
-			"url": "left_arrow.png",
-			"size": "small"
+		"fields": [{
+			"title": {
+				"text": "2009"
+			}
 		},
+		{
+			"image": {
+				"url": "left_arrow.png",
+				"size": "small"
+			}
+		}],
 		"next": 0
 	},
 	{
-		"title" : "2011",
-		"bottomImage": {
-			"url": "left_arrow.png",
-			"size": "small"
+		"fields": [{
+			"title": {
+				"text": "2011"
+			}
 		},
+		{
+			"image": {
+				"url": "left_arrow.png",
+				"size": "small"
+			}
+		}],
 		"next": 1
 	},
 	{
 		"isChapter" : true,
-		"title": "starts here",
+		"fields": [{
+			"title": {
+				"text": "starts here"
+			}
+		}],
 		"prev": 3
 	},
 	{
-		"title" : "Stop!",
-		"subTitle": "Goes baaaack!",
-		"bottomImage": {
-			"url": "left_arrow.png",
-			"size": "small"
+		"fields": [{
+			"title": {
+				"text": "Stop!"
+			}
 		},
+		{
+			"subTitle": {
+				"text": "Goes baaaack!"
+			}
+		},
+		{
+			"image": {
+				"url": "left_arrow.png",
+				"size": "small"
+			}
+		},
+		{
+			"image": {
+				"url": "left_arrow.png",
+				"size": "small"
+			}
+		}],
 		"next": 2
 	},
 	{
-	  "title": "Something",
+		"fields": [{
+			"title": {
+				"text": "Something"
+			}
+		},
+		{
+			"paragraph": {
+				"text": "Algun texto magico"
+			}
+		}],
 		"cheatsheet" : [
 			"cheat 1",
 			"cheat 2",
