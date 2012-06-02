@@ -14,13 +14,12 @@
 					"Item 4"
 				]
 			}
-		}],
-		"next": 5
+		}]
 	},
 	{
 		"fields": [{
 			"title": {
-				"text": "2009"
+				"text": "2010"
 			}
 		},
 		{
@@ -28,8 +27,7 @@
 				"url": "left_arrow.png",
 				"size": "small"
 			}
-		}],
-		"next": 0
+		}]
 	},
 	{
 		"fields": [{
@@ -42,8 +40,7 @@
 				"url": "left_arrow.png",
 				"size": "small"
 			}
-		}],
-		"next": 1
+		}]
 	},
 	{
 		"isChapter" : true,
@@ -51,8 +48,7 @@
 			"title": {
 				"text": "starts here"
 			}
-		}],
-		"prev": 3
+		}]
 	},
 	{
 		"fields": [{
@@ -76,8 +72,7 @@
 				"url": "left_arrow.png",
 				"size": "small"
 			}
-		}],
-		"next": 2
+		}]
 	},
 	{
 		"fields": [{

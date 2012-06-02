@@ -132,7 +132,7 @@ border-radius: 10px;
 
 	border: solid 3px #457C30;
 	background-color: white;
-	border-radius: 10px 10px 0 0;
+	border-radius: 10px;
 	
 	line-height: 0.5;
 	font-size: 16px;
@@ -141,6 +141,28 @@ border-radius: 10px;
 	color: #555;
 	position: absolute;
 	text-decoration: none;
+	bottom: -10px;
+}
+
+.deleteSlide,
+.deleteSlide:visited {
+	width: 60px;
+	height: 10px;
+	box-shadow: 2px 2px 5px #000;
+	padding: 5px 10px;
+
+	border: solid 3px #457C30;
+	background-color: white;
+	border-radius: 10px;
+	
+	line-height: 0.5;
+	font-size: 16px;
+	font-weight: bold;
+	font-family: arial;
+	color: #555;
+	position: absolute;
+	text-decoration: none;
+	left: 45%;
 	bottom: -10px;
 }
 
@@ -185,6 +207,40 @@ border-radius: 10px;
 	margin: 10px;
 	line-height: 2;
 }
+
+
+/*
+ * Template Editor
+ */
+
+.editorField {
+	border: dashed 1px silver;
+}
+
+.editorField li {
+	border: dashed 1px silver;
+	width:90% !important;
+}
+
+textarea {
+	overflow: hidden;
+	outline: none;
+	vertical-align: top;
+	resize: none;
+	width: 99%;
+}
+
+h1 textarea, h2 textarea, h3 textarea, ul.bulletList li textarea {
+	border: none;
+	text-align: center;
+	background-color: transparent;
+}
+
+ul.bulletList li textarea {
+	text-align: left;
+}
+
+
 
 
 

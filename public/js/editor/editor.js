@@ -66,6 +66,22 @@ function buildToolbox(){
 }
 
 function init(slides){
+	var currentSliderIndex = 0,
+		currentStateEdit = true;
+	
+	var initSlider = function(editor){
+		currentStateEdit = editor;
+		Slider.init(slides, currentSliderIndex, {
+			container: $('#preview'),
+			editorTmpl: (editor) ? 'editor-' : ''
+		});
+		
+		Slider.toggle(true);
+		Slider.updateList(10);
+		
+		$('textarea').attr('rows', 1).css('height', '1em');
+	};
+	
 	$('a', '#toolbox').live('click', function(){
 		var that = $(this),
 			label = that.text();
@@ -75,31 +91,91 @@ function init(slides){
 			buildForm(label, type, field);
 	});
 	
-	Slider.init(slides, 0, {
-		container: $('#preview'),
-		editorTmpl: 'editor-'
-	});
-	
-	Slider.toggle(true);
-	Slider.updateList(10);
-	
 	$('#nextSlide').bind('click', function(){
-		Slider.moveRight();
+		Slider.moveRight(function(idx){
+			currentSliderIndex = idx;
+			$('textarea').attr('rows', 1).css('height', '1em');
+			
+			if (currentStateEdit)
+				Slider.updateList(10);
+		});
 	});
+	
 	$('#prevSlide').bind('click', function(){
-		Slider.moveLeft();
+		Slider.moveLeft(function(idx){
+			currentSliderIndex = idx;
+			$('textarea').attr('rows', 1).css('height', '1em');
+			
+			if (currentStateEdit)
+				Slider.updateList(10);
+		});
 	});
+	
 	$('#addField').bind('click', function(){
 		$('#toolbox').slideToggle(1000);
 		$('#addField').toggleClass('close');
 	});
 	
 	$('#screen-mode').buttonset();
+	
 	$('#view-edit').click(function(){
 		$('.vEditor', '#preview').show();
+		initSlider(true);
 	});
+	
 	$('#view-free').click(function(){
 		$('.vEditor', '#preview').hide();
+		initSlider(false);
+	});
+	
+	$('textarea').live('change, cut, paste, drop, keydown', function(){
+			var self = this;
+			setTimeout(function(){
+				self.style.height = 'auto';
+				self.style.height = self.scrollHeight + 'px';
+			}, 0);
+	});
+		
+	$('textarea.newListItem').live('click', function(){
+		var li = $(this).parent('li');
+		var newItem = $("<li style='display: list-item;'><textarea></textarea></li>");
+		newItem.insertBefore(li);
+		$('textarea', newItem).attr('rows', 1).css('height', '1em').focus();
+	});
+	
+	$('textarea').live('change', function(){
+		hydrateSlide(currentSliderIndex, slides);
+	});
+	
+	initSlider(true);
+}
+
+function hydrateSlide(idx, slides){
+	
+	var fieldCtrls = $('.field', '#slider-list li:nth-child(' + (idx + 1) + ')');
+
+	slides[idx].fields = [];
+	
+	fieldCtrls.each(function(){
+		var fieldName = $(this).attr('data-field');
+		var field = {};
+		field[fieldName] = {};
+		
+		switch(fieldName) {
+			case 'title':
+			case 'subTitle':
+				field[fieldName].text = $(this).val();
+				break;
+			case 'list':
+				field[fieldName].items = [];
+				
+				$('li textarea', $(this)).not('.newListItem').each(function(){
+					field[fieldName].items.push($(this).val());
+				});
+				break;
+		}
+		
+		slides[idx].fields.push(field);
 	});
 }
 
@@ -112,11 +188,3 @@ $(document).ready(function(){
 	
 	injectTemplates();
 });
-
-
-
-
-
-
-
-

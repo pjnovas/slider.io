@@ -144,6 +144,7 @@ var Slider = (function($) {
 			ulId = options && options.ulId || 'slider-list';
 			slideData = slideList;
 			
+			$('li', '#' + ulId).remove();
 			for (var i=0; i< slideData.length; i++){
 				$('#' + ulId).append('<li>');
 			}

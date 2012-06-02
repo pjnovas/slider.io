@@ -30,6 +30,7 @@
 			  <a href="#" class="moveButtons" id="nextSlide">&gt;</a>
 			  
 			  <a href="#" class="insertSlide vEditor" id="insertLeft">nuevo</a>
+			  <a href="#" class="deleteSlide vEditor" id="deleteCurrent">eliminar</a>
 			  <a href="#" class="insertSlide vEditor" id="insertRight">nuevo</a>
 			</div>
 

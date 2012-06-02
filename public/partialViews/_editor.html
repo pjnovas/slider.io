@@ -2,7 +2,7 @@
 <script id="toolboxItem-tmpl" type="text/template">
 	{{#items}}
 	<li>
-		<a data-type="{{type}}" data-field="{{field}}" href="#">{{label}}</a>
+		<a data-type="{{type}}" href="#">{{label}}</a>
 	</li>
 	{{/items}}
 </script>
@@ -11,11 +11,11 @@
 	{{#fields}}
 		
 		{{#title}}
-			<h1>{{title.text}}</h1>
+			<h1 class="editorField"><textarea data-field="title" class="field">{{title.text}}</textarea></h1>
 		{{/title}}
 		
 		{{#subTitle}}
-			<h2>{{subTitle.text}}</h2>
+			<h2 class="editorField"><textarea data-field="subTitle" class="field">{{subTitle.text}}</textarea></h2>
 		{{/subTitle}}
 		
 		{{#image}}
@@ -23,10 +23,11 @@
 		{{/image}}
 	
 		{{#list}}
-			<ul class="bulletList">	
+			<ul class="bulletList editorField field" data-field="list">	
 			{{#list.items}}
-				<li>{{.}}</li>
+				<li><textarea>{{.}}</textarea></li>
 			{{/list.items}}
+			<li><textarea class="newListItem"></textarea></li>
 			</ul>
 		{{/list}}
 		
@@ -36,7 +37,7 @@
 		{{/code}}
 		
 		{{#paragraph}}
-			<p class="paragraph">{{paragraph.text}}</p>
+			<p class="paragraph"><textarea>{{paragraph.text}}</textarea></p>
 		{{/paragraph}}
 	
 	{{/fields}}
