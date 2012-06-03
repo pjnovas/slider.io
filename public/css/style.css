@@ -94,7 +94,6 @@ h1, h2, h3 {
 }
 
 #slider-stage{
-	width: 100%;
 	overflow:auto;
 	overflow-x:hidden;
 	overflow-y:hidden;

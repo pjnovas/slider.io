@@ -69,6 +69,19 @@ function init(slides){
 	var currentSliderIndex = 0,
 		currentStateEdit = true;
 	
+	var rebuildEditMode = function(){
+		Slider.updateList(10);
+			
+		$("li.current").sortable({
+			revert: true,
+			items: '.editorField',
+			handle: 'a.moveField',
+			update: function(event, ui) {
+				hydrateSlide(currentSliderIndex, slides);
+			}
+		}).disableSelection();
+	}
+	
 	var initSlider = function(editor){
 		currentStateEdit = editor;
 		Slider.init(slides, currentSliderIndex, {
@@ -78,10 +91,56 @@ function init(slides){
 		
 		Slider.toggle(true);
 		
-		if (currentStateEdit)
-			Slider.updateList(10);
-		
 		$('textarea').attr('rows', 1).css('height', '1em');
+		
+		if (currentStateEdit) {
+			rebuildEditMode();
+		}
+		
+	};
+	
+	var rebuildMoveCtrls = function(){
+		if (currentStateEdit){
+			rebuildEditMode();
+			
+			if (currentSliderIndex === 0){
+				$('#prevSlide').text('+').addClass('addSlide');
+			}
+			else {
+				$('#prevSlide').text('<').removeClass('addSlide');
+			}
+			
+			if (currentSliderIndex === slides.length-1){
+				$('#nextSlide').text('+').addClass('addSlide');
+			}
+			else {
+				$('#nextSlide').text('>').removeClass('addSlide');
+			}
+		}
+		else {
+			$('#prevSlide').text('<').removeClass('addSlide');
+			$('#nextSlide').text('>').removeClass('addSlide');
+		}
+	}
+	
+	var moveLeft = function(callback){
+		Slider.moveLeft(function(idx){
+			currentSliderIndex = idx;
+			$('textarea').attr('rows', 1).css('height', '1em');
+			rebuildMoveCtrls();
+			if (callback)
+				callback();
+		});
+	};
+	
+	var moveRight = function(callback){
+		Slider.moveRight(function(idx){
+			currentSliderIndex = idx;
+			$('textarea').attr('rows', 1).css('height', '1em');
+			rebuildMoveCtrls();
+			if (callback)
+				callback();
+		});
 	};
 	
 	$('a', '#toolbox').live('click', function(){
@@ -94,23 +153,11 @@ function init(slides){
 	});
 	
 	$('#nextSlide').bind('click', function(){
-		Slider.moveRight(function(idx){
-			currentSliderIndex = idx;
-			$('textarea').attr('rows', 1).css('height', '1em');
-			
-			if (currentStateEdit)
-				Slider.updateList(10);
-		});
+		moveRight();
 	});
 	
 	$('#prevSlide').bind('click', function(){
-		Slider.moveLeft(function(idx){
-			currentSliderIndex = idx;
-			$('textarea').attr('rows', 1).css('height', '1em');
-			
-			if (currentStateEdit)
-				Slider.updateList(10);
-		});
+		moveLeft();
 	});
 	
 	$('#addField').bind('click', function(){
@@ -123,11 +170,13 @@ function init(slides){
 	$('#view-edit').click(function(){
 		$('.vEditor', '#preview').show();
 		initSlider(true);
+		rebuildMoveCtrls();
 	});
 	
 	$('#view-free').click(function(){
 		$('.vEditor', '#preview').hide();
 		initSlider(false);
+		rebuildMoveCtrls();
 	});
 	
 	$('textarea').live('change, cut, paste, drop, keydown', function(){
@@ -154,7 +203,69 @@ function init(slides){
 		hydrateSlide(currentSliderIndex, slides);
 	});
 	
+	$('#insertLeft, #prevSlide.addSlide').live('click', function(){
+		insertSlide(currentSliderIndex, slides);
+		currentSliderIndex++;
+		initSlider(true);
+		
+		moveLeft();
+	});
+	
+	$('#insertRight, #nextSlide.addSlide').live('click', function(){
+		insertSlide(currentSliderIndex+1, slides);
+		initSlider(true);
+		
+		moveRight();
+	});
+	
+	$('#deleteCurrent').live('click', function(){
+		
+		if (slides.length > 1){
+			if (currentSliderIndex === 0){
+				moveRight(function(){
+					removeSlide(0, slides);
+					currentSliderIndex--;
+					initSlider(true);
+					rebuildMoveCtrls();
+				});
+			}
+			else if(currentSliderIndex === slides.length-1) {
+				moveLeft(function(){
+					removeSlide(currentSliderIndex+1, slides);
+					initSlider(true);
+					rebuildMoveCtrls();
+				});
+			}
+			else {
+				moveRight(function(){
+					removeSlide(currentSliderIndex-1, slides);
+					currentSliderIndex--;
+					initSlider(true);
+					rebuildMoveCtrls();
+				});
+			}
+		}
+		else if (slides.length === 1){
+			insertSlide(0, slides);
+			removeSlide(currentSliderIndex+1, slides);
+			initSlider(true);
+			rebuildMoveCtrls();
+		}
+		
+	});
+	
 	initSlider(true);
+	rebuildMoveCtrls();
+}
+
+function insertSlide(idx, slides){
+	slides.splice(idx, 0, {
+		"fields": []
+	});
+}
+
+function removeSlide(idx, slides){
+	slides.splice(idx, 1);
 }
 
 function hydrateSlide(idx, slides){
@@ -181,7 +292,8 @@ function hydrateSlide(idx, slides){
 				});
 				break;
 			case 'image':
-				
+				field[fieldName].url = $(this).attr('data-field-url');
+				field[fieldName].size = $(this).attr('data-field-size');
 				break;
 			case 'code':
 				field[fieldName].language = 'javascript';

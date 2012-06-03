@@ -123,6 +123,12 @@ border-radius: 10px;
 	background-color: #C1CFFA;
 }
 
+#prevSlide.addSlide, #prevSlide.addSlide:hover,
+#nextSlide.addSlide, #nextSlide.addSlide:hover   {
+	border: solid 5px #7CB467;
+	background-color: white;
+}
+
 .insertSlide,
 .insertSlide:visited {
 	width: 50px;
@@ -219,7 +225,11 @@ border-radius: 10px;
 	position:relative;
 }
 
-.remove, .remove:visited {
+
+
+.remove, .remove:visited,
+.addBefore, .addBefore:visited,
+.moveField, .moveField:visited {
 	position: absolute;
 	box-shadow: 2px 3px 7px black;
 	border-radius: 30px;
@@ -228,17 +238,42 @@ border-radius: 10px;
 	font-weight: bold;
 	font-family: Arial;
 	color: white;
+	line-height: 0.5;
+	text-decoration: none;
+}
+
+.addBefore, .addBefore:visited {
+	border: solid 2px	white;
+	background-color:	#40AA31;
+	right: 45%;
+	top: -15px;
+}
+
+.moveField, .moveField:visited {
+	border: solid 2px white;
+	background-color: #20399B;
+	left: -10px;
+	top: 5px;
+	border-radius: 8px;
+	padding: 2px;
+}
+
+.remove, .remove:visited {
 	border: solid 2px	white;
 	background-color:	#FD3535;
 	right: -10px;
-	top: -10px;
-	line-height: 0.5;
-	text-decoration: none;
+	top: -10px;	
 }
 
 .remove:hover {
 	color: #F22;
 	border: solid 2px #FF1D1D;
+	background-color: white;
+}
+
+.addBefore:hover {
+	color: #0E5A03;
+	border: solid 2px #40AA31;
 	background-color: white;
 }
 
