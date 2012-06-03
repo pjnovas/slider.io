@@ -11,9 +11,8 @@ a, span {
 }
 
 #slider-stage {
-border: 3px solid #0B93D5;
-background-color: #111010;
-border-radius: 10px;
+	border: 3px solid #0B93D5;
+	border-radius: 10px;
 }
 
 #preview {
@@ -237,7 +236,7 @@ border-radius: 10px;
 
 .editorField,
 .newListItemli {
-	border: dashed 1px silver;
+	border: dashed 1px #999;
 	position:relative;
 }
 
@@ -320,7 +319,9 @@ ul.bulletList li textarea {
 	text-align: left;
 }
 
-
+ul, li {
+	color: #000;
+}
 
 
 

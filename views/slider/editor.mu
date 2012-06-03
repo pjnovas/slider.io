@@ -9,12 +9,13 @@
 		<link href="/css/style.css" rel="stylesheet">
 		<link href="/css/editor.css" rel="stylesheet">
 		
+		<link href="sliderStyles.css" rel="stylesheet">
 	</head>
 
 	<body class="ui-widget-content" style="border:none">
 		<div id="wrapper">
 
-			<div id="preview">
+			<div id="preview" class="sliderCtn">
 				<ul id="toolbox">
 				</ul>
 				<div id="slider-stage">

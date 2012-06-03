@@ -25,7 +25,7 @@
 	<link href="sliderStyles.css" rel="stylesheet">
   
 </head>
-<body>
+<body class="sliderCtn">
   <header>
 		<div id="clients-holder"></div>
   </header>

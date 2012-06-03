@@ -1,5 +1,5 @@
 
-body {
+.sliderCtn {
 	{{#background}}
 		
 		{{#color}}
@@ -82,7 +82,7 @@ body {
 
 
 @media screen and (max-width: 680px) {
-	body {
+	.sliderCtn {
 		{{#background}}
 			
 			{{#color}}
