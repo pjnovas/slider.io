@@ -5,6 +5,7 @@
 		<title>SliderIO Editor</title>
 
 		<link href="/css/dark-hive/jquery-ui-1.8.20.custom.css" rel="stylesheet">
+		<link href="/css/highlight/solarized_dark.min.css" rel="stylesheet">
 		<link href="/css/style.css" rel="stylesheet">
 		<link href="/css/editor.css" rel="stylesheet">
 		

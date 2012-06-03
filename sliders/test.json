@@ -81,8 +81,9 @@
 			}
 		},
 		{
-			"paragraph": {
-				"text": "Algun texto magico"
+			"code": {
+				"language": "javascript",
+				"script": "console.log('This is just Amazing!');"
 			}
 		}],
 		"cheatsheet" : [

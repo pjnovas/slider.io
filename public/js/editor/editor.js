@@ -77,7 +77,9 @@ function init(slides){
 		});
 		
 		Slider.toggle(true);
-		Slider.updateList(10);
+		
+		if (currentStateEdit)
+			Slider.updateList(10);
 		
 		$('textarea').attr('rows', 1).css('height', '1em');
 	};
@@ -147,6 +149,11 @@ function init(slides){
 		hydrateSlide(currentSliderIndex, slides);
 	});
 	
+	$('a.remove').live('click', function(){
+		$(this).parent('.editorField').remove();
+		hydrateSlide(currentSliderIndex, slides);
+	});
+	
 	initSlider(true);
 }
 
@@ -172,6 +179,13 @@ function hydrateSlide(idx, slides){
 				$('li textarea', $(this)).not('.newListItem').each(function(){
 					field[fieldName].items.push($(this).val());
 				});
+				break;
+			case 'image':
+				
+				break;
+			case 'code':
+				field[fieldName].language = 'javascript';
+				field[fieldName].script = $(this).val();
 				break;
 		}
 		

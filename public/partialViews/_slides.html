@@ -23,9 +23,13 @@
 		{{/list}}
 		
 		{{#code}}
-			<h2>{{cTitle}}</h2>
-			<div class="{{language}}"><pre><code class="{{language}}">{{code}}</code></pre></div>
+		<div class="{{code.language}}">
+				<pre>
+					<code class="{{code.language}}">{{code.script}}</code>
+				</pre>
+		</div>
 		{{/code}}
+		
 		
 		{{#paragraph}}
 			<p class="paragraph">{{paragraph.text}}</p>

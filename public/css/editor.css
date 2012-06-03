@@ -213,12 +213,37 @@ border-radius: 10px;
  * Template Editor
  */
 
-.editorField {
+.editorField,
+.newListItemli {
 	border: dashed 1px silver;
+	position:relative;
 }
 
-.editorField li {
-	border: dashed 1px silver;
+.remove, .remove:visited {
+	position: absolute;
+	box-shadow: 2px 3px 7px black;
+	border-radius: 30px;
+	padding: 5px;
+	font-size: 18px;
+	font-weight: bold;
+	font-family: Arial;
+	color: white;
+	border: solid 2px	white;
+	background-color:	#FD3535;
+	right: -10px;
+	top: -10px;
+	line-height: 0.5;
+	text-decoration: none;
+}
+
+.remove:hover {
+	color: #F22;
+	border: solid 2px #FF1D1D;
+	background-color: white;
+}
+
+li.editorField, 
+.newListItemli {
 	width:90% !important;
 }
 
@@ -230,7 +255,11 @@ textarea {
 	width: 99%;
 }
 
-h1 textarea, h2 textarea, h3 textarea, ul.bulletList li textarea {
+h1 textarea, 
+h2 textarea, 
+h3 textarea, 
+ul.bulletList li textarea,
+code textarea {
 	border: none;
 	text-align: center;
 	background-color: transparent;
