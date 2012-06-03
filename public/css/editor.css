@@ -204,8 +204,8 @@ a, span {
 #toolbox {
 	display:none;
 	position:absolute;
-	top:10px;
-	left: 20px;
+	top:10%;
+	left: 40%;
 	width: 150px;
 	background-color: #FFF;	
 	box-shadow: 2px 3px 7px gray;
@@ -214,6 +214,7 @@ a, span {
 	padding: 0;
 	border: solid 1px silver;
 	border-width: 1px 1px 0 1px;
+	z-index: 10;
 }
 
 #toolbox li {
@@ -240,10 +241,8 @@ a, span {
 	position:relative;
 }
 
-
-
 .remove, .remove:visited,
-.addBefore, .addBefore:visited,
+.addField, .addField:visited,
 .moveField, .moveField:visited {
 	position: absolute;
 	box-shadow: 2px 3px 7px black;
@@ -257,11 +256,14 @@ a, span {
 	text-decoration: none;
 }
 
-.addBefore, .addBefore:visited {
-	border: solid 2px	white;
-	background-color:	#40AA31;
-	right: 45%;
-	top: -15px;
+.addField, .addField:visited {
+	position: static;
+	border: solid 2px white;
+	background-color: #40AA31;
+	width: 10px;
+	height: 10px;
+	display: block;
+	margin: 5px auto;
 }
 
 .moveField, .moveField:visited {
@@ -286,7 +288,7 @@ a, span {
 	background-color: white;
 }
 
-.addBefore:hover {
+.addField:hover {
 	color: #0E5A03;
 	border: solid 2px #40AA31;
 	background-color: white;

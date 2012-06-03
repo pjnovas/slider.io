@@ -2,7 +2,7 @@
 <script id="toolboxItem-tmpl" type="text/template">
 	{{#items}}
 	<li>
-		<a data-type="{{type}}" href="#">{{label}}</a>
+		<a data-field="{{field}}" href="#">{{label}}</a>
 	</li>
 	{{/items}}
 </script>
@@ -60,6 +60,7 @@
 		{{/paragraph}}
 
 	{{/fields}}
+	<a href="#" class="addField">+</a>
 </script>
 
 <script id="editor-footer-tmpl" type="text/template">

@@ -150,11 +150,10 @@ function init(slides){
 	
 	$('a', '#toolbox').live('click', function(){
 		var that = $(this),
-			label = that.text();
-			type = that.attr('data-type'),
 			field = that.attr('data-field');
-		
-			buildForm(label, type, field);
+			
+			addField(field, currentSliderIndex, slides);
+			initSlider(true);
 	});
 	
 	$('#nextSlide').bind('click', function(){
@@ -165,9 +164,8 @@ function init(slides){
 		moveLeft();
 	});
 	
-	$('#addField').bind('click', function(){
-		$('#toolbox').slideToggle(1000);
-		$('#addField').toggleClass('close');
+	$('a.addField').live('click', function(){
+		$('#toolbox').toggle();
 	});
 	
 	$('#screen-mode').buttonset();
@@ -194,7 +192,14 @@ function init(slides){
 		
 	$('textarea.newListItem').live('click', function(){
 		var li = $(this).parent('li');
-		var newItem = $("<li style='display: list-item;'><textarea></textarea></li>");
+		
+		var newItem = $("<li>");
+		newItem
+			.addClass('editorField')
+			.css('display','list-item')
+			.append('<textarea>')
+			.append("<a href='#' class='remove'>x</a>");
+			
 		newItem.insertBefore(li);
 		$('textarea', newItem).attr('rows', 1).css('height', '1em').focus();
 	});
@@ -312,8 +317,29 @@ function hydrateSlide(idx, slides){
 	});
 }
 
-function buildForm(label, type, field){
+function addField(fieldName, idx, slides){
+	var field = {};
+	field[fieldName] = {};
 	
+	switch(fieldName) {
+		case 'title':
+		case 'subTitle':
+			field[fieldName].text = 'some text here';
+			break;
+		case 'list':
+			field[fieldName].items = [];
+			break;
+		case 'image':
+			field[fieldName].url = '';
+			field[fieldName].size = 'small';
+			break;
+		case 'code':
+			field[fieldName].language = 'javascript';
+			field[fieldName].script = 'put some code here';
+			break;
+	}
+	
+	slides[idx].fields.push(field);
 }
 
 $(document).ready(function(){
