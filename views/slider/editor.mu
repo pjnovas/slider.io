@@ -25,14 +25,14 @@
 					<input type="radio" id="view-edit" name="mode" checked="checked"/><label for="view-edit">Edicion</label>
 					<input type="radio" id="view-free" name="mode" /><label for="view-free">Preview</label>
 				</div>
-			  <a href="#" class="moveButtons vEditor" id="addField"><span>+</span></a>
-			  <a href="#" class="moveButtons vEditor" id="configs">8</a>
+			  <a href="#" class="moveButtons vEditor" id="addField"></a>
+			  <a href="#" class="moveButtons vEditor" id="configs"></a>
 			  <a href="#" class="moveButtons" id="prevSlide">&lt;</a>
 			  <a href="#" class="moveButtons" id="nextSlide">&gt;</a>
 			  
-			  <a href="#" class="insertSlide vEditor" id="insertLeft">nuevo</a>
-			  <a href="#" class="deleteSlide vEditor" id="deleteCurrent">eliminar</a>
-			  <a href="#" class="insertSlide vEditor" id="insertRight">nuevo</a>
+			  <a href="#" class="insertSlide vEditor" id="insertLeft"></a>
+			  <a href="#" class="deleteSlide vEditor" id="deleteCurrent"></a>
+			  <a href="#" class="insertSlide vEditor" id="insertRight"></a>
 			</div>
 
 		</div>
