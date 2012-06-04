@@ -12,6 +12,7 @@
 		<link href="sliderStyles.css" rel="stylesheet">
 	</head>
 
+
 	<body class="ui-widget-content" style="border:none">
 		<div id="wrapper">
 
