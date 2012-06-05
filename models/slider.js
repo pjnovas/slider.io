@@ -3,28 +3,35 @@ var fs = require('fs'),
 	util = require('util'),
 	fsExtra = require('fs.extra');
 
-var getJSONFile = function(name, done, error){
+var callError = function(error, callbackFunction){
+	console.log(error);
 	
-	callError = function(err){
-		console.log(err);
-		
-		if (err.code === 'ENOENT')
-			error({code: "notfound"});
-		else error({code: "unknown"});
-	}
+	if (error.code === 'ENOENT')
+		callbackFunction({code: "notfound"});
+	else callbackFunction({code: "unknown"});
+}
+
+var getJSONFile = function(name, done, error){
 	
 	fs.realpath('./sliders', function(err, path){
 		
 		if (err){
-			 callError(err);
+			 callError(err, error);
 		}
 
 		fs.readFile(path + '/' + name + '.json', 'utf8', function (err, data) {
 		  if (err) {
-		    callError(err);
+		    callError(err, error);
 		  }
 			
-			done(JSON.parse(data));
+			try {
+				var parsed = JSON.parse(data); 
+				done(parsed);	
+			}
+			catch(err){
+				callError('Error parsing file ' + name + '.json - Stack:' + err, error);
+			}
+			
 		});
 		
 	});
@@ -41,11 +48,7 @@ exports.getConfig = function(_name, done, error){
 exports.getSlidesCSSTemplate = function(_name, done, error){	
 	fs.readFile(__dirname + '/sliderCSS.css', 'ascii', function (err, data) {
 	 	if (err){
-	 		console.log(err);
-	 		
-			if (err.code === 'ENOENT')
-				error({code: "notfound"});
-			else error({code: "unknown"});
+	 		callError(err, error);
 	 	}
 	 	
 	 	done(data);
@@ -57,7 +60,7 @@ exports.getSliderList = function(done, error){
 	fs.realpath('./sliders', function(err, path){
 		
 		if (err){
-			 callError(err);
+			 callError(err, error);
 		}
 
 		fs.readdir(path, function (err, files) {
@@ -83,7 +86,7 @@ exports.saveSlider = function(name, data, done, error){
 	
 	fs.realpath('./sliders', function(err, path){
 		if (err){
-			 callError(err);
+			 callError(err, error);
 		}
 
 		fs.readdir(path, function (err, files) {
@@ -92,12 +95,12 @@ exports.saveSlider = function(name, data, done, error){
 	
 			fsExtra.copy(fileName, fileName + '-' + now, function (err) {
 				if (err) {
-			    callError(err);
+			    callError(err, error);
 			  }
 				
 				fs.writeFile(fileName, JSON.stringify(data), function (err) {
 					if (err){
-						 callError(err);
+						 callError(err, error);
 					}
 					
 					done();
