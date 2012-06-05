@@ -9,6 +9,12 @@ app.set('view engine', 'mustache');
 app.register(".mu", stache);
 app.set('views', __dirname + '/views');
 
+app.configure(function(){
+    app.use(express.methodOverride());
+    app.use(express.bodyParser());
+    app.use(app.router);
+});
+
 router.configure(app);
 
 app.use(express.static(__dirname + '/public'));

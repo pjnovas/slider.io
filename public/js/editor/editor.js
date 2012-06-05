@@ -268,6 +268,26 @@ function init(slides){
 		
 	});
 	
+	$("#saveSlider").bind('click',function(){
+		
+		$.ajax({
+	    url: "update",
+	    type: "POST",
+	    dataType: "json",
+	    data: JSON.stringify({slider: slides}),
+	    contentType: "application/json",
+	    cache: false,
+	    timeout: 5000,
+	    success: function(data) {
+	      alert('Saveeeeed');
+	    },
+	    error: function() {
+	      alert("Wow ... didn't worked");
+	    },
+	  });
+	  
+	});
+	
 	$("#preview").resizable();
 	
 	initSlider(true);

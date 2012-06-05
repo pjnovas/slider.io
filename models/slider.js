@@ -1,5 +1,7 @@
 
-var fs = require('fs');
+var fs = require('fs'),
+	util = require('util'),
+	fsExtra = require('fs.extra');
 
 var getJSONFile = function(name, done, error){
 	
@@ -76,6 +78,38 @@ exports.getSliderList = function(done, error){
 		
 	});
 };
+
+exports.saveSlider = function(name, data, done, error){
+	
+	fs.realpath('./sliders', function(err, path){
+		if (err){
+			 callError(err);
+		}
+
+		fs.readdir(path, function (err, files) {
+			var fileName = path + '\\' + name + '.json', 
+				now = new Date().getTime();
+	
+			fsExtra.copy(fileName, fileName + '-' + now, function (err) {
+				if (err) {
+			    callError(err);
+			  }
+				
+				fs.writeFile(fileName, JSON.stringify(data), function (err) {
+					if (err){
+						 callError(err);
+					}
+					
+					done();
+				});
+				
+			});		
+		});
+	});
+};
+
+
+
 
 
 

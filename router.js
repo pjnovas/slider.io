@@ -63,6 +63,10 @@ exports.configure = function(app) {
 	  sliderCtrl.renderSlider(res, req.params.slider);
 	});
 	
+	app.post('/slider/:slider/update', function (req, res){
+	  sliderCtrl.saveSlides(req.params.slider, req.body.slider, res);
+	});
+	
 	app.get('/slider', function (req, res){
 	  sliderCtrl.renderSliderList(res);
 	});

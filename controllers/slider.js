@@ -57,6 +57,17 @@ exports.getSlides = function(sliderName, res){
 	});
 };
 
+exports.saveSlides = function(sliderName, data, res){
+	
+	slider.saveSlider(sliderName, data, function(slides){
+  	res.json(data);
+	}, function(error){
+		if (error.code === 'notfound')
+			res.send("Slides for Slider '" + sliderName + "' NOT FOUND", 404);
+		else res.send(error.toString(), 500);
+	});
+};
+
 exports.renderSliderList = function(res){
 	
 	slider.getSliderList(function(_sliders){
