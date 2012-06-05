@@ -7,12 +7,13 @@
 		<link href="/css/dark-hive/jquery-ui-1.8.20.custom.css" rel="stylesheet">
 		<link href="/css/highlight/solarized_dark.min.css" rel="stylesheet">
 		<link href="/css/style.css" rel="stylesheet">
+		<link href="/css/font-awesome.css" rel="stylesheet">
 		<link href="/css/editor.css" rel="stylesheet">
 		
 		<link href="sliderStyles.css" rel="stylesheet">
 	</head>
 
-	<body class="ui-widget-content" style="border:none">
+	<body class="bgEdition" style="border:none">
 		<div id="wrapper">
 
 			<div id="preview" class="sliderCtn">
@@ -23,17 +24,38 @@
 			  	</ul>
 			  </div>
 			  <div id="screen-mode">
-					<input type="radio" id="view-edit" name="mode" checked="checked"/><label for="view-edit">Edicion</label>
-					<input type="radio" id="view-free" name="mode" /><label for="view-free">Preview</label>
+			  	<a href="#" class="icon-edit selected" id="view-edit">
+				  </a>
+				  <a href="#" class="icon-eye-open" id="view-free">
+				  </a>
 				</div>
-			  <a href="#" class="moveButtons vEditor" id="addField"></a>
-			  <a href="#" class="moveButtons vEditor" id="configs"></a>
-			  <a href="#" class="moveButtons" id="prevSlide">&lt;</a>
-			  <a href="#" class="moveButtons" id="nextSlide">&gt;</a>
+			  <a href="#" class="icon-save vEditor" id="saveSlider">
+			  </a>
+			  <a href="#" class="icon-cog vEditor" id="configs">
+			  </a>
+			  <a href="#" class="icon-chevron-left" id="prevSlide">
+			  </a>
+			  <a href="#" class="icon-chevron-right" id="nextSlide">
+				</a>
 			  
-			  <a href="#" class="insertSlide vEditor" id="insertLeft"></a>
-			  <a href="#" class="deleteSlide vEditor" id="deleteCurrent"></a>
-			  <a href="#" class="insertSlide vEditor" id="insertRight"></a>
+			  <a href="#" class="actionSlide vEditor" id="insertLeft">
+			  	<div class="icon-arrow-up">
+			  	</div>
+			  	<div class="icon-plus">
+			  	</div>
+			  </a>
+			  <a href="#" class="actionSlide vEditor" id="deleteCurrent">
+			  	<div class="icon-remove">
+			  	</div>
+			  	<div class="icon-arrow-down">
+			  	</div>
+			  </a>
+			  <a href="#" class="actionSlide vEditor" id="insertRight">
+			  	<div class="icon-arrow-up">
+			  	</div>
+			  	<div class="icon-plus">
+			  	</div>
+			  </a>
 			</div>
 
 		</div>

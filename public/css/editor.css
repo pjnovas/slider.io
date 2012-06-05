@@ -1,18 +1,23 @@
 
+.bgEdition {
+	background-color: red;
+	background: url('../imgs/bg.png') repeat;
+}
+
 a, span {
 		/* Firefox */
-	-moz-transition: all 1s ease;
+	-moz-transition: all 0.5s ease;
 	/* WebKit */
-	-webkit-transition: all 1s ease;
+	-webkit-transition: all 0.5s ease;
 	/* Opera */
-	-o-transition: all 1s ease;
+	-o-transition: all 0.5s ease;
 	/* Standard */
-	transition: all 1s ease;
+	transition: all 0.5s ease;
 }
 
 #slider-stage {
-	border: 3px solid #0B93D5;
-	border-radius: 10px;
+	border: 3px solid #3D3D3D;
+	border-radius: 5px;
 }
 
 #preview {
@@ -22,106 +27,80 @@ a, span {
 	margin: 40px auto;
 }
 
-.moveButtons,
-.moveButtons:visited {
-	border: 5px solid #0B93D5;
+
+/*
+ * Save & Config buttons
+ */
+
+#configs,
+#saveSlider {
+	width: 30px;
+	height: 20px;
+	
+	box-shadow: 2px 3px 7px black;
+	border-radius: 12px;
+	padding: 10px 8px;
+	font-size: 40px;
+	line-height: 0.5;
+	
+	position: absolute;
+	text-decoration: none;
+	top: -20px;
+}
+
+#configs { 
+	background-color: #DA8E1D;
+	border: 5px solid #FFF;
+	color: #FFF;
+	
+	right: -20px;
+}
+
+#configs:hover {
+	border: 5px solid #DA8E1D;
+	color: #DA8E1D;
+	background-color: #FFF;
+} 
+
+#saveSlider { 
+	background-color: #375FC9;
+	border: 5px solid #FFF;
+	color: #FFF;
+	
+	left: -20px;
+}
+
+#saveSlider:hover {
+	border: 5px solid #375FC9;
+	color: #375FC9;
+	background-color: #FFF;
+}
+
+
+/*
+ * Directional buttons
+ */
+
+#nextSlide, 
+#prevSlide,
+#nextSlide:visited,
+#prevSlide:visited {
+	border: 5px solid #FFF;
+	background-color: #0B93D5;
+	color: #FFF;
+
 	box-shadow: 2px 3px 7px #000;
 	border-radius: 30px;
-	padding: 10px;
-	background-color: white;
+	padding: 10px 12px;
+	
 	font-size: 30px;
 	font-weight: bold;
 	font-family: Arial;
 	line-height: 1.6;
-	color: #555;
-
+	
 	position: absolute;
 	top: 40%;
 	text-decoration: none;
-}
-
-.moveButtons:hover {
-	border: solid 5px #7CB467;
-	background-color: #9EFF86;
-}
-
-/*
-#addField {
-	box-shadow: 2px 3px 7px #000;
-	border-radius: 30px;
-	padding: 10px;
-	font-size: 30px;
-	font-weight: bold;
-	font-family: Arial;
-	color: #555;
-	
-	border: solid 5px #7CB467;
-	background-color: white;
-	
-	left: -20px;
-	top: -20px;
-	line-height: 0.5;
-}
-
-#addField:hover {
-	border: solid 5px #457C30;
-	background-color: #9EFF86;
-}
-
-#addField span {
-	-webkit-transform: rotate(0deg);
-	-moz-transform: rotate(0deg);
-	display: inline-block;
-}
-
-#addField.close span {
-	-webkit-transform: rotate(-135deg);
-	-moz-transform: rotate(-135deg);
-	display: inline-block;
-}
-
-#addField.close:hover {
-	border: solid 5px #5A0404;
-	background-color: #C43838;
-}
-*/
-
-#configs,
-#addField {
-	width: 30px;
-	height: 30px;
-	border: 5px solid #555;
-	box-shadow: 2px 3px 7px #000;
-	border-radius: 30px;
-	padding: 10px;
-	font-size: 30px;
-	font-weight: bold;
-	font-family: Arial;
-	line-height: 0.5;
-	color: #555;
-
-	position: absolute;
-	text-decoration: none;
-	
-	top: -20px;	
-}
-
-#configs { 
-	background: url('/imgs/conf.png');	
-	background-color: white;
-	right: -20px;
-}
-
-#addField { 
-	background: url('/imgs/save.png');
-	background-color: white;
-	left: -20px;
-}
-
-#configs:hover, 
-#addField:hover {
-	border: solid 5px #333;
-	background-color: silver;
 }
 
 #prevSlide {
@@ -134,72 +113,149 @@ a, span {
 
 #nextSlide:hover,
 #prevSlide:hover {
-	border: solid 5px #163E7A;
-	background-color: #C1CFFA;
+	border: 5px solid #0B93D5;
+	background-color: #FFF;
+	color: #0B93D5;
 }
 
-#prevSlide.addSlide, #prevSlide.addSlide:hover,
-#nextSlide.addSlide, #nextSlide.addSlide:hover   {
+#prevSlide.addSlide, 
+#nextSlide.addSlide {
+	border: solid 5px #FFF;
+	background-color: #7CB467;
+	color: #FFF;
+	padding: 10px 9px;
+}
+
+#prevSlide.addSlide:hover,
+#nextSlide.addSlide:hover {
 	border: solid 5px #7CB467;
-	background-color: white;
+	background-color: #FFF;
+	color: #7CB467;
+	padding: 10px 9px;
 }
 
-.insertSlide,
-.insertSlide:visited {
+
+/*
+ * Action Slides: Insert & Remove Slides
+ */
+
+.actionSlide,
+.actionSlide:visited {
 	
-	background: url('/imgs/arrow_up.png');
 	width: 30px;
-	height: 45px;
-	padding: 5px 10px;
+	height: 65px;
+	padding: 5px;
+	box-shadow: 2px 3px 7px #000;
+	border-radius: 15px;
 	
-	line-height: 0.5;
-	font-size: 16px;
-	font-weight: bold;
-	font-family: arial;
-	color: #555;
 	position: absolute;
 	text-decoration: none;
+}
+
+.actionSlide div,
+.actionSlide:visited div {
+	width: 100%;
+	margin: 5px 0;
+	line-height: 0.5;
+	font-size: 25px;
+	padding: 6px;
+}
+
+#deleteCurrent { 
+	background-color: #E03939;
+	border: 5px solid #FFF;
+	color: #FFF;
+	
+	left: 47%;
+	bottom: -60px;
+}
+
+#deleteCurrent:hover {
+	border: 5px solid #E03939;
+	color: #E03939;
+	background-color: #FFF;
+} 
+
+#insertLeft,
+#insertRight {
+	border: solid 5px #FFF;
+	background-color: #7CB467;
+	color: #FFF;
 	bottom: -25px;
 }
 
-.deleteSlide,
-.deleteSlide:visited {
-	background: url('/imgs/trash.png');
-	
-	border: solid 3px #AD0909;
-	background-color: #F38989;
-	
-	width: 30px;
-	height: 40px;
-	box-shadow: 2px 2px 5px #000;
-	padding: 5px 10px;
-
-	border-radius: 10px;
-	
-	line-height: 0.5;
-	font-size: 16px;
-	font-weight: bold;
-	font-family: arial;
-	color: #555;
-	position: absolute;
-	text-decoration: none;
-	left: 45%;
-	bottom: -25px;
+#insertLeft:hover,
+#insertRight:hover {
+	border: solid 5px #7CB467;
+	background-color: #FFF;
+	color: #7CB467;
 }
 
 #insertLeft {
-	left: 35px;
+	left: 6%;
 }
 
 #insertRight {
-	right: 35px;
+	right: 6%;
 }
+
+/*
+ * View Mode Buttons
+ */
 
 #screen-mode {
 	position: absolute;
-	top: -30px;
-	left: 37%;
+	top: -35px;
+	left: 41%;
+	
+	width: 119px;
+	height: 20px;
 }
+
+#screen-mode a {
+	padding: 12px 10px 8px 10px;
+	width: 30px;
+	box-shadow: 2px 3px 7px #000;
+	display: inline-block;
+	text-decoration: none;
+	text-indent: -1px;
+	font-size: 40px;
+	line-height: 0.5;
+	background-color: #AC00A5;
+	border: 5px solid #FFF;
+	color: #FFF;
+}
+
+#screen-mode a.selected {
+	box-shadow: none;
+	box-shadow:inset 2px 3px 7px #000;
+} 
+
+#screen-mode a:hover {
+	background-color: #FFF;
+	border: 5px solid #AC00A5;
+	color: #AC00A5;
+}
+
+#screen-mode a.selected:hover {
+	background-color: #AC00A5;
+	border: 5px solid #FFF;
+	color: #FFF;
+}
+
+#view-edit {
+	border-radius: 12px 0px 0px 12px;
+	float: left;
+}
+
+#view-free {
+	border-radius: 0px 12px 12px 0px;
+	float: right;
+}
+
+/*
+ * Toolbox
+ */
 
 #toolbox {
 	display:none;
@@ -245,7 +301,6 @@ a, span {
 .addField, .addField:visited,
 .moveField, .moveField:visited {
 	position: absolute;
-	box-shadow: 2px 3px 7px black;
 	border-radius: 30px;
 	padding: 5px;
 	font-size: 18px;

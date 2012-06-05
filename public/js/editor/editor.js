@@ -104,27 +104,27 @@ function init(slides){
 			rebuildEditMode();
 			
 			if (currentSliderIndex === 0){
-				$('#prevSlide').text('+').addClass('addSlide');
+				$('#prevSlide').addClass('icon-plus').addClass('addSlide');
 				$('#insertLeft').hide();
 			}
 			else {
-				$('#prevSlide').text('<').removeClass('addSlide');
+				$('#prevSlide').addClass('icon-chevron-left').removeClass('addSlide').removeClass('icon-plus');
 				$('#insertLeft').show();
 			}
 			
 			if (currentSliderIndex === slides.length-1){
-				$('#nextSlide').text('+').addClass('addSlide');
+				$('#nextSlide').addClass('icon-plus').addClass('addSlide');
 				$('#insertRight').hide();
 			}
 			else {
-				$('#nextSlide').text('>').removeClass('addSlide');
+				$('#nextSlide').addClass('icon-chevron-left').removeClass('addSlide').removeClass('icon-plus');
 				$('#insertRight').show();
 			}
 		}
 		else {
 			$('#insertLeft, #insertRight').hide();
-			$('#prevSlide').text('<').removeClass('addSlide');
-			$('#nextSlide').text('>').removeClass('addSlide');
+			$('#prevSlide').addClass('icon-chevron-left').removeClass('addSlide').removeClass('icon-plus');
+			$('#nextSlide').addClass('icon-chevron-right').removeClass('addSlide').removeClass('icon-plus');
 		}
 	}
 	
@@ -168,15 +168,19 @@ function init(slides){
 		$('#toolbox').toggle();
 	});
 	
-	$('#screen-mode').buttonset();
-	
 	$('#view-edit').click(function(){
+		$('#screen-mode a').removeClass('selected');
+		$(this).addClass('selected');
+		
 		$('.vEditor', '#preview').show();
 		initSlider(true);
 		rebuildMoveCtrls();
 	});
 	
 	$('#view-free').click(function(){
+		$('#screen-mode a').removeClass('selected');
+		$(this).addClass('selected');
+		
 		$('.vEditor', '#preview').hide();
 		initSlider(false);
 		rebuildMoveCtrls();
