@@ -1,9 +1,4 @@
 
-.bgEdition {
-	background-color: #E7D9C4;
-	background: url('../imgs/bg.png') repeat;
-}
-
 .vEditor {
 	z-index: 3;
 }
@@ -18,19 +13,6 @@ a, span {
 	/* Standard */
 	transition: all 0.5s ease;
 }
-
-#slider-stage {
-	border: 3px solid #3D3D3D;
-	border-radius: 5px;
-}
-
-#preview {
-	width: 650px;
-	height: 500px;
-	position:relative;
-	margin: 40px auto;
-}
-
 
 /*
  * Save & Config buttons
@@ -49,7 +31,7 @@ a, span {
 	
 	position: absolute;
 	text-decoration: none;
-	top: -20px;
+	top: 20px;
 }
 
 #configs { 
@@ -57,7 +39,7 @@ a, span {
 	border: 5px solid #FFF;
 	color: #FFF;
 	
-	right: -20px;
+	right: 20px;
 }
 
 #configs:hover {
@@ -71,7 +53,7 @@ a, span {
 	border: 5px solid #FFF;
 	color: #FFF;
 	
-	left: -20px;
+	left: 20px;
 }
 
 #saveSlider:hover {
@@ -108,11 +90,11 @@ a, span {
 }
 
 #prevSlide {
-	left: -30px;
+	left: 30px;
 }
 
 #nextSlide {
-	right: -30px;
+	right: 30px;
 }
 
 #nextSlide:hover,
@@ -171,7 +153,7 @@ a, span {
 	color: #FFF;
 	
 	left: 47%;
-	bottom: -60px;
+	bottom: 60px;
 }
 
 #deleteCurrent:hover {
@@ -185,7 +167,7 @@ a, span {
 	border: solid 5px #FFF;
 	background-color: #7CB467;
 	color: #FFF;
-	bottom: -25px;
+	bottom: 25px;
 }
 
 #insertLeft:hover,
@@ -209,8 +191,8 @@ a, span {
 
 #screen-mode {
 	position: absolute;
-	top: -35px;
-	left: 41%;
+	top: 0px;
+	left: 45%;
 	
 	width: 120px;
 	height: 20px;
@@ -338,7 +320,7 @@ a, span {
 .moveField, .moveField:visited {
 	border: solid 2px white;
 	background-color: #20399B;
-	left: -10px;
+	left: 10px;
 	top: 5px;
 	border-radius: 8px;
 	padding: 2px;
@@ -347,8 +329,8 @@ a, span {
 .remove, .remove:visited {
 	border: solid 2px	white;
 	background-color:	#FD3535;
-	right: -10px;
-	top: -10px;	
+	right: 10px;
+	top: 10px;	
 }
 
 .remove:hover {

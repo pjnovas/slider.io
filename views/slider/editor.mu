@@ -13,54 +13,49 @@
 		<link href="sliderStyles.css" rel="stylesheet">
 	</head>
 
-	<body class="bgEdition" style="border:none">
-		<div id="wrapper">
+	<body class="sliderCtn">
 
-			<div id="preview" class="sliderCtn">
-				<div id="mainConfigs">
-				</div>
-				<ul id="toolbox">
-				</ul>
-				<div id="slider-stage">
-			  	<ul id="slider-list">
-			  	</ul>
-			  </div>
-			  <div id="screen-mode">
-			  	<a href="#" class="icon-edit selected" id="view-edit">
-				  </a>
-				  <a href="#" class="icon-eye-open" id="view-free">
-				  </a>
-				</div>
-			  <a href="#" class="icon-save vEditor" id="saveSlider">
-			  </a>
-			  <a href="#" class="icon-cog vEditor" id="configs">
-			  </a>
-			  <a href="#" class="icon-chevron-left" id="prevSlide">
-			  </a>
-			  <a href="#" class="icon-chevron-right" id="nextSlide">
-				</a>
-			  
-			  <a href="#" class="actionSlide vEditor" id="insertLeft">
-			  	<div class="icon-arrow-up">
-			  	</div>
-			  	<div class="icon-plus">
-			  	</div>
-			  </a>
-			  <a href="#" class="actionSlide vEditor" id="deleteCurrent">
-			  	<div class="icon-remove">
-			  	</div>
-			  	<div class="icon-arrow-down">
-			  	</div>
-			  </a>
-			  <a href="#" class="actionSlide vEditor" id="insertRight">
-			  	<div class="icon-arrow-up">
-			  	</div>
-			  	<div class="icon-plus">
-			  	</div>
-			  </a>
-			</div>
-
+		<div id="mainConfigs">
 		</div>
+		<ul id="toolbox">
+		</ul>
+		<div id="slider-stage">
+	  	<ul id="slider-list">
+	  	</ul>
+	  </div>
+	  <div id="screen-mode">
+	  	<a href="#" class="icon-edit selected" id="view-edit">
+		  </a>
+		  <a href="#" class="icon-eye-open" id="view-free">
+		  </a>
+		</div>
+	  <a href="#" class="icon-save vEditor" id="saveSlider">
+	  </a>
+	  <a href="#" class="icon-cog vEditor" id="configs">
+	  </a>
+	  <a href="#" class="icon-chevron-left" id="prevSlide">
+	  </a>
+	  <a href="#" class="icon-chevron-right" id="nextSlide">
+		</a>
+	  
+	  <a href="#" class="actionSlide vEditor" id="insertLeft">
+	  	<div class="icon-arrow-up">
+	  	</div>
+	  	<div class="icon-plus">
+	  	</div>
+	  </a>
+	  <a href="#" class="actionSlide vEditor" id="deleteCurrent">
+	  	<div class="icon-remove">
+	  	</div>
+	  	<div class="icon-arrow-down">
+	  	</div>
+	  </a>
+	  <a href="#" class="actionSlide vEditor" id="insertRight">
+	  	<div class="icon-arrow-up">
+	  	</div>
+	  	<div class="icon-plus">
+	  	</div>
+	  </a>
 
 	<script type="text/javascript" src="/js/libs/jquery-1.7.1.min.js"></script>
 	<script type="text/javascript" src="/js/libs/jquery-ui-1.8.20.custom.min.js"></script>

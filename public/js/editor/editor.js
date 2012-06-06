@@ -282,7 +282,7 @@ function init(slides){
 	      alert('Saveeeeed');
 	    },
 	    error: function() {
-	      alert("Wow ... didn't worked");
+	      alert("Wow ... didn't work");
 	    },
 	  });
 	  
