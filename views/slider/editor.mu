@@ -17,6 +17,8 @@
 		<div id="wrapper">
 
 			<div id="preview" class="sliderCtn">
+				<div id="mainConfigs">
+				</div>
 				<ul id="toolbox">
 				</ul>
 				<div id="slider-stage">

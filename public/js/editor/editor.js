@@ -85,7 +85,7 @@ function init(slides){
 	var initSlider = function(editor){
 		currentStateEdit = editor;
 		Slider.init(slides, currentSliderIndex, {
-			container: $('#preview'),
+			container: window,
 			editorTmpl: (editor) ? 'editor-' : ''
 		});
 		
@@ -289,6 +289,29 @@ function init(slides){
 	});
 	
 	$("#preview").resizable();
+	
+	$("#mainConfigs").dialog({
+		autoOpen: false,
+		title: "Configurations",
+		width: 450,
+		height: 500,
+		resizable: false,
+		buttons: [{
+        text: "Ok",
+        click: function() { 
+        	$(this).dialog("close"); 
+        }
+    },{
+        text: "Cancel",
+        click: function() { 
+        	$(this).dialog("close"); 
+        }
+    }]
+	});
+	
+	$('#configs').bind('click', function(){
+		$('#mainConfigs').dialog('open');
+	});
 	
 	initSlider(true);
 	rebuildMoveCtrls();

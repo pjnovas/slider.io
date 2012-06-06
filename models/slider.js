@@ -90,7 +90,7 @@ exports.saveSlider = function(name, data, done, error){
 		}
 
 		fs.readdir(path, function (err, files) {
-			var fileName = path + '\\' + name + '.json', 
+			var fileName = path + '/' + name + '.json', 
 				now = new Date().getTime();
 	
 			fsExtra.copy(fileName, fileName + '-' + now, function (err) {

@@ -1,0 +1,33 @@
+<script id="config-main-tmpl" type="text/template">
+	<fieldset>
+		<div class="cfg-field">
+			<label for="txtInitIndex">Start Index</label>
+			<input id="txtInitIndex" type="text" maxlength="2" size="2" value="{{initIndex}}"/>					
+		</div>
+		<div class="cfg-field">
+			<label for="txtTitle">Title</label>
+			<input id="txtTitle" type="text" maxlength="200" size="100" value="{{title}}"/>
+		</div>
+		<div class="cfg-field">
+			<label for="txtFontFamily">Font</label>
+			<input id="txtFontFamily" type="text" maxlength="300" size="100" value="{{fontFamily}}"/>
+		</div>
+		<hr/>
+	</fieldset>
+</script>
+
+<script id="config-bg-tmpl" type="text/template">
+	<span>{{title}}</span>
+		<div class="cfg-field">
+		<label>Color</label>
+		<input type="text" maxlength="50" size="100" value="{{background.color}}"/>
+	</div>
+	<div class="cfg-field">
+		<label>Image</label>
+		<input type="text" maxlength="300" size="100" value="{{background.image.high}}"/>
+		<label>Tiled</label>
+		<input type="checkbox" checked="{{background.image.seamless}}" />
+	</div>
+</script>
+
+

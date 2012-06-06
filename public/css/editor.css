@@ -1,7 +1,11 @@
 
 .bgEdition {
-	background-color: red;
+	background-color: #E7D9C4;
 	background: url('../imgs/bg.png') repeat;
+}
+
+.vEditor {
+	z-index: 3;
 }
 
 a, span {
@@ -285,6 +289,16 @@ a, span {
 	margin: 10px;
 	line-height: 2;
 }
+
+/*
+ * Main Configurations
+ */
+
+#mainConfigs {
+	display:none;
+	
+}
+
 
 
 /*
