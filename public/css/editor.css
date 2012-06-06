@@ -36,10 +36,11 @@ a, span {
 
 #configs { 
 	background-color: #DA8E1D;
-	border: 5px solid #FFF;
-	color: #FFF;
-	
-	right: 20px;
+	border: 5px solid white;
+	color: white;
+	right: 0;
+	border-radius: 0 0 0 10px;
+	top: 0;
 }
 
 #configs:hover {
@@ -90,11 +91,13 @@ a, span {
 }
 
 #prevSlide {
-	left: 30px;
+	left: 0;
+	border-radius: 0 10px 10px 0;
 }
 
 #nextSlide {
-	right: 30px;
+	right: 0;
+	border-radius: 10px 0 0 10px;
 }
 
 #nextSlide:hover,
@@ -128,32 +131,33 @@ a, span {
 .actionSlide,
 .actionSlide:visited {
 	
-	width: 30px;
-	height: 65px;
+	width: 65px;
+	height: 30px;
 	padding: 5px;
 	box-shadow: 2px 3px 7px #000;
-	border-radius: 15px;
+	border-radius: 10px 10px 0 0;
 	
 	position: absolute;
 	text-decoration: none;
+	bottom: 0;
 }
 
 .actionSlide div,
 .actionSlide:visited div {
-	width: 100%;
 	margin: 5px 0;
 	line-height: 0.5;
 	font-size: 25px;
 	padding: 6px;
+	float: left;
 }
 
 #deleteCurrent { 
 	background-color: #E03939;
 	border: 5px solid #FFF;
 	color: #FFF;
+	border-radius: 10px 10px 0 0;
 	
 	left: 47%;
-	bottom: 60px;
 }
 
 #deleteCurrent:hover {
@@ -167,7 +171,6 @@ a, span {
 	border: solid 5px #FFF;
 	background-color: #7CB467;
 	color: #FFF;
-	bottom: 25px;
 }
 
 #insertLeft:hover,
@@ -178,11 +181,11 @@ a, span {
 }
 
 #insertLeft {
-	left: 6%;
+	left: 0;
 }
 
 #insertRight {
-	right: 6%;
+	right: 0;
 }
 
 /*
@@ -318,12 +321,16 @@ a, span {
 }
 
 .moveField, .moveField:visited {
-	border: solid 2px white;
-	background-color: #20399B;
-	left: 10px;
-	top: 5px;
-	border-radius: 8px;
-	padding: 2px;
+	background-color: #313131;
+	left: 0;
+	top: 0;
+	border-radius: 0 0 10px 0;
+	padding: 6px 3px;
+	cursor: move;
+	font-size: 18px;
+	line-height: 0.5;
+	color: #ECECEC;
+	text-indent: -2px;
 }
 
 .remove, .remove:visited {

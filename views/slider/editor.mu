@@ -23,12 +23,7 @@
 	  	<ul id="slider-list">
 	  	</ul>
 	  </div>
-	  <div id="screen-mode">
-	  	<a href="#" class="icon-edit selected" id="view-edit">
-		  </a>
-		  <a href="#" class="icon-eye-open" id="view-free">
-		  </a>
-		</div>
+	  
 	  <a href="#" class="icon-save vEditor" id="saveSlider">
 	  </a>
 	  <a href="#" class="icon-cog vEditor" id="configs">
@@ -39,9 +34,9 @@
 		</a>
 	  
 	  <a href="#" class="actionSlide vEditor" id="insertLeft">
-	  	<div class="icon-arrow-up">
-	  	</div>
 	  	<div class="icon-plus">
+	  	</div>
+	  	<div class="icon-arrow-up">
 	  	</div>
 	  </a>
 	  <a href="#" class="actionSlide vEditor" id="deleteCurrent">

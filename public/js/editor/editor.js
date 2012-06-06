@@ -168,24 +168,6 @@ function init(slides){
 		$('#toolbox').toggle();
 	});
 	
-	$('#view-edit').click(function(){
-		$('#screen-mode a').removeClass('selected');
-		$(this).addClass('selected');
-		
-		$('.vEditor', '#preview').show();
-		initSlider(true);
-		rebuildMoveCtrls();
-	});
-	
-	$('#view-free').click(function(){
-		$('#screen-mode a').removeClass('selected');
-		$(this).addClass('selected');
-		
-		$('.vEditor', '#preview').hide();
-		initSlider(false);
-		rebuildMoveCtrls();
-	});
-	
 	$('textarea').live('change cut paste drop keydown', function(){
 			var self = this;
 			setTimeout(function(){
