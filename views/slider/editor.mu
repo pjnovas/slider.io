@@ -24,8 +24,6 @@
 	  	</ul>
 	  </div>
 	  
-	  <a href="#" class="icon-save vEditor" id="saveSlider">
-	  </a>
 	  <a href="#" class="icon-cog vEditor" id="configs">
 	  </a>
 	  <a href="#" class="icon-chevron-left" id="prevSlide">

@@ -66,9 +66,9 @@ exports.getSliderList = function(done, error){
 		fs.readdir(path, function (err, files) {
 		 	
 		 	for(var i=0; i< files.length; i++){
-		 		if (files[i].indexOf('.config.json') > -1){
+		 		if (files[i].indexOf('.config.json') > -1 || files[i].indexOf('cache') > -1){
 		 			files.splice(i, 1);
-		 			continue;
+		 			i--;
 		 		}
 		 	}
 		 	
@@ -91,9 +91,10 @@ exports.saveSlider = function(name, data, done, error){
 
 		fs.readdir(path, function (err, files) {
 			var fileName = path + '/' + name + '.json', 
-				now = new Date().getTime();
+				now = new Date().getTime(),
+				newFileName = path + '/cache/' + name  + '.json' + '-' + now;
 	
-			fsExtra.copy(fileName, fileName + '-' + now, function (err) {
+			fsExtra.copy(fileName, newFileName, function (err) {
 				if (err) {
 			    callError(err, error);
 			  }

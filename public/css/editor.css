@@ -18,8 +18,7 @@ a, span {
  * Save & Config buttons
  */
 
-#configs,
-#saveSlider {
+#configs {
 	width: 30px;
 	height: 20px;
 	
@@ -48,21 +47,6 @@ a, span {
 	color: #DA8E1D;
 	background-color: #FFF;
 } 
-
-#saveSlider { 
-	background-color: #375FC9;
-	border: 5px solid #FFF;
-	color: #FFF;
-	
-	left: 20px;
-}
-
-#saveSlider:hover {
-	border: 5px solid #375FC9;
-	color: #375FC9;
-	background-color: #FFF;
-}
-
 
 /*
  * Directional buttons

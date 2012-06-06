@@ -250,26 +250,6 @@ function init(slides){
 		
 	});
 	
-	$("#saveSlider").bind('click',function(){
-		
-		$.ajax({
-	    url: "update",
-	    type: "POST",
-	    dataType: "json",
-	    data: JSON.stringify({slider: slides}),
-	    contentType: "application/json",
-	    cache: false,
-	    timeout: 5000,
-	    success: function(data) {
-	      alert('Saveeeeed');
-	    },
-	    error: function() {
-	      alert("Wow ... didn't work");
-	    },
-	  });
-	  
-	});
-	
 	$("#preview").resizable();
 	
 	$("#mainConfigs").dialog({
@@ -344,6 +324,8 @@ function hydrateSlide(idx, slides){
 		
 		slides[idx].fields.push(field);
 	});
+	
+	saveSlider(slides);
 }
 
 function addField(fieldName, idx, slides){
@@ -370,6 +352,25 @@ function addField(fieldName, idx, slides){
 	
 	slides[idx].fields.push(field);
 }
+
+var saveSlider = function(slides) {	
+		
+	$.ajax({
+    url: "update",
+    type: "POST",
+    dataType: "json",
+    data: JSON.stringify({slider: slides}),
+    contentType: "application/json",
+    cache: false,
+    timeout: 5000,
+    success: function(data) {
+    	
+    },
+    error: function() {
+      alert("Wow ... save didn't work");
+    },
+  }); 
+};
 
 $(document).ready(function(){
 	hljs.tabReplace = '  ';
