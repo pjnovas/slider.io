@@ -21,11 +21,14 @@
 	<span>{{title}}</span>
 	{{/title}}
 	<div class="cfg-field">
-		<label>Color</label>
-		<input class="color-field" maxlength="7" size="9" type="text" value="{{color}}" />
-		<label style="text-align: right;">Alpha</label>
-		<input type="text" maxlength="3" size="2" placeholder="1" value="{{alpha}}"/>
-		<label style="width:50px; font-size: 12px;">(0 to 1)</label>
+			<label>Color</label>
+			<input class="color-field" maxlength="7" size="9" type="text" 
+				{{#color.r}}rgb="{{color.r}},{{color.g}},{{color.b}}"{{/color.r}}
+				{{^color.r}}value="{{color}}"{{/color.r}} />
+			
+			<label style="text-align: right;">Alpha</label>
+			<input type="text" maxlength="3" size="2" placeholder="1" value="{{color.a}}"/>
+			<label style="width:50px; font-size: 12px;">(0 to 1)</label>
 	</div>
 	<div class="cfg-field">
 		<label>Image</label>

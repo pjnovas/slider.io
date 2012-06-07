@@ -1,0 +1,25 @@
+{{#color}}
+	{{#r}}
+		{{#a}}
+			background-color: rgba({{r}}, {{g}}, {{b}}, {{a}});
+		{{/a}}
+		{{^a}}
+			background-color: rgb({{r}}, {{g}}, {{b}});			
+		{{/a}}
+	{{/r}}
+	
+	{{^r}}
+		background-color: {{color}};
+	{{/r}}
+{{/color}}
+
+{{#image}}
+	background-image: url('images/{{high}}');
+	
+	{{#seamless}}
+		background-position: repeat;
+	{{/seamless}}
+	{{^seamless}}
+		background-size: 100% 100%;
+	{{/seamless}}
+{{/image}}

@@ -13,14 +13,22 @@
 	"slide": {
 		"all": {
 			"background": {
-				"color": "#DEDEDE",
-				"alpha": 0.9
+				"color": {
+					"r": 222,
+					"g": 222,
+					"b": 222,
+					"a": 0.9
+				}
 			}
 		},
 		"title": {
 			"background": {
-				"color": "#8CC84B",
-				"alpha": 0.9
+				"color": {
+					"r": 140,
+					"g": 200,
+					"b": 75,
+					"a": 0.9
+				}
 			}
 		}
 	}

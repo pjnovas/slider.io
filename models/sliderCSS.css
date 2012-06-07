@@ -1,80 +1,26 @@
 
 .sliderCtn {
-	{{#background}}
-		
-		{{#color}}
-			background-color: {{color}};
-		{{/color}}
-		
-		{{#image}}
-			background-image: url('images/{{high}}');
-			
-			{{#seamless}}
-				background-position: repeat;
-			{{/seamless}}
-			{{^seamless}}
-				background-size: 100% 100%;
-			{{/seamless}}
-		{{/image}}
-		 
-	{{/background}}
-
+	{{>background}}
+	
 	{{#fontFamily}}
 		font-family: {{{fontFamily}}};
 	{{/fontFamily}}
 }
  
 {{#slide}}
-
 	{{#all}}
 
-		{{#background}}
-			
-			#slider-list>li {
-			{{#color}}
-				background: {{color}};
-			{{/color}}
-			 
-			
-			{{#image}}
-				background-image: url('images/{{high}}');
-				
-				{{#seamless}}
-					background-position: repeat;
-				{{/seamless}}
-				{{^seamless}}
-					background-size: 100% 100%;
-				{{/seamless}}
-			{{/image}}
-			
-			} 
-		{{/background}}
+		#slider-list>li {
+			{{>background}}							
+		} 
 	
 	{{/all}}
 	
 	{{#title}}
 
-		{{#background}}
-			
-			#slider-list>li.title {
-			{{#color}}
-				background: {{color}};
-			{{/color}}
-			 
-			
-			{{#image}}
-				background-image: url('images/{{high}}');
-				
-				{{#seamless}}
-					background-position: repeat;
-				{{/seamless}}
-				{{^seamless}}
-					background-size: 100% 100%;
-				{{/seamless}}
-			{{/image}}
-			
-			} 
-		{{/background}}
+		#slider-list>li.title {
+			{{>background}}
+		}
 	
 	{{/title}}
 	

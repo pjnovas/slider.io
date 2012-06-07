@@ -27,29 +27,10 @@ exports.renderSliderCSS = function(sliderName, res){
 	
 	slider.getConfig(sliderName, function(sliderCfg){
 		
-		slider.getSlidesCSSTemplate(sliderName, function(templateCSS){
-			
-			//TODO: This is ugly as shit ... 
-			try {
-				sliderCfg.background.color = hex2rgb(sliderCfg.background.color, sliderCfg.background.alpha);
-			}catch(e){
-				sliderCfg.background.color = "#FFF";
-			}
-			
-			try {
-				sliderCfg.slide.all.background.color = hex2rgb(sliderCfg.slide.all.background.color, sliderCfg.slide.all.background.alpha);
-			}catch(e){
-				sliderCfg.slide.all.background.color = "#FFF";
-			}
-			
-			try {
-				sliderCfg.slide.title.background.color = hex2rgb(sliderCfg.slide.title.background.color, sliderCfg.slide.title.background.alpha);
-			}catch(e){
-				sliderCfg.slide.title.background.color = "#FFF";
-			}
+		slider.getSlidesCSSTemplate(sliderName, function(templateCSS, partialCSSBG){
 			
 			res.writeHead(200, {'content-type': 'text/css'});
-			var css = mustache.to_html(templateCSS, sliderCfg);
+			var css = mustache.to_html(templateCSS, sliderCfg, {'background': partialCSSBG});
 			res.end(css);
 			
 		}, function(error){
@@ -123,16 +104,4 @@ exports.renderEditSlider = function(_slider, res){
   	} 
   });	
 
-};
-
-var hex2rgb = function (hex, opacity) {
-  var rgb = hex.replace('#', '').match(/(.{2})/g);
-  var i = 3;
-  while (i--) {
-    rgb[i] = parseInt(rgb[i], 16);
-  }
-  if (typeof opacity == 'undefined') {
-    return 'rgb(' + rgb.join(', ') + ')';
-  }
-  return 'rgba(' + rgb.join(', ') + ', ' + opacity + ')';
 };

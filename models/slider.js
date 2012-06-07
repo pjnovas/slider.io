@@ -46,12 +46,18 @@ exports.getConfig = function(_name, done, error){
 };
 
 exports.getSlidesCSSTemplate = function(_name, done, error){	
-	fs.readFile(__dirname + '/sliderCSS.css', 'ascii', function (err, data) {
+	fs.readFile(__dirname + '/sliderCSS.css', 'ascii', function (err, sliderCSS) {
 	 	if (err){
 	 		callError(err, error);
 	 	}
 	 	
-	 	done(data);
+	 	fs.readFile(__dirname + '/sliderCSSBg.css', 'ascii', function (err, sliderCSSBg) {
+		 	if (err){
+		 		callError(err, error);
+		 	}
+		 	
+		 	done(sliderCSS, sliderCSSBg);
+	 	});
 	});
 };
 

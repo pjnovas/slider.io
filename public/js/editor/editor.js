@@ -416,6 +416,28 @@ var saveSlider = function(slides) {
 
 $.fn.applyFarbtastic = function() {
 	return this.each(function() {
+		var self = $(this);
+		
+		if (self.attr('rgb')){
+			
+			function rgbToHex(r, g, b) {
+				function componentToHex(c) {
+			    var hex = c.toString(16);
+			    return hex.length == 1 ? "0" + hex : hex;
+				}
+	
+		    return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+			}
+			
+			var colors = self.attr('rgb').split(',');
+			var hexColor = rgbToHex(
+				parseInt(colors[0],10), 
+				parseInt(colors[1],10),
+				parseInt(colors[2],10));
+				
+    	self.val(hexColor);
+		}
+		
 		$('<div/>').farbtastic(this).remove();
 	});
 };
