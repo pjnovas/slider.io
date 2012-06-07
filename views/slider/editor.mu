@@ -8,6 +8,7 @@
 		<link href="/css/highlight/solarized_dark.min.css" rel="stylesheet">
 		<link href="/css/style.css" rel="stylesheet">
 		<link href="/css/font-awesome.css" rel="stylesheet">
+		<link href="/css/farbtastic/farbtastic.css" rel="stylesheet">
 		<link href="/css/editor.css" rel="stylesheet">
 		
 		<link href="sliderStyles.css" rel="stylesheet">
@@ -49,12 +50,13 @@
 	  	<div class="icon-plus">
 	  	</div>
 	  </a>
-
+		
 	<script type="text/javascript" src="/js/libs/jquery-1.7.1.min.js"></script>
 	<script type="text/javascript" src="/js/libs/jquery-ui-1.8.20.custom.min.js"></script>
 	<script type="text/javascript" src="/js/libs/mustache.js"></script>
 	<script type="text/javascript" src="/js/libs/highlight.min.js"></script>
 	<script type="text/javascript" src="/js/libs/jquery.slider.js"></script>
+	<script type="text/javascript" src="/js/libs/farbtastic.js"></script>
 	<script type="text/javascript" src="/js/editor/editor.js"></script>
 
 	</body>

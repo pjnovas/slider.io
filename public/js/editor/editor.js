@@ -11,10 +11,16 @@ var template = function(name){
 
 function injectTemplates(){
 	var dSlides = $.Deferred(),
-		dDefault = $.Deferred();
+		dDefault = $.Deferred(),
+		dConfig = $.Deferred();
 	
-	$.when(dSlides, dDefault).done(function(){
+	$.when(dSlides, dDefault, dConfig).done(function(){
 		templatesReady.resolve();
+	});
+	
+	$.get('/partialViews/_config.html', function(templates) {
+	  $('body').append(templates);
+	  dConfig.resolve();
 	});
 	
 	$.get('/partialViews/_slides.html', function(templates) {
@@ -31,10 +37,11 @@ function injectTemplates(){
 
 function buildToolbox(){
 	var djsonToolbox = $.Deferred(),
-		djsonSlides = $.Deferred();
+		djsonSlides = $.Deferred(),
+		djsonConfig = $.Deferred();
 
-	$.when(djsonSlides, djsonToolbox).done(function(slides){
-		jsonReady.resolve(slides);
+	$.when(djsonSlides, djsonConfig, djsonToolbox).done(function(slides, config){
+		jsonReady.resolve(slides, config);
 	});
 
 	$.getJSON('/js/editor/json/toolbox.json', function(toolboxItems){
@@ -63,12 +70,24 @@ function buildToolbox(){
 	  		"xhr": xhr
 		}); 
 	});
+	
+	$.getJSON('config.json', function(data){
+		
+		djsonConfig.resolve(data);
+	
+	  }).error(function(data,status,xhr) { 
+	  	console.dir({
+	  		"data": data,
+	  		"status": status,
+	  		"xhr": xhr
+		}); 
+	});
 }
 
-function init(slides){
+function init(slides, config) {
 	var currentSliderIndex = 0,
 		currentStateEdit = true;
-	
+		
 	var rebuildEditMode = function(){
 		Slider.updateList(10);
 			
@@ -258,8 +277,9 @@ function init(slides){
 		width: 450,
 		height: 500,
 		resizable: false,
+		zIndex: 3,
 		buttons: [{
-        text: "Ok",
+        text: "Save",
         click: function() { 
         	$(this).dialog("close"); 
         }
@@ -274,6 +294,28 @@ function init(slides){
 	$('#configs').bind('click', function(){
 		$('#mainConfigs').dialog('open');
 	});
+	
+	var bindConfig = function(){
+		var main = $.mustache(template('config-main'), config);
+		var mainBg = $.mustache(template('config-bg'), config.background);
+		
+		config.slide.all.background.title = "All Slides";
+		config.slide.title.background.title = "Chapter Slide";
+		var allBg = $.mustache(template('config-bg'), config.slide.all.background);
+		var titleBg = $.mustache(template('config-bg'), config.slide.title.background);
+		
+		$("#mainConfigs").append(main).append(mainBg).append(allBg).append(titleBg);
+	
+		$('.color-field', $("#mainConfigs")).live('click', function(){
+			$('#color-picker').remove();
+			$(this).after('<div id="color-picker"></div>');
+			$('#color-picker').farbtastic(this);
+		}).live('blur', function(){
+			$('#color-picker').remove();
+		}).applyFarbtastic();
+	};
+	
+	bindConfig();
 	
 	initSlider(true);
 	rebuildMoveCtrls();
@@ -372,8 +414,15 @@ var saveSlider = function(slides) {
   }); 
 };
 
+$.fn.applyFarbtastic = function() {
+	return this.each(function() {
+		$('<div/>').farbtastic(this).remove();
+	});
+};
+
 $(document).ready(function(){
 	hljs.tabReplace = '  ';
 	
 	injectTemplates();
 });
+

@@ -25,6 +25,7 @@ exports.configure = function(app) {
 	 * 
 	 * (GET)  /slider/:slider/styles.css					-> slider custom styles
 	 * (GET)  /slider/:slider/slides.json					-> slider json (containing slides)
+	 * (GET)  /slider/:slider/config.json					-> config json (containing the configuration)
 	 * 
 	 * (GET)  /slider/create/											-> create slider form
 	 * (POST) /slider/new/												-> inserts a new slider -> redirects to /slider/:slider/editor
@@ -53,6 +54,10 @@ exports.configure = function(app) {
 	
 	app.get('/slider/:slider/slides.json', function (req, res){
 		sliderCtrl.getSlides(req.params.slider, res);
+	});
+	
+	app.get('/slider/:slider/config.json', function (req, res){
+		sliderCtrl.getConfig(req.params.slider, res);
 	});
 	
 	app.get('/slider/:slider/editor', function (req, res){

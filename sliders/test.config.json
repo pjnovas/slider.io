@@ -1,5 +1,5 @@
 {
-	"initIndex": 4,
+	"initIndex": 0,
 	"title": "Un Slider",
 	"background": {
 		"color": "#333333",
@@ -13,12 +13,14 @@
 	"slide": {
 		"all": {
 			"background": {
-				"color": "rgba(222,222,222, 0.9)"
+				"color": "#DEDEDE",
+				"alpha": 0.9
 			}
 		},
 		"title": {
 			"background": {
-				"color": "rgba(140, 200, 75, 0.9)"
+				"color": "#8CC84B",
+				"alpha": 0.9
 			}
 		}
 	}

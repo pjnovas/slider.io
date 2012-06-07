@@ -1,8 +1,4 @@
 
-.vEditor {
-	z-index: 3;
-}
-
 a, span {
 		/* Firefox */
 	-moz-transition: all 0.5s ease;
@@ -265,10 +261,47 @@ a, span {
 
 #mainConfigs {
 	display:none;
-	
 }
 
+.cfg-field {
+	display: block;
+	margin: 5px 0;
+}
 
+.cfg-field label {
+	display: inline-block;
+	width: 80px;
+}
+
+.cfg-field input {
+	border: 1px solid silver;
+	border-radius: 5px;
+}
+
+#color-picker {
+	position: absolute;
+	left: 0;
+	top: auto;
+	width: 200px;
+	background-color: #555555;
+	border-radius: 10px;
+}
+
+.edit-color-picker {
+	display: inline-block;
+	position: relative;
+	width: 29px;
+	height: 29px;
+}
+
+.edit-color-picker div{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 29px;
+	height: 29px;
+	background: url(images/select.png) center;
+}
 
 /*
  * Template Editor
@@ -309,7 +342,7 @@ a, span {
 	left: 0;
 	top: 0;
 	border-radius: 0 0 10px 0;
-	padding: 6px 3px;
+	padding: 6px 3px 4px 3px;
 	cursor: move;
 	font-size: 18px;
 	line-height: 0.5;
@@ -318,16 +351,15 @@ a, span {
 }
 
 .remove, .remove:visited {
-	border: solid 2px	white;
-	background-color:	#FD3535;
-	right: 10px;
-	top: 10px;	
+	right: -10px;
+	top: -10px;	
+	color: #FD3535;
+	text-shadow: -1px 0 #FFF, 0 1px #FFF, 1px 0	#FFF, 0 -1px	#FFF;
+	font-size: 20px;
 }
 
 .remove:hover {
-	color: #F22;
-	border: solid 2px #FF1D1D;
-	background-color: white;
+	font-size: 30px;
 }
 
 .addField:hover {

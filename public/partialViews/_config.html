@@ -1,31 +1,37 @@
 <script id="config-main-tmpl" type="text/template">
 	<fieldset>
 		<div class="cfg-field">
-			<label for="txtInitIndex">Start Index</label>
-			<input id="txtInitIndex" type="text" maxlength="2" size="2" value="{{initIndex}}"/>					
+			<label for="txtInitIndex" style="width:110px;">Start Index</label>
+			<input id="txtInitIndex" type="text" maxlength="2" size="2" placeholder="0" value="{{initIndex}}"/>					
 		</div>
 		<div class="cfg-field">
 			<label for="txtTitle">Title</label>
-			<input id="txtTitle" type="text" maxlength="200" size="100" value="{{title}}"/>
+			<input id="txtTitle" type="text" maxlength="200" size="30" placeholder="Untitled" value="{{title}}"/>
 		</div>
 		<div class="cfg-field">
 			<label for="txtFontFamily">Font</label>
-			<input id="txtFontFamily" type="text" maxlength="300" size="100" value="{{fontFamily}}"/>
+			<input id="txtFontFamily" type="text" maxlength="300" size="30" value="{{fontFamily}}"/>
 		</div>
 	</fieldset>
 </script>
 
 <script id="config-bg-tmpl" type="text/template">
+	{{#title}}
+	<hr/>
 	<span>{{title}}</span>
-		<div class="cfg-field">
+	{{/title}}
+	<div class="cfg-field">
 		<label>Color</label>
-		<input type="text" maxlength="50" size="100" value="{{background.color}}"/>
+		<input class="color-field" maxlength="7" size="9" type="text" value="{{color}}" />
+		<label style="text-align: right;">Alpha</label>
+		<input type="text" maxlength="3" size="2" placeholder="1" value="{{alpha}}"/>
+		<label style="width:50px; font-size: 12px;">(0 to 1)</label>
 	</div>
 	<div class="cfg-field">
 		<label>Image</label>
-		<input type="text" maxlength="300" size="100" value="{{background.image.high}}"/>
+		<input type="text" maxlength="300" size="20" placeholder="[No Image]" value="{{image.high}}"/>
+		<input type="checkbox" {{#image.seamless}}checked{{/image.seamless}} />
 		<label>Tiled</label>
-		<input type="checkbox" checked="{{background.image.seamless}}" />
 	</div>
 </script>
 
