@@ -418,7 +418,7 @@ $.fn.applyFarbtastic = function() {
 	return this.each(function() {
 		var self = $(this);
 		
-		if (self.attr('rgb')){
+		if (self.attr('data-rgb')){
 			
 			function rgbToHex(r, g, b) {
 				function componentToHex(c) {
@@ -429,7 +429,7 @@ $.fn.applyFarbtastic = function() {
 		    return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
 			}
 			
-			var colors = self.attr('rgb').split(',');
+			var colors = self.attr('data-rgb').split(',');
 			var hexColor = rgbToHex(
 				parseInt(colors[0],10), 
 				parseInt(colors[1],10),

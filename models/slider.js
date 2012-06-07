@@ -46,18 +46,24 @@ exports.getConfig = function(_name, done, error){
 };
 
 exports.getSlidesCSSTemplate = function(_name, done, error){	
-	fs.readFile(__dirname + '/sliderCSS.css', 'ascii', function (err, sliderCSS) {
-	 	if (err){
+	fs.realpath('./views/templates', function(err, path){
+		if (err){
 	 		callError(err, error);
 	 	}
-	 	
-	 	fs.readFile(__dirname + '/sliderCSSBg.css', 'ascii', function (err, sliderCSSBg) {
+		 	
+		fs.readFile(path + '/sliderCSS.css', 'ascii', function (err, sliderCSS) {
 		 	if (err){
 		 		callError(err, error);
 		 	}
 		 	
-		 	done(sliderCSS, sliderCSSBg);
-	 	});
+		 	fs.readFile(path + '/sliderCSSBg.css', 'ascii', function (err, sliderCSSBg) {
+			 	if (err){
+			 		callError(err, error);
+			 	}
+			 	
+			 	done(sliderCSS, sliderCSSBg);
+		 	});
+		});
 	});
 };
 
