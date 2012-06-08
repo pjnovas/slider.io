@@ -1,40 +1,42 @@
 <script id="config-main-tmpl" type="text/template">
-	<fieldset>
-		<div class="cfg-field">
+	<div data-ctn="{{ctn}}" class="cfg-ctn">
+		<div class="cfg-field-row">
 			<label for="txtInitIndex" style="width:110px;">Start Index</label>
-			<input id="txtInitIndex" type="text" maxlength="2" size="2" placeholder="0" value="{{initIndex}}"/>					
+			<input id="txtInitIndex" data-field="initIndex" class="cfg-field" type="text" maxlength="2" size="2" placeholder="0" value="{{initIndex}}"/>					
 		</div>
-		<div class="cfg-field">
+		<div class="cfg-field-row">
 			<label for="txtTitle">Title</label>
-			<input id="txtTitle" type="text" maxlength="200" size="30" placeholder="Untitled" value="{{title}}"/>
+			<input id="txtTitle" data-field="title" class="cfg-field" type="text" maxlength="200" size="30" placeholder="Untitled" value="{{title}}"/>
 		</div>
-		<div class="cfg-field">
+		<div class="cfg-field-row">
 			<label for="txtFontFamily">Font</label>
-			<input id="txtFontFamily" type="text" maxlength="300" size="30" value="{{fontFamily}}"/>
+			<input id="txtFontFamily" data-field="fontFamily" class="cfg-field" type="text" maxlength="300" size="30" value="{{fontFamily}}"/>
 		</div>
-	</fieldset>
+	</div>
 </script>
 
 <script id="config-bg-tmpl" type="text/template">
-	{{#title}}
-	<hr/>
-	<span>{{title}}</span>
-	{{/title}}
-	<div class="cfg-field">
-			<label>Color</label>
-			<input class="color-field" maxlength="7" size="9" type="text" 
-				{{#color.r}}data-rgb="{{color.r}},{{color.g}},{{color.b}}"{{/color.r}}
-				{{^color.r}}value="{{color}}"{{/color.r}} />
-			
-			<label style="text-align: right;">Alpha</label>
-			<input type="text" maxlength="3" size="2" placeholder="1" value="{{color.a}}"/>
-			<label style="width:50px; font-size: 12px;">(0 to 1)</label>
-	</div>
-	<div class="cfg-field">
-		<label>Image</label>
-		<input type="text" maxlength="300" size="20" placeholder="[No Image]" value="{{image.high}}"/>
-		<input type="checkbox" {{#image.seamless}}checked{{/image.seamless}} />
-		<label>Tiled</label>
+	<div data-ctn="{{ctn}}" class="cfg-ctn">
+		{{#title}}
+		<hr/>
+		<span>{{title}}</span>
+		{{/title}}
+		<div class="cfg-field-row">
+				<label>Color</label>
+				<input data-field="color" class="color-field cfg-field" maxlength="7" size="9" type="text" 
+					{{#color.r}}data-rgb="{{color.r}},{{color.g}},{{color.b}}"{{/color.r}}
+					{{^color.r}}value="{{color}}"{{/color.r}} />
+				
+				<label style="text-align: right;">Alpha</label>
+				<input data-field="color.a" class="cfg-field" type="text" maxlength="3" size="2" placeholder="1" value="{{color.a}}"/>
+				<label style="width:50px; font-size: 12px;">(0 to 1)</label>
+		</div>
+		<div class="cfg-field-row">
+			<label>Image</label>
+			<input data-field="image.high" class="cfg-field" type="text" maxlength="300" size="20" placeholder="[No Image]" value="{{image.high}}"/>
+			<input data-field="image.seamless" class="cfg-field" type="checkbox" {{#image.seamless}}checked{{/image.seamless}} />
+			<label>Tiled</label>
+		</div>
 	</div>
 </script>
 

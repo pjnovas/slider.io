@@ -263,17 +263,17 @@ a, span {
 	display:none;
 }
 
-.cfg-field {
+.cfg-field-row {
 	display: block;
 	margin: 5px 0;
 }
 
-.cfg-field label {
+.cfg-field-row label {
 	display: inline-block;
 	width: 80px;
 }
 
-.cfg-field input {
+.cfg-field-row input {
 	border: 1px solid silver;
 	border-radius: 5px;
 }

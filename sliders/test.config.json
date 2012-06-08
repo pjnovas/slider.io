@@ -1,15 +1,19 @@
 {
 	"initIndex": 0,
 	"title": "Un Slider",
+	"fontFamily": "sans-serif",
 	"background": {
-		"color": "#333333",
+		"color": {
+			"r": 51,
+			"g": 51,
+			"b": 51
+		},
 		"image": {
 			"high": "bg.png",
 			"low": "bg_mobile.png",
 			"seamless": false
 		}
 	},
-	"fontFamily": "sans-serif",
 	"slide": {
 		"all": {
 			"background": {
