@@ -27,6 +27,13 @@ sliderio.view.partials = (function($){
 			  injectToBody(templates);
 			  done();
 			});
+		},
+		
+		importToolbox: function(done) {
+			$.get('/partialViews/_toolbox.html', function(templates) {
+			  injectToBody(templates);
+			  done();
+			});
 		}
 	};
 })(jQuery); 

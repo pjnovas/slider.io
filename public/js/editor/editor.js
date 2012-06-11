@@ -32,11 +32,12 @@ function injectTemplates(){
 }
 
 function buildToolbox(){
-	var djsonToolbox = $.Deferred(),
+	var djsonFieldAdd = $.Deferred(),
 		djsonSlides = $.Deferred(),
-		djsonConfig = $.Deferred();
+		djsonConfig = $.Deferred(),
+		djsonToolbox = $.Deferred();
 
-	$.when(djsonSlides, djsonConfig, djsonToolbox).done(function(slides, config){
+	$.when(djsonSlides, djsonConfig, djsonFieldAdd, djsonToolbox).done(function(slides, config){
 		jsonReady.resolve(slides, config);
 	});
 
@@ -44,7 +45,7 @@ function buildToolbox(){
 		var items = $.mustache(template('toolboxItem'), {items: toolboxItems});
 		$('#toolbox').append(items);
 
-		djsonToolbox.resolve();
+		djsonFieldAdd.resolve();
 	});
 	
 	sliderio.service.slider.getSlides(function(data){
@@ -55,12 +56,13 @@ function buildToolbox(){
 		djsonConfig.resolve(data);
 	});
 	
+	sliderio.view.toolbox.build(function(){
+		djsonToolbox.resolve();
+	});
 }
 
 function init(slides, config) {
-	var currentSliderIndex = 0,
-		currentStateEdit = true;
-		
+	
 	var rebuildEditMode = function(){
 		Slider.updateList(10);
 			
@@ -69,91 +71,43 @@ function init(slides, config) {
 			items: '.editorField',
 			handle: 'a.moveField',
 			update: function(event, ui) {
-				hydrateSlide(currentSliderIndex, slides);
+				hydrateSlide(sliderio.view.toolbox.currentIndex(), slides);
 			}
 		}).disableSelection();
 	}
 	
-	var initSlider = function(editor){
-		currentStateEdit = editor;
-		Slider.init(slides, currentSliderIndex, {
+	var initSlider = function(){
+		Slider.init(slides, sliderio.view.toolbox.currentIndex(), {
 			container: window,
-			editorTmpl: (editor) ? 'editor-' : ''
+			editorTmpl: 'editor-'
 		});
 		
 		Slider.toggle(true);
 		
 		$('textarea').attr('rows', 1).css('height', '1em');
-		
-		if (currentStateEdit) {
-			rebuildEditMode();
-		}
-		
+		rebuildEditMode();		
 	};
 	
-	var rebuildMoveCtrls = function(){
-		if (currentStateEdit){
-			rebuildEditMode();
-			
-			if (currentSliderIndex === 0){
-				$('#prevSlide').addClass('icon-plus').addClass('addSlide');
-				$('#insertLeft').hide();
-			}
-			else {
-				$('#prevSlide').addClass('icon-chevron-left').removeClass('addSlide').removeClass('icon-plus');
-				$('#insertLeft').show();
-			}
-			
-			if (currentSliderIndex === slides.length-1){
-				$('#nextSlide').addClass('icon-plus').addClass('addSlide');
-				$('#insertRight').hide();
-			}
-			else {
-				$('#nextSlide').addClass('icon-chevron-left').removeClass('addSlide').removeClass('icon-plus');
-				$('#insertRight').show();
-			}
+	sliderio.view.toolbox.init({
+		sliderIndex: 0,
+		slides: slides,
+		onMove: function(){
+			initSlider();
+		},
+		onInsertSlide: function(idx){
+			initSlider();
+		},
+		onRemoveSlide: function(idx){
+			initSlider();
 		}
-		else {
-			$('#insertLeft, #insertRight').hide();
-			$('#prevSlide').addClass('icon-chevron-left').removeClass('addSlide').removeClass('icon-plus');
-			$('#nextSlide').addClass('icon-chevron-right').removeClass('addSlide').removeClass('icon-plus');
-		}
-	}
-	
-	var moveLeft = function(callback){
-		Slider.moveLeft(function(idx){
-			currentSliderIndex = idx;
-			$('textarea').attr('rows', 1).css('height', '1em');
-			rebuildMoveCtrls();
-			if (callback)
-				callback();
-		});
-	};
-	
-	var moveRight = function(callback){
-		Slider.moveRight(function(idx){
-			currentSliderIndex = idx;
-			$('textarea').attr('rows', 1).css('height', '1em');
-			rebuildMoveCtrls();
-			if (callback)
-				callback();
-		});
-	};
+	});
 	
 	$('a', '#toolbox').live('click', function(){
 		var that = $(this),
 			field = that.attr('data-field');
 			
-			addField(field, currentSliderIndex, slides);
-			initSlider(true);
-	});
-	
-	$('#nextSlide').bind('click', function(){
-		moveRight();
-	});
-	
-	$('#prevSlide').bind('click', function(){
-		moveLeft();
+			addField(field, sliderio.view.toolbox.currentIndex(), slides);
+			initSlider();
 	});
 	
 	$('a.addField').live('click', function(){
@@ -183,63 +137,12 @@ function init(slides, config) {
 	});
 	
 	$('textarea').live('change', function(){
-		hydrateSlide(currentSliderIndex, slides);
+		hydrateSlide(sliderio.view.toolbox.currentIndex(), slides);
 	});
 	
 	$('a.remove').live('click', function(){
 		$(this).parent('.editorField').remove();
-		hydrateSlide(currentSliderIndex, slides);
-	});
-	
-	$('#insertLeft, #prevSlide.addSlide').live('click', function(){
-		insertSlide(currentSliderIndex, slides);
-		currentSliderIndex++;
-		initSlider(true);
-		
-		moveLeft();
-	});
-	
-	$('#insertRight, #nextSlide.addSlide').live('click', function(){
-		insertSlide(currentSliderIndex+1, slides);
-		initSlider(true);
-		
-		moveRight();
-	});
-	
-	$('#deleteCurrent').live('click', function(){
-		
-		if (slides.length > 1){
-			if (currentSliderIndex === 0){
-				moveRight(function(){
-					removeSlide(0, slides);
-					currentSliderIndex--;
-					initSlider(true);
-					rebuildMoveCtrls();
-				});
-			}
-			else if(currentSliderIndex === slides.length-1) {
-				moveLeft(function(){
-					removeSlide(currentSliderIndex+1, slides);
-					initSlider(true);
-					rebuildMoveCtrls();
-				});
-			}
-			else {
-				moveRight(function(){
-					removeSlide(currentSliderIndex-1, slides);
-					currentSliderIndex--;
-					initSlider(true);
-					rebuildMoveCtrls();
-				});
-			}
-		}
-		else if (slides.length === 1){
-			insertSlide(0, slides);
-			removeSlide(currentSliderIndex+1, slides);
-			initSlider(true);
-			rebuildMoveCtrls();
-		}
-		
+		hydrateSlide(sliderio.view.toolbox.currentIndex(), slides);
 	});
 	
 	$("#preview").resizable();
@@ -329,18 +232,7 @@ function init(slides, config) {
 	
 	bindConfig();
 	
-	initSlider(true);
-	rebuildMoveCtrls();
-}
-
-function insertSlide(idx, slides){
-	slides.splice(idx, 0, {
-		"fields": []
-	});
-}
-
-function removeSlide(idx, slides){
-	slides.splice(idx, 1);
+	initSlider();
 }
 
 function hydrateSlide(idx, slides){
