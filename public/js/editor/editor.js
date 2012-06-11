@@ -18,21 +18,17 @@ function injectTemplates(){
 		templatesReady.resolve();
 	});
 	
-	$.get('/partialViews/_config.html', function(templates) {
-	  $('body').append(templates);
-	  dConfig.resolve();
+	sliderio.view.partials.importSlides(function(){
+		dDefault.resolve();
 	});
 	
-	$.get('/partialViews/_slides.html', function(templates) {
-	  $('body').append(templates);
-	  dDefault.resolve();
+	sliderio.view.partials.importConfig(function(){
+		dConfig.resolve();
 	});
 	
-	$.get('/partialViews/_editor.html', function(templates) {
-	  $('body').append(templates);
-	  dSlides.resolve();
+	sliderio.view.partials.importEditor(function(){
+		dSlides.resolve();
 	});
-	
 }
 
 function buildToolbox(){
@@ -44,44 +40,21 @@ function buildToolbox(){
 		jsonReady.resolve(slides, config);
 	});
 
-	$.getJSON('/js/editor/json/toolbox.json', function(toolboxItems){
-		
+	sliderio.service.slider.getToolbox(function(toolboxItems){
 		var items = $.mustache(template('toolboxItem'), {items: toolboxItems});
 		$('#toolbox').append(items);
 
 		djsonToolbox.resolve();
-	
-	  }).error(function(data,status,xhr) { 
-	  	console.dir({
-	  		"data": data,
-	  		"status": status,
-	  		"xhr": xhr
-		}); 
 	});
 	
-	$.getJSON('slides.json', function(data){
-		
+	sliderio.service.slider.getSlides(function(data){
 		djsonSlides.resolve(data);
-	
-	  }).error(function(data,status,xhr) { 
-	  	console.dir({
-	  		"data": data,
-	  		"status": status,
-	  		"xhr": xhr
-		}); 
 	});
 	
-	$.getJSON('config.json', function(data){
-		
+	sliderio.service.slider.getConfig(function(data){
 		djsonConfig.resolve(data);
-	
-	  }).error(function(data,status,xhr) { 
-	  	console.dir({
-	  		"data": data,
-	  		"status": status,
-	  		"xhr": xhr
-		}); 
 	});
+	
 }
 
 function init(slides, config) {

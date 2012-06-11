@@ -57,6 +57,10 @@
 	<script type="text/javascript" src="/js/libs/highlight.min.js"></script>
 	<script type="text/javascript" src="/js/libs/jquery.slider.js"></script>
 	<script type="text/javascript" src="/js/libs/farbtastic.js"></script>
+	
+	<script src="/js/sliderio/service/slider.js"></script>
+	<script src="/js/sliderio/view/partials.js"></script>
+	
 	<script type="text/javascript" src="/js/editor/editor.js"></script>
 
 	</body>
