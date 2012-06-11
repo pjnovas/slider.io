@@ -1,27 +1,4 @@
-
-var jsonReady = $.Deferred();
-var templatesReady = $.Deferred();
-$.when(jsonReady, templatesReady).done(initSlider);
-
-function injectTemplates(){
-	$.get('/partialViews/_slides.html', function(templates) {
-	  $('body').append(templates);
-	  templatesReady.resolve();
-	});
-}
-
-function getSlides(){
-	$.getJSON('slides.json', function(data){
-		jsonReady.resolve(data);
-		
-  }).error(function(data,status,xhr) { 
-  	console.dir({
-	  		"data": data,
-	  		"status": status,
-	  		"xhr": xhr
-  		}); 
-  });
-}
+var socket = undefined;
 
 function initSlider(jsonData){
 	Slider.init(jsonData, 0);
@@ -31,14 +8,19 @@ function initSlider(jsonData){
 
 $(document).ready(function(){
 	hljs.tabReplace = '  ';
+
+	var jsonReady = $.Deferred();
+	var templatesReady = $.Deferred();
+	$.when(jsonReady, templatesReady).done(initSlider);
 	
-	injectTemplates();
-	getSlides();
+	sliderio.view.slider.importSlides(function(){
+		templatesReady.resolve();
+	});
+	
+	sliderio.service.slider.getSlides(function(data){
+		jsonReady.resolve(data);
+	}, function(err){
+		console.dir(err);
+	});
 });
-
-var socket = undefined;
-
-
-
-
 

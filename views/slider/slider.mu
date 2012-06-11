@@ -44,6 +44,9 @@
 	<script src="/js/libs/jquery.swipe.js"></script>
 	<script src="/js/libs/jquery.slider.js"></script>
 	
+	<script src="/js/sliderio/service/slider.js"></script>
+	<script src="/js/sliderio/view/slider.js"></script>
+	
 	{{#scripts}}
 	<script type="text/javascript">
 		{{{scripts}}}
