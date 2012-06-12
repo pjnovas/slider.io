@@ -22,7 +22,7 @@ function buildEditor(){
 function init() {
 	
 	var onToolboxChange = function(){
-		sliderio.view.editor.slider.init();
+		sliderio.view.editor.slider.refresh();
 	};
 	
 	sliderio.view.toolbox.init({

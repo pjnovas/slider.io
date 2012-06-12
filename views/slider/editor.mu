@@ -16,10 +16,10 @@
 
 	<body class="sliderCtn">
 
-		<div id="slider-stage">
-	  	<ul id="slider-list">
-	  	</ul>
-	  </div>
+	<div id="slider-stage">
+  	<ul id="slider-list">
+  	</ul>
+  </div>
 	  
 	<script type="text/javascript" src="/js/libs/jquery-1.7.1.min.js"></script>
 	<script type="text/javascript" src="/js/libs/jquery-ui-1.8.20.custom.min.js"></script>

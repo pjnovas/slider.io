@@ -135,9 +135,9 @@ sliderio.view.toolbox = (function($){
 		init: function(options){
 			currentSliderIndex = (options && options.sliderIndex) || 0;
 			slides = (options && options.slides) || [];
-			onMove = (options && options.onMove);
-			onInsertSlide = (options && options.onInsertSlide);
-			onRemoveSlide = (options && options.onRemoveSlide);
+			onMove = (options && options.onMove) || function(){};
+			onInsertSlide = (options && options.onInsertSlide)|| function(){};
+			onRemoveSlide = (options && options.onRemoveSlide)|| function(){};
 			
 			attachEvents();		
 			rebuildMoveCtrls();

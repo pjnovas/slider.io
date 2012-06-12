@@ -13,6 +13,7 @@ exports.renderSlider =function(res, _slider, _userType){
 	  		fontURL: sliderCfg.fontURL,
 	  		speaker: (_userType && _userType === 'speaker')? true : false,
 	  		solo: (_userType && _userType === 'solo')? true : false,
+	  		editor: (_userType && _userType === 'editor')? true : false,
 	  		scripts: "var sliderName = '" + _slider + "';"
 	  	} 
 	  });	
@@ -103,16 +104,4 @@ exports.renderSliderList = function(res){
 	}, function(error){
 		res.send(error.toString(), 500);
 	});
-};
-
-exports.renderEditSlider = function(_slider, res){
-	
-	res.render('slider/editor.mu', { 
-  	layout: false, 
-  	locals: { 
-  		title: "Editando Slider",
-  		scripts: "var sliderName = '" + _slider + "';"
-  	} 
-  });	
-
 };

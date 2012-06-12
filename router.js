@@ -21,6 +21,7 @@ exports.configure = function(app) {
 	 * (GET)  /slider/:slider/										-> renders the Slider with ws as listener 
 	 * (GET)  /slider/:slider/speaker/						-> renders the Slider with ws as speaker for session user || /login/
 	 * (GET)  /slider/:slider/solo/								-> renders the Slider without ws
+	 * (GET)  /slider/:slider/editor/							-> slider editor view 
 	 * (GET)  /slider/:slider/offline/	 					-> response zip with slider offline
 	 * 
 	 * (GET)  /slider/:slider/styles.css					-> slider custom styles
@@ -31,7 +32,6 @@ exports.configure = function(app) {
 	 * 
 	 * (GET)  /slider/create/											-> create slider form
 	 * (POST) /slider/new/												-> inserts a new slider -> redirects to /slider/:slider/editor
-	 * (GET)  /slider/:slider/editor/							-> slider editor view 
 	 * 
 	 */
 
@@ -47,6 +47,10 @@ exports.configure = function(app) {
 	
 	app.get('/slider/:slider/solo', function (req, res){
 	  sliderCtrl.renderSlider(res, req.params.slider, 'solo');
+	});
+	
+	app.get('/slider/:slider/editor', function (req, res){
+		sliderCtrl.renderSlider(res, req.params.slider, 'editor');
 	});
 	
 	app.get('/slider/:slider/sliderStyles.css', function (req, res){
@@ -69,10 +73,6 @@ exports.configure = function(app) {
 	  sliderCtrl.saveConfig(req.params.slider, req.body.config, res);
 	});
 	
-	app.get('/slider/:slider/editor', function (req, res){
-		sliderCtrl.renderEditSlider(req.params.slider, res);
-	});
-
 	app.get('/slider/:slider/', function (req, res){
 	  sliderCtrl.renderSlider(res, req.params.slider);
 	});

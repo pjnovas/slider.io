@@ -83,7 +83,9 @@ sliderio.view.editor.slider = (function($){
 		});
 		
 		Slider.toggle(true);
-		
+	};
+	
+	var refresh = function(){
 		$('textarea').attr('rows', 1).css('height', '1em');
 		
 		Slider.updateList(10);
@@ -176,6 +178,10 @@ sliderio.view.editor.slider = (function($){
 		
 		init: function(){
 			initSlider();
+		},
+		
+		refresh: function(){
+			refresh();
 		},
 		
 		getSlides: function(){
