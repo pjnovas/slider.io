@@ -25,7 +25,7 @@ sliderio.service.slider = (function($){
 		},
 		
 		getToolbox: function(done){
-			$.getJSON('/js/editor/json/toolbox.json', function(data){
+			$.getJSON('/js/sliderio/data/toolbox.json', function(data){
 				done(data);			
 		  }).error(onError);
 		},

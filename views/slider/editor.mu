@@ -16,16 +16,11 @@
 
 	<body class="sliderCtn">
 
-		<div id="mainConfigs">
-		</div>
-		<ul id="toolbox">
-		</ul>
 		<div id="slider-stage">
 	  	<ul id="slider-list">
 	  	</ul>
 	  </div>
 	  
-		
 	<script type="text/javascript" src="/js/libs/jquery-1.7.1.min.js"></script>
 	<script type="text/javascript" src="/js/libs/jquery-ui-1.8.20.custom.min.js"></script>
 	<script type="text/javascript" src="/js/libs/mustache.js"></script>
@@ -36,8 +31,10 @@
 	<script src="/js/sliderio/service/slider.js"></script>
 	<script src="/js/sliderio/view/partials.js"></script>
 	<script src="/js/sliderio/view/toolbox.js"></script>
+	<script src="/js/sliderio/view/editor/slider.js"></script>
+	<script src="/js/sliderio/view/editor/config.js"></script>
 	
-	<script type="text/javascript" src="/js/editor/editor.js"></script>
+	<script type="text/javascript" src="/js/editor.js"></script>
 
 	</body>
 </html>

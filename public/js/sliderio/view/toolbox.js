@@ -117,6 +117,11 @@ sliderio.view.toolbox = (function($){
 			}
 			
 		});
+		
+		$('#configs').bind('click', function(){
+			sliderio.view.editor.config.show();
+		});
+		
 	};
 
 	return {
