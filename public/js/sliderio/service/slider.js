@@ -28,6 +28,39 @@ sliderio.service.slider = (function($){
 			$.getJSON('/js/editor/json/toolbox.json', function(data){
 				done(data);			
 		  }).error(onError);
+		},
+		
+		saveSlides: function(slides, done){
+			$.ajax({
+		    url: "slides.json",
+		    type: "POST",
+		    dataType: "json",
+		    data: JSON.stringify({slider: slides}),
+		    contentType: "application/json",
+		    cache: false,
+		    timeout: 5000,
+		    success: done,
+		    error: function() {
+		      alert("Wow ... save didn't work");
+		    },
+		  }); 
+		},
+		
+		saveConfig: function(cfg, done){
+			$.ajax({
+		    url: "config.json",
+		    type: "POST",
+		    dataType: "json",
+		    data: JSON.stringify({config: cfg}),
+		    contentType: "application/json",
+		    cache: false,
+		    timeout: 5000,
+		    success: done,
+		    error: function() {
+		      alert("Wow ... save didn't work");
+		    },
+		  }); 
 		}
+		
 	};
 })(jQuery); 

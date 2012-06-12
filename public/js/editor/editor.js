@@ -271,7 +271,9 @@ function hydrateSlide(idx, slides){
 		slides[idx].fields.push(field);
 	});
 	
-	saveSlider(slides);
+	sliderio.service.slider.saveSlides(slides, function(){
+		
+	});
 }
 
 function addField(fieldName, idx, slides){
@@ -298,25 +300,6 @@ function addField(fieldName, idx, slides){
 	
 	slides[idx].fields.push(field);
 }
-
-var saveSlider = function(slides) {	
-		
-	$.ajax({
-    url: "slides.json",
-    type: "POST",
-    dataType: "json",
-    data: JSON.stringify({slider: slides}),
-    contentType: "application/json",
-    cache: false,
-    timeout: 5000,
-    success: function(data) {
-    	
-    },
-    error: function() {
-      alert("Wow ... save didn't work");
-    },
-  }); 
-};
 
 function hydrateConfigs(config, slides, cfgField){
 	var p = config;
@@ -414,22 +397,9 @@ var saveConfig = function(cfg) {
 	delete cfg.slide.title.background.ctn;
 	delete cfg.slide.title.background.title;
 	
-	$.ajax({
-    url: "config.json",
-    type: "POST",
-    dataType: "json",
-    data: JSON.stringify({config: cfg}),
-    contentType: "application/json",
-    cache: false,
-    timeout: 5000,
-    success: function(data) {
-    	location.reload(true);
-    },
-    error: function() {
-      alert("Wow ... save didn't work");
-      location.reload(true);
-    },
-  }); 
+	sliderio.service.slider.saveConfig(cfg, function(){
+		location.reload(true);
+	});
   
 };
 
