@@ -104,6 +104,7 @@ sliderio.view.resources = (function($){
 					if (resources[i].file === res.file){
 						resources.splice(i, 1);
 						updateResources();
+						if (onSelect) onSelect({file: ''});
 					}
 				}
 			});
