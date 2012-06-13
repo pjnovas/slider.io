@@ -16,7 +16,9 @@ exports.saveResource = function(name, resource, done, error){
   		if (err){
 				helper.callError(err, error);
 			}
-		
+			
+			//TODO: remove from temp path (resource.path)
+			
 			done({
 	 			url: 'images/' + resource.name,
 	 			file: resource.name
@@ -44,5 +46,22 @@ exports.getResources = function(slider, done, error){
 		 	done(files);
 		});
 		
+	});
+};
+
+exports.removeResource = function(name, resource, done, error){
+
+	fs.realpath('./public/slider/' + name + '/images', function(err, path){
+		if (err){
+			helper.callError(err, error);
+		}
+		
+		fs.unlink(path + '/' + resource.file, function (err) {
+		  if (err){
+				helper.callError(err, error);
+			}
+		  
+		  done();
+		});
 	});
 };

@@ -34,6 +34,7 @@ exports.configure = function(app) {
 	 *
 	 * (GET)  /slider/:slider/resources						-> gets an array of slider resources  
 	 * (POST) /slider/:slider/resources/new				-> add a new resource to the slider 
+	 * (POST) /slider/:slider/resources/del				-> delete a resource of the slider 
 	 * 
 	 * (GET)  /slider/create/											-> create slider form
 	 * (POST) /slider/new/												-> inserts a new slider -> redirects to /slider/:slider/editor
@@ -92,6 +93,10 @@ exports.configure = function(app) {
 	********************************************************/
 	app.post('/slider/:slider/resources/new', function (req, res){
 	  resourceCtrl.addResource(req.params.slider, req.files.resource, res);
+	});
+	
+	app.post('/slider/:slider/resources/del', function (req, res){
+	  resourceCtrl.removeResource(req.params.slider, req.body.resource, res);
 	});
 	
 	app.get('/slider/:slider/resources', function (req, res){

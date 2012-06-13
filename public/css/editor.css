@@ -425,6 +425,7 @@ ul, li {
 	border-radius: 10px;
 	margin: 5px;
 	cursor: pointer;
+	position: relative;
 }
 
 #resources li:hover {

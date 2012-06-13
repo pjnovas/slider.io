@@ -11,7 +11,7 @@ exports.addResource = function(name, resource, res){
 
 exports.removeResource = function(name, resource, res){
 
-	resourceM.saveResource(name, resource, function(){
+	resourceM.removeResource(name, resource, function(){
 		res.send();
 	}, function(error){
 		res.send(error.toString(), 500);

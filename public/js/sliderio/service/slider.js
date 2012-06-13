@@ -40,9 +40,7 @@ sliderio.service.slider = (function($){
 		    cache: false,
 		    timeout: 5000,
 		    success: done,
-		    error: function() {
-		      alert("Wow ... save didn't work");
-		    },
+		    error: onError,
 		  }); 
 		},
 		
@@ -56,9 +54,7 @@ sliderio.service.slider = (function($){
 		    cache: false,
 		    timeout: 5000,
 		    success: done,
-		    error: function() {
-		      alert("Wow ... save didn't work");
-		    },
+		    error: onError,
 		  }); 
 		},
 		
@@ -66,6 +62,20 @@ sliderio.service.slider = (function($){
 			$.getJSON('resources', function(data){
 				done(data);
 		  }).error(onError);
+		},
+		
+		removeResource: function(res, done) {
+			$.ajax({
+		    url: "resources/del",
+		    type: "POST",
+		    dataType: "json",
+		    data: JSON.stringify({resource: res}),
+		    contentType: "application/json",
+		    cache: false,
+		    timeout: 5000,
+		    success: done,
+		    error: onError,
+		  }); 
 		}
 	};
 })(jQuery); 

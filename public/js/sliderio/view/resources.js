@@ -67,9 +67,6 @@ sliderio.view.resources = (function($){
 	      success: function(resource) {
 					resources.unshift(resource);
 					updateResources();
-					selected = resource;
-					if (onSelect) onSelect(selected);
-					//resMan.dialog('close');
 	      }
 			});
 		
@@ -90,7 +87,28 @@ sliderio.view.resources = (function($){
 			ele.addClass('selected');
 			
 			if (onSelect) onSelect(selected);
-			//resMan.dialog('close');
+		});
+		
+		$('#resources li a.remove').live('click', function(){
+			var ele = $(this).parents('li');
+			
+			ele.removeClass('selected');
+			
+			var res = {
+				file: ele.attr('data-file'),
+				url: $('img', ele).attr('src')
+			}
+			
+			sliderio.service.slider.removeResource(res, function(){
+				for(var i=0; i< resources.length; i++){
+					if (resources[i].file === res.file){
+						resources.splice(i, 1);
+						updateResources();
+					}
+				}
+			});
+			
+			return false;
 		});
 	};
 	
