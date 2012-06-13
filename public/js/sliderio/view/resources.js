@@ -7,7 +7,8 @@ sliderio.view.resources = (function($){
 		resources = [],
 		selected,
 		resMan,
-		onSelect;
+		onSelect,
+		timerId;
 	
 	var template = function(name){
 		return $.trim($('#' + name + '-tmpl').html());
@@ -16,10 +17,10 @@ sliderio.view.resources = (function($){
 	var createModal = function() {
 		resMan = $('<div id="resourceManager"></div>').appendTo('.sliderCtn');
 		
-		updateResources();
-		
 		var newRes = $.mustache(template('newResource'), {});
 		resMan.append(newRes);
+
+		updateResources();
 		
 		resMan.dialog({
 			autoOpen: false,
@@ -28,9 +29,31 @@ sliderio.view.resources = (function($){
 			height: 500,
 			resizable: false,
 			zIndex: 3,
-			modal: true
+			modal: true,
+			open: function(){
+				clearInterval(timerId);
+				listenToFile();
+			},
+			close: function(){
+				clearInterval(timerId);
+			}
 		});
 	};
+	
+	var listenToFile = function(){
+		
+		var onUpload = function(){
+			if($('#resourceInput').val() !== '') {
+	        clearInterval(timerId);
+	        $('#uploadResourceForm').submit();
+	        
+	        $('#resourceInput').val('');
+	        timerId = setInterval(onUpload, 500);
+	      }
+		};
+		
+		timerId = setInterval(onUpload, 500);
+	}
 	
 	var initFormAjax = function() {
 		$('#uploadResourceForm').submit(function() {

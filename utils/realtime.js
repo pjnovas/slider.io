@@ -1,5 +1,5 @@
 var socketIO = require('socket.io'),
-	slider = require('../models/slider');
+	config = require('../models/config');
 
 exports.start = function(app){
 	var io = socketIO.listen(app),
@@ -30,7 +30,7 @@ exports.start = function(app){
 	  	
 	  	if (!rooms[_roomName]) {
 	  		console.log('room not found!');
-	  		slider.getConfig(_roomName, function(sliderCfg){
+	  		config.getConfig(_roomName, function(sliderCfg){
 	  			
 	  			rooms[_roomName] = {
 						currIndex: sliderCfg.initIndex,

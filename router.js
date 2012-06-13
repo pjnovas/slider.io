@@ -1,5 +1,7 @@
 
-var sliderCtrl = require('./controllers/slider')
+var sliderCtrl = require('./controllers/slider'),
+	configCtrl = require('./controllers/config'),
+	resourceCtrl = require('./controllers/resource');
 
 exports.configure = function(app) {
 
@@ -68,28 +70,32 @@ exports.configure = function(app) {
 	  sliderCtrl.saveSlides(req.params.slider, req.body.slider, res);
 	});
 	
-	app.get('/slider/:slider/config.json', function (req, res){
-		sliderCtrl.getConfig(req.params.slider, res);
-	});
-	
-	app.post('/slider/:slider/config.json', function (req, res){
-	  sliderCtrl.saveConfig(req.params.slider, req.body.config, res);
-	});
-	
-	app.post('/slider/:slider/resources/new', function (req, res){
-	  sliderCtrl.addResource(req.params.slider, req.files.resource, res);
-	});
-	
-	app.get('/slider/:slider/resources', function (req, res){
-	  sliderCtrl.getResources(req.params.slider, res);
-	});
-	
 	app.get('/slider/:slider/', function (req, res){
 	  sliderCtrl.renderSlider(res, req.params.slider);
 	});
 	
 	app.get('/slider', function (req, res){
 	  sliderCtrl.renderSliderList(res);
+	});
+	
+	/* Config Routes ****************************************
+	********************************************************/
+	app.get('/slider/:slider/config.json', function (req, res){
+		configCtrl.getConfig(req.params.slider, res);
+	});
+	
+	app.post('/slider/:slider/config.json', function (req, res){
+	  configCtrl.saveConfig(req.params.slider, req.body.config, res);
+	});
+	
+	/* Resources Routes ****************************************
+	********************************************************/
+	app.post('/slider/:slider/resources/new', function (req, res){
+	  resourceCtrl.addResource(req.params.slider, req.files.resource, res);
+	});
+	
+	app.get('/slider/:slider/resources', function (req, res){
+	  resourceCtrl.getResources(req.params.slider, res);
 	});
 };
 

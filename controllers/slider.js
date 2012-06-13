@@ -1,10 +1,11 @@
 
 var mustache = require("mustache"),
-	slider = require('../models/slider');
+	slider = require('../models/slider'),
+	config = require('../models/config');
 
 exports.renderSlider =function(res, _slider, _userType){
 
-	slider.getConfig(_slider, function(sliderCfg){
+	config.getConfig(_slider, function(sliderCfg){
 		
 		res.render('slider/slider.mu', { 
 	  	layout: false, 
@@ -26,7 +27,7 @@ exports.renderSlider =function(res, _slider, _userType){
 
 exports.renderSliderCSS = function(sliderName, res){
 	
-	slider.getConfig(sliderName, function(sliderCfg){
+	config.getConfig(sliderName, function(sliderCfg){
 		
 		slider.getSlidesCSSTemplate(sliderName, function(templateCSS, partialCSSBG){
 			
@@ -58,16 +59,6 @@ exports.getSlides = function(sliderName, res){
 	});
 };
 
-exports.getConfig = function(sliderName, res){
-	
-	slider.getConfig(sliderName, function(sliderCfg) {
-		res.json(sliderCfg);
-	}, function(error){
-		if (error.code === 'notfound')
-			res.send("Configurations for Slider '" + sliderName + "' NOT FOUND", 404);
-		else res.send(error.toString(), 500);
-	});
-};
 
 exports.saveSlides = function(sliderName, data, res){
 	
@@ -76,17 +67,6 @@ exports.saveSlides = function(sliderName, data, res){
 	}, function(error){
 		if (error.code === 'notfound')
 			res.send("Slides for Slider '" + sliderName + "' NOT FOUND", 404);
-		else res.send(error.toString(), 500);
-	});
-};
-
-exports.saveConfig = function(sliderName, data, res){
-	
-	slider.saveConfig(sliderName, data, function(sliderCfg) {
-		res.json(data);
-	}, function(error){
-		if (error.code === 'notfound')
-			res.send("Configurations for Slider '" + sliderName + "' NOT FOUND", 404);
 		else res.send(error.toString(), 500);
 	});
 };
@@ -105,23 +85,4 @@ exports.renderSliderList = function(res){
 		res.send(error.toString(), 500);
 	});
 };
-
-exports.addResource = function(name, resource, res){
-
-	slider.saveResource(name, resource, function(savedResource){
-		res.send(savedResource);
-	}, function(error){
-		res.send(error.toString(), 500);
-	});
-};
-
-exports.getResources = function(sliderName, res){
-
-	slider.getResources(sliderName, function(resources){
-		res.send(resources);
-	}, function(error){
-		res.send(error.toString(), 500);
-	});
-};
-
 
