@@ -101,6 +101,7 @@ sliderio.view.editor.slider = (function($){
 	};
 	
 	var attachEvents = function(){
+		var liCurrent = $("li.current");
 		
 		$('a', '#toolbox').live('click', function(){
 			var that = $(this),
@@ -114,7 +115,7 @@ sliderio.view.editor.slider = (function($){
 			$('#toolbox').toggle();
 		});
 		
-		$('textarea').live('change cut paste drop keydown', function(){
+		$('textarea', liCurrent).live('change cut paste drop keydown', function(){
 				var self = this;
 				setTimeout(function(){
 					self.style.height = 'auto';
@@ -122,7 +123,7 @@ sliderio.view.editor.slider = (function($){
 				}, 0);
 		});
 			
-		$('textarea.newListItem').live('click', function(){
+		$('textarea.newListItem', liCurrent).live('click', function(){
 			var li = $(this).parent('li');
 			
 			var newItem = $("<li>");
@@ -136,11 +137,11 @@ sliderio.view.editor.slider = (function($){
 			$('textarea', newItem).attr('rows', 1).css('height', '1em').focus();
 		});
 		
-		$('textarea').live('change', function(){
+		$('textarea', liCurrent).live('change', function(){
 			hydrateSlide(sliderio.view.toolbox.currentIndex());
 		});
 		
-		$('a.remove').live('click', function(){
+		$('a.remove', liCurrent).live('click', function(){
 			$(this).parent('.editorField').remove();
 			hydrateSlide(sliderio.view.toolbox.currentIndex());
 		});
@@ -165,8 +166,8 @@ sliderio.view.editor.slider = (function($){
 			
 			sliderio.service.slider.getToolbox(function(toolboxItems){
 				var items = $.mustache(template('toolboxItem'), {items: toolboxItems});
-				$('<ul id="toolbox">').appendTo('.sliderCtn');
-				$('#toolbox').append(items);
+				var toolbox = $('<ul id="toolbox">').appendTo('.sliderCtn');
+				toolbox.append(items);
 		
 				dAddFields.resolve();
 			});

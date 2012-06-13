@@ -26,16 +26,18 @@ function buildEditor(){
 
 function init() {
 	
-	var onToolboxChange = function(){
-		sliderio.view.editor.slider.refresh();
-	};
-	
 	sliderio.view.toolbox.init({
 		sliderIndex: 0,
 		slides: sliderio.view.editor.slider.getSlides(),
-		onMove: onToolboxChange,
-		onInsertSlide: onToolboxChange,
-		onRemoveSlide: onToolboxChange
+		onMove: function(){
+			sliderio.view.editor.slider.refresh();			
+		},
+		onInsertSlide: function(){
+			sliderio.view.editor.slider.init();
+		},
+		onRemoveSlide: function(){
+			sliderio.view.editor.slider.init();
+		}
 	});
 		
 	sliderio.view.editor.slider.init();

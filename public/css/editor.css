@@ -239,7 +239,7 @@ a, span {
 	padding: 0;
 	border: solid 1px silver;
 	border-width: 1px 1px 0 1px;
-	z-index: 10;
+	z-index: 1000;
 }
 
 #toolbox li {

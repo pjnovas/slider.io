@@ -28,20 +28,16 @@ sliderio.view.toolbox = (function($){
 			$('#nextSlide').addClass('icon-chevron-left').removeClass('addSlide').removeClass('icon-plus');
 			$('#insertRight').show();
 		}
-		
-		onMove();
 	};
 	
 	var insertSlide = function(idx){
 		slides.splice(idx, 0, {
 			"fields": []
 		});
-		onInsertSlide();
 	};
 	
 	var removeSlide = function(idx){
 		slides.splice(idx, 1);
-		onRemoveSlide();
 	};
 	
 	var moveLeft = function(callback){
@@ -65,25 +61,27 @@ sliderio.view.toolbox = (function($){
 	var attachEvents = function(){
 		$('#nextSlide').bind('click', function(){
 			moveRight();
+			onMove();
 		});
 		
 		$('#prevSlide').bind('click', function(){
 			moveLeft();
+			onMove();
 		});
 		
 		$('#insertLeft, #prevSlide.addSlide').live('click', function(){
 			insertSlide(currentSliderIndex);
 			currentSliderIndex++;
-			onMove();
-			
+			onInsertSlide();
 			moveLeft();
+			onMove();
 		});
 		
 		$('#insertRight, #nextSlide.addSlide').live('click', function(){
 			insertSlide(currentSliderIndex+1);
-			onMove();
-			
+			onInsertSlide();
 			moveRight();
+			onMove();
 		});
 		
 		$('#deleteCurrent').live('click', function(){
@@ -93,12 +91,14 @@ sliderio.view.toolbox = (function($){
 					moveRight(function(){
 						removeSlide(0);
 						currentSliderIndex--;
+						onRemoveSlide();
 						rebuildMoveCtrls();
 					});
 				}
 				else if(currentSliderIndex === slides.length-1) {
 					moveLeft(function(){
 						removeSlide(currentSliderIndex+1);
+						onRemoveSlide();
 						rebuildMoveCtrls();
 					});
 				}
@@ -106,13 +106,16 @@ sliderio.view.toolbox = (function($){
 					moveRight(function(){
 						removeSlide(currentSliderIndex-1);
 						currentSliderIndex--;
+						onRemoveSlide();
 						rebuildMoveCtrls();
 					});
 				}
 			}
 			else if (slides.length === 1){
 				insertSlide(0, slides);
+				onInsertSlide();
 				removeSlide(currentSliderIndex+1);
+				onRemoveSlide();
 				rebuildMoveCtrls();
 			}
 			
