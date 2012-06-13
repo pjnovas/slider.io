@@ -5,6 +5,10 @@ var express = require('express'),
 	router = require('./router'),
 	app = express.createServer();
 
+process.on("uncaughtException", function (err) { 
+	console.log('>>>>>> Unhandled Exception Ocurred: ' + err);
+});
+
 app.set('view engine', 'mustache');
 app.register(".mu", stache);
 app.set('views', __dirname + '/views');
