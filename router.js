@@ -27,8 +27,11 @@ exports.configure = function(app) {
 	 * (GET)  /slider/:slider/styles.css					-> slider custom styles
 	 * (GET)  /slider/:slider/slides.json					-> slider json (containing slides)
 	 * (GET)  /slider/:slider/config.json					-> config json (containing the configuration)
-	 * (POST) /slider/:slider/slides.json				-> saves slider json 
-	 * (POST) /slider/:slider/config.json				-> saves config json 
+	 * (POST) /slider/:slider/slides.json					-> saves slider json 
+	 * (POST) /slider/:slider/config.json					-> saves config json 
+	 *
+	 * (GET)  /slider/:slider/resources						-> gets an array of slider resources  
+	 * (POST) /slider/:slider/resources/new				-> add a new resource to the slider 
 	 * 
 	 * (GET)  /slider/create/											-> create slider form
 	 * (POST) /slider/new/												-> inserts a new slider -> redirects to /slider/:slider/editor
@@ -53,7 +56,7 @@ exports.configure = function(app) {
 		sliderCtrl.renderSlider(res, req.params.slider, 'editor');
 	});
 	
-	app.get('/slider/:slider/sliderStyles.css', function (req, res){
+	app.get('/slider/:slider/styles.css', function (req, res){
 		sliderCtrl.renderSliderCSS(req.params.slider, res);
 	});
 	
@@ -71,6 +74,14 @@ exports.configure = function(app) {
 	
 	app.post('/slider/:slider/config.json', function (req, res){
 	  sliderCtrl.saveConfig(req.params.slider, req.body.config, res);
+	});
+	
+	app.post('/slider/:slider/resources/new', function (req, res){
+	  sliderCtrl.addResource(req.params.slider, req.files.resource, res);
+	});
+	
+	app.get('/slider/:slider/resources', function (req, res){
+	  sliderCtrl.getResources(req.params.slider, res);
 	});
 	
 	app.get('/slider/:slider/', function (req, res){

@@ -178,6 +178,7 @@ sliderio.view.editor.slider = (function($){
 		
 		init: function(){
 			initSlider();
+			refresh();
 		},
 		
 		refresh: function(){

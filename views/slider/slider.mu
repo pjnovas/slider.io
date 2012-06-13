@@ -29,7 +29,7 @@
 	<link href="/css/editor.css" rel="stylesheet">
 	{{/editor}}
 	
-	<link href="sliderStyles.css" rel="stylesheet">
+	<link href="styles.css" rel="stylesheet">
   
 </head>
 <body class="sliderCtn">
@@ -55,8 +55,10 @@
 	{{#editor}}
 	<script type="text/javascript" src="/js/libs/jquery-ui-1.8.20.custom.min.js"></script>
 	<script type="text/javascript" src="/js/libs/farbtastic.js"></script>
+	<script type="text/javascript" src="/js/libs/jquery.form.js"></script>
 	
 	<script src="/js/sliderio/view/toolbox.js"></script>
+	<script src="/js/sliderio/view/resources.js"></script>
 	<script src="/js/sliderio/view/editor/slider.js"></script>
 	<script src="/js/sliderio/view/editor/config.js"></script>
 	

@@ -34,6 +34,13 @@ sliderio.view.partials = (function($){
 			  injectToBody(templates);
 			  done();
 			});
+		},
+		
+		importResources: function(done) {
+			$.get('/partialViews/_resources.html', function(templates) {
+			  injectToBody(templates);
+			  done();
+			});
 		}
 	};
 })(jQuery); 

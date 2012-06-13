@@ -60,7 +60,12 @@ sliderio.service.slider = (function($){
 		      alert("Wow ... save didn't work");
 		    },
 		  }); 
-		}
+		},
 		
+		getResources: function(done) {
+			$.getJSON('resources', function(data){
+				done(data);
+		  }).error(onError);
+		}
 	};
 })(jQuery); 

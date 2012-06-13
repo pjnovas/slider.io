@@ -399,5 +399,50 @@ ul, li {
 	color: #000;
 }
 
+/*
+ * Resource Manager
+ */
 
+#resourceManager {
+	
+}
+
+#resourceManager input {
+	color: #FFF;
+}
+
+#resources {
+	list-style: none;
+	float:left;
+	padding: 0;
+	margin: 0;
+}
+
+#resources li{
+	float: left;
+	width: 150px;
+	height: 150px;
+	border: 1px solid silver;
+	border-radius: 10px;
+	margin: 5px;
+}
+
+#resources li.selected{
+	background-color: #496145;
+}
+
+#resources li img{
+	width: 100px;
+	height: 100px;
+	margin: 10px auto;
+	display: block;
+}
+
+#resources li span{
+	color: #FFF;
+	display: block;
+	width: 100%;
+	margin: 0 auto;
+	text-align: center;
+}
 

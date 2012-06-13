@@ -1,0 +1,18 @@
+<script id="newResource-tmpl" type="text/template">
+	<form id="uploadResourceForm" enctype="multipart/form-data" action="resources/new" method="post">
+    <input type="file" id="resourceInput" name="resource" />
+  </form>
+
+	<span id="status"></span>
+</script>
+
+<script id="resources-tmpl" type="text/template">
+	<ul id="resources">
+		{{#resources}}
+		<li>
+			<img src="{{url}}">
+			<span>"{{name}}"</span>
+		</li>
+		{{/resources}}
+	</ul>
+</script>

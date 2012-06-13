@@ -78,6 +78,12 @@ sliderio.view.editor.config = (function($){
 			$('#color-picker').remove();
 		});
 		
+		$('.image-field').live('click', function(){
+			sliderio.view.resources.show(function(resource){
+				//$(this).val(resource.url);
+			});
+		});
+		
 		$('.cfg-field').live('change', function(){
 			var self = $(this);
 			var ctrlVal = self.val();

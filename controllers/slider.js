@@ -105,3 +105,23 @@ exports.renderSliderList = function(res){
 		res.send(error.toString(), 500);
 	});
 };
+
+exports.addResource = function(name, resource, res){
+
+	slider.saveResource(name, resource, function(savedResource){
+		res.send(savedResource);
+	}, function(error){
+		res.send(error.toString(), 500);
+	});
+};
+
+exports.getResources = function(sliderName, res){
+
+	slider.getResources(sliderName, function(resources){
+		res.send(resources);
+	}, function(error){
+		res.send(error.toString(), 500);
+	});
+};
+
+

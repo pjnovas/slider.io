@@ -154,8 +154,50 @@ exports.saveConfig = function(name, data, done, error){
 	});
 };
 
+exports.saveResource = function(name, resource, done, error){
 
+	//TODO: If slider resources folder doesn't exist -> Create it!	
+	//TODO: Validate mime, type & size
+	
+	fs.realpath('./public/slider/' + name + '/images', function(err, path){
+		if (err){
+			callError(err, error);
+		}
+		
+		fs.rename(resource.path, path + '/' + resource.name,	function(error) {
+  		if (err){
+				callError(err, error);
+			}
+		
+			done({
+	 			url: 'images/' + resource.name,
+	 			name: resource.name.split('.')[0]
+	 		});
+		});
+	});
+};
 
+exports.getResources = function(slider, done, error){
+	
+	fs.realpath('./public/slider/' + slider + '/images', function(err, path){		
+		if (err){
+			 callError(err, error);
+		}
+
+		fs.readdir(path, function (err, files) {
+		 	
+		 	for(var i=0; i< files.length; i++) {
+		 		files[i] = {
+		 			url: 'images/' + files[i],
+		 			name: files[i].split('.')[0]
+		 		};
+		 	}
+		 	
+		 	done(files);
+		});
+		
+	});
+};
 
 
 

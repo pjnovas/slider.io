@@ -2,9 +2,10 @@
 function buildEditor(){
 	var dSlides = $.Deferred(),
 		dConfig = $.Deferred(),
-		dToolbox = $.Deferred();
+		dToolbox = $.Deferred(),
+		dResources = $.Deferred();
 	
-	$.when(dSlides, dConfig, dToolbox).done(init);
+	$.when(dSlides, dConfig, dToolbox, dResources).done(init);
 	
 	sliderio.view.editor.slider.build(function(){
 		dSlides.resolve();
@@ -16,6 +17,10 @@ function buildEditor(){
 	
 	sliderio.view.toolbox.build(function(){
 		dToolbox.resolve();
+	});
+	
+	sliderio.view.resources.build(function(){
+		dResources.resolve();
 	});
 }
 
