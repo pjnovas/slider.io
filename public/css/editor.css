@@ -421,13 +421,19 @@ ul, li {
 #resources li{
 	float: left;
 	width: 150px;
-	height: 150px;
 	border: 1px solid silver;
 	border-radius: 10px;
 	margin: 5px;
+	cursor: pointer;
 }
 
-#resources li.selected{
+#resources li:hover {
+	border: 1px solid #496145;
+}
+
+#resources li.selected,
+#resources li.selected:hover {
+	border: 1px solid silver;
 	background-color: #496145;
 }
 
@@ -437,12 +443,3 @@ ul, li {
 	margin: 10px auto;
 	display: block;
 }
-
-#resources li span{
-	color: #FFF;
-	display: block;
-	width: 100%;
-	margin: 0 auto;
-	text-align: center;
-}
-

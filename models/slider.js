@@ -171,7 +171,7 @@ exports.saveResource = function(name, resource, done, error){
 		
 			done({
 	 			url: 'images/' + resource.name,
-	 			name: resource.name.split('.')[0]
+	 			file: resource.name
 	 		});
 		});
 	});
@@ -189,7 +189,7 @@ exports.getResources = function(slider, done, error){
 		 	for(var i=0; i< files.length; i++) {
 		 		files[i] = {
 		 			url: 'images/' + files[i],
-		 			name: files[i].split('.')[0]
+		 			file: files[i]
 		 		};
 		 	}
 		 	

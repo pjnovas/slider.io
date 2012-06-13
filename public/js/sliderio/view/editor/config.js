@@ -79,9 +79,20 @@ sliderio.view.editor.config = (function($){
 		});
 		
 		$('.image-field').live('click', function(){
+			var currRes,
+				ele = $(this);
+			
+			if (ele.val()){
+				currRes = {
+					url: 'images/' + ele.val(),
+					file: ele.val()	
+				};
+			}
+			
 			sliderio.view.resources.show(function(resource){
-				//$(this).val(resource.url);
-			});
+				ele.val(resource.file);
+				ele.trigger('change');
+			}, currRes);
 		});
 		
 		$('.cfg-field').live('change', function(){
