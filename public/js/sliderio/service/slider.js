@@ -76,6 +76,21 @@ sliderio.service.slider = (function($){
 		    success: done,
 		    error: onError,
 		  }); 
+		},
+		
+		authenticate: function(_passcode, done, error) {
+			$.ajax({
+		    url: "authenticate",
+		    type: "POST",
+		    dataType: "json",
+		    data: JSON.stringify({passcode: _passcode}),
+		    contentType: "application/json",
+		    cache: false,
+		    timeout: 5000,
+		    cache: false,
+		    success: done,
+		    error: error,
+		  }); 
 		}
 	};
 })(jQuery); 

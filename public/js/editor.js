@@ -50,24 +50,17 @@ function init() {
 $(document).ready(function(){
 	hljs.tabReplace = '  ';
 	
-	sliderio.passcode = prompt("PassCode?", "");
+	var times = 0;
+	var authenticate = function(){
+		times++;
+		if (times < 3){
+			sliderio.passcode = prompt("Passcode", "");
+			sliderio.service.slider.authenticate(sliderio.passcode, buildEditor, authenticate);
+		}
+		else window.location.href = '/slider';
+	};
 	
-	$.ajax({
-    url: "authenticate",
-    type: "POST",
-    dataType: "json",
-    data: JSON.stringify({passcode: sliderio.passcode}),
-    contentType: "application/json",
-    cache: false,
-    timeout: 5000,
-    error: function(data, status, xhr){
-    	if (data.status === 401) {
-    		window.location.href = "?";
-    	}
-    },
-  }); 
+	authenticate();
 	
-	
-	buildEditor();
 });
 

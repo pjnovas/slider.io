@@ -72,7 +72,18 @@ $(document).ready(function(){
 	
 	if (socket) {
 		$('#clients-holder').show();
-		__passcode = prompt("PassCode","");
+		
+		var times = 0;
+		var authenticate = function(){
+			times++;
+			if (times < 3){
+				__passcode = prompt("Passcode", "");
+				sliderio.service.slider.authenticate(__passcode, function(){}, authenticate);
+			}
+			else window.location.href = './';
+		};
+		
+		authenticate();
 	}
 });
 
