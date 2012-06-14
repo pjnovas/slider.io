@@ -4,8 +4,7 @@ sliderio.view = sliderio.view || {};
 sliderio.view.editor = sliderio.view.editor || {};
 
 sliderio.view.editor.slider = (function($){
-	var slides,
-		addFieldItems = [];
+	var slides;
 	
 	var template = function(name){
 		return $.trim($('#' + name + '-tmpl').html());
@@ -111,14 +110,6 @@ sliderio.view.editor.slider = (function($){
 			
 			addField(field, sliderio.view.toolbox.currentIndex());
 			initSlider();
-		});
-		
-		$('a.addField').live('click', function(){
-			$('#toolbox').show();
-		});
-		
-		$('a.closePopup').live('click', function(){
-			$('#toolbox').hide();
 		});
 		
 		$('textarea', liCurrent).live('change cut paste drop keydown', function(){

@@ -227,9 +227,8 @@ a, span {
  */
 
 #toolbox {
-	display:none;
 	position:absolute;
-	top: 40%;
+	top: 0;
 	left: 38%;
 	background-color: #FFF;	
 	box-shadow: 2px 3px 7px gray;
@@ -239,6 +238,11 @@ a, span {
 	border: solid 1px silver;
 	border-width: 1px 1px 0 1px;
 	z-index: 1000;
+	opacity: 0.1;
+}
+
+#toolbox:hover {
+	opacity: 1;
 }
 
 #toolbox li {
@@ -254,6 +258,10 @@ a, span {
 	color: black;
 	margin: 10px;
 	font-size: 30px;
+}
+
+#toolbox li a:hover {
+	color: green;
 }
 
 #toolbox li a.h1 {
@@ -336,7 +344,6 @@ a, span {
 
 .closePopup, .closePopup:visited,
 .remove, .remove:visited,
-.addField, .addField:visited,
 .moveField, .moveField:visited {
 	position: absolute;
 	border-radius: 30px;
@@ -347,16 +354,6 @@ a, span {
 	color: white;
 	line-height: 0.5;
 	text-decoration: none;
-}
-
-.addField, .addField:visited {
-	position: static;
-	border: solid 2px white;
-	background-color: #40AA31;
-	width: 10px;
-	height: 10px;
-	display: block;
-	margin: 5px auto;
 }
 
 .moveField, .moveField:visited {
@@ -383,12 +380,6 @@ a, span {
 
 .remove:hover {
 	font-size: 30px;
-}
-
-.addField:hover {
-	color: #0E5A03;
-	border: solid 2px #40AA31;
-	background-color: white;
 }
 
 li.editorField, 
