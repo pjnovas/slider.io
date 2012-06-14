@@ -178,7 +178,7 @@ var Slider = (function($) {
 			}
 		},
 		moveRight: function(finishMove) {
-			var hiddenItems = $('ul li:hidden', currentSlide);
+			var hiddenItems = $('ul.bulletList li:hidden', currentSlide);
 			if (hiddenItems.length > 0) {
 				this.moveTo(currentIndex, finishMove);		
 			}
