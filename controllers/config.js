@@ -4,6 +4,7 @@ var config = require('../models/config');
 exports.getConfig = function(sliderName, res){
 	
 	config.getConfig(sliderName.toLowerCase(), function(sliderCfg) {
+		delete sliderCfg.passcode;
 		res.json(sliderCfg);
 	}, function(error){
 		if (error.code === 'notfound')
