@@ -33,9 +33,11 @@ function init() {
 			sliderio.view.editor.slider.refresh();			
 		},
 		onInsertSlide: function(){
+			sliderio.view.editor.slider.save();
 			sliderio.view.editor.slider.init();
 		},
 		onRemoveSlide: function(){
+			sliderio.view.editor.slider.save();
 			sliderio.view.editor.slider.init();
 		}
 	});

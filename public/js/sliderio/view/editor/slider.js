@@ -180,6 +180,12 @@ sliderio.view.editor.slider = (function($){
 		
 		getSlides: function(){
 			return slides;
+		},
+		
+		save: function(){
+			sliderio.service.slider.saveSlides(slides, function(){
+				//TODO: do something
+			});
 		}
 		
 	};
