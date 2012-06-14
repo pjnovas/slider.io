@@ -1,13 +1,15 @@
 
 var fs = require('fs');
-	
-exports.callError = function(error, callbackFunction){
+
+var callError = function(error, callbackFunction){
 	console.log(error);
 	
 	if (error.code === 'ENOENT')
 		callbackFunction({code: "notfound"});
 	else callbackFunction({code: "unknown"});
-}
+};
+	
+exports.callError = callError;
 
 exports.getJSONFile = function(name, done, error){
 	

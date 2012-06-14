@@ -1,4 +1,6 @@
 
+var sliderio = sliderio || {};
+
 function buildEditor(){
 	var dSlides = $.Deferred(),
 		dConfig = $.Deferred(),
@@ -47,6 +49,8 @@ function init() {
 
 $(document).ready(function(){
 	hljs.tabReplace = '  ';
+	
+	sliderio.passcode = prompt("PassCode?", "");
 	
 	buildEditor();
 });

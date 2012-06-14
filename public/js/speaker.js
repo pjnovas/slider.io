@@ -1,3 +1,4 @@
+var __passcode;
 
 var go = {};
 go.left = function(){
@@ -8,8 +9,12 @@ go.right = function(){
 };
 go.toggle = function(){
 	var isVisible = Slider.toggle();
-	if (socket) 
-		socket.emit('toggleSlider', isVisible);
+	if (socket) { 
+		socket.emit('toggleSlider', {
+			visible: isVisible,
+			pass: __passcode 
+		});
+	}
 };
 go.toggleDetails = function(visible){
 	if (socket) 
@@ -18,12 +23,18 @@ go.toggleDetails = function(visible){
 		Slider.toggleComments(visible);
 };
 
-function emitMoveSlider(index, type){
+function emitMoveSlider(idx, type){
 	if (socket) {
 		if (type === 'list')
-			socket.emit('updatedItemList', index);
+			socket.emit('updatedItemList', {
+				index: idx,
+				pass: __passcode
+			});
 		else 
-			socket.emit('moveSlider', index);
+			socket.emit('moveSlider', {
+				index: idx,
+				pass: __passcode
+			});
 	}
 }
 
@@ -61,6 +72,7 @@ $(document).ready(function(){
 	
 	if (socket) {
 		$('#clients-holder').show();
+		__passcode = prompt("PassCode","");
 	}
 });
 

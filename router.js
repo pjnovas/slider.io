@@ -1,7 +1,8 @@
 
 var sliderCtrl = require('./controllers/slider'),
 	configCtrl = require('./controllers/config'),
-	resourceCtrl = require('./controllers/resource');
+	resourceCtrl = require('./controllers/resource'),
+	userCtrl = require('./controllers/user');
 
 exports.configure = function(app) {
 
@@ -67,7 +68,7 @@ exports.configure = function(app) {
 		sliderCtrl.getSlides(req.params.slider, res);
 	});
 	
-	app.post('/slider/:slider/slides.json', function (req, res){
+	app.post('/slider/:slider/slides.json', userCtrl.authorizePassCode , function (req, res){
 	  sliderCtrl.saveSlides(req.params.slider, req.body.slider, res);
 	});
 	
@@ -85,7 +86,7 @@ exports.configure = function(app) {
 		configCtrl.getConfig(req.params.slider, res);
 	});
 	
-	app.post('/slider/:slider/config.json', function (req, res){
+	app.post('/slider/:slider/config.json', userCtrl.authorizePassCode, function (req, res){
 	  configCtrl.saveConfig(req.params.slider, req.body.config, res);
 	});
 	
@@ -95,7 +96,7 @@ exports.configure = function(app) {
 	  resourceCtrl.addResource(req.params.slider, req.files.resource, res);
 	});
 	
-	app.post('/slider/:slider/resources/del', function (req, res){
+	app.post('/slider/:slider/resources/del', userCtrl.authorizePassCode, function (req, res){
 	  resourceCtrl.removeResource(req.params.slider, req.body.resource, res);
 	});
 	

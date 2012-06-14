@@ -12,10 +12,7 @@ exports.start = function(app){
 	  	
 	  	var joinSliderRoom = function(){
 	  		roomName = _roomName;
-		  	
-		  	console.log(roomName);
-		  	console.dir(rooms[roomName]);
-		  	
+	  	
 		  	socket.join(roomName);
 		  	rooms[roomName].clients++;
 		  	socket.broadcast.to(roomName).emit('clientOnline', { current: rooms[roomName].clients });
@@ -29,14 +26,14 @@ exports.start = function(app){
 	  	}
 	  	
 	  	if (!rooms[_roomName]) {
-	  		console.log('room not found!');
 	  		config.getConfig(_roomName, function(sliderCfg){
 	  			
 	  			rooms[_roomName] = {
 						currIndex: sliderCfg.initIndex,
 						currItemIndex: 0,
 						visible: false,
-						clients: 0
+						clients: 0,
+						passcode: sliderCfg.passcode
 					};
 					
 					joinSliderRoom();
@@ -50,26 +47,37 @@ exports.start = function(app){
 	  	else joinSliderRoom();
 	  });
 	  
-	  socket.on('toggleSlider', function (_visible) {
-	  	rooms[roomName].visible = _visible;
-	    socket.broadcast.to(roomName).emit('toggleSlider', { visible: _visible });
+	  socket.on('toggleSlider', function (data) {
+	  	if (data.pass === rooms[roomName].passcode) {	  	
+		  	rooms[roomName].visible = data.visible;
+		    socket.broadcast.to(roomName).emit('toggleSlider', { visible: data.visible });
+		  }
 	  });
 	  
-	  socket.on('moveSlider', function (_index) {
-	  	rooms[roomName].currItemIndex = 0;
-	  	rooms[roomName].currIndex = _index;
-	    socket.broadcast.to(roomName).emit('moveSlider', { index: _index });
+	  socket.on('moveSlider', function (data) {
+	  	if (data.pass === rooms[roomName].passcode) {	 
+		  	rooms[roomName].currItemIndex = 0;
+		  	rooms[roomName].currIndex = data.index;
+		    socket.broadcast.to(roomName).emit('moveSlider', { index: data.index });
+		  }
 	  });
 	  
-	  socket.on('updatedItemList', function (_currIndex) {
-	  	rooms[roomName].currItemIndex = _currIndex;
-	    socket.broadcast.to(roomName).emit('updatedItemList', { itemIndex: _currIndex });
+	  socket.on('updatedItemList', function (data) {
+	  	if (data.pass === rooms[roomName].passcode) {	 
+		  	rooms[roomName].currItemIndex = data.currIndex;
+		    socket.broadcast.to(roomName).emit('updatedItemList', { itemIndex: data.currIndex });
+		  }
 	  });
 	  
 		socket.on('disconnect', function() {
-			rooms[roomName].clients--;
-			socket.broadcast.to(roomName).emit('clientOffline', { current: rooms[roomName].clients });
-			socket.leave(roomName);
+			if (rooms[roomName].clients > 0) {
+				rooms[roomName].clients--;
+				socket.broadcast.to(roomName).emit('clientOffline', { current: rooms[roomName].clients });
+				socket.leave(roomName);	
+			}
+			else {
+				delete rooms[roomName];
+			}
 		});
 	  
 	});

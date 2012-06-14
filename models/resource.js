@@ -1,5 +1,6 @@
 
 var fs = require('fs'),
+	fsExtra = require('fs.extra'),
 	helper = require('../models/helper');
 	
 exports.saveResource = function(name, resource, done, error){
@@ -12,9 +13,13 @@ exports.saveResource = function(name, resource, done, error){
 			helper.callError(err, error);
 		}
 		
-		fs.rename(resource.path, path + '/' + resource.name,	function(error) {
+		console.log('-------------- log path ' + resource.path);
+		console.log('-------------- log name ' + resource.name);
+		
+		fsExtra.copy(resource.path, path + '/' + resource.name, function (err) {
   		if (err){
 				helper.callError(err, error);
+				console.log('-------------- entro en error ' + error);
 			}
 			
 			//TODO: remove from temp path (resource.path)

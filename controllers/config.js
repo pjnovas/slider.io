@@ -12,7 +12,7 @@ exports.getConfig = function(sliderName, res){
 	});
 };
 
-exports.saveConfig = function(sliderName, data, res){
+exports.saveConfig = function(sliderName, passcode, data, res){
 	
 	config.saveConfig(sliderName.toLowerCase(), data, function(sliderCfg) {
 		res.json(data);
@@ -21,5 +21,6 @@ exports.saveConfig = function(sliderName, data, res){
 			res.send("Configurations for Slider '" + sliderName + "' NOT FOUND", 404);
 		else res.send(error.toString(), 500);
 	});
+		
 };
 

@@ -5,6 +5,7 @@ var express = require('express'),
 	router = require('./router'),
 	app = express.createServer();
 
+
 process.on("uncaughtException", function (err) { 
 	console.log('>>>>>> Unhandled Exception Ocurred: ' + err);
 });
