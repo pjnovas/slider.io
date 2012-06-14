@@ -5,7 +5,7 @@ var mustache = require("mustache"),
 
 exports.renderSlider =function(res, _slider, _userType){
 
-	config.getConfig(_slider, function(sliderCfg){
+	config.getConfig(_slider.toLowerCase(), function(sliderCfg){
 		
 		res.render('slider/slider.mu', { 
 	  	layout: false, 
@@ -27,7 +27,7 @@ exports.renderSlider =function(res, _slider, _userType){
 
 exports.renderSliderCSS = function(sliderName, res){
 	
-	config.getConfig(sliderName, function(sliderCfg){
+	config.getConfig(sliderName.toLowerCase(), function(sliderCfg){
 		
 		slider.getSlidesCSSTemplate(sliderName, function(templateCSS, partialCSSBG){
 			
@@ -50,7 +50,7 @@ exports.renderSliderCSS = function(sliderName, res){
 
 exports.getSlides = function(sliderName, res){
 	
-	slider.getSlides(sliderName, function(slides){
+	slider.getSlides(sliderName.toLowerCase(), function(slides){
 		res.json(slides);
 	}, function(error){
 		if (error.code === 'notfound')
@@ -62,7 +62,7 @@ exports.getSlides = function(sliderName, res){
 
 exports.saveSlides = function(sliderName, data, res){
 	
-	slider.saveSlider(sliderName, data, function(slides){
+	slider.saveSlider(sliderName.toLowerCase(), data, function(slides){
   	res.json(data);
 	}, function(error){
 		if (error.code === 'notfound')
