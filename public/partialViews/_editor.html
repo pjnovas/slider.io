@@ -28,11 +28,19 @@
 		{{/subTitle}}
 		
 		{{#image}}
-			<div class="editorField">
+			<div class="editorField editor-image">
 				<img data-field-url="{{image.url}}" data-field-size="{{image.size}}"
 					src="images/{{image.url}}" class="{{image.size}} field" data-field="image">
 				<a href="#" class="remove">x</a>
-				<a href="#" class="icon-move moveField"></a>	
+				<a href="#" class="icon-move moveField"></a>
+				<div class="imageOptions">
+					<ul>
+						<li><a href="#" data-field-url="{{image.url}}" class="icon-edit edit-resource"></a></li>
+						<li><a href="#" class="icon-picture edit-big"></a></li>
+						<li><a href="#" class="icon-picture edit-normal"></a></li>
+						<li><a href="#" class="icon-picture edit-small"></a></li>
+					</ul>
+				</div>
 			</div>
 		{{/image}}
 	
@@ -57,10 +65,6 @@
 			</code>
 		{{/code}}
 		
-		{{#paragraph}}
-			<p class="paragraph"><textarea>{{paragraph.text}}</textarea></p>
-		{{/paragraph}}
-
 	{{/fields}}
 </script>
 

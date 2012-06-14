@@ -143,6 +143,57 @@ sliderio.view.editor.slider = (function($){
 			hydrateSlide(sliderio.view.toolbox.currentIndex());
 		});
 		
+		
+		/*
+		 * Image Editor
+		 */
+		
+		$('.editor-image', liCurrent).live('mouseenter', function(){
+			$('.imageOptions' ,this).show();
+		}).live('mouseleave', function(){
+			$('.imageOptions' ,this).hide();
+		});
+		
+		$('.editor-image li a.edit-resource', liCurrent).live('click', function(){
+			var currRes,
+				ele = $(this),
+				_file = ele.attr('data-field-url');
+				
+			if (_file){
+				currRes = {
+					url: 'images/' + _file,
+					file: _file
+				};
+			}
+			
+			sliderio.view.resources.show(function(resource){
+				var img = ele.parents('div.editor-image').children('img.field'); 
+				
+				ele.attr('data-field-url', resource.file);
+				img.attr('data-field-url', resource.file);
+				img.attr('src', 'images/' + resource.file);
+				hydrateSlide(sliderio.view.toolbox.currentIndex());
+			}, currRes);	
+		});
+		
+		var resizeImage = function(ele, size){
+			var img = ele.parents('div.editor-image').children('img.field');
+			img.attr('data-field-size', size)
+				.attr('class', size + ' field');
+			hydrateSlide(sliderio.view.toolbox.currentIndex());
+		};
+		
+		$('.editor-image li a.edit-small', liCurrent).live('click', function(){
+			resizeImage($(this), 'small');
+		});
+		
+		$('.editor-image li a.edit-normal', liCurrent).live('click', function(){
+			resizeImage($(this), 'normal');
+		});
+		
+		$('.editor-image li a.edit-big', liCurrent).live('click', function(){
+			resizeImage($(this), 'big');
+		});
 	};
 	
 	return {
