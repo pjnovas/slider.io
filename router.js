@@ -46,6 +46,14 @@ exports.configure = function(app) {
 	  res.send("HOME");
 	});
 	
+	/* User Routes ****************************************
+	********************************************************/
+	//TODO: This method is temporal, will be removed after login is implemented
+	app.post('/slider/:slider/authenticate', userCtrl.authorizePassCode, function (req, res){
+		res.send({}, 200);
+	});
+	
+	
 	/* Slider Routes ****************************************
 	********************************************************/
 	app.get('/slider/:slider/speaker', function (req, res){

@@ -13,16 +13,11 @@ exports.saveResource = function(name, resource, done, error){
 			helper.callError(err, error);
 		}
 		
-		console.log('-------------- log path ' + resource.path);
-		console.log('-------------- log name ' + resource.name);
-		
 		fsExtra.copy(resource.path, path + '/' + resource.name, function (err) {
   		if (err){
 				helper.callError(err, error);
-				console.log('-------------- entro en error ' + error);
 			}
-			
-			//TODO: remove from temp path (resource.path)
+			//fs.unlink(resource.path);
 			
 			done({
 	 			url: 'images/' + resource.name,

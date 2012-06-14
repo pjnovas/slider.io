@@ -52,6 +52,22 @@ $(document).ready(function(){
 	
 	sliderio.passcode = prompt("PassCode?", "");
 	
+	$.ajax({
+    url: "authenticate",
+    type: "POST",
+    dataType: "json",
+    data: JSON.stringify({passcode: sliderio.passcode}),
+    contentType: "application/json",
+    cache: false,
+    timeout: 5000,
+    error: function(data, status, xhr){
+    	if (data.status === 401) {
+    		window.location.href = "?";
+    	}
+    },
+  }); 
+	
+	
 	buildEditor();
 });
 
