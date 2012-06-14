@@ -60,28 +60,32 @@ sliderio.view.toolbox = (function($){
 	
 	var attachEvents = function(){
 		$('#nextSlide').bind('click', function(){
-			moveRight();
-			onMove();
+			moveRight(function(){
+				onMove();	
+			});
 		});
 		
 		$('#prevSlide').bind('click', function(){
-			moveLeft();
-			onMove();
+			moveLeft(function(){
+				onMove();	
+			});
 		});
 		
 		$('#insertLeft, #prevSlide.addSlide').live('click', function(){
 			insertSlide(currentSliderIndex);
 			currentSliderIndex++;
 			onInsertSlide();
-			moveLeft();
-			onMove();
+			moveLeft(function(){
+				onMove();	
+			});
 		});
 		
 		$('#insertRight, #nextSlide.addSlide').live('click', function(){
 			insertSlide(currentSliderIndex+1);
 			onInsertSlide();
-			moveRight();
-			onMove();
+			moveRight(function(){
+				onMove();	
+			});
 		});
 		
 		$('#deleteCurrent').live('click', function(){

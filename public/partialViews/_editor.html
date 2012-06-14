@@ -1,10 +1,13 @@
 
 <script id="toolboxItem-tmpl" type="text/template">
-	{{#items}}
-	<li>
-		<a data-field="{{field}}" href="#">{{label}}</a>
-	</li>
-	{{/items}}
+	<ul id="toolbox">
+		{{#items}}
+		<li>
+			<a data-field="{{field}}" href="#" class="{{class}}" title="{{label}}"></a>
+		</li>
+		{{/items}}
+		<a href="#" class="closePopup">x</a>
+	</ul>
 </script>
 
 <script id="editor-content-tmpl" type="text/template">

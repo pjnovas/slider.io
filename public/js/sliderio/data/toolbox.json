@@ -1,27 +1,28 @@
 
 [{
 	"label": "Titulo",
-	"field": "title"
+	"field": "title",
+	"class": "icon-font h1"
 },
 {
 	"label": "Sub Titulo",
-	"field": "subTitle"
+	"field": "subTitle",
+	"class": "icon-font h2"
 },
 {
 	"label": "Imagen",
-	"field": "image"
+	"field": "image",
+	"class": "icon-picture"
 },
 {
 	"label": "Lista",
-	"field": "list"
+	"field": "list",
+	"class": "icon-list-ul"
 },
 {
 	"label": "Codigo",
-	"field": "code"
-},
-{
-	"label": "Parrafo",
-	"field": "paragraph"
+	"field": "code",
+	"class": "icon-list-alt"
 }]
 
 

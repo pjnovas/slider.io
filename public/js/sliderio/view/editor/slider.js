@@ -4,7 +4,8 @@ sliderio.view = sliderio.view || {};
 sliderio.view.editor = sliderio.view.editor || {};
 
 sliderio.view.editor.slider = (function($){
-	var slides;
+	var slides,
+		addFieldItems = [];
 	
 	var template = function(name){
 		return $.trim($('#' + name + '-tmpl').html());
@@ -83,6 +84,7 @@ sliderio.view.editor.slider = (function($){
 		});
 		
 		Slider.toggle(true);
+		refresh();
 	};
 	
 	var refresh = function(){
@@ -112,7 +114,11 @@ sliderio.view.editor.slider = (function($){
 		});
 		
 		$('a.addField').live('click', function(){
-			$('#toolbox').toggle();
+			$('#toolbox').show();
+		});
+		
+		$('a.closePopup').live('click', function(){
+			$('#toolbox').hide();
 		});
 		
 		$('textarea', liCurrent).live('change cut paste drop keydown', function(){
@@ -151,10 +157,9 @@ sliderio.view.editor.slider = (function($){
 	return {
 		build: function(done){
 			var dPartial = $.Deferred(),
-				dSlides = $.Deferred(),
-				dAddFields = $.Deferred();
+				dSlides = $.Deferred();
 				
-			$.when(dSlides, dAddFields, dPartial).done(function(data){
+			$.when(dSlides, dPartial).done(function(data){
 				slides = data;
 				attachEvents();
 				done();
@@ -164,22 +169,18 @@ sliderio.view.editor.slider = (function($){
 				dSlides.resolve(data);
 			});
 			
-			sliderio.service.slider.getToolbox(function(toolboxItems){
-				var items = $.mustache(template('toolboxItem'), {items: toolboxItems});
-				var toolbox = $('<ul id="toolbox">').appendTo('.sliderCtn');
-				toolbox.append(items);
-		
-				dAddFields.resolve();
-			});
-			
 			sliderio.view.partials.importEditor(function(){
-				dPartial.resolve();
+				sliderio.service.slider.getToolbox(function(addFieldItems){
+					var addFieldPopup = $.mustache(template('toolboxItem'), {items: addFieldItems});
+					$('.sliderCtn').append(addFieldPopup);
+			
+					dPartial.resolve();
+				});	
 			});
 		},
 		
 		init: function(){
 			initSlider();
-			refresh();
 		},
 		
 		refresh: function(){

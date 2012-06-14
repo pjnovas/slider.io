@@ -229,9 +229,8 @@ a, span {
 #toolbox {
 	display:none;
 	position:absolute;
-	top:10%;
-	left: 40%;
-	width: 150px;
+	top: 40%;
+	left: 38%;
 	background-color: #FFF;	
 	box-shadow: 2px 3px 7px gray;
 	list-style: none;
@@ -243,17 +242,38 @@ a, span {
 }
 
 #toolbox li {
-	width: 100%;
-	height: 30px;
+	width: 60px;
+	height: 60px;
 	float: left;
-	border-bottom: solid 1px silver;
 }
 
 #toolbox li a {
 	text-decoration: none;
+	line-height: 1;
+	padding: 7px 5px;
+	color: black;
 	margin: 10px;
-	line-height: 2;
+	font-size: 30px;
 }
+
+#toolbox li a.h1 {
+	font-size: 30px;
+	padding: 5px 5px 0px 5px;
+	border-radius: 5px;
+}
+
+#toolbox li a.h2 {
+	font-size: 25px;
+	padding: 10px 5px 0px 5px;
+	border-radius: 5px;
+}
+
+.closePopup, .closePopup:visited {
+	border-radius: 20px;
+	border: solid 2px #FD3535;
+	background-color: white;
+}
+
 
 /*
  * Main Configurations
@@ -313,6 +333,8 @@ a, span {
 	position:relative;
 }
 
+
+.closePopup, .closePopup:visited,
 .remove, .remove:visited,
 .addField, .addField:visited,
 .moveField, .moveField:visited {
@@ -350,6 +372,7 @@ a, span {
 	text-indent: -2px;
 }
 
+.closePopup, .closePopup:visited,
 .remove, .remove:visited {
 	right: -10px;
 	top: -10px;	
