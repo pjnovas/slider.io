@@ -1,8 +1,8 @@
 
-var sliderCtrl = require('./controllers/slider'),
-	configCtrl = require('./controllers/config'),
-	resourceCtrl = require('./controllers/resource'),
-	userCtrl = require('./controllers/user');
+var slider = require('./controllers/slider'),
+	config = require('./controllers/config'),
+	resource = require('./controllers/resource'),
+	user = require('./controllers/user');
 
 exports.configure = function(app) {
 
@@ -49,71 +49,45 @@ exports.configure = function(app) {
 	/* User Routes ****************************************
 	********************************************************/
 	//TODO: This method is temporal, will be removed after login is implemented
-	app.post('/slider/:slider/authenticate', userCtrl.authorizePassCode, function (req, res){
+	app.post('/slider/:slider/authenticate', user.authorizePassCode, function (req, res){
 		res.send({}, 200);
 	});
 	
 	
 	/* Slider Routes ****************************************
 	********************************************************/
-	app.get('/slider/:slider/speaker', function (req, res){
-	  sliderCtrl.renderSlider(res, req.params.slider, 'speaker');
-	});
+	app.get('/slider/:slider/speaker', slider.views.speaker); 
 	
-	app.get('/slider/:slider/solo', function (req, res){
-	  sliderCtrl.renderSlider(res, req.params.slider, 'solo');
-	});
+	app.get('/slider/:slider/listener', slider.views.listener); 
 	
-	app.get('/slider/:slider/editor', function (req, res){
-		sliderCtrl.renderSlider(res, req.params.slider, 'editor');
-	});
+	app.get('/slider/:slider/solo', slider.views.solo);
 	
-	app.get('/slider/:slider/styles.css', function (req, res){
-		sliderCtrl.renderSliderCSS(req.params.slider, res);
-	});
+	app.get('/slider/:slider/editor', slider.views.editor);
 	
-	app.get('/slider/:slider/slides.json', function (req, res){
-		sliderCtrl.getSlides(req.params.slider, res);
-	});
+	app.get('/slider/:slider/styles.css', slider.actions.getCSS);
 	
-	app.post('/slider/:slider/slides.json', userCtrl.authorizePassCode , function (req, res){
-	  sliderCtrl.saveSlides(req.params.slider, req.body.slider, res);
-	});
+	app.get('/slider/:slider/slides.json', slider.actions.get);
 	
-	app.post('/slider/new', function (req, res){
-	  sliderCtrl.newSlider()
-	});
+	app.post('/slider/:slider/slides.json', user.authorizePassCode , slider.actions.save);
 	
-	app.get('/slider/:slider/', function (req, res){
-	  sliderCtrl.renderSlider(res, req.params.slider);
-	});
+	app.post('/slider/new', slider.actions.create);
 	
-	app.get('/slider', function (req, res){
-	  sliderCtrl.renderSliderList(res);
-	});
+	app.get('/slider/:slider/', slider.views.listener);
+	
+	app.get('/slider', slider.views.list);
 	
 	/* Config Routes ****************************************
 	********************************************************/
-	app.get('/slider/:slider/config.json', function (req, res){
-		configCtrl.getConfig(req.params.slider, res);
-	});
+	app.get('/slider/:slider/config.json', config.actions.get);
 	
-	app.post('/slider/:slider/config.json', userCtrl.authorizePassCode, function (req, res){
-	  configCtrl.saveConfig(req.params.slider, req.body.config, res);
-	});
+	app.post('/slider/:slider/config.json', user.authorizePassCode, config.actions.save);
 	
 	/* Resources Routes ****************************************
 	********************************************************/
-	app.post('/slider/:slider/resources/new', function (req, res){
-	  resourceCtrl.addResource(req.params.slider, req.files.resource, res);
-	});
+	app.post('/slider/:slider/resources/new', resource.actions.create);
 	
-	app.post('/slider/:slider/resources/del', userCtrl.authorizePassCode, function (req, res){
-	  resourceCtrl.removeResource(req.params.slider, req.body.resource, res);
-	});
+	app.post('/slider/:slider/resources/del', user.authorizePassCode, resource.actions.remove);
 	
-	app.get('/slider/:slider/resources', function (req, res){
-	  resourceCtrl.getResources(req.params.slider, res);
-	});
+	app.get('/slider/:slider/resources', resource.actions.list);
 };
 

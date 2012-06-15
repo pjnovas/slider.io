@@ -1,7 +1,7 @@
 
 var config = require('../models/config');
 
-exports.getConfig = function(sliderName, res){
+var getConfig = function(sliderName, res){
 	
 	config.getConfig(sliderName.toLowerCase(), function(sliderCfg) {
 		delete sliderCfg.passcode;
@@ -13,7 +13,7 @@ exports.getConfig = function(sliderName, res){
 	});
 };
 
-exports.saveConfig = function(sliderName, passcode, data, res){
+var saveConfig = function(sliderName, passcode, data, res){
 	
 	config.saveConfig(sliderName.toLowerCase(), data, function(sliderCfg) {
 		res.json(data);
@@ -23,5 +23,14 @@ exports.saveConfig = function(sliderName, passcode, data, res){
 		else res.send(error.toString(), 500);
 	});
 		
+};
+
+exports.actions = {
+	get: function(req, res){
+		getConfig(req.params.slider, res);
+	},
+	save: function(req, res){
+		saveConfig(req.params.slider, req.body.config, res);
+	}
 };
 

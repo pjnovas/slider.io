@@ -1,6 +1,6 @@
 var resourceM = require('../models/resource');
 
-exports.addResource = function(name, resource, res){
+var addResource = function(name, resource, res){
 
 	resourceM.saveResource(name.toLowerCase(), resource, function(savedResource){
 		res.send(savedResource);
@@ -9,7 +9,7 @@ exports.addResource = function(name, resource, res){
 	});
 };
 
-exports.removeResource = function(name, resource, res){
+var removeResource = function(name, resource, res){
 
 	resourceM.removeResource(name.toLowerCase(), resource, function(){
 		res.send();
@@ -18,11 +18,23 @@ exports.removeResource = function(name, resource, res){
 	});
 };
 
-exports.getResources = function(sliderName, res){
+var getResources = function(sliderName, res){
 
 	resourceM.getResources(sliderName.toLowerCase(), function(resources){
 		res.send(resources);
 	}, function(error){
 		res.send(error.toString(), 500);
 	});
+};
+
+exports.actions = {
+	list: function (req, res){
+		getResources(req.params.slider, res);
+	},
+	create: function (req, res){
+		addResource(req.params.slider, req.files.resource, res);
+	},
+	remove: function (req, res){
+		removeResource(req.params.slider, req.body.resource, res);
+	}
 };
