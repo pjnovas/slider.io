@@ -48,6 +48,33 @@ exports.renderSliderCSS = function(sliderName, res){
 	});
 };
 
+exports.newSlider = function(newSlider, res){
+	
+	var onError = function(error){
+		if (error.code === 'notfound')
+			res.send("NotFound", 404);
+		else res.send(error.toString(), 500);
+	};
+	
+	config.defaultConfig(function(defaultCfg){
+		
+		var sliderName = newSlider.name;
+		defaultCfg.passcode = newSlider.passcode;
+		defaultCfg.title = newSlider.title;
+
+		var defSlide = [{"fields":[]}];
+		
+		config.saveConfig(sliderName, defaultCfg, function(){
+			
+			slider.saveSlider(sliderName, defSlide, function(){
+				
+				res.redirect('slider/' + sliderName + '/editor');
+				
+			}, onError);
+		}, onError);
+	}, onError);
+};
+
 exports.getSlides = function(sliderName, res){
 	
 	slider.getSlides(sliderName.toLowerCase(), function(slides){

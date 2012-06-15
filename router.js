@@ -80,6 +80,10 @@ exports.configure = function(app) {
 	  sliderCtrl.saveSlides(req.params.slider, req.body.slider, res);
 	});
 	
+	app.post('/slider/new', function (req, res){
+	  sliderCtrl.newSlider()
+	});
+	
 	app.get('/slider/:slider/', function (req, res){
 	  sliderCtrl.renderSlider(res, req.params.slider);
 	});

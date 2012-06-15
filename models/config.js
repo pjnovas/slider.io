@@ -38,3 +38,41 @@ exports.saveConfig = function(name, data, done, error){
 	});
 };
 
+exports.defaultConfig = function(done, error){	
+	
+	fs.realpath('./sliders', function(err, path){
+		if (err){
+			 helper.callError(err, error);
+		}
+
+		fs.readdir(path, function (err, files) {
+		 	if (err) {
+		    helper.callError(err, error);
+		  }
+		  
+			var configFile = path + '/base/config.json';
+			
+			fs.readFile(configFile, 'utf8', function (err, data) {
+			  if (err) {
+			    helper.callError(err, error);
+			  }
+				
+				try {
+					var parsed = JSON.parse(data); 
+					done(parsed);	
+				}
+				catch(err){
+					helper.callError('Error parsing file ' + configFile + ' - Stack:' + err, error);
+				}
+				
+			});	
+		});
+	});
+};
+
+
+
+
+
+
+
