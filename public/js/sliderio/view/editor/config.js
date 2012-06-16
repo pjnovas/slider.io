@@ -68,7 +68,7 @@ sliderio.view.editor.config = (function($){
 			var color = hexToRgb(self.val());
 			var alpha = self.nextAll('input[data-field=color.a]').val();
 			
-			if(alpha) color.a = alpha; 
+			if(alpha) color.a = parseFloat(alpha); 
 			hydrateConfigs({
 				container: self.parents('div.cfg-ctn').attr('data-ctn'),
 				value: color,
