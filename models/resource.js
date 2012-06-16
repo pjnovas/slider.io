@@ -49,14 +49,14 @@ exports.getResources = function(slider, done, error){
 	});
 };
 
-exports.removeResource = function(name, resource, done, error){
+exports.removeResource = function(sliderName, resourceName, done, error){
 
-	fs.realpath('./public/slider/' + name + '/images', function(err, path){
+	fs.realpath('./public/slider/' + sliderName + '/images', function(err, path){
 		if (err){
 			helper.callError(err, error);
 		}
 		
-		fs.unlink(path + '/' + resource.file, function (err) {
+		fs.unlink(path + '/' + resourceName, function (err) {
 		  if (err){
 				helper.callError(err, error);
 			}

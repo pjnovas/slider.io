@@ -24,7 +24,6 @@ exports.saveConfig = function(name, data, done, error){
 				if (err) {
 			    helper.callError(err, error);
 			  }
-				
 				fs.writeFile(fileName, JSON.stringify(data), function (err) {
 					if (err){
 						 helper.callError(err, error);

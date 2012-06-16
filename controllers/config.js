@@ -13,7 +13,7 @@ var getConfig = function(sliderName, res){
 	});
 };
 
-var saveConfig = function(sliderName, passcode, data, res){
+var saveConfig = function(sliderName, data, res){
 	
 	config.saveConfig(sliderName.toLowerCase(), data, function(sliderCfg) {
 		res.json(data);

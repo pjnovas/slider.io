@@ -66,10 +66,10 @@ sliderio.service.slider = (function($){
 		
 		removeResource: function(res, done) {
 			$.ajax({
-		    url: "resources/del",
-		    type: "POST",
+		    url: "resources/" + res.file,
+		    type: "DELETE",
 		    dataType: "json",
-		    data: JSON.stringify({passcode: sliderio.passcode, resource: res}),
+		    data: JSON.stringify({passcode: sliderio.passcode}),
 		    contentType: "application/json",
 		    cache: false,
 		    timeout: 5000,
