@@ -86,6 +86,7 @@ exports.configure = function(app) {
 	********************************************************/
 	app.post('/slider/:slider/resources/new', resource.actions.create);
 	
+	//TODO: change HTTP method to DEL and send by parameter the file
 	app.post('/slider/:slider/resources/del', user.authorizePassCode, resource.actions.remove);
 	
 	app.get('/slider/:slider/resources', resource.actions.list);
