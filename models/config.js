@@ -9,6 +9,27 @@ exports.getConfig = function(_name, done, error){
 };
 
 exports.saveConfig = function(name, data, done, error){
+
+	var writeFile = function(fileName){
+		
+		fs.writeFile(fileName, JSON.stringify(data), function (err) {
+			if (err){
+				 helper.callError(err, error);
+			}
+			
+			done();
+		});
+	};
+	
+	var versionate = function(fileName, newFileName){
+		fsExtra.copy(fileName, newFileName, function (err) {
+			if (err) {
+  			helper.callError(err, error);
+		  }
+			
+			writeFile(fileName);
+		});
+	};
 	
 	fs.realpath('./sliders', function(err, path){
 		if (err){
@@ -20,19 +41,15 @@ exports.saveConfig = function(name, data, done, error){
 				now = new Date().getTime(),
 				newFileName = path + '/cache/' + name  + '.config.json' + '-' + now;
 	
-			fsExtra.copy(fileName, newFileName, function (err) {
-				if (err) {
-			    helper.callError(err, error);
-			  }
-				fs.writeFile(fileName, JSON.stringify(data), function (err) {
-					if (err){
-						 helper.callError(err, error);
-					}
-					
-					done();
-				});
-				
-			});		
+			fs.stat(fileName, function(err, stat) {
+		    if(err == null) {
+					versionate(fileName, newFileName);     
+		    } else if(err.code == 'ENOENT') {
+					writeFile(fileName);
+		    } else {
+		      helper.callError(err, error);
+		    }
+			});
 		});
 	});
 };

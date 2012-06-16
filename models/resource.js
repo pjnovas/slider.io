@@ -65,3 +65,31 @@ exports.removeResource = function(sliderName, resourceName, done, error){
 		});
 	});
 };
+
+exports.createSliderFolder = function(sliderName, done, error){
+
+	fs.realpath('./public/slider', function(err, path){
+		if (err){
+			helper.callError(err, error);
+		}
+		
+		fs.mkdir(path + '/' + sliderName , function(err){
+			if (err){
+					helper.callError(err, error);
+			}
+				
+			fs.mkdir(path + '/' + sliderName + '/images' , function(err){
+				if (err){
+					helper.callError(err, error);
+				}
+			
+			  done();
+			});
+		});
+	});
+};
+
+
+
+
+

@@ -2,7 +2,8 @@
 var fs = require('fs'),
 	util = require('util'),
 	fsExtra = require('fs.extra'),
-	helper = require('../models/helper');
+	helper = require('../models/helper'),
+	resource = require('../models/resource');
 
 exports.getSlides = function(_name, done, error){
 	helper.getJSONFile(_name, done, error);
@@ -41,7 +42,9 @@ exports.getSliderList = function(done, error){
 		fs.readdir(path, function (err, files) {
 		 	
 		 	for(var i=0; i< files.length; i++){
-		 		if (files[i].indexOf('.config.json') > -1 || files[i].indexOf('cache') > -1){
+		 		if (files[i].indexOf('.config.json') > -1 
+		 			|| files[i].indexOf('cache') > -1
+		 			|| files[i].indexOf('base') > -1){
 		 			files.splice(i, 1);
 		 			i--;
 		 		}
@@ -59,6 +62,27 @@ exports.getSliderList = function(done, error){
 
 exports.saveSlider = function(name, data, done, error){
 	
+	var writeFile = function(fileName){
+		
+		fs.writeFile(fileName, JSON.stringify(data), function (err) {
+			if (err){
+				 helper.callError(err, error);
+			}
+			
+			done();
+		});
+	};
+	
+	var versionate = function(fileName, newFileName){
+		fsExtra.copy(fileName, newFileName, function (err) {
+			if (err) {
+  			helper.callError(err, error);
+		  }
+			
+			writeFile(fileName);
+		});
+	};
+	
 	fs.realpath('./sliders', function(err, path){
 		if (err){
 			 helper.callError(err, error);
@@ -69,20 +93,17 @@ exports.saveSlider = function(name, data, done, error){
 				now = new Date().getTime(),
 				newFileName = path + '/cache/' + name  + '.json' + '-' + now;
 	
-			fsExtra.copy(fileName, newFileName, function (err) {
-				if (err) {
-			    helper.callError(err, error);
-			  }
-				
-				fs.writeFile(fileName, JSON.stringify(data), function (err) {
-					if (err){
-						 helper.callError(err, error);
-					}
-					
-					done();
-				});
-				
-			});		
+			fs.stat(fileName, function(err, stat) {
+		    if(err == null) {
+					versionate(fileName, newFileName);     
+		    } else if(err.code == 'ENOENT') {
+	        resource.createSliderFolder(name, function(){
+						writeFile(fileName);
+					}, error);
+		    } else {
+		      helper.callError(err, error);
+		    }
+			});
 		});
 	});
 };

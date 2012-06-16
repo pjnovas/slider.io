@@ -20,7 +20,7 @@
   {{/fontURL}}
   
 	<link href="/css/highlight/solarized_dark.min.css" rel="stylesheet">
-	<link href="/css/style.css" rel="stylesheet">
+	<link href="/css/slider.css" rel="stylesheet">
 	
 	{{#editor}}
 	<link href="/css/dark-hive/jquery-ui-1.8.20.custom.css" rel="stylesheet">

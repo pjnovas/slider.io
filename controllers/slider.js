@@ -17,6 +17,7 @@ var newSlider = function(newSlider, res){
 		var sliderName = newSlider.name;
 		defaultCfg.passcode = newSlider.passcode;
 		defaultCfg.title = newSlider.title;
+		defaultCfg.description = newSlider.description;
 
 		var defSlide = [{"fields":[]}];
 		
@@ -24,7 +25,7 @@ var newSlider = function(newSlider, res){
 			
 			slider.saveSlider(sliderName, defSlide, function(){
 				
-				res.redirect('slider/' + sliderName + '/editor');
+				res.redirect('/slider/' + sliderName + '/editor');
 				
 			}, onError);
 		}, onError);
@@ -140,7 +141,12 @@ exports.actions = {
 		saveSlides(req.params.slider, req.body.slider, res);
 	},
 	create: function(req, res){
-		newSlider();
+		newSlider({
+			name: req.body.name,
+			title: req.body.title,
+			passcode: req.body.passcode,
+			description: req.body.description
+		}, res);
 	},
 	getCSS: function(req, res){
 		getStyleCSS(req.params.slider, res);
