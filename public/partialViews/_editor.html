@@ -21,7 +21,13 @@
 		
 		{{#title}}
 			<h1 class="editorField">
-				<textarea data-field="title" class="field">{{title.text}}</textarea>
+				<textarea data-field="title" class="field" 
+					{{#title.align}}style="text-align:{{title.align}}"{{/title.align}}>{{title.text}}</textarea>
+				<div class="fTextAlign">
+					<a href="#" data-align="left" class="icon-align-left"></a>
+					<a href="#" data-align="center" class="icon-align-center"></a>
+					<a href="#" data-align="right" class="icon-align-right"></a>
+				</div>
 				<a href="#" class="remove">x</a>
 				<a href="#" class="icon-move moveField"></a>	
 			</h1>
@@ -29,7 +35,13 @@
 		
 		{{#subTitle}}
 			<h2 class="editorField">
-				<textarea data-field="subTitle" class="field">{{subTitle.text}}</textarea>
+				<textarea data-field="subTitle" class="field"
+					{{#subTitle.align}}style="text-align:{{subTitle.align}}"{{/subTitle.align}}>{{subTitle.text}}</textarea>
+				<div class="fTextAlign">
+					<a href="#" data-align="left" class="icon-align-left"></a>
+					<a href="#" data-align="center" class="icon-align-center"></a>
+					<a href="#" data-align="right" class="icon-align-right"></a>
+				</div>
 				<a href="#" class="remove">x</a>
 				<a href="#" class="icon-move moveField"></a>	
 			</h2>

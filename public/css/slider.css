@@ -72,6 +72,9 @@ h1, h2, h3 {
 	color: #46483E;
 	line-height: 1;
 	margin-bottom: 0;
+	margin-left: 10px;
+	margin-right: 10px;
+	font-weight: normal;
 }
 
 #clients-holder{

@@ -30,7 +30,9 @@ exports.actions = {
 		getConfig(req.params.slider, res);
 	},
 	save: function(req, res){
-		saveConfig(req.params.slider, req.body.config, res);
+		var config = req.body.config;
+		config.passcode = req.passcode;
+		saveConfig(req.params.slider, config, res);
 	}
 };
 

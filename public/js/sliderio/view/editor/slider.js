@@ -50,6 +50,14 @@ sliderio.view.editor.slider = (function($){
 				case 'title':
 				case 'subTitle':
 					field[fieldName].text = $(this).val();
+					var txtAlign = $(this).css('text-align');
+					if (txtAlign){
+						if (txtAlign === 'center' && field[fieldName].align)
+							delete field[fieldName].align;
+						else {
+							field[fieldName].align = txtAlign;
+						}
+					}
 					break;
 				case 'list':
 					field[fieldName].items = [];
@@ -99,6 +107,13 @@ sliderio.view.editor.slider = (function($){
 				hydrateSlide(sliderio.view.toolbox.currentIndex());
 			}
 		}).disableSelection();
+		
+		$('.fTextAlign', $("li.current")).each(function(){
+			var ele = $(this).parents('.editorField');
+			var align = $('textarea', ele).css('text-align');
+			if(!align) align = 'center';
+			$('a.icon-align-' + align, $(this)).addClass('selected'); 
+		});
 	};
 	
 	var attachEvents = function(){
@@ -140,6 +155,14 @@ sliderio.view.editor.slider = (function($){
 		
 		$('a.remove', liCurrent).live('click', function(){
 			$(this).parent('.editorField').remove();
+			hydrateSlide(sliderio.view.toolbox.currentIndex());
+		});
+		
+		$('.fTextAlign a', liCurrent).live('click', function(){
+			var ele = $(this).parents('.editorField');
+			$('textarea', ele).css('text-align', $(this).attr('data-align'));
+			$('.fTextAlign a.selected', ele).removeClass('selected');
+			$(this).addClass('selected');
 			hydrateSlide(sliderio.view.toolbox.currentIndex());
 		});
 		

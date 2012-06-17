@@ -112,6 +112,22 @@ var Slider = (function($) {
 		type = editorTmpl + type;
 		
 		if (!curr.prop('data-built')) {
+			
+			data.htmlFormat = function(){
+				return function(text, render){
+					text = render(text);
+					
+					return text.replace(/\[b\]/g, '<b>').replace(/\[\/b\]/, '</b>')
+									.replace(/\[i\]/g, '<i>').replace(/\[\/i\]/, '</i>');
+					
+					//TODO: color & links
+					/*
+					var colorPattern = /\[c (#)?([0-9a-fA-F]{3})([0-9a-fA-F]{3})?\]/g;
+					var colors = text.match(colorPattern);
+					*/
+				}
+			};
+			
 			sContent = $.mustache(template(type), data);
 			fContent = $.mustache(template('footer'), data);
 			

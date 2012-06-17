@@ -4,6 +4,7 @@ var config = require('../models/config');
 exports.authorizePassCode = function(req, res, next){
 	var sliderName = req.params.slider;
 	var passcode = req.body.passcode;
+	req.passcode = passcode;
 
 	config.getConfig(sliderName, function(sliderCfg) {
 
