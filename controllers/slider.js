@@ -138,7 +138,7 @@ exports.actions = {
 		getSlides(req.params.slider, res);
 	},
 	save: function(req, res){
-		saveSlides(req.params.slider, req.body.slider, res);
+		saveSlider(req.params.slider, req.body.slider, res);
 	},
 	create: function(req, res){
 		newSlider({

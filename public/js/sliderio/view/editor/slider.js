@@ -143,6 +143,27 @@ sliderio.view.editor.slider = (function($){
 			hydrateSlide(sliderio.view.toolbox.currentIndex());
 		});
 		
+		/*
+		 * isChapter
+		 */
+		
+		$('a.chapter-field', liCurrent).live('click', function(){
+			var $this = $(this),
+				idx = sliderio.view.toolbox.currentIndex();
+				
+			if ($this.attr('data-chapter') == "true"){
+				slides[idx].isChapter = false;
+				$this.removeClass('icon-bookmark').addClass('icon-bookmark-empty');
+			}
+			else {
+				slides[idx].isChapter = true;
+				$this.removeClass('icon-bookmark-empty').addClass('icon-bookmark');
+			}
+			
+			sliderio.service.slider.saveSlides(slides, function(){
+				initSlider();
+			});
+		});
 		
 		/*
 		 * Image Editor

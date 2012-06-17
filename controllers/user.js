@@ -6,7 +6,7 @@ exports.authorizePassCode = function(req, res, next){
 	var passcode = req.body.passcode;
 
 	config.getConfig(sliderName, function(sliderCfg) {
-		
+
 		if (!sliderCfg.passcode || passcode === sliderCfg.passcode) next();
 		else res.send("Unauthorized", 401);
 		

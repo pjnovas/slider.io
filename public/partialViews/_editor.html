@@ -10,7 +10,15 @@
 </script>
 
 <script id="editor-content-tmpl" type="text/template">
+	{{#isChapter}}
+		<a data-field="isChapter" data-chapter="true" class="chapter-field icon-bookmark" title="the slide is a chapter or not"></a>	
+	{{/isChapter}}
+	{{^isChapter}}
+		<a data-field="isChapter" data-chapter="false" class="chapter-field icon-bookmark-empty" title="the slide is a chapter or not"></a>
+	{{/isChapter}}
+	
 	{{#fields}}
+		
 		{{#title}}
 			<h1 class="editorField">
 				<textarea data-field="title" class="field">{{title.text}}</textarea>
