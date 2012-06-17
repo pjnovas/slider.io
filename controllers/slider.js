@@ -97,6 +97,10 @@ var renderSlider =function(res, _slider, _userType){
 
 	config.getConfig(_slider.toLowerCase(), function(sliderCfg){
 		
+		var soloScript = "";
+		if (_userType && _userType === 'solo') 
+			soloScript = "var soloSliderStartInit = " + sliderCfg.initIndex + ";"; 
+		
 		res.render('slider/slider.mu', { 
 	  	layout: false, 
 	  	locals: { 
@@ -105,7 +109,7 @@ var renderSlider =function(res, _slider, _userType){
 	  		speaker: (_userType && _userType === 'speaker')? true : false,
 	  		solo: (_userType && _userType === 'solo')? true : false,
 	  		editor: (_userType && _userType === 'editor')? true : false,
-	  		scripts: "var sliderName = '" + _slider + "';"
+	  		scripts: "var sliderName = '" + _slider + "';" + soloScript
 	  	} 
 	  });	
 	}, function(error){
