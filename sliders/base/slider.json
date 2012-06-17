@@ -1,0 +1,39 @@
+{
+	"config": {
+		"initIndex":0,
+		"title":"Untitled",
+		"fontFamily":"sans-serif",
+		"background":{
+			"color":{
+				"r":69,
+				"g":69,
+				"b":69
+			}
+		},
+		"slide":{
+			"all":{
+				"background":{
+					"color":{
+						"r":250,
+						"g":248,
+						"b":239,
+						"a":0.9
+						}
+					}
+				},
+			"title":{
+				"background":{
+					"color":{
+						"r":140,
+						"g":200,
+						"b":75,
+						"a":0.9
+						}
+					}
+				}
+			}
+	},
+	"slides": [{
+		"fields":[]
+	}]
+}

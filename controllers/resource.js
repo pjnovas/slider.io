@@ -29,12 +29,12 @@ var getResources = function(sliderName, res){
 
 exports.actions = {
 	list: function (req, res){
-		getResources(req.params.slider, res);
+		getResources(req.slider.name, res);
 	},
 	create: function (req, res){
-		addResource(req.params.slider, req.files.resource, res);
+		addResource(req.slider.name, req.files.resource, res);
 	},
 	remove: function (req, res){
-		removeResource(req.params.slider, req.params.file, res);
+		removeResource(req.slider.name, req.params.file, res);
 	}
 };

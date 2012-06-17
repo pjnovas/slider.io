@@ -1,8 +1,6 @@
 
 var mustache = require("mustache"),
-	slider = require('../models/slider'),
-	config = require('../models/config');
-
+	slider = require('../models/slider');
 
 var newSlider = function(newSlider, res){
 	
@@ -12,71 +10,46 @@ var newSlider = function(newSlider, res){
 		else res.send(error.toString(), 500);
 	};
 	
-	config.defaultConfig(function(defaultCfg){
+	slider.defaultSlider(function(defaultSlider){
 		
 		var sliderName = newSlider.name;
-		defaultCfg.passcode = newSlider.passcode;
-		defaultCfg.title = newSlider.title;
-		defaultCfg.description = newSlider.description;
-
-		var defSlide = [{"fields":[]}];
 		
-		config.saveConfig(sliderName, defaultCfg, function(){
+		defaultSlider.name = sliderName;
+		defaultSlider.config.passcode = newSlider.passcode;
+		defaultSlider.config.title = newSlider.title;
+		defaultSlider.config.description = newSlider.description;
+		
+		slider.saveSlider(sliderName, defaultSlider, function(){
 			
-			slider.saveSlider(sliderName, defSlide, function(){
-				
-				res.redirect('/slider/' + sliderName + '/editor');
-				
-			}, onError);
+			res.redirect('/slider/' + sliderName + '/editor');
+			
 		}, onError);
 	}, onError);
 };
 
-var saveSlider = function(sliderName, data, res){
+var saveSlider = function(_slider, res){
 	
-	slider.saveSlider(sliderName.toLowerCase(), data, function(slides){
-  	res.json(data);
+	slider.saveSlider(_slider.name, _slider, function(slides){
+  	res.json(_slider);
 	}, function(error){
-		if (error.code === 'notfound')
-			res.send("Slides for Slider '" + sliderName + "' NOT FOUND", 404);
-		else res.send(error.toString(), 500);
+		res.send(error.toString(), 500);
 	});
 };
 
-var getSlides = function(sliderName, res){
-	
-	slider.getSlides(sliderName.toLowerCase(), function(slides){
-		res.json(slides);
-	}, function(error){
-		if (error.code === 'notfound')
-			res.send("Slides for Slider '" + sliderName + "' NOT FOUND", 404);
-		else res.send(error.toString(), 500);
-	});
-};
-
-var getStyleCSS = function(sliderName, res){
-	
-	config.getConfig(sliderName.toLowerCase(), function(sliderCfg){
+var getStyleCSS = function(_slider, res){
 		
-		slider.getSlidesCSSTemplate(sliderName, function(templateCSS, partialCSSBG){
-			
-			res.writeHead(200, {'content-type': 'text/css'});
-			var css = mustache.to_html(templateCSS, sliderCfg, {'background': partialCSSBG});
-			res.end(css);
-			
-		}, function(error){
-			if (error.code === 'notfound')
-				res.send("Styles Template NOT FOUND (sliderCSS.css)", 404);
-			else res.send(error.toString(), 500);
-		});
+	slider.getSlidesCSSTemplate(_slider.name, function(templateCSS, partialCSSBG){
+		
+		var css = mustache.to_html(templateCSS, _slider.config, {'background': partialCSSBG});
+		res.writeHead(200, {'content-type': 'text/css'});
+		res.end(css);
 		
 	}, function(error){
 		if (error.code === 'notfound')
-			res.send("Config Slider '" + sliderName + "' NOT FOUND", 404);
+			res.send("Styles Template NOT FOUND (sliderCSS.css)", 404);
 		else res.send(error.toString(), 500);
 	});
 };
-
 
 var renderSliderList = function(res){
 	
@@ -94,43 +67,50 @@ var renderSliderList = function(res){
 };
 
 var renderSlider =function(res, _slider, _userType){
+	
+	var soloScript = "";
+	if (_userType && _userType === 'solo') 
+		soloScript = "var soloSliderStartInit = " + _slider.config.initIndex + ";"; 
+		
+	res.render('slider/slider.mu', { 
+  	layout: false, 
+  	locals: { 
+  		title: _slider.config.title || "Untitled",
+  		fontURL: _slider.config.fontURL,
+  		speaker: (_userType && _userType === 'speaker')? true : false,
+  		solo: (_userType && _userType === 'solo')? true : false,
+  		editor: (_userType && _userType === 'editor')? true : false,
+  		scripts: "var sliderName = '" + _slider.name + "';" + soloScript
+  	} 
+  });	
+};
 
-	config.getConfig(_slider.toLowerCase(), function(sliderCfg){
-		
-		var soloScript = "";
-		if (_userType && _userType === 'solo') 
-			soloScript = "var soloSliderStartInit = " + sliderCfg.initIndex + ";"; 
-		
-		res.render('slider/slider.mu', { 
-	  	layout: false, 
-	  	locals: { 
-	  		title: sliderCfg.title || "Untitled",
-	  		fontURL: sliderCfg.fontURL,
-	  		speaker: (_userType && _userType === 'speaker')? true : false,
-	  		solo: (_userType && _userType === 'solo')? true : false,
-	  		editor: (_userType && _userType === 'editor')? true : false,
-	  		scripts: "var sliderName = '" + _slider + "';" + soloScript
-	  	} 
-	  });	
-	}, function(error){
-		if (error.code === 'notfound')
-			res.send("Config Slider '" + _slider + "' NOT FOUND", 404);
-		else res.send(error.toString(), 500);
-	});
+exports.next = {
+	get: function(req, res, next){
+		slider.getSlider(req.params.slider, function(slider){
+			req.slider = slider;
+			next();
+			
+		}, function(error){
+			if (error.code === 'notfound')
+				res.send("Slider '" + sliderName + "' NOT FOUND", 404);
+			else res.send(error.toString(), 500);
+		});
+	}
 };
 
 exports.views = {
 	listener: function(req, res){
-		renderSlider(res, req.params.slider);
+		renderSlider(res, req.slider);
 	},
 	solo: function(req, res){
-		renderSlider(res, req.params.slider, 'solo');
+		renderSlider(res, req.slider, 'solo');
 	},
 	speaker: function(req, res){
-		renderSlider(res, req.params.slider, 'speaker');
+		renderSlider(res, req.slider, 'speaker');
 	},
 	editor: function(req, res){
-		renderSlider(res, req.params.slider, 'editor');
+		renderSlider(res, req.slider, 'editor');
 	},
 	list: function(req, res){
 		renderSliderList(res);
@@ -139,10 +119,11 @@ exports.views = {
 
 exports.actions = {
 	get: function(req, res){
-		getSlides(req.params.slider, res);
+		res.json(req.slider.slides);
 	},
 	save: function(req, res){
-		saveSlider(req.params.slider, req.body.slider, res);
+		req.slider.slides = req.body.slider; 
+		saveSlider(req.slider, res);
 	},
 	create: function(req, res){
 		newSlider({
@@ -153,8 +134,18 @@ exports.actions = {
 		}, res);
 	},
 	getCSS: function(req, res){
-		getStyleCSS(req.params.slider, res);
-	}
+		getStyleCSS(req.slider, res);
+	},
+	getConfig: function(req, res){
+		delete req.slider.config.passcode;
+		res.json(req.slider.config);
+	},
+	saveConfig: function(req, res){
+		var code = req.slider.config.passcode;
+		req.slider.config = req.body.config; 
+		req.slider.config.passcode = code;
+		saveSlider(req.slider, res);
+	},
 };
 
 

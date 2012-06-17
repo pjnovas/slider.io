@@ -1,6 +1,5 @@
 
 var slider = require('./controllers/slider'),
-	config = require('./controllers/config'),
 	resource = require('./controllers/resource'),
 	user = require('./controllers/user');
 
@@ -49,45 +48,45 @@ exports.configure = function(app) {
 	/* User Routes ****************************************
 	********************************************************/
 	//TODO: This method is temporal, will be removed after login is implemented
-	app.post('/slider/:slider/authenticate', user.authorizePassCode, function (req, res){
+	app.post('/slider/:slider/authenticate', slider.next.get, user.authorizePassCode, function (req, res){
 		res.send({}, 200);
 	});
 	
 	
 	/* Slider Routes ****************************************
 	********************************************************/
-	app.get('/slider/:slider/speaker', slider.views.speaker); 
+	app.get('/slider/:slider/speaker', slider.next.get, slider.views.speaker); 
 	
-	app.get('/slider/:slider/listener', slider.views.listener); 
+	app.get('/slider/:slider/listener', slider.next.get, slider.views.listener); 
 	
-	app.get('/slider/:slider/solo', slider.views.solo);
+	app.get('/slider/:slider/solo', slider.next.get, slider.views.solo);
 	
-	app.get('/slider/:slider/editor', slider.views.editor);
+	app.get('/slider/:slider/editor', slider.next.get, slider.views.editor);
 	
-	app.get('/slider/:slider/styles.css', slider.actions.getCSS);
+	app.get('/slider/:slider/styles.css', slider.next.get, slider.actions.getCSS);
 	
-	app.get('/slider/:slider/slides.json', slider.actions.get);
+	app.get('/slider/:slider/slides.json', slider.next.get, slider.actions.get);
 	
-	app.post('/slider/:slider/slides.json', user.authorizePassCode , slider.actions.save);
+	app.post('/slider/:slider/slides.json', slider.next.get, user.authorizePassCode , slider.actions.save);
 	
 	app.post('/slider/new', slider.actions.create);
 	
-	app.get('/slider/:slider/', slider.views.listener);
+	app.get('/slider/:slider/', slider.next.get, slider.views.listener);
 	
 	app.get('/slider', slider.views.list);
 	
 	/* Config Routes ****************************************
 	********************************************************/
-	app.get('/slider/:slider/config.json', config.actions.get);
+	app.get('/slider/:slider/config.json', slider.next.get, slider.actions.getConfig);
 	
-	app.post('/slider/:slider/config.json', user.authorizePassCode, config.actions.save);
+	app.post('/slider/:slider/config.json', slider.next.get, user.authorizePassCode, slider.actions.saveConfig);
 	
 	/* Resources Routes ****************************************
 	********************************************************/
-	app.post('/slider/:slider/resources/new', resource.actions.create);
+	app.post('/slider/:slider/resources/new', slider.next.get, resource.actions.create);
 	
-	app.del('/slider/:slider/resources/:file', user.authorizePassCode, resource.actions.remove);
+	app.del('/slider/:slider/resources/:file', slider.next.get, user.authorizePassCode, resource.actions.remove);
 	
-	app.get('/slider/:slider/resources', resource.actions.list);
+	app.get('/slider/:slider/resources', slider.next.get, resource.actions.list);
 };
 

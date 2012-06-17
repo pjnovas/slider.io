@@ -1,5 +1,5 @@
 var socketIO = require('socket.io'),
-	config = require('../models/config');
+	slider = require('../models/slider');
 
 exports.start = function(app){
 	var io = socketIO.listen(app),
@@ -26,14 +26,14 @@ exports.start = function(app){
 	  	}
 	  	
 	  	if (!rooms[_roomName]) {
-	  		config.getConfig(_roomName, function(sliderCfg){
+	  		slider.getSlider(_roomName, function(sliderJSON){
 	  			
 	  			rooms[_roomName] = {
-						currIndex: sliderCfg.initIndex,
+						currIndex: sliderJSON.config.initIndex,
 						currItemIndex: 0,
 						visible: false,
 						clients: 0,
-						passcode: sliderCfg.passcode
+						passcode: sliderJSON.config.passcode
 					};
 					
 					joinSliderRoom();

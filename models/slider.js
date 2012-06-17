@@ -5,7 +5,7 @@ var fs = require('fs'),
 	helper = require('../models/helper'),
 	resource = require('../models/resource');
 
-exports.getSlides = function(_name, done, error){
+exports.getSlider = function(_name, done, error){
 	helper.getJSONFile(_name, done, error);
 };
 
@@ -108,7 +108,36 @@ exports.saveSlider = function(name, data, done, error){
 	});
 };
 
-
-
+exports.defaultSlider = function(done, error){
+	
+	fs.realpath('./sliders', function(err, path){
+		if (err){
+			 helper.callError(err, error);
+		}
+	
+		fs.readdir(path, function (err, files) {
+		 	if (err) {
+		    helper.callError(err, error);
+		  }
+	
+			var sliderFile = path + '/base/slider.json';
+	
+			fs.readFile(sliderFile, 'utf8', function (err, data) {
+			  if (err) {
+			    helper.callError(err, error);
+			  }
+	
+				try {
+					var parsed = JSON.parse(data); 
+					done(parsed);	
+				}
+				catch(err){
+					helper.callError('Error parsing file ' + sliderFile + ' - Stack:' + err, error);
+				}
+	
+			});	
+		});
+	});
+};
 
 
