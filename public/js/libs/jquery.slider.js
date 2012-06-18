@@ -150,7 +150,7 @@ var Slider = (function($) {
 			});
 		}
 		
-		$('ul li', curr).hide();
+		$('ul.bulletList li', curr).hide();
 	};
 	
 	return {
@@ -179,7 +179,7 @@ var Slider = (function($) {
 			$(mainCtn).bind('resize orientationchange', resize);
 		},
 		moveLeft: function(finishMove){
-			var hiddenItems = $('ul li:hidden', currentSlide);
+			var hiddenItems = $('ul.bulletLis li:hidden', currentSlide);
 			if (hiddenItems.length > 0) {
 				this.moveTo(currentIndex, finishMove);		
 			}
@@ -212,10 +212,10 @@ var Slider = (function($) {
 			if (index < 0 || index > slidesLen) return;
 			
 			if (index === currentIndex){
-				var hiddenItems = $('ul li:hidden', currentSlide);
+				var hiddenItems = $('ul.bulletList li:hidden', currentSlide);
 				if (hiddenItems.length > 0) {
 					hiddenItems.eq(0).show();
-					finish($('ul li:visible', currentSlide).length, 'list');
+					finish($('ul.bulletList li:visible', currentSlide).length, 'list');
 				}
 				return;
 			}
@@ -242,7 +242,7 @@ var Slider = (function($) {
 			toggle('details', visible);
 		},
 		updateList: function (index){
-			var items = $('ul li', currentSlide);
+			var items = $('ul.bulletList li', currentSlide);
 			for (var i=0; i< index; i++){
 				items.eq(i).show();
 			}
