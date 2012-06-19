@@ -63,6 +63,8 @@ exports.configure = function(app) {
 	
 	app.get('/slider/:slider/editor', slider.next.get, slider.views.editor);
 	
+	app.get('/slider/:slider/offline', slider.next.get, slider.actions.getOffline);
+	
 	app.get('/slider/:slider/styles.css', slider.next.get, slider.actions.getCSS);
 	
 	app.get('/slider/:slider/slides.json', slider.next.get, slider.actions.get);

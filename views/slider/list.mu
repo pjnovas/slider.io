@@ -68,11 +68,11 @@
 	      <ul>
 			  {{#sliders}}
 			  <li>
-			  	<h3>{{.}} 
-				  	(<a href="/slider/{{.}}">viewer</a> | 
-				  	<a href="/slider/{{.}}/solo">solo</a> | 
-				  	<a href="/slider/{{.}}/speaker">speaker</a> |
-				  	<a href="/slider/{{.}}/editor">editor</a>)
+			  	<h3>{{.}} - <a href="/slider/{{.}}">viewer</a> 
+				  	| <a href="/slider/{{.}}/solo">solo</a> 
+				  	| <a href="/slider/{{.}}/speaker">speaker</a>
+				  	| <a href="/slider/{{.}}/editor">editor</a>
+				  	| <a target="_blank" href="/slider/{{.}}/offline">offline</a>
 				  </h3>
 				</li>
 				{{/sliders}}

@@ -2,6 +2,21 @@
 var mustache = require("mustache"),
 	slider = require('../models/slider');
 
+var getOffline = function(_slider, res){
+		
+	slider.getSliderZIP(_slider, function(zipFile){
+		
+		res.writeHead(200, {
+			'content-type': 'application/x-zip-compressed',
+			'Content-disposition': 'attachment; filename=' + _slider.name + '_offline.zip'
+			});
+		res.end(zipFile);
+		
+	}, function(error){
+		res.send(error.toString(), 500);
+	});
+};
+
 var newSlider = function(newSlider, res){
 	
 	var onError = function(error){
@@ -38,11 +53,10 @@ var saveSlider = function(_slider, res){
 
 var getStyleCSS = function(_slider, res){
 		
-	slider.getSlidesCSSTemplate(_slider.name, function(templateCSS, partialCSSBG){
+	slider.getSlidesCSSTemplate(_slider, function(renderedCSS){
 		
-		var css = mustache.to_html(templateCSS, _slider.config, {'background': partialCSSBG});
 		res.writeHead(200, {'content-type': 'text/css'});
-		res.end(css);
+		res.end(renderedCSS);
 		
 	}, function(error){
 		if (error.code === 'notfound')
@@ -146,6 +160,9 @@ exports.actions = {
 		req.slider.config.passcode = code;
 		saveSlider(req.slider, res);
 	},
+	getOffline: function(req, res){
+		getOffline(req.slider, res);
+	}
 };
 
 
