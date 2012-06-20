@@ -1,91 +1,54 @@
 
-var fs = require('fs'),
-	fsExtra = require('fs.extra'),
-	helper = require('../models/helper');
-	
+var fsAccess = require('../utils/fsWrapper');
+
 exports.saveResource = function(name, resource, done, error){
 
 	//TODO: If slider resources folder doesn't exist -> Create it!	
 	//TODO: Validate mime, type & size
 	
-	fs.realpath('./public/slider/' + name + '/images', function(err, path){
-		if (err){
-			helper.callError(err, error);
-		}
+	function sendFile(){
+		//TODO: remove temp file: fs.unlink(resource.path);
 		
-		fsExtra.copy(resource.path, path + '/' + resource.name, function (err) {
-  		if (err){
-				helper.callError(err, error);
-			}
-			//fs.unlink(resource.path);
-			
-			done({
-	 			url: 'images/' + resource.name,
-	 			file: resource.name
-	 		});
-		});
-	});
+		done({
+ 			url: 'images/' + resource.name,
+ 			file: resource.name
+ 		});
+	}
+	
+	function copy(err, localPath){
+		if (err) error(err);
+		else {
+			var newFile = '/public/slider/' + name + '/images/' + resource.name;
+			fsAccess.copyNoRoot(error, resource.path, localPath + newFile, sendFile);
+		}
+	}
+	
+	fsAccess.getRoot(copy);
 };
 
 exports.getResources = function(slider, done, error){
 	
-	fs.realpath('./public/slider/' + slider + '/images', function(err, path){		
-		if (err){
-			 helper.callError(err, error);
-		}
-
-		fs.readdir(path, function (err, files) {
-		 	
-		 	for(var i=0; i< files.length; i++) {
-		 		files[i] = {
-		 			url: 'images/' + files[i],
-		 			file: files[i]
-		 		};
-		 	}
-		 	
-		 	done(files);
-		});
-		
-	});
+	function sendFiles(files){
+		for(var i=0; i< files.length; i++) {
+	 		files[i] = {
+	 			url: 'images/' + files[i],
+	 			file: files[i]
+	 		};
+	 	}
+	 	
+	 	done(files);
+	}
+	
+	fsAccess.getDirectoryFiles(error, '/public/slider/' + slider + '/images', sendFiles);
 };
 
 exports.removeResource = function(sliderName, resourceName, done, error){
-
-	fs.realpath('./public/slider/' + sliderName + '/images', function(err, path){
-		if (err){
-			helper.callError(err, error);
-		}
-		
-		fs.unlink(path + '/' + resourceName, function (err) {
-		  if (err){
-				helper.callError(err, error);
-			}
-		  
-		  done();
-		});
-	});
+	fsAccess.removeFile(error, '/public/slider/' + sliderName + '/images/' + resourceName, done);
 };
 
 exports.createSliderFolder = function(sliderName, done, error){
-
-	fs.realpath('./public/slider', function(err, path){
-		if (err){
-			helper.callError(err, error);
-		}
-		
-		fs.mkdir(path + '/' + sliderName , function(err){
-			if (err){
-					helper.callError(err, error);
-			}
-				
-			fs.mkdir(path + '/' + sliderName + '/images' , function(err){
-				if (err){
-					helper.callError(err, error);
-				}
-			
-			  done();
-			});
-		});
+	fsAccess.createDirectory(error, '/public/slider/' + sliderName, function(){
+		fsAccess.createDirectory(error, '/public/slider/' + sliderName + '/images', done);
 	});
 };
 

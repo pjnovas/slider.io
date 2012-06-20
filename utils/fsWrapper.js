@@ -76,11 +76,38 @@ function saveFile(error, path, data, done){
 	getRoot(writeFile);
 }
 
+function removeFile(error, file, done){
+	
+	function unlinkFile(err, localPath){
+		if (err) error(err);
+		else fs.unlink(localPath + file, function (err) {
+		  if (err) error(err);
+		  else done();
+		});
+	}
+	
+	getRoot(unlinkFile);
+}
+
+function createDirectory(error, path, done){
+	function create(err, localPath){
+		if (err) error(err);
+		else fs.mkdir(localPath + path, function(err){
+			if (err) error(err);
+		  else done();
+		});
+	}
+	
+	getRoot(create);
+}
+
 exports.getRoot = getRoot;
 exports.getFile = getFile;
 exports.getFiles = getFiles;
 exports.getDirectoryFiles = getDirectoryFiles;
 exports.saveFile = saveFile;
+exports.removeFile = removeFile;
+exports.createDirectory = createDirectory;
 
 exports.getJSONFile = function(error, path, done){
 	
@@ -140,6 +167,15 @@ exports.copy = function(error, fileName, newFileName, done) {
 	getRoot(copyFiles);
 };
 
+exports.copyNoRoot = function(error, fileName, newFileName, done) {
+	
+	function ready(err){
+		if (err) error(err);
+		else done();
+	}
+	
+	fsExtra.copy(fileName, newFileName, ready);	
+};
 
 
 
