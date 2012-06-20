@@ -129,7 +129,7 @@ exports.getSliderZIP = function(_slider, done, error){
 	}
 	
 	function addSliderCSS(css){
-    archive.add("css/styles.css", new Buffer(css, "utf8"));
+    archive.add("styles.css", new Buffer(css, "utf8"));
 		getOfflineFiles(_slider, addOfflineFiles, error);		
 	}
 	
