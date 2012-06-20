@@ -54,7 +54,7 @@ var saveSlider = function(_slider, res){
 var getStyleCSS = function(_slider, res){
 		
 	slider.getSlidesCSSTemplate(_slider, function(renderedCSS){
-		
+
 		res.writeHead(200, {'content-type': 'text/css'});
 		res.end(renderedCSS);
 		
