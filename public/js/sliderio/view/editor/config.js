@@ -5,7 +5,7 @@ sliderio.view.editor = sliderio.view.editor || {};
 
 sliderio.view.editor.config = (function($){
 	var config,
-		data = {};
+		styles = {};
 	
 	var template = function(name){
 		return $.trim($('#' + name + '-tmpl').html());
@@ -41,26 +41,22 @@ sliderio.view.editor.config = (function($){
 	var bind = function(){
 		var main = $.mustache(template('config-main'), config);
 		
-		data.mainBg = new StyleManager(".sliderCtn", { background: config.background }, {});
+		styles.mainBg = new StyleManager(".sliderCtn", config.style, {});
 		
-		data.allBg = new StyleManager("#slider-list li:not(.title)", { 
-			background: config.slide.all.background 
-		}, {
+		styles.allBg = new StyleManager("#slider-list li:not(.title)", config.slide.all.style, {
 			title:"All Slides"
 		});
 		
-		data.titleBg = new StyleManager("#slider-list li.title", { 
-			background: config.slide.title.background 
-		}, {
+		styles.titleBg = new StyleManager("#slider-list li.title", config.slide.title.style, {
 			title:"Chapter Slides" 
 		});
 		
 		
 		$("#mainConfigs")
 			.append(main)
-			.append(data.mainBg.getContainer())
-			.append(data.allBg.getContainer())
-			.append(data.titleBg.getContainer());
+			.append(styles.mainBg.getContainer())
+			.append(styles.allBg.getContainer())
+			.append(styles.titleBg.getContainer());
 		
 		
 		$('#txtInitIndex').bind('change', function(){
@@ -83,9 +79,9 @@ sliderio.view.editor.config = (function($){
 	};
 	
 	var saveConfig = function(cfg) {	
-		cfg.background = data.mainBg.getStyle().background;
-		cfg.slide.all.background = data.allBg.getStyle().background; 
-		cfg.slide.title.background = data.titleBg.getStyle().background;
+		cfg.style = styles.mainBg.getStyle();
+		cfg.slide.all.style = styles.allBg.getStyle(); 
+		cfg.slide.title.style = styles.titleBg.getStyle();
 		 
 		sliderio.service.slider.saveConfig(cfg, function(){
 			location.reload(true);

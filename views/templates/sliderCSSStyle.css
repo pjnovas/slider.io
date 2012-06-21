@@ -1,0 +1,33 @@
+
+{{#background}}
+
+	{{#color}}
+		{{#r}}
+			{{#a}}
+				background-color: rgba({{r}}, {{g}}, {{b}}, {{a}});
+			{{/a}}
+			{{^a}}
+				background-color: rgb({{r}}, {{g}}, {{b}});			
+			{{/a}}
+			-moz-box-shadow: 0px 0px 10px rgb({{r}}, {{g}}, {{b}});
+			-webkit-box-shadow: 0px 0px 10px rgb({{r}}, {{g}}, {{b}});
+			box-shadow: 0px 0px 10px rgb({{r}}, {{g}}, {{b}});
+		{{/r}}
+		
+		{{^r}}
+			background-color: {{color}};
+		{{/r}}
+	{{/color}}
+	
+	{{#image}}
+		background-image: url('images/{{high}}');
+		
+		{{#seamless}}
+			background-position: repeat;
+		{{/seamless}}
+		{{^seamless}}
+			background-size: 100% 100%;
+		{{/seamless}}
+	{{/image}}
+	
+{{/background}}

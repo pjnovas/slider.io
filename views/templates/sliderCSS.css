@@ -1,6 +1,6 @@
 
 .sliderCtn {
-	{{>background}}
+	{{>style}}
 	
 	{{#fontFamily}}
 		font-family: {{{fontFamily}}};
@@ -11,7 +11,7 @@
 	{{#all}}
 
 		#slider-list>li {
-			{{>background}}							
+			{{>style}}							
 		} 
 	
 	{{/all}}
@@ -19,7 +19,7 @@
 	{{#title}}
 
 		#slider-list>li.title {
-			{{>background}}
+			{{>style}}
 		}
 	
 	{{/title}}
@@ -29,24 +29,26 @@
 
 @media screen and (max-width: 680px) {
 	.sliderCtn {
-		{{#background}}
+		{{#style}}
+			{{#background}}
 			
-			{{#color}}
-				background-color: {{color}};
-			{{/color}}
-			
-			{{#image}}
-				background-image: url('images/{{low}}');
+				{{#color}}
+					background-color: {{color}};
+				{{/color}}
 				
-				{{#seamless}}
-					background-position: repeat;
-				{{/seamless}}
-				{{^seamless}}
-					background-size: 100% 100%;
-				{{/seamless}}
-			{{/image}}
-			 
-		{{/background}}
+				{{#image}}
+					background-image: url('images/{{low}}');
+					
+					{{#seamless}}
+						background-position: repeat;
+					{{/seamless}}
+					{{^seamless}}
+						background-size: 100% 100%;
+					{{/seamless}}
+				{{/image}}
+				 
+			{{/background}}
+		{{/style}}
 	}
 }
 

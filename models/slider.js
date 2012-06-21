@@ -10,14 +10,14 @@ exports.getSlider = function(_sliderName, done, error){
 
 var getSlidesCSS = function(_slider, done, error){
 	
-	function renderCSS(sliderCSS, sliderCSSBg){
-		var css = mustache.to_html(sliderCSS, _slider.config, {'background': sliderCSSBg});
+	function renderCSS(sliderCSS, sliderCSSStyle){
+		var css = mustache.to_html(sliderCSS, _slider.config, {'style': sliderCSSStyle});
 	 	done(css);
 	}
 	
 	fsAccess.getFiles(error, [
 				'/views/templates/sliderCSS.css', 
-				'/views/templates/sliderCSSBg.css'
+				'/views/templates/sliderCSSStyle.css'
 			], 'ascii', renderCSS);
 	
 };

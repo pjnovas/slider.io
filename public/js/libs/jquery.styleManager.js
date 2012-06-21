@@ -64,6 +64,7 @@
 				});
 				
 				this.image(newStyle.background, function(file){
+					newStyle.background.image = newStyle.background.image || {};
 					if(file){
 						newStyle.background.image.high = file;
 						$(element).css("backgroundImage", "url('images/" + file + "')");
@@ -73,6 +74,7 @@
 						$(element).css("backgroundImage", "none");
 					}
 				}, function(seamless){
+					newStyle.background.image = newStyle.background.image || {};
 					newStyle.background.image.seamless = seamless;
 					if (seamless)
 						$(element).css("background-position", "repeat").css("background-size", "auto");
