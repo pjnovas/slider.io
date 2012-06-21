@@ -4,7 +4,8 @@ sliderio.view = sliderio.view || {};
 sliderio.view.editor = sliderio.view.editor || {};
 
 sliderio.view.editor.config = (function($){
-	var config;
+	var config,
+		data = {};
 	
 	var template = function(name){
 		return $.trim($('#' + name + '-tmpl').html());
@@ -40,96 +41,52 @@ sliderio.view.editor.config = (function($){
 	var bind = function(){
 		var main = $.mustache(template('config-main'), config);
 		
-		var mainBg = new StyleManager(".sliderCtn", { background: config.background }, {});
-		var allBg = new StyleManager("#slider-list li:not(.title)", { background: config.slide.all.background }, {});
-		var titleBg = new StyleManager("#slider-list li.title", { background: config.slide.title.background }, {});
+		data.mainBg = new StyleManager(".sliderCtn", { background: config.background }, {});
+		
+		data.allBg = new StyleManager("#slider-list li:not(.title)", { 
+			background: config.slide.all.background 
+		}, {
+			title:"All Slides"
+		});
+		
+		data.titleBg = new StyleManager("#slider-list li.title", { 
+			background: config.slide.title.background 
+		}, {
+			title:"Chapter Slides" 
+		});
 		
 		
 		$("#mainConfigs")
 			.append(main)
-			.append(mainBg.getContainer())
-			.append(allBg.getContainer())
-			.append(titleBg.getContainer());
+			.append(data.mainBg.getContainer())
+			.append(data.allBg.getContainer())
+			.append(data.titleBg.getContainer());
 		
 		
-		/*
-		$('.cfg-field').live('change', function(){
-			var self = $(this);
-			var ctrlVal = self.val();
-			
-			if (self.is(':checkbox'))
-				ctrlVal = self.is(':checked');
-			
-			hydrateConfigs({
-				container: self.parents('div.cfg-ctn').attr('data-ctn'),
-				value: ctrlVal,
-				type: self.attr('data-field')
-			});
+		$('#txtInitIndex').bind('change', function(){
+			var newIndex = parseInt($(this).val(), 10);
+			config.initIndex = newIndex;
+			Slider.moveTo(newIndex);
 		});
-		*/
+		
+		$('#txtTitle').bind('change', function(){
+			var newTitle = $(this).val();
+			config.title = newTitle;
+			document.title = newTitle;
+		});
+		
+		$('#txtFontFamily').bind('change', function(){
+			var newFont = $(this).val();
+			config.fontFamily = newFont;
+			$(".sliderCtn").css("font-family", newValue);
+		});
 	};
 	
-	var hydrateConfigs = function (cfgField){
-		var p = config;
-		
-		var buildProperty = function(ctn){
-			if (ctn) {
-				var props = ctn.split('.');
-				for(var i=0; i< props.length; i++){
-					if (p[props[i]] === undefined) {
-						if (i === props.length-1)
-							cfgField.type = props[i]; 
-						else p[props[i]] = {};
-					}
-					else if (i === props.length-1 && typeof p[props[i]] !== 'object') {
-						cfgField.type = props[i]; 
-					}
-					else p = p[props[i]];
-				}
-			}
-		};
-		
-		buildProperty(cfgField.container);
-		
-		if (cfgField.type.indexOf('.') > -1){
-			buildProperty(cfgField.type);
-		}
-		
-		var newValue = cfgField.value;
-		
-		var val = parseFloat(newValue);
-		if(!isNaN(val)) newValue = val; 
-		
-		p[cfgField.type] = newValue;
-		
-		var updateCSS = function(){
-			
-			function getSelector(){
-				switch(cfgField.container){
-					case "background": return ".sliderCtn";
-					case "slide.all.background": return "#slider-list li:not(.title)";
-					case "slide.title.background": return "#slider-list li.title";
-					default: return ".sliderCtn";
-				}
-			}
-			
-			switch(cfgField.type){
-				case "initIndex":
-					Slider.moveTo(newValue);
-					break;
-				case "title":
-					document.title = newValue;
-					break;
-				case "fontFamily":
-					$(getSelector()).css("font-family", newValue);
-					break;
-			}
-		};
-		
-		updateCSS();
-	};
-
 	var saveConfig = function(cfg) {	
+		cfg.background = data.mainBg.getStyle().background;
+		cfg.slide.all.background = data.allBg.getStyle().background; 
+		cfg.slide.title.background = data.titleBg.getStyle().background;
+		 
 		sliderio.service.slider.saveConfig(cfg, function(){
 			location.reload(true);
 		});

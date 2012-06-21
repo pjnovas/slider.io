@@ -3,8 +3,6 @@
 (function($){
 	
 	StyleManager = function(element, myStyle, options){
-		var container = $('<div class="style-container"></div>');
-		
 		var defaults = {
 			background: {
 				color: {
@@ -37,6 +35,11 @@
 		
 		var newStyle = $.extend({}, style, myStyle);
 		var settings = $.extend({}, defaults, options);
+		
+		var container = $('<div class="style-container"></div>');
+		if (settings.title) {
+			container.append('<hr/><span>' + settings.title + '</span>');
+		}
 		
 		var template = function(name){
 			return $.trim($('#' + name + '-tmpl').html());
@@ -147,8 +150,12 @@
 		
 		if (settings.background) build.background();
 		
+		
 		this.getContainer = function(){
 			return container;
+		},
+		this.getStyle = function(){
+			return newStyle;
 		},
 		this.destroy = function(){
 			
