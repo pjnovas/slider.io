@@ -21,13 +21,17 @@
 		<input class="color-field" maxlength="7" size="9" type="text" 
 			{{#color.r}}data-rgb="{{color.r}},{{color.g}},{{color.b}}"{{/color.r}}
 			{{^color.r}}value="{{color}}"{{/color.r}} />
-		
-		<label style="text-align: right;">Alpha</label>
-		<input class="colorA" type="text" maxlength="3" size="2" placeholder="1" value="{{color.a}}"/>
-		<label style="width:50px; font-size: 12px;">(0 to 1)</label>
 	</div>
 </script>
 
+<script id="style-alpha-tmpl" type="text/template">
+	<div class="cfg-field-row">
+		<label style="text-align: right;">Alpha</label>
+		<input class="alpha-field" type="text" maxlength="3" size="2" placeholder="1" value="{{alpha}}"/>
+		<label style="width:50px; font-size: 12px;">(0 to 1)</label>
+	</div>
+</script>
+	
 <script id="style-image-tmpl" type="text/template">
 	<div class="cfg-field-row">
 		<label>Image</label>
@@ -37,6 +41,11 @@
 	</div>
 </script>
 
+<script id="style-fontFamily-tmpl" type="text/template">
+	<div class="cfg-field-row">
+		
+	</div>
+</script>
 
 
 

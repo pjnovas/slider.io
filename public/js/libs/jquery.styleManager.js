@@ -4,27 +4,52 @@
 	
 	StyleManager = function(element, myStyle, options){
 		var defaults = {
+			font: {
+				name: true,
+				color: true,
+				align: true,
+				size: true
+			},
+			border: {
+				radius: true,
+				color: true,
+				size: true
+			},
 			background: {
 				color: {
-					r: true,
-					g: true,
-					b: true,
-					a: true
+					rgb: true,
+					alpha: true
 				},
-				image: {
-			 		high: true,
-			 		seamless: true
-			 	}
+				image: true
 			}
 		};
 		
 		var style = {
+			font: {
+				name: 'arial',
+				color: {
+					r: 0,
+					g: 0,
+					b: 0
+				},
+				align: 'center',
+				size: 1
+			},
+			border: {
+				radius: 20,
+				color: {
+					r: 0,
+					g: 0,
+					b: 0
+				},
+				size: 0
+			},
 			background: {
 				color:{
 					r:69,
 					g:69,
 					b:69,
-					a: 1
+					alpha: 1
 				},
 				image: {
 			 		high: '',
@@ -46,20 +71,27 @@
 		};
 		
 		var build = {
+			font: function(){
+				
+			},
 			background: function() {
 				
 				function updateColorElement(){
 					color = newStyle.background.color;
-					var c = "rgba(" + color.r + "," + color.g + "," + color.b + "," + (color.a || 1) + ")";
+					var c = "rgba(" + color.r + "," + color.g + "," + color.b + "," + (color.alpha || 1) + ")";
 					$(element).css("background-color", c).css("-moz-box-shadow", "0px 0px 10px " + c)
 						.css("-webkit-box-shadow", "0px 0px 10px " + c).css("box-shadow", "0px 0px 10px " + c);	
 				}
 				
 				this.color(newStyle.background, function(color){
+					var alpha = newStyle.background.color.alpha || 1;
+					color.alpha = alpha;
 					newStyle.background.color = color;
 					updateColorElement();
-				}, function(alpha){
-					newStyle.background.color.a = alpha;
+				});
+				
+				this.alpha(newStyle.background.color, function(alpha){
+					newStyle.background.color.alpha = alpha;
 					updateColorElement();
 				});
 				
@@ -81,6 +113,7 @@
  					else $(element).css("background-size", "100% 100%").css("background-position", "no-repeat");
 				});
 			},
+			
 			image: function(entity, onImageChange, onSeamlessChange) {
 				
 				var imageHtml = $($.mustache(template('style-image'), entity));
@@ -109,7 +142,8 @@
 					onSeamlessChange($(this).is(':checked'));
 				});
 			},
-			color: function(entity, onChangeColor, onChangeAlpha) {
+			
+			color: function(entity, onChangeColor) {
 				
 				var colorHtml = $($.mustache(template('style-color'), entity));
 				container.append(colorHtml);
@@ -132,20 +166,21 @@
 				.bind('blur', function(){
 					var self = $(this);
 					var color = hexToRgb(self.val());
-					var alpha = self.nextAll('input[data-field=color.a]').val();
-					
-					if(alpha) color.a = parseFloat(alpha); 
 					$('#color-picker').remove();
 					onChangeColor(color);
 				});
+			},
+			
+			alpha: function(entity, onChangeAlpha){
+				var alphaHtml = $($.mustache(template('style-alpha'), entity));
+				container.append(alphaHtml);
 				
-				if (onChangeAlpha) {
-					$('.colorA', colorHtml)
-						.bind('change',function(){
-							var alpha = parseFloat($(this).val());
-							onChangeAlpha(alpha);
-						});
-				}
+				$('.alpha-field', alphaHtml)
+					.bind('change',function(){
+						var alpha = parseFloat($(this).val());
+						console.log(alpha);
+						onChangeAlpha(alpha);
+				});
 			}
 			
 		};
@@ -176,7 +211,7 @@ style {
 	 		b [int]
 	 	}
 	 	align [string]
-	 	size [int] em
+	 	size [float] em
 	 }
 	 
 	 background {

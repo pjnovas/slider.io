@@ -27,31 +27,5 @@
 {{/slide}}
 
 
-@media screen and (max-width: 680px) {
-	.sliderCtn {
-		{{#style}}
-			{{#background}}
-			
-				{{#color}}
-					background-color: {{color}};
-				{{/color}}
-				
-				{{#image}}
-					background-image: url('images/{{low}}');
-					
-					{{#seamless}}
-						background-position: repeat;
-					{{/seamless}}
-					{{^seamless}}
-						background-size: 100% 100%;
-					{{/seamless}}
-				{{/image}}
-				 
-			{{/background}}
-		{{/style}}
-	}
-}
-
-
 
 

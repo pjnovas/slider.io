@@ -3,12 +3,12 @@
 
 	{{#color}}
 		{{#r}}
-			{{#a}}
-				background-color: rgba({{r}}, {{g}}, {{b}}, {{a}});
-			{{/a}}
-			{{^a}}
+			{{#alpha}}
+				background-color: rgba({{r}}, {{g}}, {{b}}, {{alpha}});
+			{{/alpha}}
+			{{^alpha}}
 				background-color: rgb({{r}}, {{g}}, {{b}});			
-			{{/a}}
+			{{/alpha}}
 			-moz-box-shadow: 0px 0px 10px rgb({{r}}, {{g}}, {{b}});
 			-webkit-box-shadow: 0px 0px 10px rgb({{r}}, {{g}}, {{b}});
 			box-shadow: 0px 0px 10px rgb({{r}}, {{g}}, {{b}});
