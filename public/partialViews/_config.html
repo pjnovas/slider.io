@@ -15,29 +15,29 @@
 	</div>
 </script>
 
-<script id="config-bg-tmpl" type="text/template">
-	<div data-ctn="{{ctn}}" class="cfg-ctn">
-		{{#title}}
-		<hr/>
-		<span>{{title}}</span>
-		{{/title}}
-		<div class="cfg-field-row">
-				<label>Color</label>
-				<input data-field="color" class="color-field cfg-field" maxlength="7" size="9" type="text" 
-					{{#color.r}}data-rgb="{{color.r}},{{color.g}},{{color.b}}"{{/color.r}}
-					{{^color.r}}value="{{color}}"{{/color.r}} />
-				
-				<label style="text-align: right;">Alpha</label>
-				<input data-field="color.a" class="cfg-field" type="text" maxlength="3" size="2" placeholder="1" value="{{color.a}}"/>
-				<label style="width:50px; font-size: 12px;">(0 to 1)</label>
-		</div>
-		<div class="cfg-field-row">
-			<label>Image</label>
-			<input data-field="image.high" class="image-field cfg-field" type="text" maxlength="300" size="20" placeholder="[No Image]" value="{{image.high}}"/>
-			<input data-field="image.seamless" class="cfg-field" type="checkbox" {{#image.seamless}}checked{{/image.seamless}} />
-			<label>Tiled</label>
-		</div>
+<script id="style-color-tmpl" type="text/template">
+	<div class="cfg-field-row">
+		<label>Color</label>
+		<input data-field="color" class="color-field cfg-field" maxlength="7" size="9" type="text" 
+			{{#color.r}}data-rgb="{{color.r}},{{color.g}},{{color.b}}"{{/color.r}}
+			{{^color.r}}value="{{color}}"{{/color.r}} />
+		
+		<label style="text-align: right;">Alpha</label>
+		<input data-field="color.a" class="colorA cfg-field" type="text" maxlength="3" size="2" placeholder="1" value="{{color.a}}"/>
+		<label style="width:50px; font-size: 12px;">(0 to 1)</label>
 	</div>
 </script>
+
+<script id="style-image-tmpl" type="text/template">
+	<div class="cfg-field-row">
+		<label>Image</label>
+		<input data-field="image.high" class="image-field cfg-field" type="text" maxlength="300" size="20" placeholder="[No Image]" value="{{image.high}}"/>
+		<input data-field="image.seamless" class="image-seamless cfg-field" type="checkbox" {{#image.seamless}}checked{{/image.seamless}} />
+		<label>Tiled</label>
+	</div>
+</script>
+
+
+
 
 

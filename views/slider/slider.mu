@@ -54,6 +54,7 @@
 	<script type="text/javascript" src="/js/libs/jquery-ui-1.8.20.custom.min.js"></script>
 	<script type="text/javascript" src="/js/libs/farbtastic.js"></script>
 	<script type="text/javascript" src="/js/libs/jquery.form.js"></script>
+	<script type="text/javascript" src="/js/libs/jquery.styleManager.js"></script>
 	
 	<script src="/js/sliderio/view/toolbox.js"></script>
 	<script src="/js/sliderio/view/resources.js"></script>

@@ -40,61 +40,19 @@ sliderio.view.editor.config = (function($){
 	var bind = function(){
 		var main = $.mustache(template('config-main'), config);
 		
-		config.background.ctn = 'background';
-		var mainBg = $.mustache(template('config-bg'), config.background);
-		 
-		config.slide.all.background.ctn = 'slide.all.background';
-		config.slide.all.background.title = "All Slides";
-		var allBg = $.mustache(template('config-bg'), config.slide.all.background);
+		var mainBg = new StyleManager(".sliderCtn", { background: config.background }, {});
+		var allBg = new StyleManager("#slider-list li:not(.title)", { background: config.slide.all.background }, {});
+		var titleBg = new StyleManager("#slider-list li.title", { background: config.slide.title.background }, {});
 		
-		config.slide.title.background.ctn = 'slide.title.background';
-		config.slide.title.background.title = "Chapter Slide";
-		var titleBg = $.mustache(template('config-bg'), config.slide.title.background);
 		
-		$("#mainConfigs").append(main).append(mainBg).append(allBg).append(titleBg);
-	
-		$('.color-field', $("#mainConfigs"))
-		.applyFarbtastic()
-		.live('click', function(){
-			
-			$('#color-picker').remove();
-			$(this).after('<div id="color-picker"></div>');
-			
-			$('#color-picker').farbtastic(this);
-			
-		})
-		.live('blur', function(){
-			var self = $(this);
-			var color = hexToRgb(self.val());
-			var alpha = self.nextAll('input[data-field=color.a]').val();
-			
-			if(alpha) color.a = parseFloat(alpha); 
-			hydrateConfigs({
-				container: self.parents('div.cfg-ctn').attr('data-ctn'),
-				value: color,
-				type: self.attr('data-field')
-			});
-			
-			$('#color-picker').remove();
-		});
+		$("#mainConfigs")
+			.append(main)
+			.append(mainBg.getContainer())
+			.append(allBg.getContainer())
+			.append(titleBg.getContainer());
 		
-		$('.image-field').live('click', function(){
-			var currRes,
-				ele = $(this);
-			
-			if (ele.val()){
-				currRes = {
-					url: 'images/' + ele.val(),
-					file: ele.val()	
-				};
-			}
-			
-			sliderio.view.resources.show(function(resource){
-				ele.val(resource.file);
-				ele.trigger('change');
-			}, currRes);
-		});
 		
+		/*
 		$('.cfg-field').live('change', function(){
 			var self = $(this);
 			var ctrlVal = self.val();
@@ -108,6 +66,7 @@ sliderio.view.editor.config = (function($){
 				type: self.attr('data-field')
 			});
 		});
+		*/
 	};
 	
 	var hydrateConfigs = function (cfgField){
@@ -155,14 +114,6 @@ sliderio.view.editor.config = (function($){
 			}
 			
 			switch(cfgField.type){
-				case "alpha":
-				case "color":
-					var c = "rgba(" + newValue.r + "," + newValue.g + "," + newValue.b + "," + (newValue.a || 1) + ")";
-					$(getSelector()).css("background-color", c)
-						.css("-moz-box-shadow", "0px 0px 10px " + c)
-						.css("-webkit-box-shadow", "0px 0px 10px " + c)
-						.css("box-shadow", "0px 0px 10px " + c);
-					break;
 				case "initIndex":
 					Slider.moveTo(newValue);
 					break;
@@ -172,47 +123,13 @@ sliderio.view.editor.config = (function($){
 				case "fontFamily":
 					$(getSelector()).css("font-family", newValue);
 					break;
-				case "high":
-					if (newValue) {
-						$(getSelector()).css("backgroundImage", "url('images/" + newValue + "')");
-					}
-					else {
-						$(getSelector()).css("backgroundImage", "none");
-					}
-					break;
-				case "seamless":
-					if (newValue) {
-						$(getSelector())
-							.css("background-position", "repeat")
-							.css("background-size", "auto");
-					}
-					else $(getSelector())
-						.css("background-size", "100% 100%")
-						.css("background-position", "no-repeat")
-					break;
 			}
 		};
 		
 		updateCSS();
 	};
-	
-	var hexToRgb = function (hex) {
-    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-    return result ? {
-        r: parseInt(result[1], 16),
-        g: parseInt(result[2], 16),
-        b: parseInt(result[3], 16)
-    } : null;
-	};
-	
+
 	var saveConfig = function(cfg) {	
-		
-		delete cfg.background.ctn;
-		delete cfg.slide.all.background.ctn;
-		delete cfg.slide.all.background.title;
-		delete cfg.slide.title.background.ctn;
-		delete cfg.slide.title.background.title;
-		
 		sliderio.service.slider.saveConfig(cfg, function(){
 			location.reload(true);
 		});
