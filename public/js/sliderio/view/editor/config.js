@@ -12,8 +12,9 @@ sliderio.view.editor.config = (function($){
 	};
 
 	var createDialog = function(){
-		$('<div id="mainConfigs"></div>').appendTo('.sliderCtn');
+		//$('<div id="mainConfigs"></div>').appendTo('.sliderCtn');
 		
+		/*
 		$("#mainConfigs").dialog({
 			autoOpen: false,
 			title: "Configurations",
@@ -36,6 +37,7 @@ sliderio.view.editor.config = (function($){
 	        }
 	    }]
 		});
+		*/
 	};
 	
 	var bind = function(){
@@ -109,7 +111,7 @@ sliderio.view.editor.config = (function($){
 		},
 			
 		show: function(){
-			$('#mainConfigs').dialog('open');
+			$('#mainConfigs').show();//.dialog('open');
 		}
 	};
 	

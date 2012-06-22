@@ -86,7 +86,7 @@ sliderio.view.editor.slider = (function($){
 
 	var initSlider = function(){
 		Slider.init(slides, sliderio.view.toolbox.currentIndex(), {
-			container: window,
+			container: '.sliderCtn',
 			editorTmpl: 'editor-'
 		});
 		

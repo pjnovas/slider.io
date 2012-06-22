@@ -1,4 +1,10 @@
 
+.sliderWrapper {
+	width: 65%;
+	float: left;
+	position: relative;
+}
+
 #slider-list>li {
 	position: relative;
 }
@@ -292,7 +298,13 @@ a, span {
  */
 
 #mainConfigs {
-	display:none;
+	/*display:none;*/
+	
+	width: 33%;
+	height: 394px;
+	overflow: auto;
+	padding-left: 2%;
+	float: right;
 }
 
 .cfg-field-row {

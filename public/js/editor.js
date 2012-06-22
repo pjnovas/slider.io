@@ -28,6 +28,15 @@ function buildEditor(){
 
 function init() {
 	
+	function resizeCtns(){
+		var wHeight = $(window).height()
+		$('.sliderCtn').height(wHeight);
+		$('#mainConfigs').height(wHeight);	
+		Slider.resizeSlider();
+	}
+	
+	$(window).bind('resize', resizeCtns);
+	
 	sliderio.view.toolbox.init({
 		sliderIndex: 0,
 		slides: sliderio.view.editor.slider.getSlides(),
@@ -45,6 +54,7 @@ function init() {
 	});
 		
 	sliderio.view.editor.slider.init();
+	resizeCtns();
 }
 
 $(document).ready(function(){

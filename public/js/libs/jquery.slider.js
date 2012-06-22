@@ -247,6 +247,9 @@ var Slider = (function($) {
 			for (var i=0; i< index; i++){
 				items.eq(i).show();
 			}
+		},
+		resizeSlider: function(){
+			resize();
 		}
 	};
 	

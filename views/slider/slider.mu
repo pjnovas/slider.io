@@ -32,6 +32,16 @@
 	<link href="styles.css" rel="stylesheet">
   
 </head>
+{{#editor}}
+<body>
+	<div class="sliderCtn sliderWrapper">
+	  <div id="slider-stage">
+	  	<ul id="slider-list"></ul>
+	  </div>
+	</div>
+	<div id="mainConfigs"></div>
+{{/editor}}
+{{^editor}}
 <body class="sliderCtn">
   <header>
 		<div id="clients-holder"></div>
@@ -39,7 +49,7 @@
   <div id="slider-stage">
   	<ul id="slider-list"></ul>
   </div>
-  <footer></footer>
+{{/editor}}
 
   <script src="/js/libs/jquery-1.7.1.min.js"></script>	
 	<script src="/js/libs/highlight.min.js"></script>
