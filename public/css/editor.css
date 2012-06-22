@@ -407,6 +407,7 @@ textarea {
 	vertical-align: top;
 	resize: none;
 	width: 99%;
+	color: inherit;
 }
 
 h1 textarea, 
@@ -417,14 +418,11 @@ code textarea {
 	border: none;
 	text-align: center;
 	background-color: transparent;
+	color: inherit;
 }
 
 ul.bulletList li textarea {
 	text-align: left;
-}
-
-ul, li {
-	color: #000;
 }
 
 .imageOptions {

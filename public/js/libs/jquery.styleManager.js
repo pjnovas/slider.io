@@ -36,13 +36,23 @@
 				size: 1
 			},
 			border: {
-				radius: 20,
+				radius: {
+					top: 20,
+					right: 20,
+					bottom: 20,
+					left: 20
+				},
 				color: {
 					r: 0,
 					g: 0,
 					b: 0
 				},
-				size: 0
+				size: {
+					top: 0,
+					right: 0,
+					bottom: 0,
+					left: 0
+				}
 			},
 			background: {
 				color:{
@@ -71,8 +81,57 @@
 		};
 		
 		var build = {
+			border: function(){
+				
+				this.radius(newStyle.border, function(radius){
+					newStyle.border.radius = radius;
+					var r = radius.top + 'px ' + radius.right + 'px '
+						+ radius.bottom + 'px ' + radius.left + 'px';
+						
+					$(element)
+						.css("-moz-border-radius", r)
+						.css("-webkit-border-radius", r)
+						.css("border-radius", r);
+				});
+				
+				if (settings.border.size){
+					this.size(newStyle.border, function(size){
+						newStyle.border.size = size;
+						var s = size.top + 'px ' + size.right + 'px '
+							+ size.bottom + 'px ' + size.left + 'px';
+							
+						$(element).css("border-style", 'solid');
+						$(element).css("border-width", s);
+					});
+				}
+				
+				if (settings.border.color){
+					this.color(newStyle.border, function(color){
+						newStyle.border.color = newStyle.border.color || 'transparent';
+						newStyle.border.color = color;
+						var c = "rgb(" + color.r + "," + color.g + "," + color.b + ")";
+						
+						$(element).css("border-style", 'solid');
+						$(element).css("border-color", c);
+					});
+				}
+			},
+			
 			font: function(){
 				
+				this.fontName(newStyle.font, function(name){
+					newStyle.font.name = name;
+					$(element).css("font-family", name);
+					$('textarea', element).css("font-family", name);
+				});
+				
+				this.color(newStyle.font, function(color){
+					newStyle.font.color = newStyle.font.color || {r:1,g:1,b:1};
+					newStyle.font.color = color;
+					var c = "rgb(" + color.r + "," + color.g + "," + color.b + ")";
+					$(element).css("color", c);
+					$('textarea', element).css("color", c);
+				});
 			},
 			background: function() {
 				
@@ -144,7 +203,7 @@
 			},
 			
 			color: function(entity, onChangeColor) {
-				
+				entity.color = entity.color || {r:1, g:1, b:1}; 
 				var colorHtml = $($.mustache(template('style-color'), entity));
 				container.append(colorHtml);
 				
@@ -178,15 +237,55 @@
 				$('.alpha-field', alphaHtml)
 					.bind('change',function(){
 						var alpha = parseFloat($(this).val());
-						console.log(alpha);
 						onChangeAlpha(alpha);
+				});
+			},
+			
+			fontName: function(entity, onChange){
+				var fontNameHtml = $($.mustache(template('style-fontFamily'), entity));
+				container.append(fontNameHtml);
+				
+				$('.fontName-field', fontNameHtml)
+					.bind('change',function(){
+						onChange($(this).val());
+				});
+			},
+			
+			radius: function(entity, onChange){
+				var radiusHtml = $($.mustache(template('style-radius'), entity));
+				container.append(radiusHtml);
+				
+				$('.radius-field', radiusHtml)
+					.bind('change',function(){
+						onChange({
+							top: parseInt($('.radius-top-field', radiusHtml).val(),10) || 0,
+							right: parseInt($('.radius-right-field', radiusHtml).val(),10) || 0,
+							bottom: parseInt($('.radius-bottom-field', radiusHtml).val(),10) || 0,
+							left: parseInt($('.radius-left-field', radiusHtml).val(),10) || 0
+						});
+				});
+			},
+			
+			size: function(entity, onChange){
+				var sizeHtml = $($.mustache(template('style-size'), entity));
+				container.append(sizeHtml);
+				
+				$('.size-field', sizeHtml)
+					.bind('change',function(){
+						onChange({
+							top: parseInt($('.size-top-field', sizeHtml).val(),10) || 0,
+							right: parseInt($('.size-right-field', sizeHtml).val(),10) || 0,
+							bottom: parseInt($('.size-bottom-field', sizeHtml).val(),10) || 0,
+							left: parseInt($('.size-left-field', sizeHtml).val(),10) || 0
+						});
 				});
 			}
 			
 		};
 		
 		if (settings.background) build.background();
-		
+		if (settings.font) build.font();
+		if (settings.border) build.border();
 		
 		this.getContainer = function(){
 			return container;
@@ -200,47 +299,3 @@
 	};
 	  
 })(jQuery);
-
-/*
-style {
-	 font {
-	 	name [string]
-	 	color {
-	 		r [int]
-	 		g [int]
-	 		b [int]
-	 	}
-	 	align [string]
-	 	size [float] em
-	 }
-	 
-	 background {
-	 	color {
-	 		r [int]
-	 		g [int]
-	 		b [int]
-	 		a [float]
-	 	}
-	 	image {
-	 		high [string]
-	 		seamless [bool]
-	 		size {
-	 			width [float] %
-	 			height [float] %
-	 		}
-	 	}
-	 }
-	 
-	 border {
-	 	radius [int]
-	 	color {
-	 		r [int]
-	 		g [int]
-	 		b [int]
-	 	}
-	 	size [int] px
-	 }
-}
- */
-
-

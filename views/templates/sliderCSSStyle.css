@@ -1,4 +1,27 @@
 
+{{#border}}
+	
+	{{#radius}}
+		-moz-border-radius: {{top}}px {{right}}px {{bottom}}px {{left}}px;
+	  -webkit-border-radius: {{top}}px {{right}}px {{bottom}}px {{left}}px;
+	  border-radius: {{top}}px {{right}}px {{bottom}}px {{left}}px;
+	{{/radius}}
+	
+{{/border}}
+
+{{#font}}
+	{{#name}}
+		font-family: {{name}}; 
+	{{/name}}
+	
+	{{#color}}
+		{{#r}}
+			color: rgb({{r}}, {{g}}, {{b}});			
+		{{/r}}
+	{{/color}}
+	
+{{/font}}
+
 {{#background}}
 
 	{{#color}}

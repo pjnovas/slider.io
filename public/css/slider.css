@@ -6,7 +6,7 @@ audio:not([controls]) { display: none; }
 [hidden] { display: none; }
 
 html { font-size: 100%; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
-html, button, input, select, textarea { font-family: sans-serif; color: #222; }
+/*html, button, input, select, textarea { font-family: sans-serif; color: #222; }*/
 body { margin: 0; font-size: 1em; line-height: 1.4; }
 
 ::-moz-selection { background: #8CC84B; color: #fff; text-shadow: none; }
@@ -69,7 +69,6 @@ td { vertical-align: top; }
 
 h1, h2, h3 {
 	text-align: center;
-	color: #46483E;
 	line-height: 1;
 	margin-bottom: 0;
 	margin-left: 10px;
@@ -118,10 +117,6 @@ h1, h2, h3 {
 	float:left;
 	opacity: 0.4;
 	display:none;
-	
-	-moz-border-radius: 20px; /* Firefox */
-  -webkit-border-radius: 20px; /* Safari, Chrome */
-  border-radius: 20px; /* CSS3 */
 }
 
 #slider-list>li h1 {
@@ -145,7 +140,6 @@ h1, h2, h3 {
 	bottom: 0px;
 	z-index: 1100;
 	background-color: rgba(255,255,255,0.9);
-	color: black;
 	font-size: 1.5em;
 	
 	display: none;

@@ -8,10 +8,6 @@
 			<label for="txtTitle">Title</label>
 			<input id="txtTitle" type="text" maxlength="200" size="30" placeholder="Untitled" value="{{title}}"/>
 		</div>
-		<div class="cfg-field-row">
-			<label for="txtFontFamily">Font</label>
-			<input id="txtFontFamily" type="text" maxlength="300" size="30" value="{{fontFamily}}"/>
-		</div>
 	</div>
 </script>
 
@@ -19,8 +15,7 @@
 	<div class="cfg-field-row">
 		<label>Color</label>
 		<input class="color-field" maxlength="7" size="9" type="text" 
-			{{#color.r}}data-rgb="{{color.r}},{{color.g}},{{color.b}}"{{/color.r}}
-			{{^color.r}}value="{{color}}"{{/color.r}} />
+			data-rgb="{{color.r}},{{color.g}},{{color.b}}"/>
 	</div>
 </script>
 
@@ -43,10 +38,29 @@
 
 <script id="style-fontFamily-tmpl" type="text/template">
 	<div class="cfg-field-row">
-		
+		<label>Font</label>
+		<input type="text" class="fontName-field" maxlength="300" size="30" value="{{name}}"/>		
 	</div>
 </script>
 
+<script id="style-radius-tmpl" type="text/template">
+	<div class="cfg-field-row">
+		<label>Radius</label>
+		<input type="text" class="radius-field radius-top-field" maxlength="2" size="2" value="{{radius.top}}"/>
+		<input type="text" class="radius-field radius-right-field" maxlength="2" size="2" value="{{radius.right}}"/>
+		<input type="text" class="radius-field radius-bottom-field" maxlength="2" size="2" value="{{radius.bottom}}"/>
+		<input type="text" class="radius-field radius-left-field" maxlength="2" size="2" value="{{radius.left}}"/>		
+	</div>
+</script>
 
+<script id="style-size-tmpl" type="text/template">
+	<div class="cfg-field-row">
+		<label>Size</label>
+		<input type="text" class="size-field size-top-field" maxlength="2" size="2" value="{{size.top}}"/>
+		<input type="text" class="size-field size-right-field" maxlength="2" size="2" value="{{size.right}}"/>
+		<input type="text" class="size-field size-bottom-field" maxlength="2" size="2" value="{{size.bottom}}"/>
+		<input type="text" class="size-field size-left-field" maxlength="2" size="2" value="{{size.left}}"/>		
+	</div>
+</script>
 
 

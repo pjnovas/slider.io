@@ -41,14 +41,25 @@ sliderio.view.editor.config = (function($){
 	var bind = function(){
 		var main = $.mustache(template('config-main'), config);
 		
-		styles.mainBg = new StyleManager(".sliderCtn", config.style, {});
+		styles.mainBg = new StyleManager(".sliderCtn", config.style, {
+			border: false,
+			font:false
+		});
 		
 		styles.allBg = new StyleManager("#slider-list li:not(.title)", config.slide.all.style, {
-			title:"All Slides"
+			title:"All Slides",
+			border: {
+				color: false,
+				size: false
+			} 
 		});
 		
 		styles.titleBg = new StyleManager("#slider-list li.title", config.slide.title.style, {
-			title:"Chapter Slides" 
+			title:"Chapter Slides",
+			border: {
+				color: false,
+				size: false
+			} 
 		});
 		
 		
@@ -71,11 +82,6 @@ sliderio.view.editor.config = (function($){
 			document.title = newTitle;
 		});
 		
-		$('#txtFontFamily').bind('change', function(){
-			var newFont = $(this).val();
-			config.fontFamily = newFont;
-			$(".sliderCtn").css("font-family", newValue);
-		});
 	};
 	
 	var saveConfig = function(cfg) {	
