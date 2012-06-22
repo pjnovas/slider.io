@@ -43,23 +43,15 @@ sliderio.view.editor.config = (function($){
 		
 		styles.mainBg = new StyleManager(".sliderCtn", config.style, {
 			border: false,
-			font:false
+			font: false
 		});
 		
 		styles.allBg = new StyleManager("#slider-list li:not(.title)", config.slide.all.style, {
-			title:"All Slides",
-			border: {
-				color: false,
-				size: false
-			} 
+			title:"All Slides"
 		});
 		
 		styles.titleBg = new StyleManager("#slider-list li.title", config.slide.title.style, {
-			title:"Chapter Slides",
-			border: {
-				color: false,
-				size: false
-			} 
+			title:"Chapter Slides"
 		});
 		
 		

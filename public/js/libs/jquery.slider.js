@@ -173,6 +173,7 @@ var Slider = (function($) {
 			currentIndex = start;
 			
 			resize();
+			resize();
 			
 			$('#' + ulId).show();
 			

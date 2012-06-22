@@ -7,6 +7,15 @@
 	  border-radius: {{top}}px {{right}}px {{bottom}}px {{left}}px;
 	{{/radius}}
 	
+	{{#size}}
+		border-width: {{top}}px {{right}}px {{bottom}}px {{left}}px;
+	{{/size}}
+	
+	{{#color}}
+		border-color: rgb({{r}}, {{g}}, {{b}});
+	{{/color}}
+	border-style: solid; 
+	
 {{/border}}
 
 {{#font}}
