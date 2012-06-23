@@ -114,6 +114,14 @@ sliderio.view.editor.slider = (function($){
 			if(!align) align = 'center';
 			$('a.icon-align-' + align, $(this)).addClass('selected'); 
 		});
+		
+		$('textarea', "li.current").each(function(){
+				var self = this;
+				setTimeout(function(){
+					self.style.height = 'auto';
+					self.style.height = self.scrollHeight + 'px';
+				}, 0);
+		});
 	};
 	
 	var attachEvents = function(){
