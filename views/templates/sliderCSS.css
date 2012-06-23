@@ -3,6 +3,7 @@
 	{{>style}}
 	border-style:none;
 	border-radius: 0;
+	box-shadow: none;
 }
  
 {{#slide}}

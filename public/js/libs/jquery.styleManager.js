@@ -88,8 +88,8 @@
 								
 				function radiusChanged(radius){
 					newStyle.border.radius = radius;
-					var r = radius.top + 'px ' + radius.right + 'px '
-						+ radius.bottom + 'px ' + radius.left + 'px';
+					var r = radius.top + '% ' + radius.right + '% '
+						+ radius.bottom + '% ' + radius.left + '%';
 						
 					$(element)
 						.css("-moz-border-radius", r)
