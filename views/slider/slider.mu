@@ -39,10 +39,15 @@
 	  	<ul id="slider-list"></ul>
 	  </div>
 	</div>
-	<div id="mainConfigs"></div>
-	<div class="cfg-buttons">
-		<a class="save">Save</a>
-		<a class="revert">Revert</a>
+	<div id="mainConfigs">
+		<div class="cfg-header">
+			<h1>Configurations</h1>
+		</div>
+		<div class="content"></div>
+		<div class="cfg-buttons">
+			<a href="#" class="save">Save</a>
+			<a href="#" class="revert">Revert</a>
+		</div>
 	</div>
 {{/editor}}
 {{^editor}}

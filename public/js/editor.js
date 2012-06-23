@@ -31,7 +31,7 @@ function init() {
 	function resizeCtns(){
 		var wHeight = $(window).height()
 		$('.sliderCtn').height(wHeight);
-		$('#mainConfigs').height(wHeight - 55);	
+		$('#mainConfigs').height(wHeight-2);	
 		Slider.resizeSlider();
 	}
 	

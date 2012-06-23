@@ -32,7 +32,7 @@ sliderio.view.editor.config = (function($){
 			title:"Chapter Slides"
 		});
 		
-		$("#mainConfigs")
+		$("#mainConfigs .content")
 			.append(main)
 			.append(styles.mainBg.getContainer())
 			.append(styles.allBg.getContainer())

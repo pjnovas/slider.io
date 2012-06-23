@@ -73,7 +73,7 @@
 		
 		var container = $('<div class="style-container"></div>');
 		if (settings.title) {
-			container.append('<hr/><span>' + settings.title + '</span>');
+			container.append('<h2>' + settings.title + '</h2>');
 		}
 		
 		var template = function(name){
@@ -82,6 +82,9 @@
 		
 		var build = {
 			border: function(){
+				
+				var borderH = $($.mustache(template('config-head'), {title:'Border Styles'}));
+				container.append(borderH);
 				
 				this.radius(newStyle.border, function(radius){
 					newStyle.border.radius = radius;
@@ -119,6 +122,9 @@
 			
 			font: function(){
 				
+				var fontH = $($.mustache(template('config-head'), {title:'Font Styles'}));
+				container.append(fontH);
+				
 				this.fontName(newStyle.font, function(name){
 					newStyle.font.name = name;
 					$(element).css("font-family", name);
@@ -134,6 +140,8 @@
 				});
 			},
 			background: function() {
+				var bgH = $($.mustache(template('config-head'), {title:'Background Styles'}));
+				container.append(bgH);
 				
 				function updateColorElement(){
 					color = newStyle.background.color;

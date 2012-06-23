@@ -6,9 +6,10 @@
 }
 
 .sliderWrapper {
-	width: 65%;
+	width: 71.9%;
 	float: left;
 	position: relative;
+	z-index: 200;
 }
 
 #slider-list>li {
@@ -305,14 +306,19 @@ a, span {
 
 #mainConfigs {
 	font-family: 'Port Lligat Sans', 'sans';
-	width: 33%;
+	width: 28%;
 	height: 394px;
-	overflow: auto;
-	padding-left: 2%;
+	overflow-x: scroll;
+	overflow-y: auto;
 	float: right;
 	
 	background-image: url('/img/escheresque.png');
 	border: 1px solid silver;
+	position:relative;
+}
+
+#mainConfigs .content {
+	margin: 60px 0;
 }
 
 #mainConfigs input {
@@ -320,12 +326,53 @@ a, span {
 	padding: 2px;
 }
 
-.cfg-buttons {
+.style-container {
+	width: 80%;
+	margin: 0 auto;
+}
+
+.style-container h2 {
+	padding: 20px 0 0 0;
+	margin: 10px 0;
+	border-top: 3px solid #8F8F8F;
+}
+
+.style-container h3 {
+	border-top: 1px solid silver;
+	padding: 10px 0;
+}
+
+.cfg-buttons,
+.cfg-header {
 	height: 50px;
-	width: 33%;
+	width: 28%;
 	display: inline-block;
-	padding-left: 2%;
-	background-color: #5C5C5C;
+	padding-left: 1%;
+	position: fixed;
+	right: 16px;
+	z-index: 100;
+	background: url('/img/dark_matter.png');	
+} 
+
+.cfg-header {
+	top: 0;
+	
+	-moz-box-shadow: 0px 0px 5px #454545;
+	-webkit-box-shadow: 0px 0px 5px #454545;
+	box-shadow: 0px 0px 5px #454545;
+}
+
+.cfg-header h1 {
+	color: #FFF;
+	margin: 7px;
+}
+
+.cfg-buttons {
+	bottom: 0;
+
+	-moz-box-shadow: 0px 0px 5px #454545;
+	-webkit-box-shadow: 0px 0px 5px #454545;
+	box-shadow: 0px 0px 5px #454545;
 }
 
 .cfg-buttons a {
@@ -356,7 +403,7 @@ a, span {
 	border: 3px solid #FFF;
 	background-color: #7CB467;
 	color: #FFF;
-	margin-left: 13%;
+	margin-left: 16%;
 }
 
 .cfg-buttons a.save:hover {
@@ -372,7 +419,9 @@ a, span {
 
 .cfg-field-row label {
 	display: inline-block;
-	width: 100px;
+	width: 60px;
+	text-align: right;
+	margin-right: 20px;
 }
 
 .cfg-field-row input {

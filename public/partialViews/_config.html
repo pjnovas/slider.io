@@ -1,14 +1,18 @@
 <script id="config-main-tmpl" type="text/template">
-	<div data-ctn="{{ctn}}" class="cfg-ctn">
+	<div class="style-container">
 		<div class="cfg-field-row">
-			<label for="txtInitIndex">Start Index</label>
+			<label for="txtInitIndex" style="width: 110px;">Start Index</label>
 			<input id="txtInitIndex" type="text" maxlength="2" size="2" placeholder="0" value="{{initIndex}}"/>					
 		</div>
 		<div class="cfg-field-row">
 			<label for="txtTitle">Title</label>
-			<input id="txtTitle" type="text" maxlength="200" size="30" placeholder="Untitled" value="{{title}}"/>
+			<input id="txtTitle" type="text" maxlength="200" size="20" placeholder="Untitled" value="{{title}}"/>
 		</div>
 	</div>
+</script>
+
+<script id="config-head-tmpl" type="text/template">
+	<h3>{{title}}</h3>
 </script>
 
 <script id="style-color-tmpl" type="text/template">
@@ -39,7 +43,7 @@
 <script id="style-fontFamily-tmpl" type="text/template">
 	<div class="cfg-field-row">
 		<label>Font</label>
-		<input type="text" class="fontName-field" maxlength="300" size="30" value="{{name}}"/>		
+		<input type="text" class="fontName-field" maxlength="300" size="20" value="{{name}}"/>		
 	</div>
 </script>
 
