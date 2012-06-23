@@ -25,6 +25,6 @@ router.configure(app);
 app.use(express.static(__dirname + '/public'));
 
 realtime.start(app);
-app.listen(17283);
+app.listen(3000);
 
 console.log('Server Express started at port %d', app.address().port);

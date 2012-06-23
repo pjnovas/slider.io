@@ -29,8 +29,7 @@ exports.getSliderList = function(done, error){
 	function sendFiles(files){
 		
 		for(var i=0; i< files.length; i++) {
-	 		if (files[i].indexOf('.config.json') > -1 
-	 			|| files[i].indexOf('cache') > -1
+	 		if (files[i].indexOf('cache') > -1
 	 			|| files[i].indexOf('base') > -1) {
 	 				
 	 			files.splice(i, 1);

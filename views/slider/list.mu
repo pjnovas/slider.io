@@ -65,7 +65,7 @@
 	    </div>
 	    <div class="span4">
 	    	<h2>Public Sliders</h2>
-	      <ul>
+	      <ul id="sliderList">
 			  {{#sliders}}
 			  <li>
 			  	<h3>{{.}} - <a href="/slider/{{.}}">viewer</a> 
