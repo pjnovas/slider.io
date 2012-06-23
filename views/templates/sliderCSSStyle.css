@@ -52,7 +52,9 @@
 	{{/color}}
 	
 	{{#image}}
-		background-image: url('images/{{high}}');
+		{{#high}}
+			background-image: url('images/{{high}}');
+		{{/high}}
 		
 		{{#seamless}}
 			background-position: repeat;

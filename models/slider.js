@@ -81,7 +81,7 @@ function getOfflineFiles(_slider, done, error){
 			
 			{ name: "js/libs/highlight.min.js", path: _path + "/public/js/libs/highlight.min.js" },
 			{ name: "js/libs/jquery.slider.js", path: _path + "/public/js/libs/jquery.slider.js" },
-			{ name: "js/libs/jquery-1.7.1.min.js", path: _path + "/public/js/libs/jquery-1.7.1.min.js" },
+			{ name: "js/libs/jquery-1.7.2.min.js", path: _path + "/public/js/libs/jquery-1.7.2.min.js" },
 			{ name: "js/libs/mustache.js", path: _path + "/public/js/libs/mustache.js" }	
 		];
 	

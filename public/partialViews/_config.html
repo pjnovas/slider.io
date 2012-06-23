@@ -1,7 +1,7 @@
 <script id="config-main-tmpl" type="text/template">
 	<div data-ctn="{{ctn}}" class="cfg-ctn">
 		<div class="cfg-field-row">
-			<label for="txtInitIndex" style="width:110px;">Start Index</label>
+			<label for="txtInitIndex">Start Index</label>
 			<input id="txtInitIndex" type="text" maxlength="2" size="2" placeholder="0" value="{{initIndex}}"/>					
 		</div>
 		<div class="cfg-field-row">
@@ -14,25 +14,25 @@
 <script id="style-color-tmpl" type="text/template">
 	<div class="cfg-field-row">
 		<label>Color</label>
-		<input class="color-field" maxlength="7" size="9" type="text" 
+		<input class="color-field" maxlength="7" size="10" type="text" 
 			data-rgb="{{color.r}},{{color.g}},{{color.b}}"/>
 	</div>
 </script>
 
 <script id="style-alpha-tmpl" type="text/template">
 	<div class="cfg-field-row">
-		<label style="text-align: right;">Alpha</label>
-		<input class="alpha-field" type="text" maxlength="3" size="2" placeholder="1" value="{{alpha}}"/>
-		<label style="width:50px; font-size: 12px;">(0 to 1)</label>
+		<label>Alpha</label>
+		<div class="alpha-field"></div>
 	</div>
 </script>
 	
 <script id="style-image-tmpl" type="text/template">
 	<div class="cfg-field-row">
 		<label>Image</label>
-		<input class="image-field" type="text" maxlength="300" size="20" placeholder="[No Image]" value="{{image.high}}"/>
-		<input class="image-seamless" type="checkbox" {{#image.seamless}}checked{{/image.seamless}} />
-		<label>Tiled</label>
+		<img src="{{#image.high}}images/{{image.high}}{{/image.high}}{{^image.high}}/img/no-image.gif{{/image.high}}" data-url="{{image.high}}" class="image-field">
+		<input id="cfg-seamless{{image.high}}" class="image-seamless" type="checkbox" {{#image.seamless}}checked="checked"{{/image.seamless}} />
+		<label for="cfg-seamless{{image.high}}" class="image-seamless-label">Tiled</label>
+		<a href="#" class="image-field-remove">remove</a>
 	</div>
 </script>
 

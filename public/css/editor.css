@@ -1,3 +1,9 @@
+@font-face {
+  font-family: 'Port Lligat Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Port Lligat Sans'), local('PortLligatSans-Regular'), url('/font/PortLligatSans-Regular.ttf') format('woff');
+}
 
 .sliderWrapper {
 	width: 65%;
@@ -298,13 +304,65 @@ a, span {
  */
 
 #mainConfigs {
-	/*display:none;*/
-	
+	font-family: 'Port Lligat Sans', 'sans';
 	width: 33%;
 	height: 394px;
 	overflow: auto;
 	padding-left: 2%;
 	float: right;
+	
+	background-image: url('/img/escheresque.png');
+	border: 1px solid silver;
+}
+
+#mainConfigs input {
+	font-family: 'Port Lligat Sans', 'sans';
+	padding: 2px;
+}
+
+.cfg-buttons {
+	height: 50px;
+	width: 33%;
+	display: inline-block;
+	padding-left: 2%;
+	background-color: #5C5C5C;
+}
+
+.cfg-buttons a {
+	text-decoration: none;
+	border: solid 1px silver;
+	height: 30px;
+	line-height: 2;
+	display: inline-block;
+	width: 30%;
+	text-align: center;
+	margin: 8px 10px;
+	border-radius: 10px;
+}
+
+.cfg-buttons a.revert { 
+	background-color: #E03939;
+	border: 3px solid #FFF;
+	color: #FFF;
+}
+
+.cfg-buttons a.revert:hover {
+	border: 3px solid #E03939;
+	color: #E03939;
+	background-color: #FFF;
+} 
+
+.cfg-buttons a.save {
+	border: 3px solid #FFF;
+	background-color: #7CB467;
+	color: #FFF;
+	margin-left: 13%;
+}
+
+.cfg-buttons a.save:hover {
+	border: 3px solid #7CB467;
+	background-color: #FFF;
+	color: #7CB467;
 }
 
 .cfg-field-row {
@@ -314,7 +372,7 @@ a, span {
 
 .cfg-field-row label {
 	display: inline-block;
-	width: 80px;
+	width: 100px;
 }
 
 .cfg-field-row input {
@@ -345,6 +403,32 @@ a, span {
 	width: 29px;
 	height: 29px;
 	background: url(images/select.png) center;
+}
+
+.alpha-field {
+	width: 150px;
+	display: inline-block;
+}
+
+.image-field {
+	width: 50px;
+	height: 50px;
+	cursor: pointer;	
+}
+
+.cfg-field-row label.image-seamless-label {
+	width: 60px;	
+}
+
+.cfg-field-row .ui-state-active {
+	background: #9AEC9D url(images/ui-bg_glass_65_ffffff_1x400.png) 50% 50% repeat-x
+}
+
+.cfg-field-row .ui-button-text-only .ui-button-text{
+	height: 10px;
+	line-height: 0.5;
+	font-size: 16px;
+	font-family: 'Port Lligat Sans', 'sans';
 }
 
 /*

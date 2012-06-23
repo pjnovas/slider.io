@@ -23,7 +23,7 @@
 	<link href="/css/slider.css" rel="stylesheet">
 	
 	{{#editor}}
-	<link href="/css/dark-hive/jquery-ui-1.8.20.custom.css" rel="stylesheet">
+	<link href="/css/smoothness/jquery-ui-1.8.21.custom.css" rel="stylesheet">
 	<link href="/css/font-awesome.css" rel="stylesheet">
 	<link href="/css/farbtastic/farbtastic.css" rel="stylesheet">
 	<link href="/css/editor.css" rel="stylesheet">
@@ -40,6 +40,10 @@
 	  </div>
 	</div>
 	<div id="mainConfigs"></div>
+	<div class="cfg-buttons">
+		<a class="save">Save</a>
+		<a class="revert">Revert</a>
+	</div>
 {{/editor}}
 {{^editor}}
 <body class="sliderCtn">
@@ -51,7 +55,7 @@
   </div>
 {{/editor}}
 
-  <script src="/js/libs/jquery-1.7.1.min.js"></script>	
+  <script src="/js/libs/jquery-1.7.2.min.js"></script>	
 	<script src="/js/libs/highlight.min.js"></script>
 	<script src="/js/libs/mustache.js"></script>
 	<script src="/js/libs/jquery.swipe.js"></script>
@@ -61,7 +65,7 @@
 	<script src="/js/sliderio/view/partials.js"></script>
 	
 	{{#editor}}
-	<script type="text/javascript" src="/js/libs/jquery-ui-1.8.20.custom.min.js"></script>
+	<script type="text/javascript" src="/js/libs/jquery-ui-1.8.21.custom.min.js"></script>
 	<script type="text/javascript" src="/js/libs/farbtastic.js"></script>
 	<script type="text/javascript" src="/js/libs/jquery.form.js"></script>
 	<script type="text/javascript" src="/js/libs/jquery.styleManager.js"></script>

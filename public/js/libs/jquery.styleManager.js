@@ -149,10 +149,12 @@
 					updateColorElement();
 				});
 				
-				this.alpha(newStyle.background.color, function(alpha){
-					newStyle.background.color.alpha = alpha;
-					updateColorElement();
-				});
+				if (settings.background.color.alpha) {
+					this.alpha(newStyle.background.color, function(alpha){
+						newStyle.background.color.alpha = alpha;
+						updateColorElement();
+					});
+				}
 				
 				this.image(newStyle.background, function(file){
 					newStyle.background.image = newStyle.background.image || {};
@@ -178,27 +180,41 @@
 				var imageHtml = $($.mustache(template('style-image'), entity));
 				container.append(imageHtml);
 				
-				$('.image-field', imageHtml).bind('click', function(){
+				var img = $('.image-field', imageHtml).bind('click', function(){
 					var currRes,
 						ele = $(this);
 					
 					if (ele.val()){
 						currRes = {
-							url: 'images/' + ele.val(),
-							file: ele.val()	
+							url: 'images/' + ele.attr('data-url'),
+							file: ele.attr('data-url')	
 						};
 					}
 					
 					sliderio.view.resources.show(function(resource){
-						ele.val(resource.file);
-						ele.trigger('change');
+						ele.attr("data-url", resource.file)
+							.trigger('change');
 					}, currRes);
 				}).bind('change', function(){
-					onImageChange($(this).val());
-				})
+					var url = $(this).attr('data-url');
+					if (!url) $(this).attr("src","/img/no-image.gif");
+					else $(this).attr("src","images/" + url);
+					onImageChange(url);
+				});
 				
-				$('.image-seamless', imageHtml).bind('change', function(){
+				var url = img.attr('data-url');
+				if (!url) img.attr("src","/img/no-image.gif");
+				else img.attr("src","images/" + url);
+				
+				$('.image-seamless', imageHtml).button()
+				.bind('change', function(){
 					onSeamlessChange($(this).is(':checked'));
+				});
+				
+				$('.image-field-remove', imageHtml).bind('click', function(){
+					img.attr("data-url", '')
+						.trigger('change')
+						.attr("src","/img/no-image.gif");
 				});
 			},
 			
@@ -234,10 +250,15 @@
 				var alphaHtml = $($.mustache(template('style-alpha'), entity));
 				container.append(alphaHtml);
 				
-				$('.alpha-field', alphaHtml)
-					.bind('change',function(){
-						var alpha = parseFloat($(this).val());
-						onChangeAlpha(alpha);
+				$('.alpha-field', alphaHtml).slider({
+					value: entity.alpha || 1,
+					range: "min",
+					min: 0.1,
+					max: 1,
+					step: 0.1,
+					slide: function( event, ui ) {
+						onChangeAlpha(parseFloat(ui.value));
+					}
 				});
 			},
 			

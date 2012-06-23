@@ -11,41 +11,17 @@ sliderio.view.editor.config = (function($){
 		return $.trim($('#' + name + '-tmpl').html());
 	};
 
-	var createDialog = function(){
-		//$('<div id="mainConfigs"></div>').appendTo('.sliderCtn');
-		
-		/*
-		$("#mainConfigs").dialog({
-			autoOpen: false,
-			title: "Configurations",
-			width: 450,
-			height: 500,
-			resizable: false,
-			zIndex: 3,
-			close: function(event, ui) { 
-				alert("Warning: Your changes are not saved, press Save Button to do it.");
-			},
-			buttons: [{
-	        text: "Save",
-	        click: function() { 
-	        	saveConfig(config);
-	        }
-	    },{
-	        text: "Cancel",
-	        click: function() { 
-	        	location.reload(true);
-	        }
-	    }]
-		});
-		*/
-	};
-	
 	var bind = function(){
 		var main = $.mustache(template('config-main'), config);
 		
 		styles.mainBg = new StyleManager(".sliderCtn", config.style, {
 			border: false,
-			font: false
+			font: false,
+			background: {
+				color: {
+					alpha: false
+				}
+			}
 		});
 		
 		styles.allBg = new StyleManager("#slider-list li:not(.title)", config.slide.all.style, {
@@ -56,13 +32,11 @@ sliderio.view.editor.config = (function($){
 			title:"Chapter Slides"
 		});
 		
-		
 		$("#mainConfigs")
 			.append(main)
 			.append(styles.mainBg.getContainer())
 			.append(styles.allBg.getContainer())
 			.append(styles.titleBg.getContainer());
-		
 		
 		$('#txtInitIndex').bind('change', function(){
 			var newIndex = parseInt($(this).val(), 10);
@@ -76,6 +50,13 @@ sliderio.view.editor.config = (function($){
 			document.title = newTitle;
 		});
 		
+		$('a.save', '.cfg-buttons').click(function(){
+			saveConfig(config);
+		});
+		
+		$('a.revert', '.cfg-buttons').click(function(){
+			location.reload(true);
+		});
 	};
 	
 	var saveConfig = function(cfg) {	
@@ -93,8 +74,6 @@ sliderio.view.editor.config = (function($){
 			var dPartial = $.Deferred(),
 				dConfig = $.Deferred();
 			
-			createDialog();
-			
 			$.when(dConfig, dPartial).done(function(data){
 				config = data;
 				bind();
@@ -108,10 +87,6 @@ sliderio.view.editor.config = (function($){
 			sliderio.service.slider.getConfig(function(data){
 				dConfig.resolve(data);				
 			});
-		},
-			
-		show: function(){
-			$('#mainConfigs').show();//.dialog('open');
 		}
 	};
 	

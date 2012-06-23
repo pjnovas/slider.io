@@ -2,6 +2,7 @@
 .sliderCtn {
 	{{>style}}
 	border-style:none;
+	border-radius: 0;
 }
  
 {{#slide}}
