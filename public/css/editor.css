@@ -480,6 +480,62 @@ a, span {
 	font-family: 'Port Lligat Sans', 'sans';
 }
 
+.field-border-ctn {
+	position: relative;
+	width: 50px;
+	height: 50px;
+	border: solid 1px silver;
+	margin: 30px 115px;
+	display: inline-block;
+}
+
+.radius-field,
+.size-field {
+	position: absolute;
+	width: 20px;
+}
+
+.radius-top-field {
+	top: -30px;
+	left: -30px;
+}
+
+.radius-right-field {
+	top: -30px;
+	right: -30px;
+}
+
+.radius-bottom-field {
+	bottom: -30px;
+	right: -30px;
+}
+
+.radius-left-field {
+	bottom: -30px;
+	left: -30px;
+}
+
+.size-top-field {
+	top: -30px;
+	left: 25%;
+}
+
+.size-right-field {
+	top: 25%;
+	right: -30px;
+}
+
+.size-bottom-field {
+	bottom: -30px;
+	left: 25%;
+}
+
+.size-left-field {
+	top: 25%;
+	left: -30px;
+}
+
+
 /*
  * Template Editor
  */

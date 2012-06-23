@@ -85,8 +85,8 @@
 				
 				var borderH = $($.mustache(template('config-head'), {title:'Border Styles'}));
 				container.append(borderH);
-				
-				this.radius(newStyle.border, function(radius){
+								
+				function radiusChanged(radius){
 					newStyle.border.radius = radius;
 					var r = radius.top + 'px ' + radius.right + 'px '
 						+ radius.bottom + 'px ' + radius.left + 'px';
@@ -95,25 +95,25 @@
 						.css("-moz-border-radius", r)
 						.css("-webkit-border-radius", r)
 						.css("border-radius", r);
-				});
-				
-				if (settings.border.size){
-					this.size(newStyle.border, function(size){
-						newStyle.border.size = size;
-						var s = size.top + 'px ' + size.right + 'px '
-							+ size.bottom + 'px ' + size.left + 'px';
-							
-						$(element).css("border-style", 'solid');
-						$(element).css("border-width", s);
-					});
 				}
+				
+				function sizeChanged(size){
+					newStyle.border.size = size;
+					var s = size.top + 'px ' + size.right + 'px '
+						+ size.bottom + 'px ' + size.left + 'px';
+						
+					$(element).css("border-style", 'solid');
+					$(element).css("border-width", s);
+				}
+				
+				this.borderCfg(newStyle.border, radiusChanged, sizeChanged); 
 				
 				if (settings.border.color){
 					this.color(newStyle.border, function(color){
 						newStyle.border.color = newStyle.border.color || 'transparent';
 						newStyle.border.color = color;
 						var c = "rgb(" + color.r + "," + color.g + "," + color.b + ")";
-						
+
 						$(element).css("border-style", 'solid');
 						$(element).css("border-color", c);
 					});
@@ -280,36 +280,30 @@
 				});
 			},
 			
-			radius: function(entity, onChange){
-				var radiusHtml = $($.mustache(template('style-radius'), entity));
-				container.append(radiusHtml);
+			borderCfg: function (entity, onRadiusChanged, onSizeChanged) {
+				var borderHtml = $($.mustache(template('style-border'), entity));
+				container.append(borderHtml);
 				
-				$('.radius-field', radiusHtml)
+				$('.radius-field', borderHtml)
 					.bind('change',function(){
-						onChange({
-							top: parseInt($('.radius-top-field', radiusHtml).val(),10) || 0,
-							right: parseInt($('.radius-right-field', radiusHtml).val(),10) || 0,
-							bottom: parseInt($('.radius-bottom-field', radiusHtml).val(),10) || 0,
-							left: parseInt($('.radius-left-field', radiusHtml).val(),10) || 0
+						onRadiusChanged({
+							top: parseInt($('.radius-top-field', borderHtml).val(),10) || 0,
+							right: parseInt($('.radius-right-field', borderHtml).val(),10) || 0,
+							bottom: parseInt($('.radius-bottom-field', borderHtml).val(),10) || 0,
+							left: parseInt($('.radius-left-field', borderHtml).val(),10) || 0
 						});
 				});
-			},
-			
-			size: function(entity, onChange){
-				var sizeHtml = $($.mustache(template('style-size'), entity));
-				container.append(sizeHtml);
 				
-				$('.size-field', sizeHtml)
+				$('.size-field', borderHtml)
 					.bind('change',function(){
-						onChange({
-							top: parseInt($('.size-top-field', sizeHtml).val(),10) || 0,
-							right: parseInt($('.size-right-field', sizeHtml).val(),10) || 0,
-							bottom: parseInt($('.size-bottom-field', sizeHtml).val(),10) || 0,
-							left: parseInt($('.size-left-field', sizeHtml).val(),10) || 0
+						onSizeChanged({
+							top: parseInt($('.size-top-field', borderHtml).val(),10) || 0,
+							right: parseInt($('.size-right-field', borderHtml).val(),10) || 0,
+							bottom: parseInt($('.size-bottom-field', borderHtml).val(),10) || 0,
+							left: parseInt($('.size-left-field', borderHtml).val(),10) || 0
 						});
 				});
 			}
-			
 		};
 		
 		if (settings.background) build.background();
