@@ -220,24 +220,23 @@ exports.run = function(){
 				        expect(speaker.success);
 				      	
 				      	var toggleViewerCalled = false;
-				      	viewer.window.socket.once('toggleSlider', function() {
-				      		toggleViewerCalled = true;
-				      	});
 				      	
 				      	viewer.window.socket.once('initSlider', function() {					      		
 				      		speaker_visible = speaker.evaluate(script);
 									viewer_visible = viewer.evaluate(script);
 									expect(speaker_visible).to.equal(viewer_visible);
-
 									speaker.evaluate(simulateKeyUp(83)); //keyboard s
-									
-									//wait 3 seconds after emit to check if the viewer got it.
-									setTimeout(function(){
-					      		expect(toggleViewerCalled).to.equal(false);
-					      		done();
-					      	}, 3000);
 				      	});
 				      	
+				      	viewer.window.socket.once('toggleSlider', function() {
+				      		toggleViewerCalled = true;
+				      	});
+				      	
+				      	//wait 3 seconds after emit to check if the viewer got it.
+								setTimeout(function(){
+				      		expect(toggleViewerCalled).to.equal(false);
+				      		done();
+				      	}, 2000);
 				      });
 						});
 	      });

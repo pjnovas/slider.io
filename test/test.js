@@ -24,6 +24,6 @@ describe('User enter the application', function(){
 
 require('./slider/new.js').run();
 require('./slider/speaker.js').run();
-
+require('./slider/viewer.js').run();
 
 
