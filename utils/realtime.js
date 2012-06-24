@@ -70,12 +70,12 @@ exports.start = function(app){
 	  });
 	  
 		socket.on('disconnect', function() {
-			if (rooms[roomName].clients > 0) {
+			if (rooms[roomName] && rooms[roomName].clients > 0) {
 				rooms[roomName].clients--;
 				socket.broadcast.to(roomName).emit('clientOffline', { current: rooms[roomName].clients });
 				socket.leave(roomName);	
 			}
-			else {
+			else if (rooms[roomName]){
 				delete rooms[roomName];
 			}
 		});

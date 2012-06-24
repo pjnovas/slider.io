@@ -41,7 +41,7 @@ $(document).ready(function(){
 	
 	$("body").bind('keyup', function(e) {
 		
-		switch(e.keyCode || e.wich){
+		switch(e.keyCode || e.which){
 			case 83: //s
 				go.toggle();
 			break;

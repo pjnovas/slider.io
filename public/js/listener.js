@@ -36,8 +36,9 @@ socket.on('updatedItemList', function (data) {
 });
 
 socket.on('toggleSlider', function (data) {
-  if (Slider)
+  if (Slider) {
   	Slider.toggle(data.visible);
+  }
 });
 
 function initSlider(sliderInfo, jsonData){

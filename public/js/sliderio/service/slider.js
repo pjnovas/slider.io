@@ -105,7 +105,7 @@ function authenticate(callback){
 	var popup = $('<div>').addClass('popup-auth');
 	
 	$('<label>').text('Passcode').appendTo(popup);
-	var pass = $("<input type='password'>").appendTo(popup);
+	var pass = $("<input name='passcode' type='password'>").appendTo(popup);
 	var okBtn = $("<input type='button' value='OK'>").appendTo(popup);
 	
 	$("<div>").addClass('bg-popup-auth')
@@ -137,15 +137,15 @@ function authenticate(callback){
 		pass.css('border-color', 'silver');
 		
 		sliderio.service.slider.authenticate(sliderio.passcode, function(){
-			callback();
 			$('div.bg-popup-auth').remove();
 			$('div.popup-auth').remove();
+			callback();
 		}, fail);
 	}
 	
 	okBtn.bind('click', auth);
 	pass.bind('keyup', function(e){
-		if (e.keyCode  === 13 || e.wich === 13) auth();
+		if (e.keyCode  === 13 || e.which === 13) auth();
 	});
 }
 

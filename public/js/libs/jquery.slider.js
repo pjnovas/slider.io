@@ -232,8 +232,8 @@ var Slider = (function($) {
 				return firstSlider.is(':visible');
 			}
 			else {
-				if (visible) slides.show();
-			  else slides.hide();
+				if (visible && slides) slides.show();
+			  else if(slides) slides.hide();
 			}
 		},
 		toggleCheatSheet: function(visible){
