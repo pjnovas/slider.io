@@ -28,6 +28,7 @@ function buildEditor(){
 
 function init() {
 	
+	$('#mainConfigs').show();
 	function resizeCtns(){
 		var wHeight = $(window).height()
 		$('.sliderCtn').height(wHeight);
@@ -59,18 +60,6 @@ function init() {
 
 $(document).ready(function(){
 	hljs.tabReplace = '  ';
-	
-	var times = 0;
-	var authenticate = function(){
-		times++;
-		if (times < 3){
-			sliderio.passcode = prompt("Passcode", "");
-			sliderio.service.slider.authenticate(sliderio.passcode, buildEditor, authenticate);
-		}
-		else window.location.href = '/slider';
-	};
-	
-	authenticate();
-	
+	authenticate(buildEditor);
 });
 

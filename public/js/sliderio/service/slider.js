@@ -94,3 +94,58 @@ sliderio.service.slider = (function($){
 		}
 	};
 })(jQuery); 
+
+
+
+
+/* TEMP Authentication 
+ **********************/
+
+function authenticate(callback){
+	var popup = $('<div>').addClass('popup-auth');
+	
+	$('<label>').text('Passcode').appendTo(popup);
+	var pass = $("<input type='password'>").appendTo(popup);
+	var okBtn = $("<input type='button' value='OK'>").appendTo(popup);
+	
+	$("<div>").addClass('bg-popup-auth')
+		.css("height", $(window).height())
+		.appendTo('body');
+	
+	$('body').append(popup);
+	
+	function resizeBGPopup(){
+		$('div.bg-popup-auth').css("height", $(window).height());
+	}
+	
+	$(window).bind('resize', resizeBGPopup);
+	
+	pass.focus();
+	
+	var times = 0;
+	
+	function auth(){
+
+		function fail(){
+			times++;
+			pass.val('').css('border-color', 'red');
+			if (times === 3) window.location.href = '/slider';
+			pass.focus();
+		}
+		
+		sliderio.passcode = pass.val(); 
+		pass.css('border-color', 'silver');
+		
+		sliderio.service.slider.authenticate(sliderio.passcode, function(){
+			callback();
+			$('div.bg-popup-auth').remove();
+			$('div.popup-auth').remove();
+		}, fail);
+	}
+	
+	okBtn.bind('click', auth);
+	pass.bind('keyup', function(e){
+		if (e.keyCode  === 13 || e.wich === 13) auth();
+	});
+}
+

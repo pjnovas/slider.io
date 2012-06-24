@@ -89,8 +89,8 @@ exports.run = function(){
 					.pressButton("Create!", function(){
 						
 						expect(browser.success);
-						//expect(browser.location.pathname).to.equal("/slider/" + newSlider.name + '/editor');
-			      //expect(browser.text("title")).to.equal(newSlider.title);
+						expect(browser.location.pathname).to.equal("/slider/" + newSlider.name + '/editor');
+			      expect(browser.text("title")).to.equal(newSlider.title);
 			      
 			      done();
 					});

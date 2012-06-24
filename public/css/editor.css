@@ -309,6 +309,7 @@ a, span {
  */
 
 #mainConfigs {
+	display:none;
 	font-family: 'Port Lligat Sans', 'sans';
 	width: 28%;
 	height: 394px;

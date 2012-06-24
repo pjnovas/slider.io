@@ -1,4 +1,3 @@
-var __passcode;
 
 var go = {};
 go.left = function(){
@@ -12,7 +11,7 @@ go.toggle = function(){
 	if (socket) { 
 		socket.emit('toggleSlider', {
 			visible: isVisible,
-			pass: __passcode 
+			pass: (sliderio && sliderio.passcode) || '' 
 		});
 	}
 };
@@ -28,12 +27,12 @@ function emitMoveSlider(idx, type){
 		if (type === 'list')
 			socket.emit('updatedItemList', {
 				index: idx,
-				pass: __passcode
+				pass: (sliderio && sliderio.passcode) || ''
 			});
 		else 
 			socket.emit('moveSlider', {
 				index: idx,
-				pass: __passcode
+				pass: (sliderio && sliderio.passcode) || ''
 			});
 	}
 }
@@ -73,17 +72,7 @@ $(document).ready(function(){
 	if (socket) {
 		$('#clients-holder').show();
 		
-		var times = 0;
-		var authenticate = function(){
-			times++;
-			if (times < 3){
-				__passcode = prompt("Passcode", "");
-				sliderio.service.slider.authenticate(__passcode, function(){}, authenticate);
-			}
-			else window.location.href = './';
-		};
-		
-		authenticate();
+		authenticate(function(){});
 	}
 });
 
