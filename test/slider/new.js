@@ -107,7 +107,35 @@ describe('User creates a new slider', function(){
 			});
 	});
 	
-	it('should show an error when name has spaces');
+	it('should replace white spaces when name if they are', function(done){
+		//Fills the form and post it for a new slider
+		browser.visit("http://localhost:3000/slider", function () {
+			var nameSpaced = "a slider with spaces",
+				nameReplaced = "a-slider-with-spaces";
+				
+			browser
+				.fill("name", nameSpaced)
+				.fill("passcode", newSlider.passcode)
+				.fill("title", newSlider.title)
+				.fill("description", newSlider.description)
+				.pressButton("Create!", function(){
+				   
+				   utils.cleanSliderTrash(nameSpaced, function(err) {
+				    	if (err) done(err);
+				    	else utils.cleanSliderTrash(nameReplaced, function(err) {
+				    		if (err) done(err);
+				    		else {
+					    		expect(browser.location.pathname).to.equal("/slider/" + nameReplaced + '/editor');
+					    		expect(browser.text("title")).to.equal(newSlider.title);
+
+					    		done();
+				    		}		
+				    	});	
+					});
+				});
+		});
+	});
+	
 	it('should show an error when passcode is blank');
 });
 

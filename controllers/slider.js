@@ -27,7 +27,7 @@ var newSlider = function(newSlider, res){
 	
 	slider.defaultSlider(function(defaultSlider){
 		
-		var sliderName = newSlider.name;
+		var sliderName = newSlider.name.replace(/ /g, '-');
 		
 		defaultSlider.name = sliderName;
 		defaultSlider.config.passcode = newSlider.passcode;

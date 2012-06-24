@@ -17,26 +17,28 @@ exports.createSliderMock = function(done){
 	});
 };
 
-exports.deleteSliderFiles = function(done){
-	// Removes files & foldes created for the new slider
+var deleteTestTrash = function(sliderName, done){
+	
 	var fs = require('fs');
 	fs.realpath('./', function(err, localPath){
-		fs.unlink(localPath + '/sliders/' + newSlider.name + '.json', function(err){
-			if(err) done(err);
-			else {
-				fs.rmdir(localPath + '/public/slider/' + newSlider.name + '/images', function(err){
-					if(err) done(err);
-					else {
-						fs.rmdir(localPath + '/public/slider/' + newSlider.name, function(err){
-							if(err) done(err);
-							else done();
-						});
-					}
+		fs.unlink(localPath + '/sliders/' + sliderName + '.json', function(err){
+			if(err && err.code != "ENOENT") done(err);
+			else fs.rmdir(localPath + '/public/slider/' + sliderName + '/images', function(err){
+					if(err && err.code != "ENOENT") done(err);
+					else fs.rmdir(localPath + '/public/slider/' + sliderName, function(err){
+						if(err && err.code != "ENOENT") done(err);
+						else done();
+					});
 				});
-			}
 		});
 	});
 	
+};
+
+exports.cleanSliderTrash = deleteTestTrash;
+exports.deleteSliderFiles = function(done){
+	// Removes files & foldes created for the new slider
+	deleteTestTrash(newSlider.name, done);
 };
 
 exports.simulateKeyUp = function(keyCode){
