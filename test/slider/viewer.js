@@ -2,54 +2,13 @@ var expect = require('expect.js'),
 	Browser = require('zombie'),
 	browser = new Browser();
 
-var simulateKeyUp = function(keyCode){
-	return "var press=jQuery.Event('keyup');press.ctrlKey=false;press.keyCode=" + keyCode + ";$('body').trigger(press);";
-};
-	
-describe('User enter as viewer', function(){
-	
-	var newSlider = {
-		name: "newslider",
-		passcode: "mycode",
-		title: "new slider title",
-		description: "new slider description"
-	};
-	
-	beforeEach(function(done){
-		//Fills the form and post it for a new slider
-		browser.visit("http://localhost:3000/slider", function () {
-			
-			browser
-				.fill("name", newSlider.name)
-				.fill("passcode", newSlider.passcode)
-				.fill("title", newSlider.title)
-				.fill("description", newSlider.description)
-				.pressButton("Create!", done);
-				
-		});
-	});
+var utils = require('../utils/slider.js');
 
-	afterEach(function(done){
-		// Removes files & foldes created for the new slider
-		var fs = require('fs');
-		fs.realpath('./', function(err, localPath){
-			fs.unlink(localPath + '/sliders/' + newSlider.name + '.json', function(err){
-				if(err) done(err);
-				else {
-					fs.rmdir(localPath + '/public/slider/' + newSlider.name + '/images', function(err){
-						if(err) done(err);
-						else {
-							fs.rmdir(localPath + '/public/slider/' + newSlider.name, function(err){
-								if(err) done(err);
-								else done();
-							});
-						}
-					});
-				}
-			});
-		});
-		
-  });
+describe('User enter as viewer', function(){
+	var newSlider = require('../mocks/newSlider.js').slider;
+	
+	beforeEach(utils.createSliderMock);	
+	afterEach(utils.deleteSliderFiles);
 	
 	it('should load the page', function(done){
     
@@ -71,7 +30,7 @@ describe('User enter as viewer', function(){
     });
   });
   
-  it('can NOT move the slider', function(done){
+  it('should NOT move the slider', function(done){
 	 	browser.visit("http://localhost:3000/slider/" + newSlider.name + "/", function () {
       expect(browser.success);
   
@@ -79,7 +38,7 @@ describe('User enter as viewer', function(){
 			browser.window.socket.once('initSlider', function() {
   			var beforeVisible = browser.evaluate(script);
 
-				browser.evaluate(simulateKeyUp(83)); //keyboard s
+				browser.evaluate(utils.simulateKeyUp(83)); //keyboard s
 				
 				var afterVisible = browser.evaluate(script);
 				expect(beforeVisible).to.equal(afterVisible);
