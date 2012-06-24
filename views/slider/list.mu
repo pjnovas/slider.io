@@ -63,7 +63,7 @@
 			  	</fieldset>
 			  </form>
 	    </div>
-	    <div class="span4">
+	    <div class="span8">
 	    	<h2>Public Sliders</h2>
 	      <ul id="sliderList">
 			  {{#sliders}}

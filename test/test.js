@@ -22,7 +22,7 @@ describe('User enter the application', function(){
 
 });
 
-require('./slider/list.js').run();
+require('./slider/new.js').run();
 
 
 
