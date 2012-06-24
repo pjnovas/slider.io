@@ -8,7 +8,7 @@ var simulateKeyUp = function(keyCode){
 
 exports.run = function(){
 	
-	describe('User enter as viewer', function(){
+	describe('User enter as solo', function(){
 		
 		var newSlider = {
 			name: "newslider",

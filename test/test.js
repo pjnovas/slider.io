@@ -22,8 +22,9 @@ describe('User enter the application', function(){
 
 });
 
-require('./slider/new.js').run();
-require('./slider/speaker.js').run();
-require('./slider/viewer.js').run();
-require('./slider/solo.js').run();
+require('./slider/new.js');
+require('./slider/speaker.js');
+require('./slider/viewer.js');
+require('./slider/solo.js');
+require('./slider/offline.js');
 

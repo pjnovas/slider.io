@@ -24,7 +24,7 @@ exports.configure = function(app) {
 	 * (GET)  /slider/:slider/speaker/						-> renders the Slider with ws as speaker for session user || /login/
 	 * (GET)  /slider/:slider/solo/								-> renders the Slider without ws
 	 * (GET)  /slider/:slider/editor/							-> slider editor view 
-	 * (GET)  /slider/:slider/offline/	 					-> response zip with slider offline
+	 * (POST)  /slider/:slider/offline/	 					-> response zip with slider offline
 	 * 
 	 * (GET)  /slider/:slider/styles.css					-> slider custom styles
 	 * (GET)  /slider/:slider/slides.json					-> slider json (containing slides)
@@ -63,7 +63,7 @@ exports.configure = function(app) {
 	
 	app.get('/slider/:slider/editor', slider.next.get, slider.views.editor);
 	
-	app.get('/slider/:slider/offline', slider.next.get, slider.actions.getOffline);
+	app.post('/slider/:slider/offline', slider.next.get, user.authorizePassCode, slider.actions.getOffline);
 	
 	app.get('/slider/:slider/styles.css', slider.next.get, slider.actions.getCSS);
 	

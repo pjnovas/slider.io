@@ -15,6 +15,7 @@
   <meta name="MobileOptimized" content="320">
   <meta name="viewport" content="width=device-width">
 
+	
 	<link href="/css/bootstrap.min.css" rel="stylesheet">
 	<link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
 	<link href="/css/website.css" rel="stylesheet">  
@@ -67,12 +68,12 @@
 	    	<h2>Public Sliders</h2>
 	      <ul id="sliderList">
 			  {{#sliders}}
-			  <li>
+			  <li data-sld="{{.}}">
 			  	<h3>{{.}} - <a href="/slider/{{.}}">viewer</a> 
 				  	| <a href="/slider/{{.}}/solo">solo</a> 
 				  	| <a href="/slider/{{.}}/speaker">speaker</a>
 				  	| <a href="/slider/{{.}}/editor">editor</a>
-				  	| <a target="_blank" href="/slider/{{.}}/offline">offline</a>
+				  	| <a class="offline" target="_blank">offline</a>
 				  </h3>
 				</li>
 				{{/sliders}}
@@ -81,5 +82,27 @@
 	  </div>
 	</div>
   
+  <script src="/js/libs/jquery-1.7.2.min.js"></script>	
+	<script src="/js/sliderio/service/slider.js"></script>
+	<script>
+		$(document).ready(function(){
+			
+			$('a.offline').live('click', function(){
+				var name = $(this).parents('li').attr('data-sld');
+				
+				authenticate(function(){
+					var formHtml = "<form action='/slider/" + name + "/offline' method='post'>"
+		    		+ "<input type='password' name='passcode' id='passcode'>"
+		    		+ "</form>";
+	    		
+	    		var form = $(formHtml);
+	    		form.children('#passcode').val(sliderio.passcode);
+	    		form.submit();
+	    		
+				}, name);	
+			});
+			
+		});
+	</script>
 </body>
 </html>

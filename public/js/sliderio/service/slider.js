@@ -78,9 +78,14 @@ sliderio.service.slider = (function($){
 		  }); 
 		},
 		
-		authenticate: function(_passcode, done, error) {
+		authenticate: function(_passcode, done, error, sliderName) {
+			var _url = "authenticate"; 
+			if (sliderName){
+				_url = "/slider/" + sliderName + "/" + _url;
+			}
+			
 			$.ajax({
-		    url: "authenticate",
+		    url: _url,
 		    type: "POST",
 		    dataType: "json",
 		    data: JSON.stringify({passcode: _passcode}),
@@ -91,7 +96,8 @@ sliderio.service.slider = (function($){
 		    success: done,
 		    error: error,
 		  }); 
-		}
+		},
+		
 	};
 })(jQuery); 
 
@@ -101,7 +107,7 @@ sliderio.service.slider = (function($){
 /* TEMP Authentication 
  **********************/
 
-function authenticate(callback){
+function authenticate(callback, sliderName){
 	var popup = $('<div>').addClass('popup-auth');
 	
 	$('<label>').text('Passcode').appendTo(popup);
@@ -140,7 +146,7 @@ function authenticate(callback){
 			$('div.bg-popup-auth').remove();
 			$('div.popup-auth').remove();
 			callback();
-		}, fail);
+		}, fail, sliderName);
 	}
 	
 	okBtn.bind('click', auth);
