@@ -10,7 +10,7 @@ describe('User creates a new slider', function(){
 	
 	afterEach(utils.deleteSliderFiles);
 
-	it('should redirects after add a new slider', function(done){
+	it('should be redirected to editor after a new slider is created', function(done){
 		//Fills the form and post it for a new slider
 		browser.visit("http://localhost:3000/slider", function () {
 			
@@ -30,7 +30,7 @@ describe('User creates a new slider', function(){
 		});
 	});
 	
-	it('should create a json file and a resource folder', function(done){
+	it('should have already created a json file and a resource folder of the new slider', function(done){
 		browser.visit("http://localhost:3000/slider", function () {
 			
 			browser
@@ -62,7 +62,7 @@ describe('User creates a new slider', function(){
 		});
 	});
 	
-	it('should create a valid json file', function(done){
+	it('should have already created a valid json file', function(done){
 		browser.visit("http://localhost:3000/slider", function () {
 			
 			browser
@@ -107,7 +107,7 @@ describe('User creates a new slider', function(){
 			});
 	});
 	
-	it('should replace white spaces when name if they are', function(done){
+	it('should replace white spaces in slider name if they are', function(done){
 		//Fills the form and post it for a new slider
 		browser.visit("http://localhost:3000/slider", function () {
 			var nameSpaced = "a slider with spaces",
@@ -136,6 +136,6 @@ describe('User creates a new slider', function(){
 		});
 	});
 	
-	it('should show an error when passcode is blank');
+	it('should be able to visualize an error when passcode field is blank');
 });
 

@@ -10,7 +10,7 @@ describe('User request the offline slider', function(){
 	beforeEach(utils.createSliderMock);	
 	afterEach(utils.deleteSliderFiles);
 	
-	it('should have a link on manage sliders page', function(done){
+	it('should be able to click a link on manage sliders page', function(done){
     
     browser.visit("http://localhost:3000/slider/", function () {
       expect(browser.success);
@@ -22,7 +22,7 @@ describe('User request the offline slider', function(){
     });
   });
   
-  it('should ask for passcode when clicks the link', function(done){
+  it('should be asked for passcode when clicks the link', function(done){
     
     browser.visit("http://localhost:3000/slider/", function () {
       expect(browser.success);

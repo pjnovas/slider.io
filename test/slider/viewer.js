@@ -10,7 +10,7 @@ describe('User enter as viewer', function(){
 	beforeEach(utils.createSliderMock);	
 	afterEach(utils.deleteSliderFiles);
 	
-	it('should load the page', function(done){
+	it('should load the viewer page', function(done){
     
     browser.visit("http://localhost:3000/slider/" + newSlider.name + "/", function () {
       expect(browser.success);
@@ -18,7 +18,7 @@ describe('User enter as viewer', function(){
     });
   });
   
-  it('should NOT ask for passcode', function(done){
+  it('should NOT be asked for passcode', function(done){
     
     browser.visit("http://localhost:3000/slider/" + newSlider.name + "/", function () {
       expect(browser.success);
@@ -30,22 +30,20 @@ describe('User enter as viewer', function(){
     });
   });
   
-  it('should NOT move the slider', function(done){
+  it('should NOT be able to show, hide or move the slider', function(done){
 	 	browser.visit("http://localhost:3000/slider/" + newSlider.name + "/", function () {
       expect(browser.success);
   
   		var script = "$('li.current', '#slider-list').is(':visible');";
-			browser.window.socket.once('initSlider', function() {
-  			var beforeVisible = browser.evaluate(script);
+			var beforeVisible = browser.evaluate(script);
 
-				browser.evaluate(utils.simulateKeyUp(83)); //keyboard s
-				
-				var afterVisible = browser.evaluate(script);
-				expect(beforeVisible).to.equal(afterVisible);
-				
-				browser.visit("http://localhost:3000/slider/");
-				done();
-  		});
+			browser.evaluate(utils.simulateKeyUp(83)); //keyboard s
+			
+			var afterVisible = browser.evaluate(script);
+			expect(beforeVisible).to.equal(afterVisible);
+			
+			browser.visit("http://localhost:3000/slider/");
+			done();
   	});
 	});
   

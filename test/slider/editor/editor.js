@@ -2,15 +2,15 @@ var expect = require('expect.js'),
 	Browser = require('zombie'),
 	browser = new Browser();
 
-var utils = require('../utils/slider.js');
+var utils = require('../../utils/slider.js');
 
 describe('User enter to editor', function(){
-	var newSlider = require('../mocks/newSlider.js').slider;
+	var newSlider = require('../../mocks/newSlider.js').slider;
 	
 	beforeEach(utils.createSliderMock);	
 	afterEach(utils.deleteSliderFiles);
 	
-	it('should load the page', function(done){
+	it('should load the editor page', function(done){
     
     browser.visit("http://localhost:3000/slider/" + newSlider.name + "/editor", function () {
       expect(browser.success);
@@ -18,7 +18,7 @@ describe('User enter to editor', function(){
     });
   });
   
-  it('should ask for passcode', function(done){
+  it('should be asked for passcode', function(done){
     
     browser.visit("http://localhost:3000/slider/" + newSlider.name + "/editor", function () {
       expect(browser.success);
@@ -30,7 +30,7 @@ describe('User enter to editor', function(){
     });
   });
 	
-	it('should redirect after 3 invalid passcode tries', function(done){
+	it('should be redirected to slider manager after 3 invalid passcode tries', function(done){
     var maxtries = 3,
     	tries = 0;
     
@@ -65,7 +65,7 @@ describe('User enter to editor', function(){
     });
   });
 	
-	it('should validate passcode', function(done){
+	it('should close the passcode popup and start slider editor when passcode is correct', function(done){
     
     browser.visit("http://localhost:3000/slider/" + newSlider.name + "/editor", function () {
       expect(browser.success);
@@ -74,16 +74,24 @@ describe('User enter to editor', function(){
 				.fill("passcode", newSlider.passcode)
 				.pressButton("OK", function(){
 					
-					browser.wait(1000, function(){
-						var authPopup = browser.query('.popup-auth');
-      			var popupExists = (authPopup != null)? true : false;
-      			expect(popupExists).to.equal(false);
-      
-      			done();
-      		});
-							
+					var authPopup = browser.query('.popup-auth');
+    			var popupExists = (authPopup != null)? true : false;
+    			expect(popupExists).to.equal(false);
+    
+    			done();
 				});
     });
   });
   
+  describe('User edits the slider', function(){
+	
+		require('./config.js');
+		require('./slider.js');
+		require('./resources.js');
+		
+  });
 });
+
+
+
+

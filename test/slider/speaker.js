@@ -11,7 +11,7 @@ describe('User enter as speaker', function(){
 	beforeEach(utils.createSliderMock);	
 	afterEach(utils.deleteSliderFiles);
 
-	it('should load the page', function(done){
+	it('should load the speaker page', function(done){
     
     browser.visit("http://localhost:3000/slider/" + newSlider.name + "/speaker", function () {
       expect(browser.success);
@@ -19,7 +19,7 @@ describe('User enter as speaker', function(){
     });
   });
   
-  it('should ask for passcode', function(done){
+  it('should be asked for passcode', function(done){
     
     browser.visit("http://localhost:3000/slider/" + newSlider.name + "/speaker", function () {
       expect(browser.success);
@@ -31,7 +31,7 @@ describe('User enter as speaker', function(){
     });
   });
 	
-	it('should redirect after 3 invalid passcode tries', function(done){
+	it('should redirect to manage sliders after 3 invalid passcode tries', function(done){
     var maxtries = 3,
     	tries = 0;
     
@@ -66,7 +66,7 @@ describe('User enter as speaker', function(){
     });
   });
 	
-	it('should validate passcode', function(done){
+	it('should close the passcode popup and start slide when passcode is correct', function(done){
     
     browser.visit("http://localhost:3000/slider/" + newSlider.name + "/speaker", function () {
       expect(browser.success);
@@ -87,7 +87,7 @@ describe('User enter as speaker', function(){
     });
   });
 	
-	it('should move the slider', function(done){
+	it('should be able to show and hide the slider', function(done){
 	 	browser.visit("http://localhost:3000/slider/" + newSlider.name + "/speaker", function () {
       expect(browser.success);
   
@@ -112,7 +112,7 @@ describe('User enter as speaker', function(){
   	});
 	});
 	
- 	it('should emit slider toggle and being received by a viewer', function(done){
+ 	it('should be able to show and hide the slider emit by websockets to a viewer', function(done){
     var speaker = new Browser();
     var viewer = new Browser();
     
@@ -157,7 +157,7 @@ describe('User enter as speaker', function(){
     });
  });
  
- it('should not emit slider toggle if passcode provided is invalid', function(done){
+ it('should not be able to emit by websockets slider actions if passcode provided is invalid', function(done){
     var speaker = new Browser();
     var viewer = new Browser();
     
@@ -199,6 +199,9 @@ describe('User enter as speaker', function(){
       });
     });
  });
-      
+ 
+ it('should be able to move left and right the slider');
+ it('should emit slider actions by websockets to a viewer');
+ 
 });
 

@@ -10,7 +10,7 @@ describe('User enter as solo', function(){
 	beforeEach(utils.createSliderMock);
 	afterEach(utils.deleteSliderFiles);
 
-	it('should load the page', function(done){
+	it('should load the solo page', function(done){
     
     browser.visit("http://localhost:3000/slider/" + newSlider.name + "/solo", function () {
       expect(browser.success);
@@ -18,7 +18,7 @@ describe('User enter as solo', function(){
     });
   });
   
-  it('should NOT ask for passcode', function(done){
+  it('should NOT be asked for passcode', function(done){
     
     browser.visit("http://localhost:3000/slider/" + newSlider.name + "/solo", function () {
       expect(browser.success);
@@ -30,7 +30,7 @@ describe('User enter as solo', function(){
     });
   });
   
-  it('should move the slider but offline (without websockets)', function(done){
+  it('should be able to show and hide the slider without emiting by websockets', function(done){
 	 	browser.visit("http://localhost:3000/slider/" + newSlider.name + "/solo", function () {
       expect(browser.success);
   
@@ -47,5 +47,7 @@ describe('User enter as solo', function(){
 			done();
   	});
 	});
+  
+  it('should be able to mode left and right the slider without emiting by websockets');
   
 }); 
