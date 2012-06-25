@@ -6,6 +6,6 @@ var expect = require('expect.js'),
 describe('User modifies the slider', function(){
 	//var newSlider = require('../mocks/newSlider.js').slider;
 	
-	it('should');
+	//it('should');
 	
 });

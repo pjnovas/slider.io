@@ -37,10 +37,10 @@
 			},
 			border: {
 				radius: {
-					top: 20,
-					right: 20,
-					bottom: 20,
-					left: 20
+					top: 0,
+					right: 0,
+					bottom: 0,
+					left: 0
 				},
 				color: {
 					r: 0,
@@ -83,7 +83,7 @@
 		var build = {
 			border: function(){
 				
-				var borderH = $($.mustache(template('config-head'), {title:'Border Styles'}));
+				var borderH = $($.mustache(template('config-head'), {title:'Border Styles', code: 'border'}));
 				container.append(borderH);
 								
 				function radiusChanged(radius){
@@ -106,10 +106,10 @@
 					$(element).css("border-width", s);
 				}
 				
-				this.borderCfg(newStyle.border, radiusChanged, sizeChanged); 
+				this.borderCfg(borderH, newStyle.border, radiusChanged, sizeChanged); 
 				
 				if (settings.border.color){
-					this.color(newStyle.border, function(color){
+					this.color(borderH, newStyle.border, function(color){
 						newStyle.border.color = newStyle.border.color || 'transparent';
 						newStyle.border.color = color;
 						var c = "rgb(" + color.r + "," + color.g + "," + color.b + ")";
@@ -122,16 +122,16 @@
 			
 			font: function(){
 				
-				var fontH = $($.mustache(template('config-head'), {title:'Font Styles'}));
+				var fontH = $($.mustache(template('config-head'), {title:'Font Styles', code: 'font'}));
 				container.append(fontH);
 				
-				this.fontName(newStyle.font, function(name){
+				this.fontName(fontH,newStyle.font, function(name){
 					newStyle.font.name = name;
 					$(element).css("font-family", name);
 					$('textarea', element).css("font-family", name);
 				});
 				
-				this.color(newStyle.font, function(color){
+				this.color(fontH,newStyle.font, function(color){
 					newStyle.font.color = newStyle.font.color || {r:1,g:1,b:1};
 					newStyle.font.color = color;
 					var c = "rgb(" + color.r + "," + color.g + "," + color.b + ")";
@@ -140,7 +140,7 @@
 				});
 			},
 			background: function() {
-				var bgH = $($.mustache(template('config-head'), {title:'Background Styles'}));
+				var bgH = $($.mustache(template('config-head'), {title:'Background Styles', code: 'background'}));
 				container.append(bgH);
 				
 				function updateColorElement(){
@@ -150,7 +150,7 @@
 						.css("-webkit-box-shadow", "0px 0px 10px " + c).css("box-shadow", "0px 0px 10px " + c);	
 				}
 				
-				this.color(newStyle.background, function(color){
+				this.color(bgH, newStyle.background, function(color){
 					var alpha = newStyle.background.color.alpha || 1;
 					color.alpha = alpha;
 					newStyle.background.color = color;
@@ -158,13 +158,13 @@
 				});
 				
 				if (settings.background.color.alpha) {
-					this.alpha(newStyle.background.color, function(alpha){
+					this.alpha(bgH,newStyle.background.color, function(alpha){
 						newStyle.background.color.alpha = alpha;
 						updateColorElement();
 					});
 				}
 				
-				this.image(newStyle.background, function(file){
+				this.image(bgH,newStyle.background, function(file){
 					newStyle.background.image = newStyle.background.image || {};
 					if(file){
 						newStyle.background.image.high = file;
@@ -183,10 +183,10 @@
 				});
 			},
 			
-			image: function(entity, onImageChange, onSeamlessChange) {
+			image: function(where, entity, onImageChange, onSeamlessChange) {
 				
 				var imageHtml = $($.mustache(template('style-image'), entity));
-				container.append(imageHtml);
+				where.append(imageHtml);
 				
 				var img = $('.image-field', imageHtml).bind('click', function(){
 					var currRes,
@@ -226,10 +226,10 @@
 				});
 			},
 			
-			color: function(entity, onChangeColor) {
+			color: function(where, entity, onChangeColor) {
 				entity.color = entity.color || {r:1, g:1, b:1}; 
 				var colorHtml = $($.mustache(template('style-color'), entity));
-				container.append(colorHtml);
+				where.append(colorHtml);
 				
 				var hexToRgb = function (hex) {
 			    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
@@ -254,9 +254,9 @@
 				});
 			},
 			
-			alpha: function(entity, onChangeAlpha){
+			alpha: function(where, entity, onChangeAlpha){
 				var alphaHtml = $($.mustache(template('style-alpha'), entity));
-				container.append(alphaHtml);
+				where.append(alphaHtml);
 				
 				$('.alpha-field', alphaHtml).slider({
 					value: entity.alpha || 1,
@@ -270,9 +270,9 @@
 				});
 			},
 			
-			fontName: function(entity, onChange){
+			fontName: function(where, entity, onChange){
 				var fontNameHtml = $($.mustache(template('style-fontFamily'), entity));
-				container.append(fontNameHtml);
+				where.append(fontNameHtml);
 				
 				$('.fontName-field', fontNameHtml)
 					.bind('change',function(){
@@ -280,9 +280,9 @@
 				});
 			},
 			
-			borderCfg: function (entity, onRadiusChanged, onSizeChanged) {
+			borderCfg: function (where, entity, onRadiusChanged, onSizeChanged) {
 				var borderHtml = $($.mustache(template('style-border'), entity));
-				container.append(borderHtml);
+				where.append(borderHtml);
 				
 				$('.radius-field', borderHtml)
 					.bind('change',function(){

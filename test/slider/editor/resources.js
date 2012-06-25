@@ -6,6 +6,6 @@ var expect = require('expect.js'),
 describe('User work with resources', function(){
 	//var newSlider = require('../mocks/newSlider.js').slider;
 	
-	it('should ');
+	//it('should ');
 	
 });
