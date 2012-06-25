@@ -85,8 +85,8 @@ describe('User enter to editor', function(){
   
   describe('User edits the slider', function(){
 		
-		require('./config.js');
 		require('./slider.js');
+		require('./config.js');
 		require('./resources.js');
 		
   });

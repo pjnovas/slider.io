@@ -82,10 +82,38 @@ describe('User configs the slider', function(){
 		});
 	});
 	
-	
 	describe('User changes values and see them updated to slider', function(){
 		
-		it('should be able to change main slider values');
+		it('should be able to change main slider values', function(done){
+			var newTitle = "new presentation title",
+				newIdx = 1;
+				
+			browser.evaluate("$('#txtTitle').val('" + newTitle + "').trigger('change');");
+			
+			
+			
+			//add a new slider to the right for change the index
+			browser.evaluate("$('#nextSlide.addSlide').trigger('click');");
+			browser.evaluate("$('#txtInitIndex').val('" + newIdx + "').trigger('change');");
+			
+			browser.wait(function(){
+				expect(browser.evaluate("document.title")).to.equal(newTitle);
+				expect(browser.evaluate("$('#slider-list li.current').index();")).to.eql(newIdx);
+				
+				browser.clickLink('a.save', function(){
+					 browser
+						.fill("passcode", newSlider.passcode)
+						.pressButton("OK", function(){
+							
+							expect(browser.evaluate("$('#txtTitle').val();")).to.eql(newTitle);
+							expect(browser.text("title")).to.equal(newTitle);
+							expect(browser.evaluate("$('#txtInitIndex').val();")).to.eql(newIdx);
+							
+							done();
+						});
+				});
+			});
+		});
 		
 		it('should be able to change fonts for All Slides');
 		it('should be able to change fonts for Chapter Slides');

@@ -33,6 +33,9 @@ sliderio.view.editor.slider = (function($){
 		}
 		
 		slides[idx].fields.push(field);
+		sliderio.service.slider.saveSlides(slides, function(){
+			//TODO: do something
+		});
 	}
 	
 	var hydrateSlide = function(idx){
