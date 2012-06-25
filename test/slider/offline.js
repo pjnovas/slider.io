@@ -4,7 +4,7 @@ var expect = require('expect.js'),
 
 var utils = require('../utils/slider.js');
 
-describe('User request the offline slider', function(){
+describe('#And request the offline slider', function(){
 	var newSlider = require('../mocks/newSlider.js').slider;
 	
 	beforeEach(utils.createSliderMock);	

@@ -3,7 +3,7 @@ var expect = require('expect.js'),
 	Browser = require('zombie'),
 	browser = new Browser();
 
-describe('User configs the slider', function(){
+describe('#And configs the slider', function(){
 	var newSlider = require('../../mocks/newSlider.js').slider;
 
 	beforeEach(function(done){
@@ -19,7 +19,7 @@ describe('User configs the slider', function(){
 	});
 		
 	
-	describe('User visualizes the config panel', function(){
+	describe('#And visualizes the config panel', function(){
 	
 		it('should be able to visualize main slider values', function(){
 			var cfgPanel = browser.queryAll('#mainConfigs');
@@ -82,7 +82,7 @@ describe('User configs the slider', function(){
 		});
 	});
 	
-	describe('User changes values and see them updated to slider', function(){
+	describe('#And changes the config values', function(){
 		
 		it('should be able to change main slider values', function(done){
 			var newTitle = "new presentation title",

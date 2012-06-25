@@ -3,7 +3,7 @@ var expect = require('expect.js'),
 	Browser = require('zombie'),
 	browser = new Browser();
 
-describe('User modifies the slider', function(){
+describe('#And modifies the slider', function(){
 	var newSlider = require('../../mocks/newSlider.js').slider;
 
 	beforeEach(function(done){
@@ -18,7 +18,7 @@ describe('User modifies the slider', function(){
     });
 	});
 		
-	describe('User manage slides', function(){
+	describe('#And manage slides', function(){
 	
 		it("should be able to append a new slide to the right", function(done){
 			var currentSize = browser.evaluate("$('#slider-list>li').length;");
@@ -96,7 +96,7 @@ describe('User modifies the slider', function(){
 		
 	});
 	
-	describe('User manage fields', function(){
+	describe('#And manage fields', function(){
 		
 		it('should be able to add a new title field and modify its content', function(done){
 			var beforeSize = browser.evaluate("$('#slider-list>li.current h1').length;");

@@ -5,7 +5,7 @@ var expect = require('expect.js'),
 
 var utils = require('../utils/slider.js');
 
-describe('User creates a new slider', function(){
+describe('#And creates a new slider', function(){
 	var newSlider = require('../mocks/newSlider.js').slider;
 	
 	afterEach(utils.deleteSliderFiles);
