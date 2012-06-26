@@ -4,7 +4,7 @@ var expect = require('expect.js'),
 
 var utils = require('../../utils/slider.js');
 
-describe('#And enter to editor', function(){
+describe('#enter to editor', function(){
 	var newSlider = require('../../mocks/newSlider.js').slider;
 	
 	beforeEach(utils.createSliderMock);	
@@ -83,7 +83,7 @@ describe('#And enter to editor', function(){
     });
   });
   
-  describe('#And edits the slider', function(){
+  describe('#edits the slider', function(){
 		
 		require('./slider.js');
 		require('./config.js');

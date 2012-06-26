@@ -5,7 +5,7 @@ var expect = require('expect.js'),
 
 var utils = require('../utils/slider.js');
 
-describe('#And enter as speaker', function(){
+describe('#enter as speaker', function(){
 	var newSlider = require('../mocks/newSlider.js').slider;
 	
 	beforeEach(utils.createSliderMock);	

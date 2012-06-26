@@ -20,7 +20,7 @@ describe('User who enters the application', function(){
     });
   });
 
-	describe('#And enters slider manager', function(){
+	describe('#enters slider manager', function(){
 	
 	  it('should load the manage slider page', function(done){
 	    browser.visit("http://localhost:3000/slider", function () {
@@ -62,7 +62,7 @@ describe('User who enters the application', function(){
 		});
 	});
 	
-	describe('#And works with sliders', function(){
+	describe('#works with sliders', function(){
 		
 		require('./slider/new.js');
 		require('./slider/speaker.js');
