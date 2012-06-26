@@ -31,7 +31,7 @@ var Slider = (function($) {
 
 	var setPosition = function(finishMove, dontAnimate){
 		totIncrement = (-1 * currentIndex * increment) + initialMargin;
-		
+	
 		if (currentSlide) {
 			toggle('aside', false);
 			toggle('details', false);
@@ -81,13 +81,40 @@ var Slider = (function($) {
 			mr = gap * 0.75;
 		}
 		
+		for(var i=0; i< slideData.length; i++){
+			if(slideData[i].isChapter)
+				slides.eq(i).addClass('title');
+		}
+		
+		var slideCommon = $("<li>").width(Math.floor(width)).css('margin-right', Math.floor(mr));;
+		var slideChapter = $("<li>").addClass('title').width(Math.floor(width)).css('margin-right', Math.floor(mr));;
+		slider.append(slideCommon).append(slideChapter);
+		
+		var theBiggest;
+		if (slideCommon.outerWidth() > slideChapter.outerWidth()){
+			theBiggest = slideCommon;
+			var dif = slideCommon.outerWidth(true) - slideChapter.outerWidth(true);
+			slides.filter('.title').width(width + dif);
+			slides.not('.title').width(width);
+		}
+		else {
+			theBiggest = slideChapter;
+			var dif = slideChapter.outerWidth(true) - slideCommon.outerWidth(true);
+			slides.not('.title').width(width + dif);
+			slides.filter('.title').width(width);
+		}
+		
+		slides.height(Math.floor(height)).css('margin-right', Math.floor(mr));
 		slider.height(Math.ceil(height + mt)).css('margin-top', Math.floor(mt));
-		slides.height(Math.floor(height)).width(Math.floor(width)).css('margin-right', Math.floor(mr));
-		
+
 		currentSlide = slides.eq(currentIndex).addClass('current');
+		increment = Math.floor(width + (theBiggest.outerWidth(true) - theBiggest.innerWidth()));
 		
-		increment = Math.floor(width + (currentSlide.outerWidth(true) - currentSlide.innerWidth()));	
-		slider.width(Math.ceil(increment * slidesLen) + 10);
+		slideCommon.remove();
+		slideChapter.remove();
+		theBiggest.remove();
+		
+		slider.width(Math.ceil(increment * slidesLen) + 200);
 		
 		if (h > w) initialMargin = 0;
 		else initialMargin = Math.floor((w - width) / 2);
@@ -132,7 +159,6 @@ var Slider = (function($) {
 			fContent = $.mustache(template('footer'), data);
 			
 			curr.append(sContent).append(fContent).prop('data-built', true);
-			if (data.isChapter) curr.addClass('title');
 			
 			if (data.next || data.next === 0){
 				curr.attr('data-next', data.next);
@@ -172,7 +198,6 @@ var Slider = (function($) {
 			
 			currentIndex = start;
 			
-			resize();
 			resize();
 			
 			$('#' + ulId).show();
