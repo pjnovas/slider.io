@@ -24,7 +24,8 @@ router.configure(app);
 
 app.use(express.static(__dirname + '/public'));
 
+var port = process.env.PORT || 5000;
 realtime.start(app);
-app.listen(3000);
+app.listen(port);
 
-console.log('Server Express started at port %d', app.address().port);
+console.log('SliderIO Server started at port %d', app.address().port);
