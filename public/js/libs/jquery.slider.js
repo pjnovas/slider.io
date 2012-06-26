@@ -81,16 +81,16 @@ var Slider = (function($) {
 			mr = gap * 0.75;
 		}
 		
-		slider.height(height + mt).css('margin-top', mt);
-		slides.height(height).width(width).css('margin-right', mr);
+		slider.height(Math.ceil(height + mt)).css('margin-top', Math.floor(mt));
+		slides.height(Math.floor(height)).width(Math.floor(width)).css('margin-right', Math.floor(mr));
 		
 		currentSlide = slides.eq(currentIndex).addClass('current');
 		
-		increment = width + (currentSlide.outerWidth(true) - currentSlide.innerWidth());	
-		slider.width(increment * slidesLen);
+		increment = Math.floor(width + (currentSlide.outerWidth(true) - currentSlide.innerWidth()));	
+		slider.width(Math.ceil(increment * slidesLen) + 10);
 		
 		if (h > w) initialMargin = 0;
-		else initialMargin = (w - width) / 2;
+		else initialMargin = Math.floor((w - width) / 2);
 		
 		slider.css('margin-left', initialMargin);
 		
