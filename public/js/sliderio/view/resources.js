@@ -28,7 +28,7 @@ sliderio.view.resources = (function($){
 			width: 650,
 			height: 500,
 			resizable: false,
-			zIndex: 3,
+			zIndex: 500,
 			modal: true,
 			open: function(){
 				clearInterval(timerId);
