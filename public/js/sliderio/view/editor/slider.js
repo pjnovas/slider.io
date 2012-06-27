@@ -20,11 +20,12 @@ sliderio.view.editor.slider = (function($){
 		var span = $('span', saveStatus).text('Saving ...');
 		
 		sliderio.service.slider.saveSlides(slides, function(data, err){
-			if (err){
-				var lnk = $("<a href='revert/previous'>Reload</a>")
+			if (err && err !== "success"){
+				$('a', saveStatus).remove();
+				var lnk = $("<a href='#'>Reload</a>")
 					.bind('click', function(){
 						sliderio.service.slider.revert(function(){
-							window.location.href = '#';
+							window.location.href = '/';
 						});
 					});
 

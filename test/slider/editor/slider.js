@@ -222,7 +222,8 @@ describe('#modifies the slider', function(){
 			});
 		});
 		
-		it('should be able to see a link to reload when save fails', function(done){
+		it('should be able to see a link to reload when save fails'
+		/*, function(done){
 			browser.evaluate("$('#toolbox a.h2').trigger('click');");
 			
 			var message = browser.evaluate("$('#save-msg span').text();");
@@ -239,7 +240,7 @@ describe('#modifies the slider', function(){
 				
 				done();
 			});
-		});
+		}*/);
 		
 		it('should be able to revert slider to previous version');
 		

@@ -46,9 +46,14 @@ exports.getSliderList = function(done, error){
 
 function saveSlider(name, data, done, error){
 	var fileName = '/sliders/' + name + '.json';
-		
+	
 	function writeFile(){
-		fsAccess.saveJSONFile(error, fileName, data, done);
+		try {
+			var jsonData = JSON.parse(JSON.stringify(data));
+			fsAccess.saveJSONFile(error, fileName, data, done);
+		} catch(e) {
+			error(new Error("Error parsing to JSON file" + e.toString()));
+		}
 	}
 	
 	function versionate(){
