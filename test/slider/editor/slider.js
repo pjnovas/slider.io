@@ -27,22 +27,18 @@ describe('#modifies the slider', function(){
 			
 			browser.wait(function(){
 				expect(browser.evaluate("$('#slider-list>li').length;")).to.equal(currentSize+1);
-				browser.wait(done); //wait to save the change
+				done(); 
 			});
 			
 		});
 		
 		it("should be able to append a new slide to the left", function(done){
 			var currentSize = browser.evaluate("$('#slider-list>li').length;");
-			browser.evaluate("$('#prevSlide').trigger('click');");
-			
+			browser.evaluate("$('#prevSlide.addSlide').trigger('click');");
+							
 			browser.wait(function(){
-				browser.evaluate("$('#nextSlide.addSlide').trigger('click');");
-				
-				browser.wait(function(){
-					expect(browser.evaluate("$('#slider-list>li').length;")).to.equal(currentSize+1);
-					browser.wait(done); //wait to save the change
-				});
+				expect(browser.evaluate("$('#slider-list>li').length;")).to.equal(currentSize+1);
+				done();
 			});
 		});
 	
@@ -53,10 +49,10 @@ describe('#modifies the slider', function(){
 			browser.wait(function(){
 				browser.evaluate("$('#insertLeft').trigger('click');");
 				
-				browser.wait(function(){
+				browser.wait(1000, function(){
 					expect(browser.evaluate("$('#slider-list>li').length;")).to.equal(currentSize+1);
 					expect(browser.evaluate("$('#slider-list li.current').index();")).to.equal(currentIndex);
-					browser.wait(done); //wait to save the change
+					done(); 
 				});
 			});
 		});
@@ -68,10 +64,10 @@ describe('#modifies the slider', function(){
 			browser.wait(function(){
 				browser.evaluate("$('#insertRight').trigger('click');");
 				
-				browser.wait(function(){
+				browser.wait(1000, function(){
 					expect(browser.evaluate("$('#slider-list>li').length;")).to.equal(currentSize+1);
 					expect(browser.evaluate("$('#slider-list li.current').index();")).to.equal(currentIndex+1);
-					browser.wait(done); //wait to save the change
+					done();
 				});
 			});
 		});
@@ -212,6 +208,40 @@ describe('#modifies the slider', function(){
 		    });
 			});
 		});
+		
+		it('should be able to see a mesage with the saving state on field change', function(done){
+			browser.evaluate("$('#toolbox a.h2').trigger('click');");
+			
+			var message = browser.evaluate("$('#save-msg span').text();");
+			expect(message).to.equal('Saving ...');
+			
+			browser.wait(function(){
+				message = browser.evaluate("$('#save-msg span').text();");
+				expect(message).to.equal('Saved');
+				done();
+			});
+		});
+		
+		it('should be able to see a link to reload when save fails', function(done){
+			browser.evaluate("$('#toolbox a.h2').trigger('click');");
+			
+			var message = browser.evaluate("$('#save-msg span').text();");
+			expect(message).to.equal('Saving ...');
+			
+			browser.evaluate("var slides = sliderio.view.editor.slider.getSlides(); slides = 'fail';");
+			browser.evaluate("$('#slider-list>li.current h2').trigger('change');");
+
+			browser.wait(function(){
+				message = browser.evaluate("$('#save-msg span').text();");
+				expect(message).to.equal('Error');
+				message = browser.evaluate("$('#save-msg a').text();");
+				expect(message).to.equal('Reload');
+				
+				done();
+			});
+		});
+		
+		it('should be able to revert slider to previous version');
 		
 	});
 	

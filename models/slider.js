@@ -144,7 +144,15 @@ exports.getSliderZIP = function(_slider, done, error){
 	buildOffLineHTML(error, _slider, addIndexHTML);
 };
 
-
+exports.revert = function(index, callback){
+	
+	function sortFilesDesc(err, files){
+		files.sort(function(a,b){return b-a});
+		
+	}
+	
+	fsAccess.getDirectoryFiles(error, '/sliders/cache', sortFiles);
+}
 
 
 

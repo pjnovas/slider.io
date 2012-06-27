@@ -40,7 +40,24 @@ sliderio.service.slider = (function($){
 		    cache: false,
 		    timeout: 5000,
 		    success: done,
-		    error: onError,
+		    error: function(data, status, xhr){
+		    	done({}, status);
+		    	onError(data, status, xhr);
+		    }
+		  }); 
+		},
+		
+		revert: function(done){
+			$.ajax({
+		    url: "revert/previous",
+		    type: "POST",
+		    dataType: "json",
+		    data: JSON.stringify({passcode: sliderio.passcode}),
+		    contentType: "application/json",
+		    cache: false,
+		    timeout: 5000,
+		    success: done,
+		    error: onError
 		  }); 
 		},
 		

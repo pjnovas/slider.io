@@ -70,6 +70,8 @@ exports.configure = function(app) {
 	app.get('/slider/:slider/slides.json', slider.next.get, slider.actions.get);
 	
 	app.post('/slider/:slider/slides.json', slider.next.get, user.authorizePassCode , slider.actions.save);
+
+	app.post('/slider/:slider/revert/previous', slider.next.get, user.authorizePassCode , slider.actions.revert);
 	
 	app.post('/slider/new', slider.actions.create);
 	

@@ -10,6 +10,37 @@ sliderio.view.editor.slider = (function($){
 		return $.trim($('#' + name + '-tmpl').html());
 	};
 	
+	var saveSlides = function(callback){
+		var saveStatus = $('#save-msg');
+		
+		if(saveStatus.length === 0)
+			saveStatus = $("<div id='save-msg'><span></span></div>").appendTo('body');
+			 
+		saveStatus.show().css('opacity', 1);
+		var span = $('span', saveStatus).text('Saving ...');
+		
+		sliderio.service.slider.saveSlides(slides, function(data, err){
+			if (err){
+				var lnk = $("<a href='revert/previous'>Reload</a>")
+					.bind('click', function(){
+						sliderio.service.slider.revert(function(){
+							window.location.href = '#';
+						});
+					});
+
+				span.text('Error: ');
+				saveStatus.addClass('error').append(lnk);
+			}
+			else {
+				span.text('Saved');
+				saveStatus.addClass('success').stop(true).animate({opacity: 0}, 2000, function(){
+					saveStatus.hide();
+				});
+				if (callback) callback();
+			}
+		});
+	};
+	
 	var addField = function(fieldName, idx){
 		var field = {};
 		field[fieldName] = {};
@@ -33,9 +64,7 @@ sliderio.view.editor.slider = (function($){
 		}
 		
 		slides[idx].fields.push(field);
-		sliderio.service.slider.saveSlides(slides, function(){
-			//TODO: do something
-		});
+		saveSlides();
 	}
 	
 	var hydrateSlide = function(idx){
@@ -82,9 +111,7 @@ sliderio.view.editor.slider = (function($){
 				slides[idx].fields.push(field);
 			});
 			
-		sliderio.service.slider.saveSlides(slides, function(){
-			//TODO: do something
-		});
+		saveSlides();
 	};
 
 	var initSlider = function(){
@@ -194,7 +221,7 @@ sliderio.view.editor.slider = (function($){
 				$this.removeClass('icon-bookmark-empty').addClass('icon-bookmark');
 			}
 			
-			sliderio.service.slider.saveSlides(slides, function(){
+			saveSlides(function(){
 				initSlider();
 			});
 		});
@@ -289,9 +316,7 @@ sliderio.view.editor.slider = (function($){
 		},
 		
 		save: function(){
-			sliderio.service.slider.saveSlides(slides, function(){
-				//TODO: do something
-			});
+			saveSlides();
 		}
 		
 	};

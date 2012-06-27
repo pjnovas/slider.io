@@ -99,6 +99,12 @@ var renderSlider =function(res, _slider, _userType){
   });	
 };
 
+var revert = function(_slider, res){
+	slider.revert(-1, function(previous){
+		res.send(previous);
+	});
+};
+
 exports.next = {
 	get: function(req, res, next){
 		slider.getSlider(req.params.slider, function(slider){
@@ -162,6 +168,9 @@ exports.actions = {
 	},
 	getOffline: function(req, res){
 		getOffline(req.slider, res);
+	},
+	revert: function(req, res){
+		revert(req.slider, res);
 	}
 };
 
