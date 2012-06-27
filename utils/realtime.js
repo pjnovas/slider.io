@@ -64,8 +64,8 @@ exports.start = function(app){
 	  
 	  socket.on('updatedItemList', function (data) {
 	  	if (data.pass === rooms[roomName].passcode) {	 
-		  	rooms[roomName].currItemIndex = data.currIndex;
-		    socket.broadcast.to(roomName).emit('updatedItemList', { itemIndex: data.currIndex });
+		  	rooms[roomName].currItemIndex = data.index;
+		    socket.broadcast.to(roomName).emit('updatedItemList', { itemIndex: data.index });
 		  }
 	  });
 	  

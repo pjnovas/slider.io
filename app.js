@@ -10,6 +10,7 @@ process.on("uncaughtException", function (err) {
 	console.log('>>>>>> Unhandled Exception Ocurred: ' + err);
 });
 */
+
 app.set('view engine', 'mustache');
 app.register(".mu", stache);
 app.set('views', __dirname + '/views');
@@ -24,8 +25,8 @@ router.configure(app);
 
 app.use(express.static(__dirname + '/public'));
 
-var port = process.env.PORT || 5000;
+var port = process.env.PORT || 3000;
 realtime.start(app);
 app.listen(port);
 
-console.log('SliderIO Server started at port %d', app.address().port);
+console.log('SliderIO Server started at port %d', port);
