@@ -44,7 +44,7 @@ exports.getSliderList = function(done, error){
 	fsAccess.getDirectoryFiles(error, '/sliders', sendFiles);
 };
 
-exports.saveSlider = function(name, data, done, error){
+function saveSlider(name, data, done, error){
 	var fileName = '/sliders/' + name + '.json';
 		
 	function writeFile(){
@@ -64,6 +64,7 @@ exports.saveSlider = function(name, data, done, error){
 	
 	fsAccess.fileExist(error, fileName, versionate, doesnot);
 };
+exports.saveSlider = saveSlider;
 
 exports.defaultSlider = function(done, error){
 	fsAccess.getJSONFile(error, '/sliders/base/slider.json', done);
@@ -144,19 +145,30 @@ exports.getSliderZIP = function(_slider, done, error){
 	buildOffLineHTML(error, _slider, addIndexHTML);
 };
 
-exports.revert = function(index, callback){
-	
-	function sortFilesDesc(err, files){
-		files.sort(function(a,b){return b-a});
-		
+exports.revert = function(error, index, _slider, done){
+	var fileRecovered;
+	function removePrevious(){
+		fsAccess.removeFile(error, "/sliders/cache/" + fileRecovered, done);
 	}
 	
-	fsAccess.getDirectoryFiles(error, '/sliders/cache', sortFiles);
-}
-
-
-
-
-
-
+	function saveNew(recovered){
+		var fileName = '/sliders/' + _slider.name + '.json';
+		fsAccess.saveJSONFile(error, fileName, recovered, removePrevious);
+	}
+	
+	function sortFilesDesc(allfiles){
+		var files = [];
+		for(var i=0; i<allfiles.length;i++){
+			if (allfiles[i].indexOf(_slider.name + '.json-') > -1)
+				files.push(allfiles[i]);
+		}
+		
+		files.sort(function(a, b){ return b-a } );
+		fileRecovered = files[index-1];
+		fsAccess.getJSONFile(error, '/sliders/cache/' + files[index-1], saveNew);
+	}
+	
+	var path = '/sliders/cache/';
+	fsAccess.getDirectoryFiles(error, path, sortFilesDesc);
+};
 

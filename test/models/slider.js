@@ -35,8 +35,6 @@ describe('Sliders versions', function(){
 				}, function(err){
 					done(err);
 				});
-				
-				
 			}
 			
 			doVersion();
@@ -47,10 +45,36 @@ describe('Sliders versions', function(){
 		util.cleanSliderTrash(sliderName, done);
 	});
 
-  it('should sort the files desc and pick the first one', function(done){
-    var idx = -1;
-    //slider.revert()
-    done();
+  it('should revert the slider one step back', function(done){
+    var initIndex = sliderMock.initIndex;
+    
+    slider.revert(done, 1, sliderMock, function(){
+    	
+    	slider.getSlider(sliderMock.name,	function(sliderGot){
+    		
+    		expect(sliderGot.initIndex).to.equal(initIndex-1);
+    		done(); 
+    		
+    	}, done);
+    		
+    });
+    
+  });
+  
+  it('should revert the slider three step back', function(done){
+    var initIndex = sliderMock.initIndex;
+    
+    slider.revert(done, 3, sliderMock, function(){
+    	
+    	slider.getSlider(sliderMock.name,	function(sliderGot){
+    		
+    		expect(sliderGot.initIndex).to.equal(initIndex-3);
+    		done(); 
+    		
+    	}, done);
+    		
+    });
+    
   });
   
 });
