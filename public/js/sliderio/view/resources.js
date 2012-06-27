@@ -30,6 +30,7 @@ sliderio.view.resources = (function($){
 			resizable: false,
 			zIndex: 500,
 			modal: true,
+			dialogClass: 'resources-bg',
 			open: function(){
 				clearInterval(timerId);
 				listenToFile();
