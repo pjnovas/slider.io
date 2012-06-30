@@ -22,6 +22,13 @@ sliderio.view.partials = (function($){
 			});
 		},
 		
+		importStyles: function(done) {
+			$.get('/partialViews/_style.html', function(templates) {
+			  injectToBody(templates);
+			  done();
+			});
+		},
+		
 		importEditor: function(done) {
 			$.get('/partialViews/_editor.html', function(templates) {
 			  injectToBody(templates);

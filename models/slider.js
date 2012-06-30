@@ -109,14 +109,20 @@ function getOfflineFiles(_slider, done, error){
 
 function buildOffLineHTML(error, _slider, done){
 	
-	function renderHTML(indexHtml, slidesView){
-		var html = mustache.to_html(indexHtml, { title: _slider.config.title, partialView: slidesView});
+	function renderHTML(indexHtml, slidesView, slideStyles){
+		var html = mustache.to_html(indexHtml, { 
+			title: _slider.config.title, 
+			partialView: slidesView, 
+			partialStyles: slideStyles
+		});
+	 	
 	 	done(html);
 	}
 	
 	fsAccess.getFiles(error, [
 				'/offline/index.html', 
-				'/public/partialViews/_slides.html'
+				'/public/partialViews/_slides.html',
+				'/public/partialViews/_style.html'
 			], 'ascii', renderHTML);
 };
 

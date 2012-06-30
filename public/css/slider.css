@@ -137,6 +137,7 @@ h1, h2, h3 {
 	float:left;
 	opacity: 0.4;
 	display:none;
+	position: relative;
 }
 
 #slider-list>li.current {

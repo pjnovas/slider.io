@@ -3,7 +3,7 @@
 	{{#fields}}
 		
 		{{#title}}
-			<h1 {{#title.align}}style="text-align:{{title.align}}"{{/title.align}}>
+			<h1 style="{{#title.align}}text-align:{{title.align}}{{/title.align}}; {{>style}}">
 				{{#htmlFormat}}{{title.text}}{{/htmlFormat}}
 			</h1>
 		{{/title}}

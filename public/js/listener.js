@@ -52,10 +52,16 @@ $(document).ready(function(){
 	
 	var jsonReady = $.Deferred();
 	var templatesReady = $.Deferred();
-	$.when(socketIOReady, jsonReady, templatesReady).done(initSlider);
+	var stylesReady = $.Deferred();
+	
+	$.when(socketIOReady, jsonReady, templatesReady, stylesReady).done(initSlider);
 
 	sliderio.view.partials.importSlides(function(){
 		templatesReady.resolve();
+	});
+	
+	sliderio.view.partials.importStyles(function(){
+		stylesReady.resolve();
 	});
 	
 	sliderio.service.slider.getSlides(function(data){

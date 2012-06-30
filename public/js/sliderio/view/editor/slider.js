@@ -340,9 +340,10 @@ sliderio.view.editor.slider = (function($){
 	return {
 		build: function(done){
 			var dPartial = $.Deferred(),
-				dSlides = $.Deferred();
+				dSlides = $.Deferred(),
+				dStyles = $.Deferred();
 				
-			$.when(dSlides, dPartial).done(function(data){
+			$.when(dSlides, dPartial, dStyles).done(function(data){
 				slides = data;
 				attachEvents();
 				done();
@@ -350,6 +351,10 @@ sliderio.view.editor.slider = (function($){
 			
 			sliderio.service.slider.getSlides(function(data){
 				dSlides.resolve(data);
+			});
+			
+			sliderio.view.partials.importStyles(function(){
+				dStyles.resolve();
 			});
 			
 			sliderio.view.partials.importEditor(function(){

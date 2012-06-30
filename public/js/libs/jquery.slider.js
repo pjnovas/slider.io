@@ -149,16 +149,10 @@ var Slider = (function($) {
 					
 					return text.replace(/\[b\]/g, '<b>').replace(/\[\/b\]/, '</b>')
 									.replace(/\[i\]/g, '<i>').replace(/\[\/i\]/, '</i>');
-					
-					//TODO: color & links
-					/*
-					var colorPattern = /\[c (#)?([0-9a-fA-F]{3})([0-9a-fA-F]{3})?\]/g;
-					var colors = text.match(colorPattern);
-					*/
 				}
 			};
 			
-			sContent = $.mustache(template(type), data);
+			sContent = $.mustache(template(type), data, {'style': template('fieldStyle')});
 			fContent = $.mustache(template('footer'), data);
 			
 			curr.append(sContent).append(fContent).prop('data-built', true);

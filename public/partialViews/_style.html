@@ -1,0 +1,82 @@
+
+<script id="fieldStyle-tmpl" type="text/template">
+
+{{#style}}
+
+	{{#position}}
+		position: absolute;
+		top:{{top}}%; 
+		left:{{left}}%;
+	{{/position}}
+	
+	{{#border}}
+		
+		{{#radius}}
+			-moz-border-radius: {{top}}% {{right}}% {{bottom}}% {{left}}%;
+		  -webkit-border-radius: {{top}}% {{right}}% {{bottom}}% {{left}}%;
+		  border-radius: {{top}}% {{right}}% {{bottom}}% {{left}}%;
+		{{/radius}}
+		
+		{{#size}}
+			border-width: {{top}}px {{right}}px {{bottom}}px {{left}}px;
+		{{/size}}
+		
+		{{#color}}
+			border-color: rgb({{r}}, {{g}}, {{b}});
+		{{/color}}
+		border-style: solid; 
+		
+	{{/border}}
+	
+	{{#font}}
+		{{#name}}
+			font-family: {{name}}; 
+		{{/name}}
+		
+		{{#color}}
+			{{#r}}
+				color: rgb({{r}}, {{g}}, {{b}});			
+			{{/r}}
+		{{/color}}
+		
+	{{/font}}
+	
+	{{#background}}
+	
+		{{#color}}
+			{{#r}}
+				{{#alpha}}
+					background-color: rgba({{r}}, {{g}}, {{b}}, {{alpha}});
+				{{/alpha}}
+				{{^alpha}}
+					background-color: rgb({{r}}, {{g}}, {{b}});			
+				{{/alpha}}
+				-moz-box-shadow: 0px 0px 10px rgb({{r}}, {{g}}, {{b}});
+				-webkit-box-shadow: 0px 0px 10px rgb({{r}}, {{g}}, {{b}});
+				box-shadow: 0px 0px 10px rgb({{r}}, {{g}}, {{b}});
+			{{/r}}
+			
+			{{^r}}
+				background-color: {{color}};
+			{{/r}}
+		{{/color}}
+		
+		{{#image}}
+			{{#high}}
+				background-image: url('images/{{high}}');
+			{{/high}}
+			
+			{{#seamless}}
+				background-position: repeat;
+			{{/seamless}}
+			{{^seamless}}
+				background-size: 100% 100%;
+			{{/seamless}}
+		{{/image}}
+		
+	{{/background}}
+
+{{/style}}
+
+</script>
+

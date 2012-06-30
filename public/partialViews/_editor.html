@@ -20,7 +20,7 @@
 	{{#fields}}
 		
 		{{#title}}
-			<h1 class="editorField absoluteField" style="{{#title.style.position}}top:{{top}}%; left:{{left}}%;{{/title.style.position}}">
+			<h1 class="editorField absoluteField" style="{{>style}}">
 				<span {{#title.align}}style="text-align:{{title.align}}"{{/title.align}}>{{title.text}}</span>
 				<textarea data-field="title" class="field" 
 					{{#title.align}}style="text-align:{{title.align}}"{{/title.align}}>{{title.text}}</textarea>
