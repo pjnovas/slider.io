@@ -124,6 +124,31 @@ a, span {
 	padding: 10px 9px;
 }
 
+#delete-field,
+#delete-field:visited {
+	padding: 10px 12px;
+	font-size: 100px;
+	font-weight: bold;
+	font-family: Arial;
+	line-height: 1;
+	position: absolute;
+	text-decoration: none;
+	bottom: 100px;
+	left: 20px;
+	color: #E03939;
+	width: 65px;
+	height: 100px;
+	border-radius: 5px;
+}
+
+#delete-field.active {
+	background-color: #C4C4C4;
+}
+
+#delete-field.hover {
+	background-color: #E03939;
+	color: #C4C4C4;
+}
 
 /*
  * Action Slides: Insert & Remove Slides
@@ -558,14 +583,13 @@ a, span {
 
 .editorField,
 .newListItemli {
-	border: dashed 1px #999;
+	/*border: dashed 1px #999;*/
 	position:relative;
 }
 
 
 .closePopup, .closePopup:visited,
-.remove, .remove:visited,
-.moveField, .moveField:visited {
+.remove, .remove:visited {
 	position: absolute;
 	border-radius: 30px;
 	padding: 5px;
@@ -575,19 +599,6 @@ a, span {
 	color: white;
 	line-height: 0.5;
 	text-decoration: none;
-}
-
-.moveField, .moveField:visited {
-	background-color: #313131;
-	left: 0;
-	top: 0;
-	border-radius: 0 0 10px 0;
-	padding: 6px 3px 4px 3px;
-	cursor: move;
-	font-size: 18px;
-	line-height: 0.5;
-	color: #ECECEC;
-	text-indent: -2px;
 }
 
 .closePopup, .closePopup:visited,
@@ -608,18 +619,23 @@ li.editorField,
 	width:90% !important;
 }
 
-textarea {
+.sliderWrapper textarea {
+	display: none;
+}
+
+textarea, .sliderWrapper span {
 	overflow: hidden;
 	outline: none;
 	vertical-align: top;
 	resize: none;
 	width: 99%;
 	color: inherit;
+	display: inline-block;
 }
 
-h1 textarea, 
-h2 textarea, 
-h3 textarea, 
+h1 textarea, h1 span, 
+h2 textarea, h2 span,
+h3 textarea, h3 span,
 ul.bulletList li textarea,
 code textarea {
 	border: none;

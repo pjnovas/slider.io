@@ -133,11 +133,20 @@ sliderio.view.editor.slider = (function($){
 		$("li.current").sortable({
 			revert: true,
 			items: '.editorField',
-			handle: 'a.moveField',
 			update: function(event, ui) {
 				hydrateSlide(sliderio.view.toolbox.currentIndex());
 			}
 		}).disableSelection();
+		
+		$("#delete-field").droppable({
+			activeClass: "active",
+			hoverClass: "hover",
+			tolerance: "pointer",
+			drop: function( event, ui ) {
+				$(ui.draggable).remove();
+				hydrateSlide(sliderio.view.toolbox.currentIndex());
+			}
+		})
 		
 		$('.fTextAlign', $("li.current")).each(function(){
 			var ele = $(this).parents('.editorField');
@@ -152,7 +161,7 @@ sliderio.view.editor.slider = (function($){
 					self.style.height = 'auto';
 					self.style.height = self.scrollHeight + 'px';
 				}, 0);
-		});
+		}).hide();
 	};
 	
 	var attachEvents = function(){
@@ -192,6 +201,18 @@ sliderio.view.editor.slider = (function($){
 			hydrateSlide(sliderio.view.toolbox.currentIndex());
 		});
 		
+		$('textarea', liCurrent).live('blur', function(){
+			var txt = $(this),
+				span = txt.prev('span');
+				
+			span.text(txt.val()).show();
+			txt.hide();
+		});
+		
+		$('span', 'li.current').live('dblclick', function(){
+			$(this).hide().nextAll('textarea').show().attr('rows', 1).css('height', '1em').focus();
+		});
+		
 		$('a.remove', liCurrent).live('click', function(){
 			$(this).parent('.editorField').remove();
 			hydrateSlide(sliderio.view.toolbox.currentIndex());
@@ -199,6 +220,7 @@ sliderio.view.editor.slider = (function($){
 		
 		$('.fTextAlign a', liCurrent).live('click', function(){
 			var ele = $(this).parents('.editorField');
+			$('span', ele).css('text-align', $(this).attr('data-align'));
 			$('textarea', ele).css('text-align', $(this).attr('data-align'));
 			$('.fTextAlign a.selected', ele).removeClass('selected');
 			$(this).addClass('selected');
