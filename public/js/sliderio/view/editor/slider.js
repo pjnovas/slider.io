@@ -105,8 +105,20 @@ sliderio.view.editor.slider = (function($){
 					break;
 				case 'code':
 					field[fieldName].language = 'javascript';
-						field[fieldName].script = $(this).val();
-						break;
+					field[fieldName].script = $(this).val();
+					break;
+				}
+				
+				var fl = $(this).parents('.editorField');
+				if (fl.hasClass('absoluteField')){
+					field[fieldName].style = field[fieldName].style || {};
+					
+					var calPos = {
+						top: (fl.position().top * 100) / $("li.current").height(),
+						left: (fl.position().left * 100) / $("li.current").width()
+					};
+					
+					field[fieldName].style.position = calPos;
 				}
 				
 				slides[idx].fields.push(field);
@@ -138,10 +150,23 @@ sliderio.view.editor.slider = (function($){
 			}
 		}).disableSelection();
 		
+		$(".absoluteField", "li.current").draggable({
+			revert: 'invalid'
+		});
+		
+		$("li.current").droppable({
+			accept: ".absoluteField",
+			tolerance: "fit",
+			drop: function( event, ui ) {
+				hydrateSlide(sliderio.view.toolbox.currentIndex());
+			}
+		});
+		
 		$("#delete-field").droppable({
 			activeClass: "active",
 			hoverClass: "hover",
 			tolerance: "pointer",
+			accept: '.editorField',
 			drop: function( event, ui ) {
 				$(ui.draggable).remove();
 				hydrateSlide(sliderio.view.toolbox.currentIndex());
@@ -181,6 +206,17 @@ sliderio.view.editor.slider = (function($){
 					self.style.height = 'auto';
 					self.style.height = self.scrollHeight + 'px';
 				}, 0);
+		});
+			
+		$('.sliderWrapper').live('click', function(){
+			$('.editorField.selected').removeClass('selected');
+		});
+			
+		$('.editorField', liCurrent).live('click', function(e){
+			$('.editorField.selected').removeClass('selected');
+			$(this).addClass('selected');
+			
+			e.stopPropagation();
 		});
 			
 		$('textarea.newListItem', liCurrent).live('click', function(){

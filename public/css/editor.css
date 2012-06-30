@@ -585,10 +585,16 @@ a, span {
 
 .editorField,
 .newListItemli {
-	/*border: dashed 1px #999;*/
 	position:relative;
 }
 
+.absoluteField {
+	position:absolute;
+}
+
+.editorField.selected {
+	border: dashed 1px #515151;
+}
 
 .closePopup, .closePopup:visited,
 .remove, .remove:visited {
@@ -814,5 +820,4 @@ h2.editorField:hover .fTextAlign {
 	display: block;
 	margin: 4px 0;
 }
-	
 	
