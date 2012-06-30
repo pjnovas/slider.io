@@ -60,7 +60,8 @@ var Slider = (function($) {
 	};
 	
 	var resize = function(){
-		var h = $(mainCtn).height(),
+		var h100 = 700,
+			h = $(mainCtn).height(),
 			w = $(mainCtn).width(),
 			mr = 0,
 			mt = (h * 0.05),
@@ -80,6 +81,8 @@ var Slider = (function($) {
 		else {
 			mr = gap * 0.75;
 		}
+		
+		$('html').css('font-size', ((h*100)/h100) + '%');
 		
 		for(var i=0; i< slideData.length; i++){
 			if(slideData[i].isChapter)

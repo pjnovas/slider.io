@@ -87,7 +87,7 @@ a, span {
 	line-height: 1.6;
 	
 	position: absolute;
-	top: 40%;
+	top: 50%;
 	text-decoration: none;
 }
 
@@ -275,7 +275,7 @@ a, span {
 #toolbox {
 	position:absolute;
 	top: 0;
-	left: 38%;
+	right: 0;
 	background-color: #FFF;	
 	box-shadow: 2px 3px 7px gray;
 	list-style: none;
@@ -284,17 +284,13 @@ a, span {
 	border: solid 1px silver;
 	border-width: 1px 1px 0 1px;
 	z-index: 1000;
-	opacity: 0.1;
-}
-
-#toolbox:hover {
-	opacity: 1;
+	width: 5%;
 }
 
 #toolbox li {
-	width: 60px;
-	height: 60px;
-	float: left;
+	width: 5%;
+	height: 5%;
+	display: block;
 }
 
 #toolbox li a {
@@ -302,8 +298,8 @@ a, span {
 	line-height: 1;
 	padding: 7px 5px;
 	color: black;
-	margin: 10px;
-	font-size: 30px;
+	font-size: 1.9em;
+	font-size: 1.9rem;
 }
 
 #toolbox li a:hover {
@@ -311,13 +307,14 @@ a, span {
 }
 
 #toolbox li a.h1 {
-	font-size: 30px;
-	padding: 5px 5px 0px 5px;
+	font-size: 1.9em;
+	font-size: 1.9rem;
 	border-radius: 5px;
 }
 
 #toolbox li a.h2 {
-	font-size: 25px;
+	font-size: 1.5em;
+	font-size: 1.5rem;
 	padding: 10px 5px 0px 5px;
 	border-radius: 5px;
 }
@@ -354,6 +351,7 @@ a, span {
 #mainConfigs input {
 	font-family: 'Port Lligat Sans', 'sans';
 	padding: 2px;
+	font-size: inherit;
 }
 
 .style-container {
@@ -365,11 +363,13 @@ a, span {
 	padding: 20px 0 0 0;
 	margin: 10px 0;
 	border-top: 3px solid #8F8F8F;
+	font-size: 25px;
 }
 
 .style-container h3 {
 	border-top: 1px solid silver;
 	padding: 10px 0;
+	font-size: 20px;
 }
 
 .cfg-buttons,
@@ -395,6 +395,7 @@ a, span {
 .cfg-header h1 {
 	color: #FFF;
 	margin: 7px;
+	font-size: 30px;
 }
 
 .cfg-buttons {
@@ -409,12 +410,12 @@ a, span {
 	text-decoration: none;
 	border: solid 1px silver;
 	height: 30px;
-	line-height: 2;
 	display: inline-block;
 	width: 30%;
 	text-align: center;
 	margin: 8px 10px;
 	border-radius: 10px;
+	font-size: 20px;
 }
 
 .cfg-buttons a.revert { 
@@ -445,6 +446,7 @@ a, span {
 .cfg-field-row {
 	display: block;
 	margin: 5px 0;
+	font-size: 16px;
 }
 
 .cfg-field-row label {
@@ -516,7 +518,7 @@ a, span {
 	width: 50px;
 	height: 50px;
 	border: solid 1px silver;
-	margin: 30px 115px;
+	margin: 11% 40%;
 	display: inline-block;
 }
 
@@ -642,6 +644,7 @@ code textarea {
 	text-align: center;
 	background-color: transparent;
 	color: inherit;
+	font-size: inherit;
 }
 
 ul.bulletList li textarea {
@@ -722,7 +725,7 @@ h2.editorField:hover .fTextAlign {
 
 .fTextAlign a,
 .fTextAlign a:visited {
-	font-size: 30px;
+	font-size: 26px;
 	text-decoration: none;
 	color: #444;
 	float:left;
@@ -796,6 +799,7 @@ h2.editorField:hover .fTextAlign {
 	text-align: center;
 	border-radius: 0 0 10px 10px;
 	font-family: 'Port Lligat Sans', 'sans';
+	font-size: 18px;
 }
 
 #save-msg.success {
