@@ -61,7 +61,7 @@ var Slider = (function($) {
 	
 	var resize = function(){
 		var h100 = 700,
-			h = $(mainCtn).height(),d
+			h = $(mainCtn).height(),
 			w = $(mainCtn).width(),
 			mr = 0,
 			mt = (h * 0.05),
