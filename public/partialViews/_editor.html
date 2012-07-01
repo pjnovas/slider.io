@@ -20,28 +20,28 @@
 	{{#fields}}
 		
 		{{#title}}
-			<h1 class="editorField absoluteField" style="{{>style}}">
-				<span {{#title.align}}style="text-align:{{title.align}}"{{/title.align}}>{{title.text}}</span>
-				<textarea data-field="title" class="field" 
-					{{#title.align}}style="text-align:{{title.align}}"{{/title.align}}>{{title.text}}</textarea>
+			<h1 class="editorField" style="{{>style}}">
+				<span>{{title.text}}</span>
+				<textarea data-field="title" class="field">{{title.text}}</textarea>
 				<div class="fTextAlign">
 					<a href="#" data-align="left" class="icon-align-left"></a>
 					<a href="#" data-align="center" class="icon-align-center"></a>
 					<a href="#" data-align="right" class="icon-align-right"></a>
 				</div>
+				<a href="#" data-align="left" class="icon-pushpin"></a>
 			</h1>
 		{{/title}}
 		
 		{{#subTitle}}
-			<h2 class="editorField">
-				<span {{#subTitle.align}}style="text-align:{{subTitle.align}}"{{/subTitle.align}}>{{subTitle.text}}</span>
-				<textarea data-field="subTitle" class="field"
-					{{#subTitle.align}}style="text-align:{{subTitle.align}}"{{/subTitle.align}}>{{subTitle.text}}</textarea>
+			<h2 class="editorField" style="{{>style}}">
+				<span>{{subTitle.text}}</span>
+				<textarea data-field="subTitle" class="field">{{subTitle.text}}</textarea>
 				<div class="fTextAlign">
 					<a href="#" data-align="left" class="icon-align-left"></a>
 					<a href="#" data-align="center" class="icon-align-center"></a>
 					<a href="#" data-align="right" class="icon-align-right"></a>
 				</div>
+				<a href="#" data-align="left" class="icon-pushpin"></a>
 			</h2>
 		{{/subTitle}}
 		

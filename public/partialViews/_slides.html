@@ -3,13 +3,13 @@
 	{{#fields}}
 		
 		{{#title}}
-			<h1 style="{{#title.align}}text-align:{{title.align}}{{/title.align}}; {{>style}}">
+			<h1 style="{{>style}}">
 				{{#htmlFormat}}{{title.text}}{{/htmlFormat}}
 			</h1>
 		{{/title}}
 		
 		{{#subTitle}}
-			<h2 {{#subTitle.align}}style="text-align:{{subTitle.align}}"{{/subTitle.align}}>
+			<h2 style="{{>style}}">
 				{{#htmlFormat}}{{subTitle.text}}{{/htmlFormat}}
 			</h2>
 		{{/subTitle}}

@@ -78,18 +78,19 @@ sliderio.view.editor.slider = (function($){
 			var fieldName = $(this).attr('data-field');
 			var field = {};
 			field[fieldName] = {};
+			field[fieldName].style = field[fieldName].style || {};
+			
+			var ele = $(this).parents('.editorField');
 			
 			switch(fieldName) {
 				case 'title':
 				case 'subTitle':
 					field[fieldName].text = $(this).val();
-					var txtAlign = $(this).css('text-align');
+					var txtAlign = ele.css('text-align');
 					if (txtAlign){
-						if (txtAlign === 'center' && field[fieldName].align)
-							delete field[fieldName].align;
-						else {
-							field[fieldName].align = txtAlign;
-						}
+						if (txtAlign === 'center' && field[fieldName].style.align)
+							delete field[fieldName].style.align;
+						else field[fieldName].style.align = txtAlign;
 					}
 					break;
 				case 'list':
@@ -109,16 +110,15 @@ sliderio.view.editor.slider = (function($){
 					break;
 				}
 				
-				var fl = $(this).parents('.editorField');
-				if (fl.hasClass('absoluteField')){
-					field[fieldName].style = field[fieldName].style || {};
-					
-					var calPos = {
-						top: (fl.position().top * 100) / $("li.current").height(),
-						left: (fl.position().left * 100) / $("li.current").width()
+				if (ele.hasClass('absoluteField')){
+					field[fieldName].style.position = {
+						top: (ele.position().top * 100) / $("li.current").height(),
+						left: (ele.position().left * 100) / $("li.current").width()
 					};
-					
-					field[fieldName].style.position = calPos;
+				}
+				else {
+					if(field[fieldName].style) 
+						delete field[fieldName].style.position;
 				}
 				
 				slides[idx].fields.push(field);
@@ -141,10 +141,15 @@ sliderio.view.editor.slider = (function($){
 		$('textarea').attr('rows', 1).css('height', '1em');
 		
 		Slider.updateList(10);
-			
+		
+		$(".editorField", "li.current").each(function(){
+			if($(this).css("position") === "absolute")
+				$(this).addClass("absoluteField");
+		});
+
 		$("li.current").sortable({
 			revert: true,
-			items: '.editorField',
+			items: '.editorField:not(.absoluteField)',
 			update: function(event, ui) {
 				hydrateSlide(sliderio.view.toolbox.currentIndex());
 			}
@@ -175,7 +180,7 @@ sliderio.view.editor.slider = (function($){
 		
 		$('.fTextAlign', $("li.current")).each(function(){
 			var ele = $(this).parents('.editorField');
-			var align = $('textarea', ele).css('text-align');
+			var align = ele.css('text-align');
 			if(!align) align = 'center';
 			$('a.icon-align-' + align, $(this)).addClass('selected'); 
 		});
@@ -256,11 +261,23 @@ sliderio.view.editor.slider = (function($){
 		
 		$('.fTextAlign a', liCurrent).live('click', function(){
 			var ele = $(this).parents('.editorField');
-			$('span', ele).css('text-align', $(this).attr('data-align'));
-			$('textarea', ele).css('text-align', $(this).attr('data-align'));
+			ele.css('text-align', $(this).attr('data-align'));
+			
 			$('.fTextAlign a.selected', ele).removeClass('selected');
 			$(this).addClass('selected');
 			hydrateSlide(sliderio.view.toolbox.currentIndex());
+		});
+		
+		$('a.icon-pushpin', liCurrent).live('click', function(){
+			var ele = $(this).parents('.editorField');
+			ele.toggleClass('absoluteField');
+			
+			if (ele.hasClass('absoluteField'))
+				ele.css('width', 'auto');
+			else ele.css('position','').css('top','').css('left','');
+
+			hydrateSlide(sliderio.view.toolbox.currentIndex());
+			refresh();
 		});
 		
 		/*
