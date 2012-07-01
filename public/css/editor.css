@@ -585,25 +585,23 @@ a, span {
 
 .editorField,
 .newListItemli {
-	position:relative;
+	position:absolute;
+	width: auto;
+	z-index: 5;
 }
 
 .editorField.selected {
 	border: dashed 1px #515151;
 }
 
-.absoluteField {
-	position:absolute;
-	z-index: 5;
-}
-
 .editorField .icon-pushpin,
-.editorField .icon-pushpin:visited {
+.editorField .icon-pushpin:visited,
+.editorField .edit-resource,
+.editorField .edit-resource:visited {
 	display: none;
 	
 	position: absolute;
 	top: 0px;
-	left: -50px;
 	width: 50px;
 	height: 30px;
 	
@@ -618,13 +616,26 @@ a, span {
 	text-shadow: 2px 2px silver;
 }
 
+.editorField .icon-pushpin,
+.editorField .icon-pushpin:visited {
+	left: -50px;
+}
+
+
 .icon-pushpin:hover,
-.editorField:hover .icon-pushpin {
+.editorField:hover .icon-pushpin, 
+.editorField:hover .edit-resource {
 	display: block;
 }
 
 .absoluteField:hover .icon-pushpin {
 	text-shadow: 0px 0px silver;
+	color: #444;
+}
+
+.editorField .edit-resource {
+	top:0px;
+	right:-50px;
 	color: #444;
 }
 
@@ -693,6 +704,8 @@ ul.bulletList li textarea {
 	text-align: left;
 }
 
+
+/*
 .imageOptions {
 	display: none;
 	position: absolute;
@@ -744,7 +757,7 @@ ul.bulletList li textarea {
 	font-size: 80px;
 	margin-left: 50px;
 }
-
+*/
 .fTextAlign {
 	display: none;
 	position: absolute;

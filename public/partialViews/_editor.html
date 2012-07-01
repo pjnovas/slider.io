@@ -28,7 +28,6 @@
 					<a href="#" data-align="center" class="icon-align-center"></a>
 					<a href="#" data-align="right" class="icon-align-right"></a>
 				</div>
-				<a href="#" data-align="left" class="icon-pushpin"></a>
 			</h1>
 		{{/title}}
 		
@@ -41,23 +40,12 @@
 					<a href="#" data-align="center" class="icon-align-center"></a>
 					<a href="#" data-align="right" class="icon-align-right"></a>
 				</div>
-				<a href="#" data-align="left" class="icon-pushpin"></a>
 			</h2>
 		{{/subTitle}}
 		
 		{{#image}}
-			<div class="editorField editor-image">
-				<img data-field-url="{{image.url}}" data-field-size="{{image.size}}"
-					src="images/{{image.url}}" class="{{image.size}} field" data-field="image">
-				<div class="imageOptions">
-					<ul>
-						<li><a href="#" data-field-url="{{image.url}}" class="icon-edit edit-resource"></a></li>
-						<li><a href="#" class="icon-picture edit-big"></a></li>
-						<li><a href="#" class="icon-picture edit-normal"></a></li>
-						<li><a href="#" class="icon-picture edit-small"></a></li>
-					</ul>
-				</div>
-			</div>
+			<img data-field-url="{{image.url}}" style="{{>style}}" class="field editorField editor-image" 
+				src="images/{{image.url}}" data-field="image">
 		{{/image}}
 	
 		{{#list}}
@@ -75,6 +63,7 @@
 		
 		{{#code}}
 			<code class="editorField">
+				<span>{{code.script}}</span>
 				<textarea data-field="code" class="field">{{code.script}}</textarea>
 			</code>
 		{{/code}}

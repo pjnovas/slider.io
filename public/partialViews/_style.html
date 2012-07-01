@@ -7,14 +7,22 @@
 		text-align: {{align}}; 
 	{{/align}}
 	
+	position: absolute;
+	
 	{{#position}}
-		position: absolute;
 		top:{{top}}%; 
 		left:{{left}}%;
+	{{/position}}
+	{{^position}}
+		top:0; 
+		left:0;
 	{{/position}}
 	
 	{{#size}}
 		width:{{width}}%; 
+	{{/size}}
+	{{^size}}
+		width: auto;
 	{{/size}}
 	
 	{{#border}}
