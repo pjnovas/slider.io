@@ -44,8 +44,10 @@
 		{{/subTitle}}
 		
 		{{#image}}
-			<img data-field-url="{{image.url}}" style="{{>style}}" class="field editorField editor-image" 
+		<div class="editorField isImage" style="{{>style}}">
+			<img data-field-url="{{image.url}}" class="field editor-image" 
 				src="images/{{image.url}}" data-field="image">
+		</div>
 		{{/image}}
 	
 		{{#list}}

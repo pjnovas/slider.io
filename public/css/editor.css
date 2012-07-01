@@ -639,6 +639,14 @@ a, span {
 	color: #444;
 }
 
+.editorField .editor-image {
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	position:absolute;
+}
+
 
 .closePopup, .closePopup:visited,
 .remove, .remove:visited {

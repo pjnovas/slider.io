@@ -56,7 +56,12 @@ sliderio.view.editor.slider = (function($){
 				break;
 			case 'image':
 				field[fieldName].url = '';
-				field[fieldName].size = 'small';
+				field[fieldName].style = {
+					size: {
+						width: 50,
+						height: 50
+					}
+				};
 				break;
 			case 'code':
 				field[fieldName].language = 'javascript';
@@ -108,12 +113,11 @@ sliderio.view.editor.slider = (function($){
 					break;
 				case 'image':
 			
-					ele = $(this);
-					field[fieldName].url = ele.attr('data-field-url');
-					field[fieldName].size = ele.attr('data-field-size');
+					field[fieldName].url = $(this).attr('data-field-url');
+					field[fieldName].size = $(this).attr('data-field-size');
 					
 					var newW = (ele.width() * 100) / $("li.current").width();
-					var newH = (ele.height * 100) / $("li.current").height();
+					var newH = (ele.height() * 100) / $("li.current").height();
 					
 					field[fieldName].style.size = {
 						width: (newW <= 100)? newW : 100,
@@ -153,17 +157,6 @@ sliderio.view.editor.slider = (function($){
 		
 		Slider.updateList(10);
 		
-		$('.editor-image', "li.current").each(function(){
-			var ele = $(this);
-			ele.resizable({ 
-				maxWidth: $("li.current").width() - (ele.position().left + 20),
-				maxHeight: $("li.current").height() - (ele.position().top + 50),
-			  stop: function(event, ui) {
-			  	hydrateSlide(sliderio.view.toolbox.currentIndex());
-			  }
-			});
-		});
-		
 		$(".editorField", "li.current").draggable({
 			revert: 'invalid'
 		});
@@ -201,7 +194,7 @@ sliderio.view.editor.slider = (function($){
 					self.style.height = self.scrollHeight + 'px';
 				}, 0);
 		}).hide();
-		
+
 	};
 	
 	var attachEvents = function(){
@@ -232,16 +225,18 @@ sliderio.view.editor.slider = (function($){
 			$('.editorField.selected').removeClass('selected').resizable('destroy');
 			
 			var ele = $(this);
-			if(!ele.hasClass('editor-image')){
-				ele.addClass('selected').resizable({ 
-					maxWidth: $("li.current").width() - (ele.position().left + 20),
-					maxHeight: $("li.current").height() - (ele.position().top + 50),
-					handles: 'e',
-				  stop: function(event, ui) {
-				  	hydrateSlide(sliderio.view.toolbox.currentIndex());
-				  }
-				});
-			}
+			var handles = "e";
+			if(ele.hasClass('isImage'))
+				handles = "se";
+			
+			ele.addClass('selected').resizable({ 
+				maxWidth: $("li.current").width() - (ele.position().left + 20),
+				maxHeight: $("li.current").height() - (ele.position().top + 50),
+				handles: handles,
+			  stop: function(event, ui) {
+			  	hydrateSlide(sliderio.view.toolbox.currentIndex());
+			  }
+			});
 			
 			e.stopPropagation();
 		});
