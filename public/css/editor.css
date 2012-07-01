@@ -857,3 +857,6 @@ h2.editorField:hover .fTextAlign {
 	margin: 4px 0;
 }
 	
+.ui-dialog {
+	font-size: 80%;
+}

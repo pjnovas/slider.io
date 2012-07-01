@@ -176,7 +176,7 @@ sliderio.view.editor.slider = (function($){
 				$(ui.draggable).remove();
 				hydrateSlide(sliderio.view.toolbox.currentIndex());
 			}
-		})
+		});
 		
 		$('.fTextAlign', $("li.current")).each(function(){
 			var ele = $(this).parents('.editorField');
