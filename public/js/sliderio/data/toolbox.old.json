@@ -13,6 +13,16 @@
 	"label": "Imagen",
 	"field": "image",
 	"class": "icon-picture"
+},
+{
+	"label": "Lista",
+	"field": "list",
+	"class": "icon-list-ul"
+},
+{
+	"label": "Codigo",
+	"field": "code",
+	"class": "icon-list-alt"
 }]
 
 
