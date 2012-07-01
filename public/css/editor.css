@@ -699,8 +699,7 @@ textarea {
 h1 textarea, h1 span, 
 h2 textarea, h2 span,
 h3 textarea, h3 span,
-ul.bulletList li textarea,
-code textarea {
+ul.bulletList li textarea {
 	border: none;
 	text-align: center;
 	background-color: transparent;

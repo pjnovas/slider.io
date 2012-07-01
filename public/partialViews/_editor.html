@@ -64,10 +64,9 @@
 		{{/list}}
 		
 		{{#code}}
-			<code class="editorField">
-				<span>{{code.script}}</span>
-				<textarea data-field="code" class="field">{{code.script}}</textarea>
-			</code>
+			<pre class="editorField">
+				<code data-field="code" class="{{code.language}}">{{code.script}}</code>
+			</pre>
 		{{/code}}
 		
 	{{/fields}}
@@ -86,4 +85,9 @@
 	</details>
 </script>
 
-
+<script id="codeModal-tmpl" type="text/template">
+	<select id="languages">
+		<option value="javascript">javascript</option>
+	</select>
+	<textarea class="script" rows="5"></textarea>
+</script>

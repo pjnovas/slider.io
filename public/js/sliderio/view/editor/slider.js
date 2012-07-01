@@ -4,10 +4,40 @@ sliderio.view = sliderio.view || {};
 sliderio.view.editor = sliderio.view.editor || {};
 
 sliderio.view.editor.slider = (function($){
-	var slides;
+	var slides,
+		currentCode,
+		codeModal;
 	
 	var template = function(name){
 		return $.trim($('#' + name + '-tmpl').html());
+	};
+	
+	var createCodeModal = function() {
+		codeModal = $('<div id="codeModal"></div>').appendTo('.sliderCtn');
+		
+		var modal = $.mustache(template('codeModal'), {});
+		codeModal.append(modal);
+
+		codeModal.dialog({
+			autoOpen: false,
+			title: "Code Block",
+			width: 650,
+			height: 350,
+			resizable: false,
+			zIndex: 500,
+			modal: true,
+			buttons: {
+				"Ok": function(){
+								
+				}
+			},
+			open: function(){
+				
+			},
+			close: function(){
+				
+			}
+		});
 	};
 	
 	var saveSlides = function(callback){
@@ -49,7 +79,7 @@ sliderio.view.editor.slider = (function($){
 		switch(fieldName) {
 			case 'title':
 			case 'subTitle':
-				field[fieldName].text = 'some text here';
+				field[fieldName].text = 'double click me';
 				break;
 			case 'list':
 				field[fieldName].items = [];
@@ -65,7 +95,7 @@ sliderio.view.editor.slider = (function($){
 				break;
 			case 'code':
 				field[fieldName].language = 'javascript';
-				field[fieldName].script = 'put some code here';
+				field[fieldName].script = 'double click me';
 				break;
 		}
 		
@@ -153,7 +183,7 @@ sliderio.view.editor.slider = (function($){
 	};
 	
 	var refresh = function(){
-		$('textarea').attr('rows', 1).css('height', '1em');
+		$('textarea', "li.current").attr('rows', 1).css('height', '1em');
 		
 		Slider.updateList(10);
 		
@@ -271,6 +301,11 @@ sliderio.view.editor.slider = (function($){
 			$(this).hide().nextAll('textarea').show().attr('rows', 1).css('height', '1em').focus();
 		});
 		
+		$('pre', $("li.current")).live('dblclick', function(){
+			currentCode = $(this);
+			$('#codeModal').dialog('open');
+		});
+		
 		$('a.remove', $("li.current")).live('click', function(){
 			$(this).parent('.editorField').remove();
 			hydrateSlide(sliderio.view.toolbox.currentIndex());
@@ -340,6 +375,7 @@ sliderio.view.editor.slider = (function($){
 				
 			$.when(dSlides, dPartial, dStyles).done(function(data){
 				slides = data;
+				createCodeModal();
 				attachEvents();
 				done();
 			});
