@@ -121,6 +121,16 @@ sliderio.view.editor.slider = (function($){
 						delete field[fieldName].style.position;
 				}
 				
+				var newW = (ele.width() * 100) / $("li.current").width();
+				
+				//there is a problem with height == 100%, so ... TBD
+				//var newH = (ele.height * 100) / $("li.current").height();
+				
+				field[fieldName].style.size = {
+					width: (newW <= 100)? newW : 100
+					//height: (newH <= 100)? newH : 100
+				};
+				
 				slides[idx].fields.push(field);
 			});
 			
@@ -205,7 +215,7 @@ sliderio.view.editor.slider = (function($){
 			initSlider();
 		});
 		
-		$('textarea', liCurrent).live('change cut paste drop keydown', function(){
+		$('textarea', $("li.current")).live('change cut paste drop keydown', function(){
 				var self = this;
 				setTimeout(function(){
 					self.style.height = 'auto';
@@ -214,17 +224,25 @@ sliderio.view.editor.slider = (function($){
 		});
 			
 		$('.sliderWrapper').live('click', function(){
-			$('.editorField.selected').removeClass('selected');
+			$('.editorField.selected').removeClass('selected').resizable('destroy');
 		});
 			
-		$('.editorField', liCurrent).live('click', function(e){
-			$('.editorField.selected').removeClass('selected');
-			$(this).addClass('selected');
+		$('.editorField', $("li.current")).live('click', function(e){
+			$('.editorField.selected').removeClass('selected').resizable('destroy');
+			var ele = $(this);
+			ele.addClass('selected').resizable({ 
+				maxWidth: $("li.current").width() - (ele.position().left + 20),
+				maxHeight: $("li.current").height() - (ele.position().top + 50),
+				handles: 'e',
+			  stop: function(event, ui) {
+			  	hydrateSlide(sliderio.view.toolbox.currentIndex());
+			  }
+			});
 			
 			e.stopPropagation();
 		});
 			
-		$('textarea.newListItem', liCurrent).live('click', function(){
+		$('textarea.newListItem', $("li.current")).live('click', function(){
 			var li = $(this).parent('li');
 			
 			var newItem = $("<li>");
@@ -238,11 +256,11 @@ sliderio.view.editor.slider = (function($){
 			$('textarea', newItem).attr('rows', 1).css('height', '1em').focus();
 		});
 		
-		$('textarea', liCurrent).live('change', function(){
+		$('textarea', $("li.current")).live('change', function(){
 			hydrateSlide(sliderio.view.toolbox.currentIndex());
 		});
 		
-		$('textarea', liCurrent).live('blur', function(){
+		$('textarea', $("li.current")).live('blur', function(){
 			var txt = $(this),
 				span = txt.prev('span');
 				
@@ -250,16 +268,16 @@ sliderio.view.editor.slider = (function($){
 			txt.hide();
 		});
 		
-		$('span', 'li.current').live('dblclick', function(){
+		$('span', $("li.current")).live('dblclick', function(){
 			$(this).hide().nextAll('textarea').show().attr('rows', 1).css('height', '1em').focus();
 		});
 		
-		$('a.remove', liCurrent).live('click', function(){
+		$('a.remove', $("li.current")).live('click', function(){
 			$(this).parent('.editorField').remove();
 			hydrateSlide(sliderio.view.toolbox.currentIndex());
 		});
 		
-		$('.fTextAlign a', liCurrent).live('click', function(){
+		$('.fTextAlign a', $("li.current")).live('click', function(){
 			var ele = $(this).parents('.editorField');
 			ele.css('text-align', $(this).attr('data-align'));
 			
@@ -268,7 +286,7 @@ sliderio.view.editor.slider = (function($){
 			hydrateSlide(sliderio.view.toolbox.currentIndex());
 		});
 		
-		$('a.icon-pushpin', liCurrent).live('click', function(){
+		$('a.icon-pushpin', $("li.current")).live('click', function(){
 			var ele = $(this).parents('.editorField');
 			ele.toggleClass('absoluteField');
 			
