@@ -100,8 +100,15 @@ var renderSlider =function(res, _slider, _userType){
 };
 
 var revert = function(_slider, res){
-	slider.revert(-1, function(previous){
-		res.send(previous);
+	slider.revert(function(error){
+			if (error.code === 'notfound')
+				res.send("Slider '" + sliderName + "' NOT FOUND", 404);
+			else res.send(error.toString(), 500);
+		},
+		-1,
+		_slider, 
+		function(previous){
+			res.send(previous);
 	});
 };
 

@@ -174,11 +174,13 @@ exports.revert = function(error, index, _slider, done){
 				files.push(parseInt(allfiles[i].split('-')[1]));
 			}
 		}
-		
-		files.sort(function(a, b){ return b-a } );
-		
-		fileRecovered = _slider.name + '.json-' + files[index-1];
-		fsAccess.getJSONFile(error, '/sliders/cache/' + fileRecovered, saveNew);
+		if(files.length > 0){
+			files.sort(function(a, b){ return b-a } );
+			
+			fileRecovered = _slider.name + '.json-' + files[index-1];
+			fsAccess.getJSONFile(error, '/sliders/cache/' + fileRecovered, saveNew);
+		}
+		else done();
 	}
 	
 	var path = '/sliders/cache/';
