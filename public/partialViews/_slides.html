@@ -3,19 +3,19 @@
 	{{#fields}}
 		
 		{{#title}}
-			<h1 style="{{>style}}">
+			<h1 style="{{>style}}" {{#lazy}}{{#index}}class="lazy lazy-{{index}}"{{/index}}{{/lazy}}>
 				{{#htmlFormat}}{{title.text}}{{/htmlFormat}}
 			</h1>
 		{{/title}}
 		
 		{{#subTitle}}
-			<h2 style="{{>style}}">
+			<h2 style="{{>style}}" {{#lazy}}{{#index}}class="lazy lazy-{{index}}"{{/index}}{{/lazy}}>
 				{{#htmlFormat}}{{subTitle.text}}{{/htmlFormat}}
 			</h2>
 		{{/subTitle}}
 		
 		{{#image}}
-			<img src="images/{{image.url}}" style="{{>style}}">
+			<img src="images/{{image.url}}" style="{{>style}}" {{#lazy}}{{#index}}class="lazy lazy-{{index}}"{{/index}}{{/lazy}}>
 		{{/image}}
 	
 		{{#list}}

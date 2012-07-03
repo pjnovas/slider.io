@@ -28,6 +28,11 @@
 					<a href="#" data-align="center" class="icon-align-center"></a>
 					<a href="#" data-align="right" class="icon-align-right"></a>
 				</div>
+				<div class="lazy-show {{#lazy}}{{#visible}}show{{/visible}}{{^visible}}hide{{/visible}}{{/lazy}}{{^lazy}}show{{/lazy}}">
+					<input type="text" value="{{lazy.index}}" placeholder="0" size="2" maxlength="2">
+					<a href="#" data-align="center" 
+						class="{{#lazy}}{{#visible}}icon-eye-open{{/visible}}{{^visible}}icon-eye-close{{/visible}}{{/lazy}}{{^lazy}}icon-eye-open{{/lazy}}"></a>
+				</div>
 			</h1>
 		{{/title}}
 		
@@ -40,14 +45,24 @@
 					<a href="#" data-align="center" class="icon-align-center"></a>
 					<a href="#" data-align="right" class="icon-align-right"></a>
 				</div>
+				<div class="lazy-show {{#lazy}}{{#visible}}show{{/visible}}{{^visible}}hide{{/visible}}{{/lazy}}{{^lazy}}show{{/lazy}}">
+					<input type="text" value="{{lazy.index}}" placeholder="0" size="2" maxlength="2">
+					<a href="#" data-align="center" 
+						class="{{#lazy}}{{#visible}}icon-eye-open{{/visible}}{{^visible}}icon-eye-close{{/visible}}{{/lazy}}{{^lazy}}icon-eye-open{{/lazy}}"></a>
+				</div>
 			</h2>
 		{{/subTitle}}
 		
 		{{#image}}
-		<div class="editorField isImage" style="{{>style}}">
-			<img data-field-url="{{image.url}}" class="field editor-image" 
-				src="images/{{image.url}}" data-field="image">
-		</div>
+			<div class="editorField isImage" style="{{>style}}">
+				<img data-field-url="{{image.url}}" class="field editor-image" 
+					src="images/{{image.url}}" data-field="image">
+				<div class="lazy-show {{#lazy}}{{#visible}}show{{/visible}}{{^visible}}hide{{/visible}}{{/lazy}}{{^lazy}}show{{/lazy}}">
+					<input type="text" value="{{lazy.index}}" placeholder="0" size="2" maxlength="2">
+					<a href="#" data-align="center" 
+						class="{{#lazy}}{{#visible}}icon-eye-open{{/visible}}{{^visible}}icon-eye-close{{/visible}}{{/lazy}}{{^lazy}}icon-eye-open{{/lazy}}"></a>
+				</div>
+			</div>
 		{{/image}}
 	
 		{{#list}}

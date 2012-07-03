@@ -166,6 +166,13 @@ sliderio.view.editor.slider = (function($){
 					left: (ele.position().left * 100) / $("li.current").width()
 				};
 				
+				var lazy = ele.find('.lazy-show');
+				if (lazy.length > 0){
+					field[fieldName].lazy = {};
+					field[fieldName].lazy.visible = (lazy.hasClass('show'))? true: false;
+					field[fieldName].lazy.index = parseInt(lazy.find('input').val(), 10);
+				}
+				
 				slides[idx].fields.push(field);
 			});
 			
@@ -306,17 +313,36 @@ sliderio.view.editor.slider = (function($){
 			$('#codeModal').dialog('open');
 		});
 		
-		$('a.remove', $("li.current")).live('click', function(){
-			$(this).parent('.editorField').remove();
-			hydrateSlide(sliderio.view.toolbox.currentIndex());
-		});
-		
 		$('.fTextAlign a', $("li.current")).live('click', function(){
 			var ele = $(this).parents('.editorField');
 			ele.css('text-align', $(this).attr('data-align'));
 			
 			$('.fTextAlign a.selected', ele).removeClass('selected');
 			$(this).addClass('selected');
+			hydrateSlide(sliderio.view.toolbox.currentIndex());
+		});
+		
+		/*
+		 * Lazy Show
+		 */
+		
+		$('.lazy-show a', $("li.current")).live('click', function(){
+			var self = $(this),
+				holder = self.parents('.lazy-show');
+			
+			if (holder.hasClass('show')) {
+				holder.removeClass('show').addClass('hide');
+				self.removeClass('icon-eye-open').addClass('icon-eye-close');
+			}
+			else {
+				holder.removeClass('hide').addClass('show');
+				self.removeClass('icon-eye-close').addClass('icon-eye-open');
+			}
+			
+			hydrateSlide(sliderio.view.toolbox.currentIndex());
+		});
+		
+		$('.lazy-show input', $("li.current")).live('change', function(){
 			hydrateSlide(sliderio.view.toolbox.currentIndex());
 		});
 				

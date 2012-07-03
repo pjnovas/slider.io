@@ -3,7 +3,6 @@ var socket = undefined;
 function initSlider(jsonData){
 	Slider.init(jsonData, (soloSliderStartInit || 0));
 	Slider.toggle(true);
-	Slider.updateList(10);
 }
 
 $(document).ready(function(){

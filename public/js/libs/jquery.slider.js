@@ -15,6 +15,7 @@ var Slider = (function($) {
 		slidesLen,
 		firstSlider,
 		currentSlide,
+		currentLazy = 0,
 		
 		velocity = 500,
 		slideData = null;
@@ -173,7 +174,7 @@ var Slider = (function($) {
 			});
 		}
 		
-		$('ul.bulletList li', curr).hide();
+		currentLazy = 0;
 	};
 	
 	return {
@@ -202,7 +203,7 @@ var Slider = (function($) {
 			$(mainCtn).bind('resize orientationchange', resize);
 		},
 		moveLeft: function(finishMove){
-			var hiddenItems = $('ul.bulletLis li:hidden', currentSlide);
+			var hiddenItems = $('.lazy', currentSlide);
 			if (hiddenItems.length > 0) {
 				this.moveTo(currentIndex, finishMove);		
 			}
@@ -217,7 +218,7 @@ var Slider = (function($) {
 			}
 		},
 		moveRight: function(finishMove) {
-			var hiddenItems = $('ul.bulletList li:hidden', currentSlide);
+			var hiddenItems = $('.lazy', currentSlide);
 			if (hiddenItems.length > 0) {
 				this.moveTo(currentIndex, finishMove);		
 			}
@@ -235,10 +236,11 @@ var Slider = (function($) {
 			if (index < 0 || index > slidesLen) return;
 			
 			if (index === currentIndex){
-				var hiddenItems = $('ul.bulletList li:hidden', currentSlide);
+				var hiddenItems = $('.lazy', currentSlide);
 				if (hiddenItems.length > 0) {
-					hiddenItems.eq(0).show();
-					finish($('ul.bulletList li:visible', currentSlide).length, 'list');
+					currentLazy++;
+					hiddenItems.filter('.lazy-' + currentLazy).show().removeClass('lazy');
+					finish(currentLazy, 'list');
 				}
 				return;
 			}
@@ -265,9 +267,10 @@ var Slider = (function($) {
 			toggle('details', visible);
 		},
 		updateList: function (index){
-			var items = $('ul.bulletList li', currentSlide);
-			for (var i=0; i< index; i++){
-				items.eq(i).show();
+			var fields = $('.lazy', currentSlide);
+			for (var i=0; i<= index; i++){
+				var field = fields.filter('.lazy-' + i);
+				if (field.length > 0) field.removeClass('lazy').show();
 			}
 		},
 		resizeSlider: function(){
