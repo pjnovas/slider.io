@@ -105,10 +105,10 @@ var revert = function(_slider, res){
 				res.send("Slider '" + sliderName + "' NOT FOUND", 404);
 			else res.send(error.toString(), 500);
 		},
-		-1,
+		1,
 		_slider, 
-		function(previous){
-			res.send(previous);
+		function(){
+			res.send({}, 200);
 	});
 };
 

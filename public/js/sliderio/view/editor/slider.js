@@ -391,6 +391,39 @@ sliderio.view.editor.slider = (function($){
 			}, currRes);	
 		});
 		
+		/*
+		 * Revert Event
+		 */
+		
+		var isCtrl = false;
+		$("body").live('keydown', function(e){
+			switch(e.keyCode || e.which){
+				case 17: // Ctrl
+					isCtrl = true;
+				break;
+			}
+		});
+		
+		$("body").live('keyup', function(e){
+			
+			switch(e.keyCode || e.which){
+				case 17: // Ctrl
+					isCtrl = false;
+				break;
+				case 90: // Z
+					if (isCtrl){
+						sliderio.service.slider.revert(function(){
+							sliderio.service.slider.getSlides(function(data){
+								slides = data;
+								attachEvents();
+								initSlider();
+							});
+						});
+					}
+				break;
+			}
+			
+		});
 	};
 	
 	return {
