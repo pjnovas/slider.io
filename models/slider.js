@@ -60,7 +60,18 @@ function saveSlider(name, data, done, error){
 		var now = new Date().getTime(),
 			newFileName = '/sliders/cache/' + name  + '.json' + '-' + now;
 		
-		fsAccess.copy(error, fileName, newFileName, writeFile)
+		getCachedFiles(error, name, function(files){
+			
+			if (files.length > 19) {
+				var cacheToDelete = name + '.json-' + files[files.length-1];
+				fsAccess.removeFile(error, '/sliders/cache/' + cacheToDelete, function(){
+					fsAccess.copy(error, fileName, newFileName, writeFile);
+				});
+			}
+			else {
+				fsAccess.copy(error, fileName, newFileName, writeFile);
+			}
+		});
 	}
 	
 	function doesnot(){
@@ -126,6 +137,26 @@ function buildOffLineHTML(error, _slider, done){
 			], 'ascii', renderHTML);
 };
 
+function getCachedFiles(error, sliderName, done) {
+	
+	function sortFilesDesc(allfiles){
+		var files = [];
+		for(var i=0; i<allfiles.length;i++){
+			if (allfiles[i].indexOf(sliderName + '.json-') > -1){
+				files.push(parseInt(allfiles[i].split('-')[1]));
+			}
+		}
+		if(files.length > 0){
+			files.sort(function(a, b){ return b-a } );
+			done(files);
+		}
+		else done([]);
+	}
+	
+	var path = '/sliders/cache/';
+	fsAccess.getDirectoryFiles(error, path, sortFilesDesc);
+}
+
 exports.getSliderZIP = function(_slider, done, error){
 	
   var archive = new zip();
@@ -167,6 +198,14 @@ exports.revert = function(error, index, _slider, done){
 		fsAccess.saveJSONFile(error, fileName, recovered, removePrevious);
 	}
 	
+	getCachedFiles(error, _slider.name, function(files){
+		if (files.length) {
+			fileRecovered = _slider.name + '.json-' + files[index-1];
+			fsAccess.getJSONFile(error, '/sliders/cache/' + fileRecovered, saveNew);
+		}
+	});
+	
+	/*
 	function sortFilesDesc(allfiles){
 		var files = [];
 		for(var i=0; i<allfiles.length;i++){
@@ -185,5 +224,8 @@ exports.revert = function(error, index, _slider, done){
 	
 	var path = '/sliders/cache/';
 	fsAccess.getDirectoryFiles(error, path, sortFilesDesc);
+	*/
 };
+
+
 
