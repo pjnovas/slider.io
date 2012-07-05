@@ -26,6 +26,23 @@ function buildEditor(){
 	});
 }
 
+function revertPrevius(){
+	sliderio.service.slider.revert(function(){
+		var dSlides = $.Deferred(),
+			dConfig = $.Deferred();
+		
+		$.when(dSlides, dConfig).done(init);
+		
+		sliderio.view.editor.slider.build(function(){
+			dSlides.resolve();
+		});
+		
+		sliderio.view.editor.config.build(function(){
+			dConfig.resolve();
+		});
+	});
+}
+
 function init() {
 	
 	$('#mainConfigs').show();
@@ -56,6 +73,34 @@ function init() {
 		
 	sliderio.view.editor.slider.init();
 	resizeCtns();
+	
+	/*
+	 * Revert Event
+	 */
+	
+	var isCtrl = false;
+	$("body").live('keydown', function(e){
+		switch(e.keyCode || e.which){
+			case 17: // Ctrl
+				isCtrl = true;
+			break;
+		}
+	});
+	
+	$("body").live('keyup', function(e){
+		
+		switch(e.keyCode || e.which){
+			case 17: // Ctrl
+				isCtrl = false;
+			break;
+			case 90: // Z
+				if (isCtrl){
+					revertPrevius();
+				}
+			break;
+		}
+		
+	});
 }
 
 $(document).ready(function(){

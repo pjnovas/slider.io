@@ -21,7 +21,8 @@
 					alpha: true
 				},
 				image: true
-			}
+			},
+			onChange: function(){}
 		};
 		
 		var style = {
@@ -108,16 +109,22 @@
 				
 				this.borderCfg(borderH, newStyle.border, radiusChanged, sizeChanged); 
 				
-				if (settings.border.color){
-					this.color(borderH, newStyle.border, function(color){
-						newStyle.border.color = newStyle.border.color || 'transparent';
-						newStyle.border.color = color;
-						var c = "rgb(" + color.r + "," + color.g + "," + color.b + ")";
+				function colorChanged(color){
+					newStyle.border.color = newStyle.border.color || '#000000';
+					newStyle.border.color = color;
+					var c = "rgb(" + color.r + "," + color.g + "," + color.b + ")";
 
-						$(element).css("border-style", 'solid');
-						$(element).css("border-color", c);
-					});
+					$(element).css("border-style", 'solid');
+					$(element).css("border-color", c);
 				}
+				
+				if (settings.border.color){
+					this.color(borderH, newStyle.border, colorChanged);
+				}
+				colorChanged(settings.border.color);
+				
+				radiusChanged(newStyle.border.radius);
+				sizeChanged(newStyle.border.size);
 			},
 			
 			font: function(){
@@ -125,20 +132,27 @@
 				var fontH = $($.mustache(template('config-head'), {title:'Font Styles', code: 'font'}));
 				container.append(fontH);
 				
-				this.fontName(fontH,newStyle.font, function(name){
+				function fontNameChanged(name){
 					newStyle.font.name = name;
 					$(element).css("font-family", name);
 					$('textarea', element).css("font-family", name);
-				});
+				}
 				
-				this.color(fontH,newStyle.font, function(color){
+				function colorChanged(color){
 					newStyle.font.color = newStyle.font.color || {r:1,g:1,b:1};
 					newStyle.font.color = color;
 					var c = "rgb(" + color.r + "," + color.g + "," + color.b + ")";
 					$(element).css("color", c);
 					$('textarea', element).css("color", c);
-				});
+				}
+				
+				this.fontName(fontH,newStyle.font, fontNameChanged);
+				this.color(fontH,newStyle.font, colorChanged);
+				
+				fontNameChanged(newStyle.font.name);
+				colorChanged(newStyle.font.color);
 			},
+			
 			background: function() {
 				var bgH = $($.mustache(template('config-head'), {title:'Background Styles', code: 'background'}));
 				container.append(bgH);
@@ -150,21 +164,27 @@
 						.css("-webkit-box-shadow", "0px 0px 10px " + c).css("box-shadow", "0px 0px 10px " + c);	
 				}
 				
-				this.color(bgH, newStyle.background, function(color){
+				function colorChanged(color){
 					var alpha = newStyle.background.color.alpha || 1;
 					color.alpha = alpha;
 					newStyle.background.color = color;
 					updateColorElement();
-				});
-				
-				if (settings.background.color.alpha) {
-					this.alpha(bgH,newStyle.background.color, function(alpha){
-						newStyle.background.color.alpha = alpha;
-						updateColorElement();
-					});
 				}
 				
-				this.image(bgH,newStyle.background, function(file){
+				this.color(bgH, newStyle.background, colorChanged);
+				colorChanged(newStyle.background.color);
+				
+				if (settings.background.color.alpha) {
+					function alphaChanged(alpha){
+						newStyle.background.color.alpha = alpha;
+						updateColorElement();
+					}
+					
+					this.alpha(bgH,newStyle.background.color, alphaChanged);
+					alphaChanged(newStyle.background.color.alpha);
+				}
+				
+				function imageFileChanged(file){
 					newStyle.background.image = newStyle.background.image || {};
 					if(file){
 						newStyle.background.image.high = file;
@@ -174,13 +194,19 @@
 						newStyle.background.image.high = '';
 						$(element).css("backgroundImage", "none");
 					}
-				}, function(seamless){
+				}
+				
+				function seamlessChanged(seamless){
 					newStyle.background.image = newStyle.background.image || {};
 					newStyle.background.image.seamless = seamless;
 					if (seamless)
 						$(element).css("background-position", "repeat").css("background-size", "auto");
  					else $(element).css("background-size", "100% 100%").css("background-position", "no-repeat");
-				});
+				}
+				
+				this.image(bgH,newStyle.background, imageFileChanged, seamlessChanged);
+				imageFileChanged(newStyle.background.image.high);
+				seamlessChanged(newStyle.background.image.seamless);
 			},
 			
 			image: function(where, entity, onImageChange, onSeamlessChange) {
@@ -208,6 +234,7 @@
 					if (!url) $(this).attr("src","/img/no-image.gif");
 					else $(this).attr("src","images/" + url);
 					onImageChange(url);
+					settings.onChange();
 				});
 				
 				var url = img.attr('data-url');
@@ -217,6 +244,7 @@
 				$('.image-seamless', imageHtml).button()
 				.bind('change', function(){
 					onSeamlessChange($(this).is(':checked'));
+					settings.onChange();
 				});
 				
 				$('.image-field-remove', imageHtml).bind('click', function(){
@@ -251,6 +279,7 @@
 					var color = hexToRgb(self.val());
 					$('#color-picker').remove();
 					onChangeColor(color);
+					settings.onChange();
 				});
 			},
 			
@@ -266,6 +295,7 @@
 					step: 0.1,
 					slide: function( event, ui ) {
 						onChangeAlpha(parseFloat(ui.value));
+						settings.onChange();
 					}
 				});
 			},
@@ -277,6 +307,7 @@
 				$('.fontName-field', fontNameHtml)
 					.bind('change',function(){
 						onChange($(this).val());
+						settings.onChange();
 				});
 			},
 			
@@ -292,6 +323,7 @@
 							bottom: parseInt($('.radius-bottom-field', borderHtml).val(),10) || 0,
 							left: parseInt($('.radius-left-field', borderHtml).val(),10) || 0
 						});
+						settings.onChange();
 				});
 				
 				$('.size-field', borderHtml)
@@ -302,6 +334,7 @@
 							bottom: parseInt($('.size-bottom-field', borderHtml).val(),10) || 0,
 							left: parseInt($('.size-left-field', borderHtml).val(),10) || 0
 						});
+						settings.onChange();
 				});
 			}
 		};

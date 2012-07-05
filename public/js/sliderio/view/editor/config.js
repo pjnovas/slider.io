@@ -12,6 +12,7 @@ sliderio.view.editor.config = (function($){
 	};
 
 	var bind = function(){
+		
 		var main = $.mustache(template('config-main'), config);
 		
 		styles.mainBg = new StyleManager(".sliderCtn", config.style, {
@@ -21,18 +22,24 @@ sliderio.view.editor.config = (function($){
 				color: {
 					alpha: false
 				}
-			}
+			},
+			onChange: saveConfig
 		});
 		
 		styles.allBg = new StyleManager("#slider-list li:not(.title)", config.slide.all.style, {
-			title:"All Slides"
+			title:"All Slides",
+			onChange: saveConfig
 		});
 		
 		styles.titleBg = new StyleManager("#slider-list li.title", config.slide.title.style, {
-			title:"Chapter Slides"
+			title:"Chapter Slides",
+			onChange: saveConfig
 		});
 		
-		$("#mainConfigs .content")
+		var contentConfigs = $("#mainConfigs .content");
+		$('*', contentConfigs).remove();
+		
+		contentConfigs
 			.append(main)
 			.append(styles.mainBg.getContainer())
 			.append(styles.allBg.getContainer())
@@ -42,30 +49,33 @@ sliderio.view.editor.config = (function($){
 			var newIndex = parseInt($(this).val(), 10);
 			config.initIndex = newIndex;
 			Slider.moveTo(newIndex);
+			saveConfig();
 		});
 		
 		$('#txtTitle').bind('change', function(){
 			var newTitle = $(this).val();
 			config.title = newTitle;
 			document.title = newTitle;
-		});
-		
-		$('a.save', '.cfg-buttons').click(function(){
-			saveConfig(config);
-		});
-		
-		$('a.revert', '.cfg-buttons').click(function(){
-			location.reload(true);
+			saveConfig();
 		});
 	};
 	
-	var saveConfig = function(cfg) {	
+	var saveConfig = function() {
+		cfg = config;	
 		cfg.style = styles.mainBg.getStyle();
 		cfg.slide.all.style = styles.allBg.getStyle(); 
 		cfg.slide.title.style = styles.titleBg.getStyle();
-		 
-		sliderio.service.slider.saveConfig(cfg, function(){
-			location.reload(true);
+		
+		sliderio.view.status.show('Saving ...');
+		
+		sliderio.service.slider.saveConfig(cfg, function(data, err){
+			if (err && err !== "success"){
+				sliderio.view.status.error();
+			}
+			else {
+				sliderio.view.status.success('Saved');
+				if (callback) callback();
+			}
 		});
 	};
 	

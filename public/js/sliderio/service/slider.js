@@ -71,7 +71,10 @@ sliderio.service.slider = (function($){
 		    cache: false,
 		    timeout: 5000,
 		    success: done,
-		    error: onError,
+		    error: function(data, status, xhr){
+		    	done({}, status);
+		    	onError(data, status, xhr);
+		    }
 		  }); 
 		},
 		

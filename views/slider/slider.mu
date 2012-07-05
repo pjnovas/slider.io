@@ -44,10 +44,6 @@
 			<h1>Configurations</h1>
 		</div>
 		<div class="content"></div>
-		<div class="cfg-buttons">
-			<a href="#" class="save">Save</a>
-			<a href="#" class="revert">Revert</a>
-		</div>
 	</div>
 {{/editor}}
 {{^editor}}
@@ -75,6 +71,7 @@
 	<script type="text/javascript" src="/js/libs/jquery.form.js"></script>
 	<script type="text/javascript" src="/js/libs/jquery.styleManager.js"></script>
 	
+	<script src="/js/sliderio/view/status.js"></script>
 	<script src="/js/sliderio/view/toolbox.js"></script>
 	<script src="/js/sliderio/view/resources.js"></script>
 	<script src="/js/sliderio/view/editor/slider.js"></script>

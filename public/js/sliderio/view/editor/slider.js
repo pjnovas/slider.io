@@ -41,32 +41,14 @@ sliderio.view.editor.slider = (function($){
 	};
 	
 	var saveSlides = function(callback){
-		var saveStatus = $('#save-msg');
-		
-		if(saveStatus.length === 0)
-			saveStatus = $("<div id='save-msg'><span></span></div>").appendTo('body');
-			 
-		saveStatus.show().css('opacity', 1);
-		var span = $('span', saveStatus).text('Saving ...');
+		sliderio.view.status.show('Saving ...');
 		
 		sliderio.service.slider.saveSlides(slides, function(data, err){
 			if (err && err !== "success"){
-				$('a', saveStatus).remove();
-				var lnk = $("<a href='#'>Reload</a>")
-					.bind('click', function(){
-						sliderio.service.slider.revert(function(){
-							window.location.href = '/';
-						});
-					});
-
-				span.text('Error: ');
-				saveStatus.addClass('error').append(lnk);
+				sliderio.view.status.error();
 			}
 			else {
-				span.text('Saved');
-				saveStatus.addClass('success').stop(true).animate({opacity: 0}, 2000, function(){
-					saveStatus.hide();
-				});
+				sliderio.view.status.success('Saved');
 				if (callback) callback();
 			}
 		});
@@ -391,39 +373,6 @@ sliderio.view.editor.slider = (function($){
 			}, currRes);	
 		});
 		
-		/*
-		 * Revert Event
-		 */
-		
-		var isCtrl = false;
-		$("body").live('keydown', function(e){
-			switch(e.keyCode || e.which){
-				case 17: // Ctrl
-					isCtrl = true;
-				break;
-			}
-		});
-		
-		$("body").live('keyup', function(e){
-			
-			switch(e.keyCode || e.which){
-				case 17: // Ctrl
-					isCtrl = false;
-				break;
-				case 90: // Z
-					if (isCtrl){
-						sliderio.service.slider.revert(function(){
-							sliderio.service.slider.getSlides(function(data){
-								slides = data;
-								attachEvents();
-								initSlider();
-							});
-						});
-					}
-				break;
-			}
-			
-		});
 	};
 	
 	return {
