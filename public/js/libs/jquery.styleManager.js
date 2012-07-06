@@ -22,7 +22,8 @@
 				},
 				image: true
 			},
-			onChange: function(){}
+			onChange: function(){},
+			fontsFamilies: []
 		};
 		
 		var style = {
@@ -301,13 +302,23 @@
 			},
 			
 			fontName: function(where, entity, onChange){
-				var fontNameHtml = $($.mustache(template('style-fontFamily'), entity));
+
+				var fontNameHtml = $($.mustache(template('style-fontFamily'), {families: settings.fontsFamilies}));
 				where.append(fontNameHtml);
 				
+			  function format(state) {
+          return "<span style=\"font-family:" + state.id + ";\">" + state.text + "</span>";
+       	}
+				
 				$('.fontName-field', fontNameHtml)
-					.bind('change',function(){
+				.val(entity.name)
+				.bind('change',function(){
 						onChange($(this).val());
 						settings.onChange();
+				})
+				.select2({
+					formatResult: format,
+          formatSelection: format
 				});
 			},
 			
@@ -338,10 +349,10 @@
 				});
 			}
 		};
-		
+					
 		if (settings.background) build.background();
 		if (settings.font) build.font();
-		if (settings.border) build.border();
+		if (settings.border) build.border();	
 		
 		this.getContainer = function(){
 			return container;

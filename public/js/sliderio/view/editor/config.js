@@ -5,7 +5,8 @@ sliderio.view.editor = sliderio.view.editor || {};
 
 sliderio.view.editor.config = (function($){
 	var config,
-		styles = {};
+		styles = {},
+		fonts = [];
 	
 	var template = function(name){
 		return $.trim($('#' + name + '-tmpl').html());
@@ -28,12 +29,14 @@ sliderio.view.editor.config = (function($){
 		
 		styles.allBg = new StyleManager("#slider-list li:not(.title)", config.slide.all.style, {
 			title:"All Slides",
-			onChange: saveConfig
+			onChange: saveConfig,
+			fontsFamilies: fonts
 		});
 		
 		styles.titleBg = new StyleManager("#slider-list li.title", config.slide.title.style, {
 			title:"Chapter Slides",
-			onChange: saveConfig
+			onChange: saveConfig,
+			fontsFamilies: fonts
 		});
 		
 		var contentConfigs = $("#mainConfigs .content");
@@ -82,10 +85,12 @@ sliderio.view.editor.config = (function($){
 	return {
 		build: function(done){
 			var dPartial = $.Deferred(),
-				dConfig = $.Deferred();
+				dConfig = $.Deferred(),
+				dFonts = $.Deferred();
 			
-			$.when(dConfig, dPartial).done(function(data){
-				config = data;
+			$.when(dConfig, dFonts, dPartial).done(function(_config, _fonts){
+				config = _config;
+				fonts = _fonts;
 				bind();
 				done();
 			});
@@ -96,6 +101,10 @@ sliderio.view.editor.config = (function($){
 			
 			sliderio.service.slider.getConfig(function(data){
 				dConfig.resolve(data);				
+			});
+			
+			sliderio.service.slider.getDefaultFonts(function(data){
+				dFonts.resolve(data);				
 			});
 		}
 	};

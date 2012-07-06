@@ -26,6 +26,7 @@
 	<link href="/css/smoothness/jquery-ui-1.8.21.custom.css" rel="stylesheet">
 	<link href="/css/font-awesome.css" rel="stylesheet">
 	<link href="/css/farbtastic/farbtastic.css" rel="stylesheet">
+	<link href="/css/select2/select2.css" rel="stylesheet">
 	<link href="/css/editor.css" rel="stylesheet">
 	{{/editor}}
 	
@@ -68,6 +69,7 @@
 	{{#editor}}
 	<script type="text/javascript" src="/js/libs/jquery-ui-1.8.21.custom.min.js"></script>
 	<script type="text/javascript" src="/js/libs/farbtastic.js"></script>
+	<script type="text/javascript" src="/js/libs/select2.min.js"></script>
 	<script type="text/javascript" src="/js/libs/jquery.form.js"></script>
 	<script type="text/javascript" src="/js/libs/jquery.styleManager.js"></script>
 	

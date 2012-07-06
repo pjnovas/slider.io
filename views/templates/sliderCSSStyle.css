@@ -20,7 +20,7 @@
 
 {{#font}}
 	{{#name}}
-		font-family: {{name}}; 
+		font-family: {{{name}}}; 
 	{{/name}}
 	
 	{{#color}}

@@ -45,7 +45,11 @@
 <script id="style-fontFamily-tmpl" type="text/template">
 	<div class="cfg-field-row">
 		<label>Font</label>
-		<input type="text" class="fontName-field" maxlength="300" size="20" value="{{name}}"/>		
+		<select class="fontName-field" style="width:200px;">
+			{{#families}}
+				<option value="{{value}},{{base}}">{{name}}</option>
+			{{/families}}
+		</select>
 	</div>
 </script>
 

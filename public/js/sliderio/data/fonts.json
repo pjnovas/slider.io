@@ -1,0 +1,57 @@
+[{
+	"name": "Arial",
+	"value": "'Arial'",
+	"base": "sans-serif"
+},{
+	"name": "Arial Black",
+	"value": "'Arial Black'",
+	"base": "sans-serif"
+},{
+	"name": "Comic Sans MS",
+	"value": "'Comic Sans MS'",
+	"base": "cursive"
+},{
+	"name": "Courier New",
+	"value": "'Courier New'",
+	"base": "monospace"
+},{
+	"name": "Georgia",
+	"value": "'Georgia'",
+	"base": "serif"
+},{
+	"name": "Impact",
+	"value": "'Impact', 'Charcoal'",
+	"base": "sans-serif"
+},{
+	"name": "Lucida Console, Monaco",
+	"value": "'Lucida Console', 'Monaco'",
+	"base": "monospace"
+},{
+	"name": "Lucida Sans, Lucida Grande",
+	"value": "'Lucida Sans Unicode', 'Lucida Grande'",
+	"base": "sans-serif"
+},{
+	"name": "Palatino Linotype, Book Antiqua",
+	"value": "'Palatino Linotype', 'Book Antiqua'",
+	"base": "serif"
+},{
+	"name": "Tahoma, Geneva",
+	"value": "'Tahoma', 'Geneva'",
+	"base": "sans-serif"
+},{
+	"name": "Times New Roman",
+	"value": "'Times New Roman', 'Times'",
+	"base": "serif"
+},{
+	"name": "Trebuchet MS",
+	"value": "'Trebuchet MS'",
+	"base": "sans-serif"
+},{
+	"name": "Verdana",
+	"value": "'Verdana'",
+	"base": "sans-serif"
+},{
+	"name": "Webdings",
+	"value": "'Webdings'",
+	"base": "monospace"
+}]

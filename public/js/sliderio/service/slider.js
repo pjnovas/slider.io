@@ -30,6 +30,12 @@ sliderio.service.slider = (function($){
 		  }).error(onError);
 		},
 		
+		getDefaultFonts: function(done){
+			$.getJSON('/js/sliderio/data/fonts.json', function(data){
+				done(data);
+		  }).error(onError);
+		},
+		
 		saveSlides: function(slides, done){
 			$.ajax({
 		    url: "slides.json",
