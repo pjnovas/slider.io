@@ -4,7 +4,7 @@ var sliderio = sliderio || {};
 sliderio.view = sliderio.view || {};
 
 sliderio.view.toolbox = (function($){
-	var currentSliderIndex = 0,
+	var currentSliderIndex,
 		slides = [],
 		onMove = function(){},
 		onInsertSlide = function(){},
@@ -59,13 +59,13 @@ sliderio.view.toolbox = (function($){
 	};
 	
 	var attachEvents = function(){
-		$('#nextSlide').bind('click', function(){
+		$('#nextSlide').live('click', function(){
 			moveRight(function(){
 				onMove();	
 			});
 		});
 		
-		$('#prevSlide').bind('click', function(){
+		$('#prevSlide').live('click', function(){
 			moveLeft(function(){
 				onMove();	
 			});
@@ -130,6 +130,7 @@ sliderio.view.toolbox = (function($){
 		build: function(done){
 			sliderio.view.partials.importToolbox(function(template){
 				$('.sliderCtn').append($('#toolbox-tmpl').html());
+				attachEvents();	
 				done();
 			});		
 		},
@@ -140,8 +141,7 @@ sliderio.view.toolbox = (function($){
 			onMove = (options && options.onMove) || function(){};
 			onInsertSlide = (options && options.onInsertSlide)|| function(){};
 			onRemoveSlide = (options && options.onRemoveSlide)|| function(){};
-			
-			attachEvents();		
+				
 			rebuildMoveCtrls();
 		},
 		

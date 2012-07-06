@@ -31,7 +31,9 @@ function revertPrevius(){
 		var dSlides = $.Deferred(),
 			dConfig = $.Deferred();
 		
-		$.when(dSlides, dConfig).done(init);
+		$.when(dSlides, dConfig).done(function(){
+			init(sliderio.view.toolbox.currentIndex());
+		});
 		
 		sliderio.view.editor.slider.build(function(){
 			dSlides.resolve();
@@ -43,7 +45,7 @@ function revertPrevius(){
 	});
 }
 
-function init() {
+function init(idx) {
 	
 	$('#mainConfigs').show();
 	function resizeCtns(){
@@ -56,7 +58,7 @@ function init() {
 	$(window).bind('resize', resizeCtns);
 	
 	sliderio.view.toolbox.init({
-		sliderIndex: 0,
+		sliderIndex: idx || 0,
 		slides: sliderio.view.editor.slider.getSlides(),
 		onMove: function(){
 			sliderio.view.editor.slider.refresh();			

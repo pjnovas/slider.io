@@ -77,7 +77,6 @@ sliderio.view.editor.config = (function($){
 			}
 			else {
 				sliderio.view.status.success('Saved');
-				if (callback) callback();
 			}
 		});
 	};
