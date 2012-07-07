@@ -41,7 +41,7 @@ describe('#creates a new slider', function(){
 				.pressButton("Create!", function(){
 					
 					var fs = require('fs');
-					fs.realpath('./', function(err, localPath){
+					fs.realpath('../', function(err, localPath){
 						fs.stat(localPath + '/sliders/' + newSlider.name + '.json', function(err){
 							if(err == null) {
 								fs.readdir(localPath + '/public/slider/' + newSlider.name + '/images', function(err){
@@ -73,7 +73,7 @@ describe('#creates a new slider', function(){
 				.pressButton("Create!", function(){
 					
 					var fs = require('fs');
-					fs.realpath('./', function(err, localPath){
+					fs.realpath('../', function(err, localPath){
 						var path = localPath + '/sliders/' + newSlider.name + '.json';
 						fs.readFile(path, 'utf8', function(err, data){
 							if(err) done(err);

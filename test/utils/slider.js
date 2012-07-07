@@ -21,7 +21,7 @@ var deleteTestTrash = function(sliderName, done){
 	var fs = require('fs');
 	
 	function cleanCache(){
-			fs.realpath('./', function(err, localPath){
+			fs.realpath('../', function(err, localPath){
 				var dirPath = localPath + '/sliders/cache';
 	      try { var files = fs.readdirSync(dirPath); }
 	      catch(e) { return; }
@@ -40,7 +40,7 @@ var deleteTestTrash = function(sliderName, done){
 		}
 		
 	
-	fs.realpath('./', function(err, localPath){
+	fs.realpath('../', function(err, localPath){
 		fs.unlink(localPath + '/sliders/' + sliderName + '.json', function(err){
 			if(err && err.code != "ENOENT") done(err);
 			else fs.rmdir(localPath + '/public/slider/' + sliderName + '/images', function(err){

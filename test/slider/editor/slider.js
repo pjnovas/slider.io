@@ -3,9 +3,11 @@ var expect = require('expect.js'),
 	Browser = require('zombie'),
 	browser = new Browser();
 
+var utils = require('../../utils/slider.js');
+
 describe('#modifies the slider', function(){
 	var newSlider = require('../../mocks/newSlider.js').slider;
-
+/*
 	beforeEach(function(done){
 		 browser.visit("http://localhost:3000/slider/" + newSlider.name + "/editor", function () {
       expect(browser.success);
@@ -17,33 +19,47 @@ describe('#modifies the slider', function(){
 				});
     });
 	});
-		
-	describe('#manage slides', function(){
+	*/	
 	
-		it("should be able to append a new slide to the right", function(done){
-			var currentSize = browser.evaluate("$('#slider-list>li').length;");
-			
-			browser.evaluate("$('#nextSlide.addSlide').trigger('click');");
-			
-			browser.wait(function(){
-				expect(browser.evaluate("$('#slider-list>li').length;")).to.equal(currentSize+1);
-				done(); 
-			});
-			
-		});
+	beforeEach(function(done){
+		utils.createSliderMock(function(){
+			browser.visit("http://localhost:3000/slider/" + newSlider.name + "/editor", function () {
+	      expect(browser.success);
+	      
+	      browser
+					.fill("passcode", newSlider.passcode)
+					.pressButton("OK", function(){
+						done();
+					});
+	    });
+    });
+	});	
 		
-		it("should be able to append a new slide to the left", function(done){
+	afterEach(utils.deleteSliderFiles);
+	
+	describe('#manage slides', function(){
+		
+		it("should be able to append a new slide to the left & right", function(done){
 			var currentSize = browser.evaluate("$('#slider-list>li').length;");
 			browser.evaluate("$('#prevSlide.addSlide').trigger('click');");
-							
+
 			browser.wait(function(){
-				expect(browser.evaluate("$('#slider-list>li').length;")).to.equal(currentSize+1);
-				done();
+				var newsize = browser.evaluate("$('#slider-list>li').length;");
+				expect(newsize).to.equal(currentSize+1);
+				
+				browser.evaluate("$('#nextSlide').trigger('click'); $('#nextSlide.addSlide').trigger('click');");
+		
+				browser.wait(function(){
+					expect(browser.evaluate("$('#slider-list>li').length;")).to.equal(newsize+1);
+					done(); 
+				});
+				
 			});
 		});
-	
+			
 		it("should be able to insert a slide to the left", function(done){
 			var currentSize = browser.evaluate("$('#slider-list>li').length;");
+			console.log(currentSize);
 			var currentIndex = browser.evaluate("$('#slider-list li.current').index();");
 			
 			browser.wait(function(){
@@ -169,46 +185,6 @@ describe('#modifies the slider', function(){
 			});
 		});
 		
-		it('should be able to add a new bullet list field', function(done){
-			var beforeSize = browser.evaluate("$('#slider-list>li.current ul.bulletList').length;");
-			browser.evaluate("$('#toolbox a.icon-list-ul').trigger('click');");
-			var afterSize = browser.evaluate("$('#slider-list>li.current ul.bulletList').length;");
-			
-			expect(afterSize).to.equal(beforeSize+1);			
-			
-			browser.wait(function(){
-			
-				browser.visit("http://localhost:3000/slider/" + newSlider.name + "/editor", function () {	      
-		      browser
-							.fill("passcode", newSlider.passcode)
-							.pressButton("OK", function(){
-								expect(browser.evaluate("$('#slider-list>li.current ul.bulletList').length;")).to.equal(afterSize);
-								done();
-							});
-		    });
-			});
-		});
-		
-		it('should be able to add a new code-block field', function(done){
-			var beforeSize = browser.evaluate("$('#slider-list>li.current code').length;");
-			browser.evaluate("$('#toolbox a.icon-list-alt').trigger('click');");
-			var afterSize = browser.evaluate("$('#slider-list>li.current code').length;");
-			
-			expect(afterSize).to.equal(beforeSize+1);			
-			
-			browser.wait(function(){
-			
-				browser.visit("http://localhost:3000/slider/" + newSlider.name + "/editor", function () {	      
-		      browser
-							.fill("passcode", newSlider.passcode)
-							.pressButton("OK", function(){
-								expect(browser.evaluate("$('#slider-list>li.current code').length;")).to.equal(afterSize);
-								done();
-							});
-		    });
-			});
-		});
-		
 		it('should be able to see a mesage with the saving state on field change', function(done){
 			browser.evaluate("$('#toolbox a.h2').trigger('click');");
 			
@@ -221,28 +197,6 @@ describe('#modifies the slider', function(){
 				done();
 			});
 		});
-		
-		it('should be able to see a link to reload when save fails'
-		/*, function(done){
-			browser.evaluate("$('#toolbox a.h2').trigger('click');");
-			
-			var message = browser.evaluate("$('#save-msg span').text();");
-			expect(message).to.equal('Saving ...');
-			
-			browser.evaluate("var slides = sliderio.view.editor.slider.getSlides(); slides = 'fail';");
-			browser.evaluate("$('#slider-list>li.current h2').trigger('change');");
-
-			browser.wait(function(){
-				message = browser.evaluate("$('#save-msg span').text();");
-				expect(message).to.equal('Error');
-				message = browser.evaluate("$('#save-msg a').text();");
-				expect(message).to.equal('Reload');
-				
-				done();
-			});
-		}*/);
-		
-		it('should be able to revert slider to previous version');
 		
 	});
 	

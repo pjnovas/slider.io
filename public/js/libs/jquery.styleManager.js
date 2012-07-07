@@ -206,7 +206,7 @@
 				}
 				
 				this.image(bgH,newStyle.background, imageFileChanged, seamlessChanged);
-				imageFileChanged(newStyle.background.image.high);
+				imageFileChanged((newStyle.background.image && newStyle.background.image.high) || '');
 				seamlessChanged(newStyle.background.image.seamless);
 			},
 			

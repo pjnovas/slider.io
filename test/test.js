@@ -33,7 +33,8 @@ describe('User who enters the application', function(){
 	
 	    browser.visit("http://localhost:3000/slider", function () {
 	    	var fs = require('fs');
-				fs.realpath('./sliders', function(err, localPath){
+				fs.realpath('../sliders', function(err, localPath){
+					if (err) done(err);
 					fs.readdir(localPath, function(err, files){	
 						
 						var countFiles = 0;
