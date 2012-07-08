@@ -1,5 +1,5 @@
 node_modules
 .project
-sliders/cache
+sliders/cache/
 sliders/*.json
-public/slider
+public/slider/
