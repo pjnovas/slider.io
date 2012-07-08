@@ -1,14 +1,15 @@
 
 var expect = require('expect.js'),
-	Browser = require('zombie'),
+	Browser = require('zombie');
 	browser = new Browser();
 
 var utils = require('../../utils/slider.js');
 
 describe('#modifies the slider', function(){
 	var newSlider = require('../../mocks/newSlider.js').slider;
-/*
+
 	beforeEach(function(done){
+		console.log('\nentering editor');
 		 browser.visit("http://localhost:3000/slider/" + newSlider.name + "/editor", function () {
       expect(browser.success);
       
@@ -19,44 +20,34 @@ describe('#modifies the slider', function(){
 				});
     });
 	});
-	*/	
 	
-	beforeEach(function(done){
-		utils.createSliderMock(function(){
-			browser.visit("http://localhost:3000/slider/" + newSlider.name + "/editor", function () {
-	      expect(browser.success);
-	      
-	      browser
-					.fill("passcode", newSlider.passcode)
-					.pressButton("OK", function(){
-						done();
-					});
-	    });
-    });
-	});	
-		
-	afterEach(utils.deleteSliderFiles);
+	//describe('#manage slides', function(){
 	
-	describe('#manage slides', function(){
-		
-		it("should be able to append a new slide to the left & right", function(done){
+		it("should be able to append a new slide to the left", function(done){
 			var currentSize = browser.evaluate("$('#slider-list>li').length;");
+			console.log(currentSize);
 			browser.evaluate("$('#prevSlide.addSlide').trigger('click');");
 
 			browser.wait(function(){
 				var newsize = browser.evaluate("$('#slider-list>li').length;");
 				expect(newsize).to.equal(currentSize+1);
-				
-				browser.evaluate("$('#nextSlide').trigger('click'); $('#nextSlide.addSlide').trigger('click');");
-		
-				browser.wait(function(){
-					expect(browser.evaluate("$('#slider-list>li').length;")).to.equal(newsize+1);
-					done(); 
-				});
-				
+				done();
 			});
 		});
-			
+		
+		it("should be able to append a new slide to the right", function(done){
+			var currentSize = browser.evaluate("$('#slider-list>li').length;")
+			console.log(currentSize);
+			browser.evaluate("$('#nextSlide.addSlide').trigger('click');");
+		
+			browser.wait(function(){
+				var newsize = browser.evaluate("$('#slider-list>li').length;");
+				expect(newsize).to.equal(currentSize+1);
+				done();		
+			});
+				
+		});
+		
 		it("should be able to insert a slide to the left", function(done){
 			var currentSize = browser.evaluate("$('#slider-list>li').length;");
 			console.log(currentSize);
@@ -106,7 +97,7 @@ describe('#modifies the slider', function(){
 			});
 		});
 		
-	});
+	//});
 	
 	describe('#manage fields', function(){
 		
@@ -154,12 +145,12 @@ describe('#modifies the slider', function(){
 				
 					browser.visit("http://localhost:3000/slider/" + newSlider.name + "/editor", function () {	      
 			      browser
-								.fill("passcode", newSlider.passcode)
-								.pressButton("OK", function(){
-									expect(browser.evaluate("$('#slider-list>li.current h2').length;")).to.equal(afterSize);
-									expect(browser.evaluate("$('#slider-list>li.current h2 textarea').eq(0).val();")).to.equal(valueAfter);
-									done();
-								});
+							.fill("passcode", newSlider.passcode)
+							.pressButton("OK", function(){
+								expect(browser.evaluate("$('#slider-list>li.current h2').length;")).to.equal(afterSize);
+								expect(browser.evaluate("$('#slider-list>li.current h2 textarea').eq(0).val();")).to.equal(valueAfter);
+								done();
+							});
 			    });
 				});
 			});

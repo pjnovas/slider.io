@@ -208,9 +208,8 @@ var Slider = (function($) {
 				this.moveTo(currentIndex, finishMove);		
 			}
 			else {
-				var prev = currentSlide.attr('data-prev');
-				if (prev) {
-					this.moveTo(parseInt(prev,10), finishMove);
+				if (currentSlide && currentSlide.attr('data-prev')) {
+					this.moveTo(parseInt(currentSlide.attr('data-prev'),10), finishMove);
 				}
 				else if(currentIndex > 0) {
 					this.moveTo(currentIndex - 1, finishMove);

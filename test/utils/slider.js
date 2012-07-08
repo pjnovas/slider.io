@@ -4,6 +4,7 @@ var Browser = require('zombie'),
 exports.createSliderMock = function(done){
 	var browser = new Browser();
 	
+	console.log("\ncreating slider mock ..");
 	//Fills the form and post it for a new slider
 	browser.visit("http://localhost:3000/slider", function () {
 		
@@ -18,28 +19,28 @@ exports.createSliderMock = function(done){
 };
 
 var deleteTestTrash = function(sliderName, done){
+	console.log("\ndeleting slider trash..");
 	var fs = require('fs');
 	
 	function cleanCache(){
-			fs.realpath('../', function(err, localPath){
-				var dirPath = localPath + '/sliders/cache';
-	      try { var files = fs.readdirSync(dirPath); }
-	      catch(e) { return; }
-	      if (files.length > 0) {
-	        for (var i = 0; i < files.length; i++) {
-	          var filePath = dirPath + '/' + files[i];
-	          if (fs.statSync(filePath).isFile())
-	            fs.unlinkSync(filePath);
-	          else rmDir(filePath);
-	        }
-	      }
-	      //fs.rmdirSync(dirPath);
-      			
-				done();
-			});
-		}
+		fs.realpath('../', function(err, localPath){
+			var dirPath = localPath + '/sliders/cache';
+      try { var files = fs.readdirSync(dirPath); }
+      catch(e) { return; }
+      if (files.length > 0) {
+        for (var i = 0; i < files.length; i++) {
+          var filePath = dirPath + '/' + files[i];
+          if (fs.statSync(filePath).isFile())
+            fs.unlinkSync(filePath);
+          else rmDir(filePath);
+        }
+      }
+      //fs.rmdirSync(dirPath);
+    			
+			done();
+		});
+	}
 		
-	
 	fs.realpath('../', function(err, localPath){
 		fs.unlink(localPath + '/sliders/' + sliderName + '.json', function(err){
 			if(err && err.code != "ENOENT") done(err);
