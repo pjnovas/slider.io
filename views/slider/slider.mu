@@ -72,6 +72,7 @@
 	<script type="text/javascript" src="/js/libs/select2.min.js"></script>
 	<script type="text/javascript" src="/js/libs/jquery.form.js"></script>
 	<script type="text/javascript" src="/js/libs/jquery.styleManager.js"></script>
+	<script type="text/javascript" src="/js/libs/nicEdit.js"></script>
 	
 	<script src="/js/sliderio/view/status.js"></script>
 	<script src="/js/sliderio/view/toolbox.js"></script>

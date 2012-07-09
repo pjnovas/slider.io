@@ -92,5 +92,6 @@ exports.configure = function(app) {
 	app.del('/slider/:slider/resources/:file', slider.next.get, user.authorizePassCode, resource.actions.remove);
 	
 	app.get('/slider/:slider/resources', slider.next.get, resource.actions.list);
+	
 };
 

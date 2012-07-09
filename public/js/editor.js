@@ -108,5 +108,11 @@ function init(idx) {
 $(document).ready(function(){
 	hljs.tabReplace = '  ';
 	authenticate(buildEditor);
+	/*
+	var detailsEditor = new nicEditor({
+			buttonList: ['fontSize','bold','italic','underline','strikeThrough','subscript','superscript'],
+			iconsPath : '../nicEditorIcons.gif'
+	}).panelInstance('area4');
+	*/
 });
 

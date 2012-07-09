@@ -334,8 +334,7 @@
 							bottom: parseInt($('.radius-bottom-field', borderHtml).val(),10) || 0,
 							left: parseInt($('.radius-left-field', borderHtml).val(),10) || 0
 						});
-						settings.onChange();
-				});
+				}).bind('blur', settings.onChange);
 				
 				$('.size-field', borderHtml)
 					.bind('change',function(){
@@ -345,8 +344,7 @@
 							bottom: parseInt($('.size-bottom-field', borderHtml).val(),10) || 0,
 							left: parseInt($('.size-left-field', borderHtml).val(),10) || 0
 						});
-						settings.onChange();
-				});
+				}).bind('blur', settings.onChange);
 			}
 		};
 					

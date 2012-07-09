@@ -133,8 +133,8 @@ a, span {
 	line-height: 1;
 	position: absolute;
 	text-decoration: none;
-	bottom: 100px;
-	left: 20px;
+	bottom: 5%;
+	left: 5%;
 	color: #E03939;
 	width: 65px;
 	height: 100px;
@@ -214,59 +214,33 @@ a, span {
 	right: 0;
 }
 
-/*
- * View Mode Buttons
- */
-
-#screen-mode {
-	position: absolute;
-	top: 0px;
-	left: 45%;
-	
-	width: 120px;
-	height: 20px;
-}
-
-#screen-mode a {
-	padding: 12px 10px 8px 10px;
+#editDetails { 
 	width: 30px;
+	height: 30px;
 	box-shadow: 2px 3px 7px #000;
-	display: inline-block;
-	text-decoration: none;
-	text-indent: -1px;
-	font-size: 40px;
-	line-height: 0.5;
-	background-color: #AC00A5;
-	border: 5px solid #FFF;
-	color: #FFF;
-}
-
-#screen-mode a.selected {
-	box-shadow: none;
-	box-shadow:inset 2px 3px 7px #000;
-} 
-
-#screen-mode a:hover {
-	background-color: #FFF;
-	border: 5px solid #AC00A5;
-	color: #AC00A5;
-}
-
-#screen-mode a.selected:hover {
-	background-color: #AC00A5;
-	border: 5px solid #FFF;
-	color: #FFF;
-}
-
-#view-edit {
-	border-radius: 12px 0px 0px 12px;
+	
+	line-height: 0.8;
+	font-size: 50px;
+	padding: 6px;
 	float: left;
+	text-indent: -1px;
+	position: absolute;
+	text-decoration: none;
+	bottom: 0;
+	
+	background-color: #DA670C;
+	border: 5px solid #FFF;
+	color: #FFF;
+	border-radius: 10px 10px 0 0;
+	
+	left: 27%;
 }
 
-#view-free {
-	border-radius: 0px 12px 12px 0px;
-	float: right;
-}
+#editDetails:hover {
+	border: 5px solid #DA670C;
+	color: #DA670C;
+	background-color: #FFF;
+} 
 
 /*
  * Toolbox
@@ -442,7 +416,7 @@ a, span {
 }
 
 .alpha-field {
-	width: 150px;
+	width: 100px;
 	display: inline-block;
 }
 
@@ -479,27 +453,27 @@ a, span {
 .radius-field,
 .size-field {
 	position: absolute;
-	width: 20px;
+	width: 30px;
 }
 
 .radius-top-field {
 	top: -30px;
-	left: -30px;
+	left: -40px;
 }
 
 .radius-right-field {
 	top: -30px;
-	right: -30px;
+	right: -40px;
 }
 
 .radius-bottom-field {
 	bottom: -30px;
-	right: -30px;
+	right: -40px;
 }
 
 .radius-left-field {
 	bottom: -30px;
-	left: -30px;
+	left: -40px;
 }
 
 .size-top-field {
@@ -509,7 +483,7 @@ a, span {
 
 .size-right-field {
 	top: 25%;
-	right: -30px;
+	right: -40px;
 }
 
 .size-bottom-field {
@@ -519,7 +493,7 @@ a, span {
 
 .size-left-field {
 	top: 25%;
-	left: -30px;
+	left: -40px;
 }
 
 /*
@@ -668,9 +642,9 @@ ul.bulletList li textarea {
 	display: none;
 	position: absolute;
 	top: -15px;
-	right: -115px;
-	width: 115px;
-	height: 30px;
+	right: -90px;
+	width: 80px;
+	height: 25px;
 	
 	background: white;
 	border: solid 1px silver;

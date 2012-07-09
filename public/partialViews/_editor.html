@@ -29,7 +29,7 @@
 					<a href="#" data-align="right" class="icon-align-right"></a>
 				</div>
 				<div class="lazy-show {{#lazy}}{{#visible}}show{{/visible}}{{^visible}}hide{{/visible}}{{/lazy}}{{^lazy}}show{{/lazy}}">
-					<input type="text" value="{{lazy.index}}" placeholder="0" size="2" maxlength="2">
+					<input type="text" value="{{#lazy.index}}{{lazy.index}}{{/lazy.index}}{{^lazy.index}}0{{/lazy.index}}" placeholder="0" size="2" maxlength="2">
 					<a href="#" data-align="center" 
 						class="{{#lazy}}{{#visible}}icon-eye-open{{/visible}}{{^visible}}icon-eye-close{{/visible}}{{/lazy}}{{^lazy}}icon-eye-open{{/lazy}}"></a>
 				</div>
@@ -46,7 +46,7 @@
 					<a href="#" data-align="right" class="icon-align-right"></a>
 				</div>
 				<div class="lazy-show {{#lazy}}{{#visible}}show{{/visible}}{{^visible}}hide{{/visible}}{{/lazy}}{{^lazy}}show{{/lazy}}">
-					<input type="text" value="{{lazy.index}}" placeholder="0" size="2" maxlength="2">
+					<input type="text" value="{{#lazy.index}}{{lazy.index}}{{/lazy.index}}{{^lazy.index}}0{{/lazy.index}}" placeholder="0" size="2" maxlength="2">
 					<a href="#" data-align="center" 
 						class="{{#lazy}}{{#visible}}icon-eye-open{{/visible}}{{^visible}}icon-eye-close{{/visible}}{{/lazy}}{{^lazy}}icon-eye-open{{/lazy}}"></a>
 				</div>
@@ -58,32 +58,13 @@
 				<img data-field-url="{{image.url}}" class="field editor-image" 
 					src="images/{{image.url}}" data-field="image">
 				<div class="lazy-show {{#lazy}}{{#visible}}show{{/visible}}{{^visible}}hide{{/visible}}{{/lazy}}{{^lazy}}show{{/lazy}}">
-					<input type="text" value="{{lazy.index}}" placeholder="0" size="2" maxlength="2">
+					<input type="text" value="{{#lazy.index}}{{lazy.index}}{{/lazy.index}}{{^lazy.index}}0{{/lazy.index}}" placeholder="0" size="2" maxlength="2">
 					<a href="#" data-align="center" 
 						class="{{#lazy}}{{#visible}}icon-eye-open{{/visible}}{{^visible}}icon-eye-close{{/visible}}{{/lazy}}{{^lazy}}icon-eye-open{{/lazy}}"></a>
 				</div>
 			</div>
 		{{/image}}
-	
-		{{#list}}
-			<ul class="bulletList editorField field" data-field="list">
-			{{#list.items}}
-				<li class="editorField">
-					<span>{{.}}</span>
-					<textarea>{{.}}</textarea>
-					<a href="#" class="remove">x</a>
-				</li>
-			{{/list.items}}
-				<li class="newListItemli"><textarea class="newListItem"></textarea></li>
-			</ul>
-		{{/list}}
-		
-		{{#code}}
-			<pre class="editorField">
-				<code data-field="code" class="{{code.language}}">{{code.script}}</code>
-			</pre>
-		{{/code}}
-		
+			
 	{{/fields}}
 </script>
 
