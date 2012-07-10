@@ -11,35 +11,7 @@ sliderio.view.editor.slider = (function($){
 	var template = function(name){
 		return $.trim($('#' + name + '-tmpl').html());
 	};
-	
-	var createCodeModal = function() {
-		codeModal = $('<div id="codeModal"></div>').appendTo('.sliderCtn');
-		
-		var modal = $.mustache(template('codeModal'), {});
-		codeModal.append(modal);
 
-		codeModal.dialog({
-			autoOpen: false,
-			title: "Code Block",
-			width: 650,
-			height: 350,
-			resizable: false,
-			zIndex: 500,
-			modal: true,
-			buttons: {
-				"Ok": function(){
-								
-				}
-			},
-			open: function(){
-				
-			},
-			close: function(){
-				
-			}
-		});
-	};
-	
 	var saveSlides = function(callback){
 		sliderio.view.status.show('Saving ...');
 		
@@ -114,7 +86,7 @@ sliderio.view.editor.slider = (function($){
 					field[fieldName].style.size = {
 						width: (newW <= 100)? newW : 100
 					};
-					
+					ele.css('width', newW + '%');
 					break;
 				case 'list':
 					field[fieldName].items = [];
@@ -136,6 +108,8 @@ sliderio.view.editor.slider = (function($){
 						height: (newH <= 100)? newH : 100
 					};
 					
+					ele.css('width', newW + '%');
+					ele.css('height', newH + '%');
 					break;
 				case 'code':
 					field[fieldName].language = 'javascript';
@@ -143,21 +117,26 @@ sliderio.view.editor.slider = (function($){
 					break;
 				}
 				
+				var newTop = (ele.position().top * 100) / $("li.current").height();
+				var newLeft = (ele.position().left * 100) / $("li.current").width();
 				field[fieldName].style.position = {
-					top: (ele.position().top * 100) / $("li.current").height(),
-					left: (ele.position().left * 100) / $("li.current").width()
+					top: newTop,
+					left: newLeft
 				};
-				
+				ele.css('top', newTop + '%');
+				ele.css('left', newLeft + '%');
+					
 				var lazy = ele.find('.lazy-show');
 				if (lazy.length > 0){
 					field[fieldName].lazy = {};
 					field[fieldName].lazy.visible = (lazy.hasClass('show'))? true: false;
 					field[fieldName].lazy.index = parseInt(lazy.find('input').val(), 10);
 				}
-				
+						
 				slides[idx].fields.push(field);
 			});
-			
+		
+		slides[idx].details = $('details', $('li.current')).text();
 		saveSlides();
 	};
 
@@ -214,6 +193,7 @@ sliderio.view.editor.slider = (function($){
 				}, 0);
 		}).hide();
 
+		$('#detailsEditor').val($('details', $('li.current')).text());
 	};
 	
 	var attachEvents = function(){
@@ -244,14 +224,10 @@ sliderio.view.editor.slider = (function($){
 			$('.editorField.selected').removeClass('selected').resizable('destroy');
 			
 			var ele = $(this);
-			var handles = "e";
-			if(ele.hasClass('isImage'))
-				handles = "se";
-			
 			ele.addClass('selected').resizable({ 
 				maxWidth: $("li.current").width() - (ele.position().left + 20),
 				maxHeight: $("li.current").height() - (ele.position().top + 50),
-				handles: handles,
+				handles: "all",
 			  stop: function(event, ui) {
 			  	hydrateSlide(sliderio.view.toolbox.currentIndex());
 			  }
@@ -373,6 +349,15 @@ sliderio.view.editor.slider = (function($){
 			}, currRes);	
 		});
 		
+		/*
+		 * Slide Details
+		 */
+		
+		$('#detailsEditor').live('change', function(){
+			var details = $(this).val();
+			$('details', $('li.current')).text(details);
+			hydrateSlide(sliderio.view.toolbox.currentIndex());
+		});
 	};
 	
 	return {
@@ -383,7 +368,6 @@ sliderio.view.editor.slider = (function($){
 				
 			$.when(dSlides, dPartial, dStyles).done(function(data){
 				slides = data;
-				createCodeModal();
 				attachEvents();
 				done();
 			});

@@ -46,11 +46,20 @@ function revertPrevius(){
 }
 
 function init(idx) {
+	//var detailsEditor;
+	window.detailsEditor = null;
 	
 	$('#mainConfigs').show();
 	function resizeCtns(){
-		var wHeight = $(window).height()
-		$('.sliderCtn').height(wHeight);
+		var wHeight = $(window).height();
+		var dtlHeight = 0;
+		
+		if ($('#detailsEditorCtn').is(':visible')) {
+			dtlHeight = $('#detailsEditorCtn').height();
+		}
+		
+		$('.left-sideCtn').height(wHeight);
+		$('.sliderCtn').height(wHeight - dtlHeight-1);
 		$('#mainConfigs').height(wHeight-2);	
 		Slider.resizeSlider();
 	}
@@ -75,6 +84,29 @@ function init(idx) {
 		
 	sliderio.view.editor.slider.init();
 	resizeCtns();
+	
+	$('#editDetails').live('click', function(){
+		var dtlCtn = $('#detailsEditorCtn');
+
+		if (dtlCtn.is(':visible')) {
+			dtlCtn.height(200).show().stop(true).animate({ height: 1 }, {
+				duration: 500,
+				step: resizeCtns,
+				complete: function() {
+					$(this).hide();
+					resizeCtns();
+				}
+			});
+		}
+		else {
+			dtlCtn.height(1).show().stop(true).animate({ height: 200 }, {
+				duration: 500,
+				step: resizeCtns,
+				complete: resizeCtns
+			});
+		}
+	});
+	
 	
 	/*
 	 * Revert Event
@@ -107,12 +139,6 @@ function init(idx) {
 
 $(document).ready(function(){
 	hljs.tabReplace = '  ';
-	authenticate(buildEditor);
-	/*
-	var detailsEditor = new nicEditor({
-			buttonList: ['fontSize','bold','italic','underline','strikeThrough','subscript','superscript'],
-			iconsPath : '../nicEditorIcons.gif'
-	}).panelInstance('area4');
-	*/
+	authenticate(buildEditor);	
 });
 

@@ -15,10 +15,6 @@
   <meta name="MobileOptimized" content="320">
   <meta name="viewport" content="width=device-width">
 
-	{{#fontURL}}
-  <link href='{{{fontURL}}}' rel='stylesheet'>
-  {{/fontURL}}
-  
 	<link href="/css/highlight/solarized_dark.min.css" rel="stylesheet">
 	<link href="/css/slider.css" rel="stylesheet">
 	
@@ -35,10 +31,16 @@
 </head>
 {{#editor}}
 <body>
-	<div class="sliderCtn sliderWrapper">
-	  <div id="slider-stage">
-	  	<ul id="slider-list"></ul>
-	  </div>
+	<div class="left-sideCtn">
+		<div class="sliderCtn sliderWrapper">
+		  <div id="slider-stage">
+		  	<ul id="slider-list"></ul>
+		  </div>
+		</div>
+		<div id="detailsEditorCtn">
+			<h3>Slide Details</h3>
+			<textarea id="detailsEditor"></textarea>
+		</div>
 	</div>
 	<div id="mainConfigs">
 		<div class="cfg-header">
@@ -72,7 +74,6 @@
 	<script type="text/javascript" src="/js/libs/select2.min.js"></script>
 	<script type="text/javascript" src="/js/libs/jquery.form.js"></script>
 	<script type="text/javascript" src="/js/libs/jquery.styleManager.js"></script>
-	<script type="text/javascript" src="/js/libs/nicEdit.js"></script>
 	
 	<script src="/js/sliderio/view/status.js"></script>
 	<script src="/js/sliderio/view/toolbox.js"></script>
